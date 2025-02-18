@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.14">
   <diagram name="Page-1" id="5RAgXpiNk382n0N53aNm">
-    <mxGraphModel dx="2153" dy="1925" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2759" dy="1770" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -183,70 +183,70 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-54" value="Consultant" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="-164" y="156" width="30" height="60" as="geometry" />
+          <mxGeometry x="-1110" y="111" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-55" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0.75;exitY=0.1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-54" target="9iku5hwitjRTv78SaysS-58">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-225" y="153" as="sourcePoint" />
-            <mxPoint x="-60" y="63" as="targetPoint" />
+            <mxPoint x="-1171" y="108" as="sourcePoint" />
+            <mxPoint x="-1006" y="18" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-56" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-128" y="181" as="sourcePoint" />
-            <mxPoint x="35" y="167" as="targetPoint" />
+            <mxPoint x="-1074" y="136" as="sourcePoint" />
+            <mxPoint x="-911" y="122" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-57" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0.713;exitY=0.697;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.017;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-54" target="9iku5hwitjRTv78SaysS-60">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-228" y="192" as="sourcePoint" />
-            <mxPoint x="-21" y="306" as="targetPoint" />
+            <mxPoint x="-1174" y="147" as="sourcePoint" />
+            <mxPoint x="-967" y="261" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-58" value="Conectare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-23" y="19" width="120" height="59" as="geometry" />
+          <mxGeometry x="-970" y="-20" width="120" height="59" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-59" value="Receptionare mesaje" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-23" y="143" width="120" height="64" as="geometry" />
+          <mxGeometry x="-970" y="80" width="120" height="64" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-60" value="Oferă reduceri speciale" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-21" y="321" width="120" height="61" as="geometry" />
+          <mxGeometry x="-970" y="280" width="120" height="61" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-61" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-59">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="176" y="173" as="sourcePoint" />
-            <mxPoint x="160" y="199" as="targetPoint" />
+            <mxPoint x="-770" y="128" as="sourcePoint" />
+            <mxPoint x="-786" y="154" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-62" value="(include)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;exitX=1.003;exitY=0.405;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.003;entryY=0.394;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-58" target="9iku5hwitjRTv78SaysS-63">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="240" y="199" as="sourcePoint" />
-            <mxPoint x="156" y="46" as="targetPoint" />
+            <mxPoint x="-706" y="154" as="sourcePoint" />
+            <mxPoint x="-790" y="1" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-63" value="autentificare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="156" y="15" width="120" height="63" as="geometry" />
+          <mxGeometry x="-790" y="-30" width="120" height="63" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-64" value="primire notificări prin email" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="177" y="140" width="140" height="70" as="geometry" />
+          <mxGeometry x="-769" y="95" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-65" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-54">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="175" y="224" as="sourcePoint" />
-            <mxPoint x="-15" y="258" as="targetPoint" />
+            <mxPoint x="-771" y="179" as="sourcePoint" />
+            <mxPoint x="-961" y="213" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-66" value="Trimitere mesaje" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-23" y="229" width="124" height="63" as="geometry" />
+          <mxGeometry x="-974" y="180.5" width="124" height="63" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-67" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-66">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="181" y="261" as="sourcePoint" />
-            <mxPoint x="160" y="199" as="targetPoint" />
+            <mxPoint x="-765" y="216" as="sourcePoint" />
+            <mxPoint x="-786" y="154" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-68" value="trimitere imagini" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="181" y="225.5" width="140" height="70" as="geometry" />
+          <mxGeometry x="-765" y="180.5" width="140" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
