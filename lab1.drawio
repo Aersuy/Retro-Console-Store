@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.14">
   <diagram name="Page-1" id="5RAgXpiNk382n0N53aNm">
-    <mxGraphModel dx="1587" dy="2666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1742" dy="2764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -517,21 +517,21 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-161" value="Conectare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="160" y="-1270" width="130" height="70" as="geometry" />
+          <mxGeometry x="260" y="-1290" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-162" value="Autentificare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="330" y="-1340" width="140" height="70" as="geometry" />
+          <mxGeometry x="510" y="-1350" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-163" value="Logare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="330" y="-1200" width="140" height="70" as="geometry" />
+          <mxGeometry x="510" y="-1240" width="140" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-164" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.376;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-162" target="9iku5hwitjRTv78SaysS-161">
+        <mxCell id="9iku5hwitjRTv78SaysS-164" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.376;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-162" target="9iku5hwitjRTv78SaysS-161">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="-995" as="sourcePoint" />
             <mxPoint x="430" y="-945" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-165" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0.011;exitY=0.688;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-163" target="9iku5hwitjRTv78SaysS-161">
+        <mxCell id="9iku5hwitjRTv78SaysS-165" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0.011;exitY=0.688;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-163" target="9iku5hwitjRTv78SaysS-161">
           <mxGeometry x="0.4466" y="3" relative="1" as="geometry">
             <mxPoint x="520" y="-985" as="sourcePoint" />
             <mxPoint x="440" y="-935" as="targetPoint" />
