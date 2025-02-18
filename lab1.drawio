@@ -209,12 +209,6 @@
             <mxPoint x="-850.0000000000002" y="112" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-62" value="(include)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-71">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-849.6399999999999" y="3.894999999999982" as="sourcePoint" />
-            <mxPoint x="-790.0000000000016" y="-175" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-64" value="primire notificări prin email" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-765" y="84" width="140" height="60" as="geometry" />
         </mxCell>
@@ -248,11 +242,23 @@
         <mxCell id="9iku5hwitjRTv78SaysS-74" value="Ofera Reduceri Speciale" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-980" y="280" width="140" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-75" value="Locare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="9iku5hwitjRTv78SaysS-75" value="Logare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-790" y="-89" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-76" value="Autentificare" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-790" y="-209" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9iku5hwitjRTv78SaysS-77" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-76" target="9iku5hwitjRTv78SaysS-71">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-800" y="-170" as="sourcePoint" />
+            <mxPoint x="-870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9iku5hwitjRTv78SaysS-78" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-75" target="9iku5hwitjRTv78SaysS-71">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-790" as="sourcePoint" />
+            <mxPoint x="-870" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
