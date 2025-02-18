@@ -203,16 +203,13 @@
             <mxPoint x="-967" y="261" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-59" value="Receptionare mesaje" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-970" y="80" width="120" height="64" as="geometry" />
-        </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-60" value="Oferă reduceri speciale" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-970" y="280" width="120" height="61" as="geometry" />
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-61" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-59" source="9iku5hwitjRTv78SaysS-64">
+        <mxCell id="9iku5hwitjRTv78SaysS-61" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-64">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-770" y="128" as="sourcePoint" />
-            <mxPoint x="-786" y="154" as="targetPoint" />
+            <mxPoint x="-850.0000000000002" y="112" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-62" value="(include)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;exitX=1.003;exitY=0.405;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-63">
@@ -250,6 +247,9 @@
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-71" value="&lt;div&gt;Conectare&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-980" y="-30" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9iku5hwitjRTv78SaysS-72" value="Receptare Mesaje" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-980" y="90" width="140" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
