@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.14">
   <diagram name="Page-1" id="5RAgXpiNk382n0N53aNm">
-    <mxGraphModel dx="2759" dy="1770" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2305" dy="1483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -212,13 +212,13 @@
         <mxCell id="9iku5hwitjRTv78SaysS-60" value="Oferă reduceri speciale" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-970" y="280" width="120" height="61" as="geometry" />
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-61" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-59">
+        <mxCell id="9iku5hwitjRTv78SaysS-61" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-59" source="9iku5hwitjRTv78SaysS-64">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-770" y="128" as="sourcePoint" />
             <mxPoint x="-786" y="154" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-62" value="(include)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;exitX=1.003;exitY=0.405;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.003;entryY=0.394;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-58" target="9iku5hwitjRTv78SaysS-63">
+        <mxCell id="9iku5hwitjRTv78SaysS-62" value="(include)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;exitX=1.003;exitY=0.405;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-58" target="9iku5hwitjRTv78SaysS-63">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-706" y="154" as="sourcePoint" />
             <mxPoint x="-790" y="1" as="targetPoint" />
@@ -228,7 +228,7 @@
           <mxGeometry x="-790" y="-30" width="120" height="63" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-64" value="primire notificări prin email" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-769" y="95" width="140" height="70" as="geometry" />
+          <mxGeometry x="-765" y="84" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-65" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1" source="9iku5hwitjRTv78SaysS-54">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -239,14 +239,14 @@
         <mxCell id="9iku5hwitjRTv78SaysS-66" value="Trimitere mesaje" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-974" y="180.5" width="124" height="63" as="geometry" />
         </mxCell>
-        <mxCell id="9iku5hwitjRTv78SaysS-67" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-66">
+        <mxCell id="9iku5hwitjRTv78SaysS-67" value="(extend)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="9iku5hwitjRTv78SaysS-66" source="9iku5hwitjRTv78SaysS-68">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-765" y="216" as="sourcePoint" />
             <mxPoint x="-786" y="154" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9iku5hwitjRTv78SaysS-68" value="trimitere imagini" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-765" y="180.5" width="140" height="70" as="geometry" />
+          <mxGeometry x="-765" y="177" width="140" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
