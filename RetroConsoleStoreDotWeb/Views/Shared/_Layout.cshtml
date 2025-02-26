@@ -11,7 +11,7 @@
     @Styles.Render("~/bundles/font-awesome/css")
     @Styles.Render("~/bundles/datatables/css")
     @Styles.Render("~/bundles/toastr/css")
-
+    @Styles.Render("~/bundles/style/css")
 
 
 
@@ -32,9 +32,11 @@
 
             @Html.Partial("_Footer")
         </section>
+        @Scripts.Render("~/bundles/scripts/js")
 
-        @Scripts.Render("~/bundles/bootstrap/js")
         @Scripts.Render("~/bundles/jquery/js")
+        @Scripts.Render("~/bundles/bootstrap/js")
+
 
     </div>
 
