@@ -13,6 +13,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             return View();
         }
+        public ActionResult productDetail()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             return View();

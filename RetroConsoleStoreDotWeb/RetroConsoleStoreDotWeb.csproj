@@ -119,6 +119,37 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\bag.svg" />
+    <Content Include="Content\images\bowl-2.png" />
+    <Content Include="Content\images\bowl-3.png" />
+    <Content Include="Content\images\cart.svg" />
+    <Content Include="Content\images\couch.png" />
+    <Content Include="Content\images\cross.svg" />
+    <Content Include="Content\images\dots-green.svg" />
+    <Content Include="Content\images\dots-light.svg" />
+    <Content Include="Content\images\dots-yellow.svg" />
+    <Content Include="Content\images\envelope-outline.svg" />
+    <Content Include="Content\images\img-grid-1.jpg" />
+    <Content Include="Content\images\img-grid-2.jpg" />
+    <Content Include="Content\images\img-grid-3.jpg" />
+    <Content Include="Content\images\person-1.jpg" />
+    <Content Include="Content\images\person-1.png" />
+    <Content Include="Content\images\person_1.jpg" />
+    <Content Include="Content\images\person_2.jpg" />
+    <Content Include="Content\images\person_3.jpg" />
+    <Content Include="Content\images\person_4.jpg" />
+    <Content Include="Content\images\post-1.jpg" />
+    <Content Include="Content\images\post-2.jpg" />
+    <Content Include="Content\images\post-3.jpg" />
+    <Content Include="Content\images\product-1.png" />
+    <Content Include="Content\images\product-2.png" />
+    <Content Include="Content\images\product-3.png" />
+    <Content Include="Content\images\return.svg" />
+    <Content Include="Content\images\sofa.png" />
+    <Content Include="Content\images\support.svg" />
+    <Content Include="Content\images\truck.svg" />
+    <Content Include="Content\images\user.svg" />
+    <Content Include="Content\images\why-choose-us-img.jpg" />
     <Content Include="Content\index.html" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\Site.css" />
@@ -164,6 +195,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\tiny-slider.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -227,6 +259,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Articol\Class1.cs" />
+    <Compile Include="Models\MainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +304,7 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\ProductDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,7 +314,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,9 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Hello World</h2>
-
-<p>
-    <a href="@Url.Action("About", "Home")">About</a> |
-    <a href="@Url.Action("Contact", "Home")">Contact</a>
-</p>
+<div class="n">
+    @Html.Partial("_Header")
+    @Html.Partial("_Navigation")
+</div>

@@ -1,28 +1,24 @@
-﻿
-@{
-    ViewBag.Title = "_Header";
-}
+﻿<div class="container">
+    <a class="navbar-brand" href="@Url.Action("Index","Home")">Furni<span>.</span></a>
 
-<div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">
-        </a>
-    </div>
-    LUNA
-    <span>v.1.3</span>
-    <div id="navbar" class="navbar-collapse collapse">
-        <div class="left-nav-toggle">
-            <a href="">
-                <i class="stroke-hamburgermenu"></i>
-            </a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class=" profil-link">
-                <a href="#">
-                </a>
-                <span class="profile-address">luna@company.io</span> <img src="images/profile.jpg" class="img-circle" alt="" ;
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsFurni">
+        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item ">
+                <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
             </li>
+            <li><a class="nav-link" href="@Url.Action("Catalog","Shop")">Shop</a></li>
+            <li><a class="nav-link" href="@Url.Action("AboutUs","Home")">About us</a></li>
+            <li><a class="nav-link" href="@Url.Action("Services","Home")">Services</a></li>
+            <li><a class="nav-link" href="@Url.Action("ContactUs","Home")">Contact us</a></li>
+        </ul>
+
+        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+            <li><a class="nav-link" href="@Url.Action("UserPage","Auth")"><img src="/Content/images/user.svg"></a></li>
+            <li><a class="nav-link" href="@Url.Action("Cart","Shop")"><img src="/Content/images/cart.svg"></a></li>
         </ul>
     </div>
 </div>
-

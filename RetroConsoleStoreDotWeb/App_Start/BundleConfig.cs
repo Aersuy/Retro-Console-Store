@@ -19,19 +19,18 @@ namespace RetroConsoleStoreDotWeb.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap/js").Include("~/Scripts/bootstrap.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery/js").Include("~/Scripts/jquery-3.2.1.min.js"));
+            bundles.Add(new StyleBundle("~/bundles/tiny-slider/css").Include("~/Content/tiny-slider.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/bundles/main/css").Include("~/Content/style.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new StyleBundle("~/bundles/font-awesome/css").Include("~/Content/font-awesome.min.css", new CssRewriteUrlTransform()));
 
-            bundles.Add(new StyleBundle("~/bundles/toastr/css").Include("~/Content/toastr.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new ScriptBundle("~/bundles/tiny-slider/js").Include("~/Scripts/tiny-slider.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/datatables/css").Include("~/Vendors/datatables/datatables.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new ScriptBundle("~/bundles/main/js").Include("~/Scripts/custom.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/animate/css").Include("~/content/animate.min.css", new CssRewriteUrlTransform()));
 
-            bundles.Add(new StyleBundle("~/bundles/style/css").Include("~/content/style.css", new CssRewriteUrlTransform()));
 
-            bundles.Add(new ScriptBundle("~/bundles/scripts/js").Include("~/Scripts/scripts.js"));
 
 
         }
