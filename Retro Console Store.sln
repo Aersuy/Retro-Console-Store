@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotBusines
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotDomain", "RetroConsoleStoreDotDomain\RetroConsoleStoreDotDomain.csproj", "{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreHelpers", "RetroConsoleStoreHelpers\RetroConsoleStoreHelpers.csproj", "{B3681A95-0DF0-43B6-B600-A845441DFD5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotHelpers", "RetroConsoleStoreHelpers\RetroConsoleStoreDotHelpers.csproj", "{B3681A95-0DF0-43B6-B600-A845441DFD5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

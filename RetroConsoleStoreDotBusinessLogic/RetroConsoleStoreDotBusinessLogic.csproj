@@ -52,9 +52,9 @@
       <Project>{cad620f4-ed24-4246-b5bc-6fbea2beada3}</Project>
       <Name>RetroConsoleStoreDotDomain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RetroConsoleStoreHelpers\RetroConsoleStoreHelpers.csproj">
+    <ProjectReference Include="..\RetroConsoleStoreHelpers\RetroConsoleStoreDotHelpers.csproj">
       <Project>{b3681a95-0df0-43b6-b600-a845441dfd5f}</Project>
-      <Name>RetroConsoleStoreHelpers</Name>
+      <Name>RetroConsoleStoreDotHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
