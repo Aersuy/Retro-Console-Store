@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotWeb", "RetroConsoleStoreDotWeb\RetroConsoleStoreDotWeb.csproj", "{0E1767E5-AD7A-467D-B25E-4E27AB99271E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotBusinessLogic", "RetroConsoleStoreDotBusinessLogic\RetroConsoleStoreDotBusinessLogic.csproj", "{78AC3EE6-6239-49A5-83B8-376913C3300A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotDomain", "RetroConsoleStoreDotDomain\RetroConsoleStoreDotDomain.csproj", "{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreHelpers", "RetroConsoleStoreHelpers\RetroConsoleStoreHelpers.csproj", "{B3681A95-0DF0-43B6-B600-A845441DFD5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{0E1767E5-AD7A-467D-B25E-4E27AB99271E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E1767E5-AD7A-467D-B25E-4E27AB99271E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E1767E5-AD7A-467D-B25E-4E27AB99271E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78AC3EE6-6239-49A5-83B8-376913C3300A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78AC3EE6-6239-49A5-83B8-376913C3300A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78AC3EE6-6239-49A5-83B8-376913C3300A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78AC3EE6-6239-49A5-83B8-376913C3300A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3681A95-0DF0-43B6-B600-A845441DFD5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3681A95-0DF0-43B6-B600-A845441DFD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3681A95-0DF0-43B6-B600-A845441DFD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3681A95-0DF0-43B6-B600-A845441DFD5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
