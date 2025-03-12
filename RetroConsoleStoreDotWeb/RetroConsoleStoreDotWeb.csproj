@@ -256,6 +256,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,8 +306,10 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\ProductDetails.cshtml" />
-    <Content Include="Views\Auth\UserPage.cshtml" />
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
+    <Content Include="Views\User\UserPage.cshtml" />
+    <Content Include="Views\User\Cart.cshtml" />
+    <Content Include="Views\User\Statistics.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
