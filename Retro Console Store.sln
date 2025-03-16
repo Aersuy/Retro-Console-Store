@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotWeb", "RetroConsoleStoreDotWeb\RetroConsoleStoreDotWeb.csproj", "{0E1767E5-AD7A-467D-B25E-4E27AB99271E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStore.Web", "RetroConsoleStoreDotWeb\RetroConsoleStore.Web.csproj", "{0E1767E5-AD7A-467D-B25E-4E27AB99271E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotBusinessLogic", "RetroConsoleStoreDotBusinessLogic\RetroConsoleStoreDotBusinessLogic.csproj", "{78AC3EE6-6239-49A5-83B8-376913C3300A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStore.BusinessLogic", "RetroConsoleStoreDotBusinessLogic\RetroConsoleStore.BusinessLogic.csproj", "{78AC3EE6-6239-49A5-83B8-376913C3300A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotDomain", "RetroConsoleStoreDotDomain\RetroConsoleStoreDotDomain.csproj", "{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStore.Domain", "RetroConsoleStoreDotDomain\RetroConsoleStore.Domain.csproj", "{CAD620F4-ED24-4246-B5BC-6FBEA2BEADA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStoreDotHelpers", "RetroConsoleStoreHelpers\RetroConsoleStoreDotHelpers.csproj", "{B3681A95-0DF0-43B6-B600-A845441DFD5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroConsoleStore.Helpers", "RetroConsoleStoreHelpers\RetroConsoleStore.Helpers.csproj", "{B3681A95-0DF0-43B6-B600-A845441DFD5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

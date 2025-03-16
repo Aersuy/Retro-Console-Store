@@ -1,25 +1,47 @@
 ﻿@{
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
-    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Contact Us | RetroConsoleStore";
 }
 
-
-
-
-<form method="post" action="/Home/Contact">
-    <div>
-        <label for="Name">Name:</label>
-        <input type="text" id="Name" name="Name" required />
+<div class="catalogue-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-5">
+                <h1 class="retro-font-pixel">Contact Us</h1>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="catalogue-content">
+                    <div class="famicom-controller-ports">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                    <div class="contact-form-wrapper">
+                        <form method="post" action="/Home/Contact">
+                            <div>
+                                <label for="Name">Name:</label>
+                                <input type="text" id="Name" name="Name" placeholder="Your name here..." required />
+                            </div>
+                            <div>
+                                <label for="Email">Email:</label>
+                                <input type="email" id="Email" name="Email" placeholder="your@email.com" required />
+                            </div>
+                            <div>
+                                <label for="Message">Message:</label>
+                                <textarea id="Message" name="Message" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <div class="button-container">
+                                <button type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="famicom-cartridge-slot"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="Email">Email:</label>
-        <input type="email" id="Email" name="Email" required />
-    </div>
-    <div>
-        <label for="Message">Message:</label>
-        <textarea id="Message" name="Message" required></textarea>
-    </div>
-    <div>
-        <button type="submit">Send</button>
-    </div>
-</form>
+</div>

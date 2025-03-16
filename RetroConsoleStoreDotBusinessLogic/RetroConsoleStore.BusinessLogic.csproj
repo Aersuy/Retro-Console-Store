@@ -48,13 +48,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RetroConsoleStoreDotDomain\RetroConsoleStoreDotDomain.csproj">
+    <ProjectReference Include="..\RetroConsoleStoreDotDomain\RetroConsoleStore.Domain.csproj">
       <Project>{cad620f4-ed24-4246-b5bc-6fbea2beada3}</Project>
-      <Name>RetroConsoleStoreDotDomain</Name>
+      <Name>RetroConsoleStore.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RetroConsoleStoreHelpers\RetroConsoleStoreDotHelpers.csproj">
+    <ProjectReference Include="..\RetroConsoleStoreHelpers\RetroConsoleStore.Helpers.csproj">
       <Project>{b3681a95-0df0-43b6-b600-a845441dfd5f}</Project>
-      <Name>RetroConsoleStoreDotHelpers</Name>
+      <Name>RetroConsoleStore.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
