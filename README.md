@@ -5,6 +5,4 @@ Raileanu Vlad
 
 Nicu Iurie
 
-Claudiu 
-
 Gadilica Nichita
