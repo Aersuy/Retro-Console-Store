@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 
 
 namespace RetroConsoleStoreDotWeb.App_Start
@@ -28,6 +30,8 @@ namespace RetroConsoleStoreDotWeb.App_Start
             bundles.Add(new ScriptBundle("~/bundles/tiny-slider/js").Include("~/Scripts/tiny-slider.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/main/js").Include("~/Scripts/custom.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/site/css").Include("~/Content/Site.css"));
 
 
 
