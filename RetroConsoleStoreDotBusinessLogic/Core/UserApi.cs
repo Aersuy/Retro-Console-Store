@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RetroConsoleStoreDotBusinessLogic.Interfaces
+namespace RetroConsoleStore.BusinessLogic.Core
 {
-    internal interface ISessionBL
+    public class UserApi
     {
     }
 }

@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthBL\SessionBL.cs" />
-    <Compile Include="BL.cs" />
-    <Compile Include="Core\UserAPIcs.cs" />
-    <Compile Include="Interfaces\ISessionBL.cs" />
+    <Compile Include="BL struct\AuthBL.cs" />
+    <Compile Include="BusinessLogic.cs" />
+    <Compile Include="Core\UserApi.cs" />
+    <Compile Include="Interfaces\IAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

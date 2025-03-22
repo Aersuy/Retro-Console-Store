@@ -330,6 +330,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RetroConsoleStoreDotBusinessLogic\RetroConsoleStore.BusinessLogic.csproj">
+      <Project>{78ac3ee6-6239-49a5-83b8-376913c3300a}</Project>
+      <Name>RetroConsoleStore.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RetroConsoleStoreDotDomain\RetroConsoleStore.Domain.csproj">
+      <Project>{cad620f4-ed24-4246-b5bc-6fbea2beada3}</Project>
+      <Name>RetroConsoleStore.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
