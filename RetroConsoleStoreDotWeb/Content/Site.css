@@ -642,13 +642,21 @@ form button:hover {
     color: #ffcc33;
 }
 
-/* Fix for navbar-brand to ensure consistent appearance */
+
 .navbar-brand.retro-font-pixel {
     transform: none !important;
     border-radius: 4px;
-    max-width: 250px;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-right: 40px;
     text-decoration: none;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 8px 12px; 
+    white-space: nowrap; 
+    display: inline-block; 
+    width: auto; 
+    max-width: none;
+    box-sizing: border-box; 
+    border: 4px solid #e6007e;
+    background-color: rgba(58, 31, 93, 0.7);
 }
-

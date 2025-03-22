@@ -2,8 +2,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Catalogue | RetroConsoleStore";
 }
-
-<div class="catalogue-container">
+@model IEnumerable<RetroConsoleStoreDotWeb.Models.Articol.Product>
+@System.Web.Optimization.Styles.Render("~/bundles/catalog/css")
+<div class="catalogue-container retro-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center mb-5">
@@ -12,11 +13,30 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
-                <div class="catalogue-content">
-                    <!-- Catalogue content will go here -->
+            @if (Model != null && Model.Any())
+            {
+                foreach (var product in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card retro-card">
+                            <img src="@product.ImagePath" class="card-img-top" alt="@product.Name">
+                            <div class="card-body">
+                                <h5 class="card-title retro-font-8bit">@product.Name</h5>
+                                <p class="card-text">@product.Description</p>
+                                <p class="card-text price-tag"><strong>$@product.Price.ToString("0.00")</strong></p>
+                                <a href="@Url.Action("Product", "Item", new { id = product.Id })" class="btn retro-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p class="retro-font-8bit">No products available</p>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
+
