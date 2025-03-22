@@ -1,40 +1,39 @@
-﻿<footer style="background-color: #4f0940; color: white;" class="py-4 mt-5">
+﻿<footer class="retro-footer py-4 mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
-                <h5>About Us</h5>
-                <p class="small">
-                    Proiect MRSTWEB.<br />
-                    Raileanu Vlad <br />
-                    Nicu Iuria  <br />
-                    Gadilica Nichita
+                <h5 class="footer-heading">About Us</h5>
+                <p class="footer-text">
+                    RetroConsoleStore<br />
+                    Your destination for classic gaming nostalgia.<br />
+                    Rediscover the magic of retro consoles.
                 </p>
             </div>
 
             <div class="col-md-4 mb-3 mb-md-0">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="@Url.Action("Index", "Home")" class="text-white text-decoration-none">Home</a></li>
-                    <li><a href="@Url.Action("About", "Home")" class="text-white text-decoration-none">About</a></li>
-                    <li><a href="@Url.Action("Contact", "Home")" class="text-white text-decoration-none">Contact</a></li>
-                    <li><a href="@Url.Action("Auth", "Auth")" class="text-white text-decoration-none">Services</a></li>
+                <h5 class="footer-heading">Quick Links</h5>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a href="@Url.Action("Catalogue", "Home")">Catalogue</a></li>
+                    <li><a href="@Url.Action("About", "Home")">About</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4">
-                <h5>Contact</h5>
-                <ul class="list-unstyled">
-                    <li>Email: <a href="mailto:raileanu1100@gmail.com" class="text-white text-decoration-none">raileanu1100@gmail.com</a></li>
-                    <li>Phone: <a href="tel:+1234567890" class="text-white text-decoration-none">+1 234 567 890</a></li>
-                    <li>Address: 123 Main Street, City</li>
+                <h5 class="footer-heading">Contact</h5>
+                <ul class="list-unstyled footer-links">
+                    <li>Email: <a href="mailto:info@retroconsolestore.com">info@retroconsolestore.com</a></li>
+                    <li>Phone: <a href="tel:+1234567890">+1 234 567 890</a></li>
+                    <li>Address: 123 Gaming Street, Retro City</li>
                 </ul>
             </div>
         </div>
 
-        <hr class="border-secondary my-4">
+        <hr class="footer-divider my-4">
 
         <div class="text-center">
-            <p class="mb-0">&copy; @DateTime.Now.Year Proiect placeholder. All rights reserved.</p>
+            <p class="mb-0 copyright">&copy; @DateTime.Now.Year RetroConsoleStore. All rights reserved.</p>
         </div>
     </div>
 </footer>

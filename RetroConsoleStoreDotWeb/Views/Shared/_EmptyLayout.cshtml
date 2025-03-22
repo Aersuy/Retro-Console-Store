@@ -1,13 +1,14 @@
-﻿
-@using System.Web.Optimization
+﻿@using System.Web.Optimization
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title - RetroConsoleStore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen&family=Press+Start+2P&display=swap" rel="stylesheet">
+    @Styles.Render("~/bundles/site/css")
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     @Styles.Render("~/bundles/bootstrap/css")
     @Styles.Render("~/bundles/font-awesome/css")
@@ -18,14 +19,17 @@
     {@RenderSection("Styles", required: false)}
 </head>
 <body>
-    <nav class="custom-navbar navbar navbar-expand-md navbar-dark" style="background-color: #4f0940;" aria-label="Furni navigation bar">
+    <!--Header/Navigation-->
+    <nav class="retro-navbar navbar navbar-expand-md" arial-label="RetroConsoleStore navigation">
         @Html.Partial("_Header")
     </nav>
 
     @RenderBody()
+
+    <!--Footer-->
     @Html.Partial("_Footer")
 
-    @Scripts.Render("~/bundles/bootstrap/js")
+    @Scripts.Render("~/bundles/bootstrap-bundle/js")
     @Scripts.Render("~/bundles/tiny-slider/js")
     @Scripts.Render("~/bundles/main/js")
 
