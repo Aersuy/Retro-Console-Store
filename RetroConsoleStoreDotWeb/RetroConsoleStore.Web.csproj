@@ -261,6 +261,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articol\Class1.cs" />
+    <Compile Include="Models\Auth\Auth.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -305,11 +306,12 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\ProductDetails.cshtml" />
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
     <Content Include="Views\User\UserPage.cshtml" />
     <Content Include="Views\User\Cart.cshtml" />
     <Content Include="Views\User\Statistics.cshtml" />
+    <Content Include="Views\Items\Catalog.cshtml" />
+    <Content Include="Views\Items\Product.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
