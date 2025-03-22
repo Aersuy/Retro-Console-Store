@@ -254,6 +254,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -311,9 +312,13 @@
     <Content Include="Views\User\UserPage.cshtml" />
     <Content Include="Views\User\Cart.cshtml" />
     <Content Include="Views\User\Statistics.cshtml" />
-    <Content Include="Views\Home\Catalogue.cshtml" />
     <Content Include="Views\Item\Catalog.cshtml" />
     <Content Include="Views\Item\Product.cshtml" />
+    <Content Include="Views\Item\TradeIn.cshtml" />
+    <Content Include="Views\Admin\AddProduct.cshtml" />
+    <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\ManageRoles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,19 +6,22 @@ using System.Web.Mvc;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
-    public class ItemController : Controller
+    public class AdminController : Controller
     {
-        // GET: Item
-        public ActionResult Catalog()
+        // GET: Admin
+        public ActionResult AddProduct()
         {
             return View();
         }
-
-        public ActionResult Product()
+        public ActionResult EditProduct()
         {
             return View();
         }
-        public ActionResult TradeIn()
+        public ActionResult ManageUsers()
+        {
+            return View();
+        }
+        public ActionResult ManageRoles()
         {
             return View();
         }
