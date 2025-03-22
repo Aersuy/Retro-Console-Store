@@ -151,6 +151,7 @@
     <Content Include="Content\images\user.svg" />
     <Content Include="Content\images\why-choose-us-img.jpg" />
     <Content Include="Content\index.html" />
+    <Content Include="Content\product.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />

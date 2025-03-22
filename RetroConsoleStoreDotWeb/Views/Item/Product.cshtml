@@ -1,8 +1,76 @@
-﻿
+﻿@model RetroConsoleStoreDotWeb.Models.Articol.Product
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Product";
 }
+@System.Web.Optimization.Styles.Render("~/bundles/product/css")
+<div class="product-container retro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="retro-font-pixel">Product Details</h1>
+            </div>
+        </div>
 
-<h2>Product</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="product-image-container retro-card">
+                    <img src="@Model.ImagePath" class="img-fluid" alt="@Model.Name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="product-details retro-card">
+                    <h2 class="retro-font-8bit mb-3">@Model.Name</h2>
+                    <div class="price-badge">
+                        <span class="price-tag">$@Model.Price.ToString("0.00")</span>
+                    </div>
 
+                    <div class="product-description mt-4">
+                        <h4 class="retro-font-8bit">Description</h4>
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <div class="product-specs mt-4">
+                        <h4 class="retro-font-8bit">Specifications</h4>
+                        <div class="specs-table">
+                            <div class="spec-row">
+                                <div class="spec-label">Brand</div>
+                                <div class="spec-value">@Model.Brand</div>
+                            </div>
+                            <div class="spec-row">
+                                <div class="spec-label">Year Released</div>
+                                <div class="spec-value">@Model.YearReleased</div>
+                            </div>
+                            <div class="spec-row">
+                                <div class="spec-label">Availability</div>
+                                <div class="spec-value">
+                                    @if (Model.StockQuantity > 0)
+                                    {
+                                        <span class="in-stock">In Stock (@Model.StockQuantity available)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="out-of-stock">Out of Stock</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions mt-4">
+                        @if (Model.StockQuantity > 0)
+                        {
+                            <button class="retro-btn add-to-cart-btn">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button class="retro-btn-disabled" disabled>Out of Stock</button>
+                        }
+                        <a href="@Url.Action("Catalog", "Item")" class="retro-btn-outline">Back to Catalog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,12 +36,25 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 Price = 179.99m
             }
             };
+
+
             return View(products);
         }
 
-        public ActionResult Product()
+        public ActionResult Product(int id)
         {
-            return View();
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Nintendo NES",
+                Description = "The Nintendo Entertainment System (NES) is an 8-bit home video game console developed and manufactured by Nintendo. It was released in Japan in 1983 as the Family Computer (FC), and was redesigned as the NES for release in North America in 1985.",
+                ImagePath = "/Content/images/nintendo-famicom.jpg",
+                Price = 149.99m,
+                Brand = "Nintendo",
+                YearReleased = 1985,
+                StockQuantity = 5
+            };
+            return View(product);
         }
         public ActionResult TradeIn()
         {

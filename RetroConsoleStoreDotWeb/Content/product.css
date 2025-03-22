@@ -1,0 +1,139 @@
+﻿.product-container {
+    padding: 40px 0;
+}
+
+.product-image-container {
+    padding: 15px;
+    margin-bottom: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-details {
+    padding: 25px;
+    height: 100%;
+}
+
+.price-badge {
+    display: inline-block;
+    background-color: #e6007e;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.price-tag {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Silkscreen', cursive;
+}
+
+.retro-font-8bit {
+    color: #ffcc33;
+}
+
+.specs-table {
+    background-color: #2a1845;
+    border: 2px solid #e6007e;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.spec-row {
+    display: flex;
+    border-bottom: 1px solid #e6007e;
+}
+
+    .spec-row:last-child {
+        border-bottom: none;
+    }
+
+.spec-label {
+    flex: 1;
+    padding: 10px;
+    font-weight: bold;
+    background-color: rgba(230, 0, 126, 0.2);
+}
+
+.spec-value {
+    flex: 2;
+    padding: 10px;
+}
+
+.in-stock {
+    color: #00e640;
+    font-weight: bold;
+}
+
+.out-of-stock {
+    color: #ff5252;
+    font-weight: bold;
+}
+
+.retro-btn {
+    background-color: #e6007e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'Silkscreen', cursive;
+    text-transform: uppercase;
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+
+    .retro-btn:hover {
+        background-color: #ffcc33;
+        color: #3a1f5d;
+        text-decoration: none;
+    }
+
+.retro-btn-outline {
+    background-color: transparent;
+    color: #ffcc33;
+    border: 2px solid #e6007e;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: 'Silkscreen', cursive;
+    text-transform: uppercase;
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+
+    .retro-btn-outline:hover {
+        background-color: #e6007e;
+        color: white;
+        text-decoration: none;
+    }
+
+.retro-btn-disabled {
+    background-color: #666666;
+    color: #dddddd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'Silkscreen', cursive;
+    text-transform: uppercase;
+    margin-right: 10px;
+    cursor: not-allowed;
+}
+
+.add-to-cart-btn {
+    font-size: 1.1rem;
+}
+
+/* Make sure the cards have the retro style */
+.retro-card {
+    background-color: #3a1f5d;
+    border: 4px solid #e6007e;
+    border-radius: 4px;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(230, 0, 126, 0.5);
+}
