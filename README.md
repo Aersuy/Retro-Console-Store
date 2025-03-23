@@ -5,4 +5,4 @@ Raileanu Vlad
 
 Nicu Iurie
 
-Gadilica Nichita
+Gîdilica Nichita
