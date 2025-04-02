@@ -44,6 +44,7 @@
     <Compile Include="BL struct\AuthBL.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\UserApi.cs" />
+    <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
