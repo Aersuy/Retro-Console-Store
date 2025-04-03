@@ -6,7 +6,7 @@ namespace RetroConsoleStoreDotBusinessLogic.DBModel
 {
     public class UserContext : DbContext
     {
-        public UserContext() : base("name=RetroConsoleStore") { }
+        public UserContext() : base("name=Retro-Console-Store") { }
 
         public virtual DbSet<UDBTablecs> Users { get; set; } 
     }
