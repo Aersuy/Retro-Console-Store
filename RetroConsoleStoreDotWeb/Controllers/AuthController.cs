@@ -19,21 +19,37 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _businessLogic = new BusinessLogic();
         }
 
+        [HttpGet]
+        public ActionResult Auth()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Auth(UserLoginDTO model)
+        {
+            ViewBag.Message = _businessLogic.GetAuthBL().UserAuthLogic(model);
+            return View(model);
+        }
+        
+
+
+
         public ActionResult Index()
         {
 
             return View();
            
         }
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
-        public ActionResult Auth()
-        {
-            var result = _businessLogic.GetAuthBL().UserAuthLogic(new UserLoginDTO());
-            ViewBag.Message = result;
-            return View();
+        [HttpPost]
+        public ActionResult Login(UserLoginDTO model)
+        {   
+            return View(model);
         }
      
       

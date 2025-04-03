@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RetroConsoleStore.Domain.Model.User.UserLoginDTO
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Register";
 }
@@ -11,35 +13,64 @@
         <span></span>
     </div>
 
-    <form method="post" action="@Url.Action("Register", "Auth")">
+    @using (Html.BeginForm("Auth", "Auth", FormMethod.Post))
+    {
         <div>
-            <label for="Username">Username</label>
-            <input type="text" id="Username" name="Username" required placeholder="Enter your username">
+            <label for="UserName">Username</label>
+            @Html.TextBoxFor(m => m.UserName, new
+            {
+                required = "required",
+                placeholder = "Enter your username",
+                minlength = "5"
+            })
         </div>
 
         <div>
             <label for="Email">Email</label>
-            <input type="email" id="Email" name="Email" required placeholder="Enter your email">
+            @Html.TextBoxFor(m => m.Email, new
+            {
+                placeholder = "Enter your email"
+
+            })
+
         </div>
 
         <div>
             <label for="Password">Password</label>
-            <input type="password" id="Password" name="Password" required placeholder="Enter your password">
+            @Html.PasswordFor(m => m.Password, new
+            {
+                required = "required",
+                placeholder = "Enter your password",
+                minlength = "8",
+                @class = "form-input" // Add this class
+            })
         </div>
 
         <div>
             <label for="ConfirmPassword">Confirm Password</label>
-            <input type="password" id="ConfirmPassword" name="ConfirmPassword" required placeholder="Confirm your password">
+            @Html.Password("ConfirmPassword", null, new
+            {
+                required = "required",
+                placeholder = "Confirm your password",
+                @class = "form-input" // Add this class
+            })
         </div>
 
         <div class="button-container">
             <button type="submit" class="retro-font-8bit">Register</button>
         </div>
-    </form>
+    }
 
     <div class="famicom-cartridge-slot"></div>
 
     <p class="retro-font-8bit" style="margin-top: 20px;">
         Already have an account? <a href="@Url.Action("Login", "Auth")" style="color: #ffcc33;">Login here</a>
     </p>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="message-box retro-font-8bit">
+            @ViewBag.Message
+        </div>
+    }
 </div>

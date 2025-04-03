@@ -8,7 +8,8 @@ using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotDomain.User;
-using RetroConsoleStoreDotDomain.Enums;  // Added missing semicolon
+using RetroConsoleStoreDotDomain.Enums;
+using System.Runtime.InteropServices.ComTypes;  // Added missing semicolon
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
 {
@@ -19,31 +20,22 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             using (var ctx = new UserContext())
             {
                 try
-                { 
-                    if (string.IsNullOrEmpty(data.UserName) || string.IsNullOrEmpty(data.Password))
+                {
+                    if (!ValidateUserInput(data))
                     {
-                        return "Username and password required";
+                        return "Enter valid data";
                     }
-                    
-                    if (ctx.Users.Any(u => u.username == data.UserName))
+                    if(UserWithNameAlreadyExists(data,ctx))
                     {
-                        return "Username Already Exists";
+                        return "User with name already exists";
                     }
+                    UDBTablecs NewUser = CreateNewUser(data);
                     // user nou
-                    var newUser = new UDBTablecs
-                    {
-                        username = "testuser",
-                        password = "testpass123", 
-                        email = "test@example.com",
-                        RegisterDate = DateTime.Now,
-                        LastRegisterDate = DateTime.Now,
-                        level = URole.User
-                    };
-
-                    ctx.Users.Add(newUser);
+                    
+                    ctx.Users.Add(NewUser);
                     ctx.SaveChanges();
 
-                   
+
                     var user = ctx.Users.FirstOrDefault(u => u.username == "testuser");
                     return user != null ? "User created and retrieved successfully!" : "Failed to create/retrieve user";
                 }
@@ -52,6 +44,31 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     return $"Database error: {ex.Message}";
                 }
             }
-        } 
+        }
+        private bool ValidateUserInput(UserLoginDTO data)
+        {
+            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool UserWithNameAlreadyExists(UserLoginDTO data, UserContext ctx)
+        {
+            return ctx.Users.Any(u => u.username == data.UserName);
+        }
+        private UDBTablecs CreateNewUser(UserLoginDTO data)
+        {
+            return new UDBTablecs
+            {
+                username = data.UserName,
+                password = data.Password,
+                email = data.Email ?? "default@email.com",
+                RegisterDate = DateTime.Now,
+                LastRegisterDate = DateTime.Now,
+                LastIP = data.UserIp,
+                level = URole.User
+            };
+        }
     }
 }

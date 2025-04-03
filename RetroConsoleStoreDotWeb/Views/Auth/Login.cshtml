@@ -1,6 +1,55 @@
-﻿@{   
+﻿@model RetroConsoleStore.Domain.Model.User.UserLoginDTO
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Login";
 }
 
-<h2>Loginjdfds</h2>
+<div class="contact-container">
+    <h2 class="retro-font-pixel">Login</h2>
+
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+        <div>
+            <label for="UserName">Username</label>
+            @Html.TextBoxFor(m => m.UserName, new
+            {
+                required = "required",
+                placeholder = "Enter your username",
+                minlength = "5"
+            })
+        </div>
+
+        <div>
+            <label for="Password">Password</label>
+            @Html.PasswordFor(m => m.Password, new
+            {
+                required = "required",
+                placeholder = "Enter your password",
+                minlength = "8"
+            })
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="retro-font-8bit">Login</button>
+        </div>
+    }
+
+    <div class="famicom-cartridge-slot"></div>
+
+    <p class="retro-font-8bit" style="margin-top: 20px;">
+        Don't have an account? <a href="@Url.Action("Auth", "Auth")" style="color: #ffcc33;">Register here</a>
+    </p>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="message-box retro-font-8bit">
+            @ViewBag.Message
+        </div>
+    }
+</div>
