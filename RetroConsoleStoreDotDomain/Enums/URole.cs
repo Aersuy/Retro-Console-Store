@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RetroConsoleStoreDotDomain.Enums
 {
-    internal enum URole
+    public enum URole
     {
         None = 0,
         Banned = 1,
