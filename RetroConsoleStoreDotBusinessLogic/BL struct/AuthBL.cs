@@ -19,8 +19,17 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             using (var ctx = new UserContext())
             {
                 try
-                {
-                    // User nou
+                { 
+                    if (string.IsNullOrEmpty(data.UserName) || string.IsNullOrEmpty(data.Password))
+                    {
+                        return "Username and password required";
+                    }
+                    
+                    if (ctx.Users.Any(u => u.username == data.UserName))
+                    {
+                        return "Username Already Exists";
+                    }
+                    // user nou
                     var newUser = new UDBTablecs
                     {
                         username = "testuser",
