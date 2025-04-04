@@ -48,7 +48,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         }
         [HttpPost]
         public ActionResult Login(UserLoginDTO model)
-        {   
+        {   ViewBag.Message = _businessLogic.GetLoginBL().LoginLogic(model);
             return View(model);
         }
      

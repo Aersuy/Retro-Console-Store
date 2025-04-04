@@ -16,7 +16,36 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             using (var ctx = new UserContext())
             {
+                try
+                {
+                    if (!ValidateUserInput(data))
+                    {
+                        return "Invalid username or password format";
+                    }
+                    if (!UserWithNameAlreadyExists(data, ctx))
+                    {
+                        return "User does not exist";
+                    }
 
+                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
+                    if (user == null)
+                    {
+                        return "User does not exist";
+                    }
+                    if (user.password != data.Password)
+                    {
+                        return "Wrong Password";
+                    }
+
+                    user.LastRegisterDate = DateTime.Now;
+                    user.LastIP = data.UserIp;
+                    ctx.SaveChanges();
+                    return "Login successful";
+                }
+                catch (Exception ex)
+                {
+                    return $"An error occurred: {ex.Message}";
+                }
             }
 
         }
@@ -28,6 +57,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 return true;
             }
             return false;
+        }
+        private bool UserWithNameAlreadyExists(UserLoginDTO data, UserContext ctx)
+        {
+            return ctx.Users.Any(u => u.username == data.UserName);
         }
     }
 }
