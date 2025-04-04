@@ -10,7 +10,10 @@ namespace RetroConsoleStoreDotBusinessLogic.DBContext
 {
     public class LogContext : DbContext
     {
-        public LogContext() : base("name=Retro-Console-Store-Log") { }
+        public LogContext() : base("name=Retro-Console-Store-Log") 
+        {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<LogContext>());
+        }
         public virtual DbSet<LTable> Logs { get; set; }
     }
 

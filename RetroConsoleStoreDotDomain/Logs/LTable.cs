@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotDomain.Enums;
 using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotDomain.Logs
@@ -30,10 +31,14 @@ namespace RetroConsoleStoreDotDomain.Logs
         [Required]
         public DateTime CreatedDate { get; set; }
 
+        [Required]
+        public string Type { get; set; }
+
         public string UserIp {  get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual UDBTablecs User { get; set; }
+
+
+
 
 
     }

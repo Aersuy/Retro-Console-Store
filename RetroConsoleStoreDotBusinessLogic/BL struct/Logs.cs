@@ -24,9 +24,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     var LogEntry = new LTable
                     {
                         UserName = data.UserName,
-                        Description = "Use Auth Attempt",
+                        Description = "User attempted authentification",
                         CreatedDate = DateTime.Now,
-                        UserIp = data.UserIp
+                        UserIp = data.UserIp,
+                        Type = "Auth"
                     };
 
                     using (var ctx2 = new UserContext())
