@@ -43,7 +43,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                             LogEntry.Description += "\n Failed - User not found\n";
                         }
                     }
-                    //Everything up untill here works
+                    //Everything up untill here works / Update method works perfectly
                     ctx.Logs.Add(LogEntry);
                     ctx.SaveChanges();
                     return "Log created";

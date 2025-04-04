@@ -10,5 +10,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     internal interface ILog
     {
         string AuthLog(UserLoginDTO data);
+        string LoginLog(UserLoginDTO data);
     }
 }
