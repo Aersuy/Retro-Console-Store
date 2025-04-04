@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="BL struct\AuthBL.cs" />
     <Compile Include="BL struct\LoginBL1.cs" />
+    <Compile Include="BL struct\Logs.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DBContext\DBContext.cs" />
     <Compile Include="DBContext\LogContext.cs" />
     <Compile Include="DBContext\UserContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,7 +9,8 @@ using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreDotDomain.Enums;
-using System.Runtime.InteropServices.ComTypes;  // Added missing semicolon
+using System.Runtime.InteropServices.ComTypes;
+using RetroConsoleStoreDotBusinessLogic.BL_struct;  // Added missing semicolon
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
 {
@@ -37,10 +38,15 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
 
 
                     var user = ctx.Users.FirstOrDefault(u => u.username == "testuser");
+                    var logs = new Logs();
+                    logs.AuthLog(data);
                     return user != null ? "User created and retrieved successfully!" : "Failed to create/retrieve user";
                 }
+
                 catch (Exception ex)
                 {
+                    var logs = new Logs();
+                    logs.AuthLog(data);
                     return $"Database error: {ex.Message}";
                 }
             }

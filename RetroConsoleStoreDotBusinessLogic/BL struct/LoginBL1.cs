@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
+using RetroConsoleStoreDotBusinessLogic.DBContext;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
@@ -40,6 +41,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     user.LastRegisterDate = DateTime.Now;
                     user.LastIP = data.UserIp;
                     ctx.SaveChanges();
+                    using (var ctx2 = new LogContext()) 
+                    {
+                        
+                    }
                     return "Login successful";
                 }
                 catch (Exception ex)
