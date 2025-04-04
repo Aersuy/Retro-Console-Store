@@ -56,6 +56,18 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 return $"Error creating log entry: {ex.Message}";
             }
         }
+        public string LoginLog(UserLoginDTO data)
+        {
+            try
+            {
+                throw new Exception(); // exception for not yet implemented
+            }
+            catch (Exception ex)
+            {
+                return $"Error creating log entry: {ex.Message}";
+            }
+
         }
-    }
+     }
+}
 
