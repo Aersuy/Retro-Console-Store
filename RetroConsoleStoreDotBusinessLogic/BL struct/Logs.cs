@@ -34,15 +34,16 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                         var user = ctx2.Users.FirstOrDefault(u => u.username == data.UserName);
                         if (user != null)
                         {
-                            LogEntry.User = user;
-                            LogEntry.Description += " \n Succesful \n";
+                            LogEntry.UserId = user.id;  
+                            LogEntry.Description += " \n Successful \n";
                         }
                         else
                         {
-                            LogEntry.User = null;
                             LogEntry.Description += "\n Failed - User not found\n";
                         }
                     }
+                    //Everything up untill here works
+                    ctx.Logs.Add(LogEntry);
                     ctx.SaveChanges();
                     return "Log created";
                 }
