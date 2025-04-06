@@ -10,7 +10,7 @@ using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreDotDomain.Enums;
 using System.Runtime.InteropServices.ComTypes;
-using RetroConsoleStoreDotBusinessLogic.BL_struct;  // Added missing semicolon
+using RetroConsoleStoreDotBusinessLogic.BL_struct;  
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
 {
