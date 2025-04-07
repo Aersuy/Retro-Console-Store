@@ -27,7 +27,7 @@ namespace RetroConsoleStoreDotDomain.User
 
         [Required]
         [Display(Name ="password")]
-        [StringLength(50,MinimumLength = 8, ErrorMessage = "Invalid Password")]
+        [StringLength(500,MinimumLength = 8, ErrorMessage = "Invalid Password")]
         public string password { get; set; }
 
 

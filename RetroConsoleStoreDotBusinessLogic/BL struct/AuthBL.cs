@@ -10,12 +10,24 @@ using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreDotDomain.Enums;
 using System.Runtime.InteropServices.ComTypes;
-using RetroConsoleStoreDotBusinessLogic.BL_struct;  
+using RetroConsoleStoreDotBusinessLogic.BL_struct;
+using RetroConsoleStoreHelpers.PasswordHash;
+
+using RetroConsoleStoreHelpers.Interfaces;
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
 {
     public class AuthBL : UserApi, IAuth
     {
+        private readonly IPasswordHash _passwordHash;
+        public IPasswordHash GetPasswordHash()
+        {
+            return _passwordHash;
+        }
+         public AuthBL(IPasswordHash passwordHash)
+        {
+            _passwordHash = passwordHash;
+        }
         public string UserAuthLogic(UserLoginDTO data)
         {
             using (var ctx = new UserContext())
@@ -30,6 +42,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     {
                         return "User with name already exists";
                     }
+                   
                     UDBTablecs NewUser = CreateNewUser(data);
                     // user nou
                     
@@ -46,6 +59,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                 catch (Exception ex)
                 {
                     var logs = new Logs();
+                    
                     logs.AuthLog(data);
                     return $"Database error: {ex.Message}";
                 }
@@ -68,7 +82,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             return new UDBTablecs
             {
                 username = data.UserName,
-                password = data.Password,
+                password = GetPasswordHash().HashPassword(data.Password),
                 email = data.Email ?? "default@email.com",
                 RegisterDate = DateTime.Now,
                 LastRegisterDate = DateTime.Now,

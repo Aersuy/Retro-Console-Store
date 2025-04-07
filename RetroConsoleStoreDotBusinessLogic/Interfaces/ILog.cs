@@ -9,7 +9,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
     internal interface ILog
     {
-        string AuthLog(UserLoginDTO data);
+        string AuthLog(UserLoginDTO data, string hash);
         string LoginLog(UserLoginDTO data);
     }
 }
