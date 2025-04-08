@@ -15,15 +15,10 @@ namespace RetroConsoleStoreDotDomain.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id {  get; set; }
 
-
-
         [Required]
         [Display(Name = "username")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Invalid username, Issue = length")]
         public string username { get; set; }
-
-
-
 
         [Required]
         [Display(Name ="password")]

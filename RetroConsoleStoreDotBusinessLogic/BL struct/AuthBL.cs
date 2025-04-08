@@ -16,7 +16,10 @@ using RetroConsoleStoreHelpers.PasswordHash;
 using RetroConsoleStoreHelpers.Interfaces;
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
-{
+{     // Use the presentation layer model 
+      // Use auto object mapping for translation
+      // between the presentation object and the BL
+      // object
     public class AuthBL : UserApi, IAuth
     {
         private readonly IPasswordHash _passwordHash;
