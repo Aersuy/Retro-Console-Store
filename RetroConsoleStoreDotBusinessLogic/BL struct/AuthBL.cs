@@ -12,8 +12,8 @@ using RetroConsoleStoreDotDomain.Enums;
 using System.Runtime.InteropServices.ComTypes;
 using RetroConsoleStoreDotBusinessLogic.BL_struct;
 using RetroConsoleStoreHelpers.PasswordHash;
-
 using RetroConsoleStoreHelpers.Interfaces;
+
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
 {     // Use the presentation layer model 
@@ -53,7 +53,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     ctx.SaveChanges();
 
 
-                    var user = ctx.Users.FirstOrDefault(u => u.username == "testuser");
+                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
                     var logs = new Logs();
                     logs.AuthLog(data);
                     return user != null ? "User created and retrieved successfully!" : "Failed to create/retrieve user";

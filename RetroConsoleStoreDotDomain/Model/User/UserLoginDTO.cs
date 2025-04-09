@@ -12,6 +12,7 @@ namespace RetroConsoleStore.Domain.Model.User
         public string Password { get; set; }
         public string UserIp { get; set; }
         
+        public string Phone { get; set; }
         public string Email { get; set; }
     }
 }

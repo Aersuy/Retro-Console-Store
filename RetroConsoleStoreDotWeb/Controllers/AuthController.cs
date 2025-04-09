@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStore.Domain.Model.User;
+using RetroConsoleStoreDotWeb.Models.Auth;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -25,9 +26,16 @@ namespace RetroConsoleStoreDotWeb.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Auth(UserLoginDTO model)
+        public ActionResult Auth(Auth model)
         {
-            ViewBag.Message = _businessLogic.GetAuthBL().UserAuthLogic(model);
+            var ModelDtO = new UserLoginDTO
+            {
+                UserName = model.Name,
+                Password = model.Password,
+                Email = model.Email,
+                Phone = model.Phone,
+            };
+            ViewBag.Message = _businessLogic.GetAuthBL().UserAuthLogic(ModelDtO);
             return View(model);
         }
         
