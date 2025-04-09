@@ -364,3 +364,6 @@ FodyWeavers.xsd
 /RetroConsoleStoreDotWeb/Web.config
 /RetroConsoleStoreDotWeb/Web.Debug.config
 /RetroConsoleStoreDotWeb/Web.Release.config
+/RetroConsoleStoreDotWeb/Web.config
+/RetroConsoleStoreDotWeb/Web.Debug.config
+/RetroConsoleStoreDotWeb/Web.Release.config
