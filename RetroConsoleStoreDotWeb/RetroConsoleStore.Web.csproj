@@ -331,6 +331,7 @@
     <Content Include="Views\Admin\EditProduct.cshtml" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageRoles.cshtml" />
+    <Content Include="Views\Admin\AdminUserPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

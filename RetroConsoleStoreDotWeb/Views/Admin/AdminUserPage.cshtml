@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "User Management";
+}
+@Model 
+<div class="catalogue-container">
+    <div class="catalogue-content">
+        <h2 class="retro-font-pixel">User Management</h2>
+
+        <div class="famicom-controller-ports">
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="admin-actions">
+            <a href="@Url.Action("AddUser", "Admin")" class="admin-button retro-font-8bit">Add New User</a>
+            <a href="@Url.Action("AdminDashboard", "Admin")" class="admin-button retro-font-8bit">Back to Dashboard</a>
+        </div>
+
+        <div class="user-table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>@user.Role</td>
+                            <td>
+                                <span class="status-badge @(user.IsActive ? "active" : "inactive")">
+                                    @(user.IsActive ? "Active" : "Inactive")
+                                </span>
+                            </td>
+                            <td class="action-buttons">
+                                <a href="@Url.Action("EditUser", "Admin", new { id = user.Id })" class="action-button edit">Edit</a>
+                                <a href="@Url.Action("UserDetails", "Admin", new { id = user.Id })" class="action-button view">View</a>
+                                @if (user.IsActive)
+                                {
+                                    <a href="@Url.Action("DeactivateUser", "Admin", new { id = user.Id })" class="action-button deactivate">Deactivate</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ActivateUser", "Admin", new { id = user.Id })" class="action-button activate">Activate</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="famicom-cartridge-slot"></div>
+
+        <div class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="@Url.Action("AdminUserPage", "Admin", new { page = ViewBag.CurrentPage - 1 })" class="pagination-button retro-font-8bit">Previous</a>
+            }
+
+            <span class="page-info retro-font-8bit">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</span>
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a href="@Url.Action("AdminUserPage", "Admin", new { page = ViewBag.CurrentPage + 1 })" class="pagination-button retro-font-8bit">Next</a>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Additional styles specific to the admin user page */
+    .admin-actions {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0 30px;
+    }
+
+    .admin-button {
+        background-color: #2a1144;
+        color: #ffcc33;
+        border: 3px solid #e6007e;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+        .admin-button:hover {
+            background-color: #e6007e;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+    .user-table-container {
+        overflow-x: auto;
+        margin: 20px 0;
+    }
+
+    .user-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+    }
+
+        .user-table th {
+            background-color: #2a1144;
+            color: #ffcc33;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 3px solid #e6007e;
+        }
+
+        .user-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(230, 0, 126, 0.3);
+            color: #ffffff;
+        }
+
+        .user-table tr:hover {
+            background-color: rgba(230, 0, 126, 0.1);
+        }
+
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 0.9rem;
+    }
+
+        .status-badge.active {
+            background-color: #2a1144;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+
+        .status-badge.inactive {
+            background-color: #2a1144;
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .action-button {
+        padding: 5px 10px;
+        border-radius: 3px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+    }
+
+        .action-button.edit {
+            background-color: #2a1144;
+            color: #ffcc33;
+            border: 1px solid #ffcc33;
+        }
+
+        .action-button.view {
+            background-color: #2a1144;
+            color: #2196f3;
+            border: 1px solid #2196f3;
+        }
+
+        .action-button.deactivate {
+            background-color: #2a1144;
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+
+        .action-button.activate {
+            background-color: #2a1144;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 20px;
+    }
+
+    .pagination-button {
+        background-color: #2a1144;
+        color: #ffcc33;
+        border: 2px solid #e6007e;
+        padding: 8px 15px;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+        .pagination-button:hover {
+            background-color: #e6007e;
+            color: #ffffff;
+        }
+
+    .page-info {
+        color: #ffcc33;
+    }
+</style>

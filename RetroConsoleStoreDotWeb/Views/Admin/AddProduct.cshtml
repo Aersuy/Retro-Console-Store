@@ -1,8 +1,63 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "AddProduct";
+    ViewBag.Title = "Add Product";
 }
 
-<h2>AddProduct</h2>
+<div class="catalogue-container">
+    <div class="catalogue-content">
+        <h2 class="retro-font-pixel">Add New Product</h2>
 
+        <div class="famicom-controller-ports">
+            <span></span>
+            <span></span>
+        </div>
+
+        <form method="post" action="@Url.Action("AddProduct", "Admin")" enctype="multipart/form-data">
+            <div>
+                <label for="Name">Product Name</label>
+                <input type="text" id="Name" name="Name" required placeholder="Enter product name">
+            </div>
+
+            <div>
+                <label for="Description">Description</label>
+                <textarea id="Description" name="Description" required placeholder="Enter product description"></textarea>
+            </div>
+
+            <div>
+                <label for="Price">Price</label>
+                <input type="number" id="Price" name="Price" step="0.01" required placeholder="Enter price">
+            </div>
+
+            <div>
+                <label for="Category">Category</label>
+                <select id="Category" name="Category" required>
+                    <option value="">Select a category</option>
+                    <option value="Console">Console</option>
+                    <option value="Game">Game</option>
+                    <option value="Accessory">Accessory</option>
+                    <option value="Collectible">Collectible</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="ImageFile">Product Image</label>
+                <input type="file" id="ImageFile" name="ImageFile" accept="image/*" required>
+            </div>
+
+            <div>
+                <label for="StockQuantity">Stock Quantity</label>
+                <input type="number" id="StockQuantity" name="StockQuantity" required placeholder="Enter stock quantity">
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="retro-font-8bit">Add Product</button>
+            </div>
+        </form>
+
+        <div class="famicom-cartridge-slot"></div>
+
+        <p class="retro-font-8bit" style="margin-top: 20px;">
+            <a href="@Url.Action("ProductManagement", "Admin")" style="color: #ffcc33;">Back to Product Management</a>
+        </p>
+    </div>
+</div>

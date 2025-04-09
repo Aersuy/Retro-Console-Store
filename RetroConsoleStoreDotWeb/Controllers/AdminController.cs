@@ -25,5 +25,9 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             return View();
         }
+        public ActionResult AdminUserPage()
+        {
+            return View();
+        }
     }
 }
