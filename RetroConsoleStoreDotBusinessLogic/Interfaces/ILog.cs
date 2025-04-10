@@ -7,7 +7,7 @@ using RetroConsoleStore.Domain.Model.User;
 
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
-    internal interface ILog
+    public interface ILog
     {
         string AuthLog(UserLoginDTO data);
         string LoginLog(UserLoginDTO data);

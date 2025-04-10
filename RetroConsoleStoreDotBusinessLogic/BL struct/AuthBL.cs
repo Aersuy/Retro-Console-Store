@@ -13,6 +13,7 @@ using System.Runtime.InteropServices.ComTypes;
 using RetroConsoleStoreDotBusinessLogic.BL_struct;
 using RetroConsoleStoreHelpers.PasswordHash;
 using RetroConsoleStoreHelpers.Interfaces;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
 
 namespace RetroConsoleStore.BusinessLogic.BL_Struct
@@ -23,13 +24,17 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
     public class AuthBL : UserApi, IAuth
     {
         private readonly IPasswordHash _passwordHash;
+        private readonly IError _error;
+        private readonly ILog _log;
         public IPasswordHash GetPasswordHash()
         {
             return _passwordHash;
         }
-         public AuthBL(IPasswordHash passwordHash)
+        public AuthBL(IPasswordHash passwordHash, IError error, ILog log)
         {
+            _error = error;
             _passwordHash = passwordHash;
+            _log = log;
         }
         public string UserAuthLogic(UserLoginDTO data)
         {
@@ -54,16 +59,21 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
 
 
                     var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
-                    var logs = new Logs();
-                    logs.AuthLog(data);
+                    // var logs = new Logs();
+                    //  logs.AuthLog(data);
+                    _log.AuthLog(data);
+                    
                     return user != null ? "User created and retrieved successfully!" : "Failed to create/retrieve user";
                 }
 
                 catch (Exception ex)
                 {
-                    var logs = new Logs();
+                  //  var logs = new Logs();
+                    _log.AuthLog(data);
+                   // logs.AuthLog(data);
+
+                    _error.ErrorToDatabase(ex,"Problem with auth process");
                     
-                    logs.AuthLog(data);
                     return $"Database error: {ex.Message}";
                 }
             }

@@ -263,6 +263,12 @@
     <Content Include="Vendors\datables\jquery.dataTables.min.js" />
     <Content Include="Vendors\datables\jquery.dataTables_themeroller.css" />
     <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -278,6 +284,7 @@
     <Compile Include="Models\Articol\Product.cs" />
     <Compile Include="Models\Auth\Auth.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\UserVisible\UserOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -332,12 +339,6 @@
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageRoles.cshtml" />
     <Content Include="Views\Admin\AdminUserPage.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

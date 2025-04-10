@@ -8,5 +8,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
     public interface IError
     {
+        void ErrorToDatabase(Exception ex, string Description);
     }
 }

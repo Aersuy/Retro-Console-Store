@@ -41,6 +41,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     user.LastRegisterDate = DateTime.Now;
                     user.LastIP = data.UserIp;
                     ctx.SaveChanges();
+                    
                     using (var ctx2 = new LogContext()) 
                     {
                         

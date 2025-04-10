@@ -15,13 +15,18 @@ namespace RetroConsoleStore.BusinessLogic
     {
         private readonly IAuth _authBL;
         private readonly ILogin _loginBL;
+        private readonly IError _errorBL;
         private readonly IPasswordHash _passwordHash;
+        private readonly ILog _loggingBL;
 
         public BusinessLogic()
         {
+            _loggingBL = new Logs();
+            _errorBL = new ErrorBL();
             _passwordHash = new PasswordHash();
-            _authBL = new AuthBL(_passwordHash);
+            _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL);
             _loginBL = new LoginBL1();
+            
             
         }
 

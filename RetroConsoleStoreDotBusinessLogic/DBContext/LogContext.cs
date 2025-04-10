@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotDomain.Error;
 using RetroConsoleStoreDotDomain.Logs;
 
 namespace RetroConsoleStoreDotBusinessLogic.DBContext
@@ -15,6 +16,7 @@ namespace RetroConsoleStoreDotBusinessLogic.DBContext
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<LogContext>());
         }
         public virtual DbSet<LTable> Logs { get; set; }
+        public virtual DbSet<ETable> Errors { get; set; }
     }
 
 }
