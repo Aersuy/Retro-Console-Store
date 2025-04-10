@@ -27,7 +27,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     {
                         return "User does not exist";
                     }
-
+                   
                     var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
                     if (user == null)
                     {
