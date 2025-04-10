@@ -22,7 +22,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
       // between the presentation object and the BL
       // object
     public class AuthBL : UserApi, IAuth
-    {
+    {  
         private readonly IPasswordHash _passwordHash;
         private readonly IError _error;
         private readonly ILog _log;
@@ -48,7 +48,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             using (var ctx = new UserContext())
             {
                 try
-                {
+                {    // Validation
                     if (!(bool)ValidateUserInput(data))
                     {
                         return "Enter valid data";
@@ -57,14 +57,14 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     {
                         return "User with name already exists";
                     }
-                   
+                     // New user creation
                     UDBTablecs NewUser = CreateNewUser(data);
-                    // user nou
                     
+                    // Saving
                     ctx.Users.Add(NewUser);
                     ctx.SaveChanges();
 
-
+                    //Result
                     var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
                     
                     _log.AuthLog(data);
@@ -74,9 +74,8 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
 
                 catch (Exception ex)
                 {
-                
+                     // Logging and writting exception to DB
                     _log.AuthLog(data);
-                 
 
                     _error.ErrorToDatabase(ex,"Problem with auth process");
                     
