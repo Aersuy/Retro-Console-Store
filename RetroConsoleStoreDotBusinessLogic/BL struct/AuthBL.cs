@@ -59,8 +59,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
 
 
                     var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
-                    // var logs = new Logs();
-                    //  logs.AuthLog(data);
+                    
                     _log.AuthLog(data);
                     
                     return user != null ? "User created and retrieved successfully!" : "Failed to create/retrieve user";
@@ -68,9 +67,9 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
 
                 catch (Exception ex)
                 {
-                  //  var logs = new Logs();
+                
                     _log.AuthLog(data);
-                   // logs.AuthLog(data);
+                 
 
                     _error.ErrorToDatabase(ex,"Problem with auth process");
                     
