@@ -26,10 +26,6 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
         private readonly IPasswordHash _passwordHash;
         private readonly IError _error;
         private readonly ILog _log;
-        public IPasswordHash GetPasswordHash()
-        {
-            return _passwordHash;
-        }
         public AuthBL(IPasswordHash passwordHash, IError error, ILog log)
         {
             _error = error;
@@ -94,7 +90,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             return new UDBTablecs
             {
                 username = data.UserName,
-                password = GetPasswordHash().HashPassword(data.Password),
+                password = _passwordHash.HashPassword(data.Password),
                 email = data.Email ?? "default@email.com",
                 RegisterDate = DateTime.Now,
                 LastRegisterDate = DateTime.Now,
