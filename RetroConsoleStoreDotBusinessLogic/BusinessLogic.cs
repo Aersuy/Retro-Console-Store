@@ -21,12 +21,11 @@ namespace RetroConsoleStore.BusinessLogic
 
         public BusinessLogic()
         {
-            _loggingBL = new Logs();
             _errorBL = new ErrorBL();
+            _loggingBL = new Logs(_errorBL);
             _passwordHash = new PasswordHash();
             _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL);
-            _loginBL = new LoginBL1();
-            
+            _loginBL = new LoginBL1();   
             
         }
 

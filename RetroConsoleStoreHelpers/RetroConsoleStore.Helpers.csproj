@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cookies\CreateCookie.cs" />
     <Compile Include="Interfaces\IPasswordHash.cs" />
     <Compile Include="PasswordHash\PasswordHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

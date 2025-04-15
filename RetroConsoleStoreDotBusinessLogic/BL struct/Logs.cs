@@ -12,9 +12,16 @@ using RetroConsoleStoreDotDomain.Logs;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
     public class Logs : ILog
-    {
-        public Logs() { }
-
+    {   private readonly IError _error;
+        public Logs(IError error) 
+        { 
+            _error = error;
+        }
+        /// <summary>
+        /// Method for loggign data to database.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public string AuthLog(UserLoginDTO data)
         {
             try
@@ -53,9 +60,15 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             
               catch (Exception ex)
             {
+                _error.ErrorToDatabase(ex, "Error in logging Auth process to db");
                 return $"Error creating log entry: {ex.Message}";
             }
         }
+        /// <summary>
+        /// Method for logging login to database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public string LoginLog(UserLoginDTO data)
         {
             try
@@ -64,6 +77,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             }
             catch (Exception ex)
             {
+                _error.ErrorToDatabase(ex, "Error in loggin Login process to db");
                 return $"Error creating log entry: {ex.Message}";
             }
 
