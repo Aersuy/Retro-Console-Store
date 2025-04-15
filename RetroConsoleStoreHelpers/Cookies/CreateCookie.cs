@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace RetroConsoleStoreHelpers.Cookies
 {
     public static class CreateCookie
-    {
+    {  // TODO
+       // Replace the Verify functions with unit tests.
         private const string SaltData = "QADLz4qk3rVgBSGjDfAH3XWV" + "qKKagMXezBPv7TmXvwnXDDeR" +
                                         "pHaLBv4JnTGRwLg9tzbmV77g" + "8DUEAEa6JPv66hy7SwHBL4z4" +
                                         "FbGdh2MVs4kq9RcaZEAszuP5"
