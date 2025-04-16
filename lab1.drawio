@@ -727,7 +727,7 @@
         <mxCell id="zsm5AC3hMA4c1sxTvSOV-8" value="&lt;div&gt;Like this so I can have 2&lt;/div&gt;&lt;div&gt;consoles.&lt;/div&gt;&lt;div&gt;Eg: I buy 2 playstation 2&#39;s&lt;/div&gt;&lt;div&gt;It will just be one, with the &lt;br&gt;&lt;/div&gt;&lt;div&gt;quantity being 2&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
           <mxGeometry x="-550" y="-1100" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-9" value="Actuall Product" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-9" value="Actual Product" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="-660" y="-850" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="zsm5AC3hMA4c1sxTvSOV-10" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-9" target="zsm5AC3hMA4c1sxTvSOV-4">
