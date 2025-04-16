@@ -492,7 +492,7 @@ form button:hover {
 
 /* Retro Navbar Styles */
 .retro-navbar {
-    background-color: #2a1144;
+    background-color: #1a1a1a;
     padding: 15px 0;
     border-bottom: 4px solid #e6007e;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -569,7 +569,7 @@ form button:hover {
 
 /* Retro Footer Styles */
 .retro-footer {
-    background-color: #2a1144;
+    background-color: #1a1a1a;
     color: #ffffff;
     border-top: 4px solid #e6007e;
     position: relative;
