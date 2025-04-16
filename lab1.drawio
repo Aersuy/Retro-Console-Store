@@ -46,6 +46,33 @@
         <mxCell id="zsm5AC3hMA4c1sxTvSOV-12" value="&lt;div&gt;How products and the cart should work&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
           <mxGeometry x="-490" y="-1350" width="80" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-13" value="&lt;div&gt;Product database structure&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-520" y="-700" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-14" value="&lt;div&gt;Table 1&lt;/div&gt;&lt;div&gt;All product types&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-720" y="-600" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-15" value="&lt;div&gt;Table 2&lt;/div&gt;&lt;div&gt;Actual products, with a column for type, that holds&lt;/div&gt;&lt;div&gt;the id for a table 1 row&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="-600" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-16" value="&lt;div&gt;Cart&lt;/div&gt;&lt;div&gt;(Need to think about more)&lt;/div&gt;&lt;div&gt;List with all products&lt;/div&gt;&lt;div&gt;Foreign key user id&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="-380" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-17" value="&lt;div&gt;User&lt;/div&gt;&lt;div&gt;Needs to have cart id as &lt;br&gt;&lt;/div&gt;&lt;div&gt;a column&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="-210" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-18" value="&lt;div&gt;Empty cart should be created&lt;/div&gt;&lt;div&gt;at the same time as the user&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="-280" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-20" value="" style="endArrow=none;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=3;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-17" target="zsm5AC3hMA4c1sxTvSOV-16">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-380" y="-440" as="sourcePoint" />
+            <mxPoint x="-220" y="-440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-23" value="&lt;div&gt;The cart should store product id&#39;s &lt;br&gt;&lt;/div&gt;&lt;div&gt;from table 2???????&lt;/div&gt;&lt;div&gt;Means I need to sort them by type in&lt;/div&gt;&lt;div&gt;BL&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-430" width="80" height="26" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
