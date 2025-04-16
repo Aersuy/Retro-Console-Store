@@ -43,6 +43,9 @@
         <mxCell id="zsm5AC3hMA4c1sxTvSOV-11" value="&lt;div&gt;Eg: Playstation 2&lt;/div&gt;&lt;div&gt;serial number: 111111&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
           <mxGeometry x="-505" y="-833" width="80" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-12" value="&lt;div&gt;How products and the cart should work&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-490" y="-1350" width="80" height="26" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
