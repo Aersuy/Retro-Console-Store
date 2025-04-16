@@ -1,77 +1,89 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.2.8">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.2.13">
   <diagram name="Page-1" id="5RAgXpiNk382n0N53aNm">
-    <mxGraphModel dx="2252" dy="3102" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2144" dy="3032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-1" value="Cart" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-1" value="Cart" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-660" y="-1260" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-3" value="User" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-3" value="User" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-360" y="-1260" width="110" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-4" value="&lt;div&gt;ProductType&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-4" value="&lt;div&gt;ProductType&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-660" y="-1005" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-5" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-1" target="zsm5AC3hMA4c1sxTvSOV-3">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-5" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="zsm5AC3hMA4c1sxTvSOV-1" target="zsm5AC3hMA4c1sxTvSOV-3" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-490" y="-1070" as="sourcePoint" />
             <mxPoint x="-330" y="-1070" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-6" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-4" target="zsm5AC3hMA4c1sxTvSOV-1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-6" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="zsm5AC3hMA4c1sxTvSOV-4" target="zsm5AC3hMA4c1sxTvSOV-1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-490" y="-1050" as="sourcePoint" />
             <mxPoint x="-330" y="-1050" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-7" value="Eg: Playstation 2" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-7" value="Eg: Playstation 2" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-520" y="-990" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-8" value="&lt;div&gt;Like this so I can have 2&lt;/div&gt;&lt;div&gt;consoles.&lt;/div&gt;&lt;div&gt;Eg: I buy 2 playstation 2&#39;s&lt;/div&gt;&lt;div&gt;It will just be one, with the &lt;br&gt;&lt;/div&gt;&lt;div&gt;quantity being 2&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-8" value="&lt;div&gt;Like this so I can have 2&lt;/div&gt;&lt;div&gt;consoles.&lt;/div&gt;&lt;div&gt;Eg: I buy 2 playstation 2&#39;s&lt;/div&gt;&lt;div&gt;It will just be one, with the &lt;br&gt;&lt;/div&gt;&lt;div&gt;quantity being 2&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-550" y="-1100" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-9" value="Actual Product" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-9" value="Actual Product" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-660" y="-850" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-10" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-9" target="zsm5AC3hMA4c1sxTvSOV-4">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-10" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="zsm5AC3hMA4c1sxTvSOV-9" target="zsm5AC3hMA4c1sxTvSOV-4" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-490" y="-1000" as="sourcePoint" />
             <mxPoint x="-330" y="-1000" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-11" value="&lt;div&gt;Eg: Playstation 2&lt;/div&gt;&lt;div&gt;serial number: 111111&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-11" value="&lt;div&gt;Eg: Playstation 2&lt;/div&gt;&lt;div&gt;serial number: 111111&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-505" y="-833" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-12" value="&lt;div&gt;How products and the cart should work&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-12" value="&lt;div&gt;How products and the cart should work&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-490" y="-1350" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-13" value="&lt;div&gt;Product database structure&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-520" y="-700" width="80" height="26" as="geometry" />
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-13" value="&lt;div&gt;Product database structure&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-505" y="-680" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-14" value="&lt;div&gt;Table 1&lt;/div&gt;&lt;div&gt;All product types&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-14" value="&lt;div&gt;Table 1&lt;/div&gt;&lt;div&gt;All product types&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-720" y="-600" width="170" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-15" value="&lt;div&gt;Table 2&lt;/div&gt;&lt;div&gt;Actual products, with a column for type, that holds&lt;/div&gt;&lt;div&gt;the id for a table 1 row&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-15" value="&lt;div&gt;Table 2&lt;/div&gt;&lt;div&gt;Actual products, with a column for type, that holds&lt;/div&gt;&lt;div&gt;the id for a table 1 row&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-380" y="-600" width="160" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-16" value="&lt;div&gt;Cart&lt;/div&gt;&lt;div&gt;(Need to think about more)&lt;/div&gt;&lt;div&gt;List with all products&lt;/div&gt;&lt;div&gt;Foreign key user id&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-16" value="&lt;div&gt;Cart&lt;/div&gt;&lt;div&gt;(Need to think about more)&lt;/div&gt;&lt;div&gt;List with all products&lt;/div&gt;&lt;div&gt;Foreign key user id&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-380" y="-380" width="160" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-17" value="&lt;div&gt;User&lt;/div&gt;&lt;div&gt;Needs to have cart id as &lt;br&gt;&lt;/div&gt;&lt;div&gt;a column&lt;/div&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-17" value="&lt;div&gt;User&lt;/div&gt;&lt;div&gt;Needs to have cart id as &lt;br&gt;&lt;/div&gt;&lt;div&gt;a column&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="-380" y="-210" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-18" value="&lt;div&gt;Empty cart should be created&lt;/div&gt;&lt;div&gt;at the same time as the user&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-18" value="&lt;div&gt;Empty cart should be created&lt;/div&gt;&lt;div&gt;at the same time as the user&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-160" y="-280" width="80" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-20" value="" style="endArrow=none;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=3;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-17" target="zsm5AC3hMA4c1sxTvSOV-16">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-20" value="" style="endArrow=none;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=3;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="zsm5AC3hMA4c1sxTvSOV-17" target="zsm5AC3hMA4c1sxTvSOV-16" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-380" y="-440" as="sourcePoint" />
             <mxPoint x="-220" y="-440" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zsm5AC3hMA4c1sxTvSOV-23" value="&lt;div&gt;The cart should store product id&#39;s &lt;br&gt;&lt;/div&gt;&lt;div&gt;from table 2???????&lt;/div&gt;&lt;div&gt;Means I need to sort them by type in&lt;/div&gt;&lt;div&gt;BL&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="zsm5AC3hMA4c1sxTvSOV-23" value="&lt;div&gt;The cart should store product id&#39;s &lt;br&gt;&lt;/div&gt;&lt;div&gt;from table 2???????&lt;/div&gt;&lt;div&gt;Means I need to sort them by type in&lt;/div&gt;&lt;div&gt;BL&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
           <mxGeometry x="-330" y="-430" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="qH4Epd57HyuETnMUrXBg-2" value="&lt;div&gt;Maybe split user auth from&lt;/div&gt;&lt;div&gt;other user data &lt;br&gt;&lt;/div&gt;&lt;div&gt;???????&lt;/div&gt;&lt;div&gt;Donno&lt;/div&gt;&lt;div&gt;Feel like too many fields&lt;/div&gt;&lt;div&gt;in table, need more&lt;/div&gt;&lt;div&gt;spliting to bare minimum needed&lt;/div&gt;&lt;div&gt;for existing&lt;/div&gt;&lt;div&gt;???????&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-590" y="-236" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="qH4Epd57HyuETnMUrXBg-4" value="" style="endArrow=none;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=3;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zsm5AC3hMA4c1sxTvSOV-14" target="zsm5AC3hMA4c1sxTvSOV-15">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-350" y="-500" as="sourcePoint" />
+            <mxPoint x="-190" y="-500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qH4Epd57HyuETnMUrXBg-5" value="&lt;div&gt;Needs manufactury date&lt;/div&gt;&lt;div&gt;serial number, second hand(y/n)&lt;/div&gt;&lt;div&gt;and ???&lt;/div&gt;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="-640" width="80" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
