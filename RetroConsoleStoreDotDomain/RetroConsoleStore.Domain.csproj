@@ -46,6 +46,8 @@
     <Compile Include="Error\ETable.cs" />
     <Compile Include="Logs\LTable.cs" />
     <Compile Include="Model\User\UserLoginDTO.cs" />
+    <Compile Include="Products\PhysicalProductT.cs" />
+    <Compile Include="Products\ProductTypeT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UDBTablecs.cs" />
   </ItemGroup>

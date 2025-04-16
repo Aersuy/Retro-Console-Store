@@ -150,6 +150,17 @@ namespace RetroConsoleStoreHelpers.Cookies
 
             return buffer;
         }
+        public static string Create(string value)
+        {
+            return EncryptAES(value,
+                "BjXNmq5MKKaraLwxz9uaATvFwE4Rj679KguTRE8c2j56FnkuKJKfkGbZEeDGFDvsGYNHpUXFUUUuUHBR4UV3T2kumguhubg6Gpt7CyqGDbUPrMvPc67kX3yP");
+        }
+
+        public static string Validate(string value)
+        {
+            return DecryptAES(value,
+                "BjXNmq5MKKaraLwxz9uaATvFwE4Rj679KguTRE8c2j56FnkuKJKfkGbZEeDGFDvsGYNHpUXFUUUuUHBR4UV3T2kumguhubg6Gpt7CyqGDbUPrMvPc67kX3yP");
+        }
     }
 
 }

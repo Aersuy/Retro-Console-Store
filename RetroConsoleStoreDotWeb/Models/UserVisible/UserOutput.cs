@@ -11,10 +11,8 @@ namespace RetroConsoleStoreDotWeb.Models.UserVisible
         public string Name { get; set; }   
         public string Email { get; set; }
         public bool Gender { get; set; }
-        public UInt64 GenderB {  get; set; }
-
         public string RegisterData { get; set; }
-        public string ProfilePicturePath {  get; set; }
-
+        public string ProfilePicturePath {get; set;}
+        public Cart.Cart Cart { get; set;}
     }
 }

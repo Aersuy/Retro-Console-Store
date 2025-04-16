@@ -284,6 +284,7 @@
     </Compile>
     <Compile Include="Models\Articol\Product.cs" />
     <Compile Include="Models\Auth\Auth.cs" />
+    <Compile Include="Models\Cart\Cart.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\UserVisible\UserOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
