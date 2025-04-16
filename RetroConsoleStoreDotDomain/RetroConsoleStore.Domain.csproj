@@ -50,6 +50,7 @@
     <Compile Include="Products\ProductTypeT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UDBTablecs.cs" />
+    <Compile Include="User\UserCartT.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RetroConsoleStoreHelpers\RetroConsoleStore.Helpers.csproj">

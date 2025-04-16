@@ -10,13 +10,6 @@ namespace RetroConsoleStoreDotWeb.Models.Cart
     {
         List<Product> products;
         public decimal TotalPrice { get; set; }
-        public void setTotalPrice()
-            {
-                TotalPrice = 0;
-                foreach (var item in products)
-                {
-                    TotalPrice += item.Price;
-                }                
-            }
+        
     }
 }

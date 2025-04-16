@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotDomain.Products
 {
@@ -23,9 +24,7 @@ namespace RetroConsoleStoreDotDomain.Products
         public string BoxCondition { get; set; } // New, Like New, Good, Acceptable
         public string InformationAboutPrivousOwner { get; set; } // Information about the previous owner, if any
 
-
-
-
-
+        public int? UserCartTId { get; set; } // Foreign key to the user cart table
+        public virtual UserCartT UserCartT { get; set; } // Navigation property to the user cart table
     }
 }
