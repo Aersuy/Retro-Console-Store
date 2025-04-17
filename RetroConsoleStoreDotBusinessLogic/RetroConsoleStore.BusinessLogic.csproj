@@ -76,7 +76,7 @@
     <Compile Include="Interfaces\IError.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
-    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Interfaces\IProductAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

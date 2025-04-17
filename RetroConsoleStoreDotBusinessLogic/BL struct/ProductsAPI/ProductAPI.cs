@@ -7,7 +7,7 @@ using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
-    internal class ProductAPI : IProduct
+    internal class ProductAPI : IProductAPI
     {
 
     }

@@ -45,6 +45,8 @@
     <Compile Include="Enums\URole.cs" />
     <Compile Include="Error\ETable.cs" />
     <Compile Include="Logs\LTable.cs" />
+    <Compile Include="Model\Product\CartItemModel.cs" />
+    <Compile Include="Model\Product\ProductModelBack.cs" />
     <Compile Include="Model\User\UserLoginDTO.cs" />
     <Compile Include="Products\CartItemT.cs" />
     <Compile Include="Products\ProductTypeT.cs" />
