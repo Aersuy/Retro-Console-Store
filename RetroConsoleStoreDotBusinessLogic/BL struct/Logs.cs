@@ -12,6 +12,8 @@ using RetroConsoleStoreDotDomain.Model.Product;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
+    //TODO : Make the product log method work with just the id
+    // need to query the db for other data
     public class Logs : ILog
     {   private readonly IError _error;
         public Logs(IError error) 
@@ -83,7 +85,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             }
 
         }
-        public string ProductLog(ProductModelBack data)
+        public string ProductLog(ProductModelBack data, string Descr)
         {
             try
             { 
@@ -91,8 +93,8 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 {
                     var LogEntry = new LTable
                     {
-                        UserName = data.Name
-                        Description = "Attempted to add Product",
+                        UserName = data.Name,
+                        Description = Descr,
                         CreatedDate = DateTime.Now,
                         // UserIp = data.UserIp,
                         Type = "Product"
@@ -108,7 +110,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                         }
                         else
                         {
-                            LogEntry.Description += "\n Failed - User not found\n";
+                            LogEntry.Description += "\n Failed \n";
                         }
                     }
                     //Everything up untill here works / Update method works perfectly

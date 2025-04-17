@@ -10,6 +10,10 @@ using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Products;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
+    //TODO : Add logging to the methods
+    //TODO : Add error handling to the methods
+    //TODO : Add validation to the methods
+    
     internal class ProductAPI : IProductAPI
     {
         readonly IError _error;
@@ -43,7 +47,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     };
                     ctx.ProductTypes.Add(NewProduct);
                     ctx.SaveChanges();
-                    _log.ProductLog(Product);
+                    _log.ProductLog(Product, "Adding product to DB");
                     return true;
                 }
                 catch (Exception ex)
@@ -69,6 +73,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     }
                     ctx.ProductTypes.Remove(Product);
                     ctx.SaveChanges();
+                   // _log.ProductLog(Product, "Adding product to DB");
                     return true;
                 }
                 catch (Exception ex)

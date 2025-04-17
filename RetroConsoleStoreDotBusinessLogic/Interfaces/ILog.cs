@@ -12,6 +12,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         string AuthLog(UserLoginDTO data);
         string LoginLog(UserLoginDTO data);
-        string ProductLog(ProductModelBack data);
+        string ProductLog(ProductModelBack data, string Desc);
     }
 }
