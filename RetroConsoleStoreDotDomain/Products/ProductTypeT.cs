@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotDomain.Products
 {
-    internal class ProductTypeT
+    public class ProductTypeT
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -34,7 +35,8 @@ namespace RetroConsoleStoreDotDomain.Products
         [Required]
         public int TotalSoldOnSite { get; set; }
 
-      
+        public int? UserCartTId { get; set; } // Foreign key to the user cart table
+        public virtual UserCartT UserCartT { get; set; } // Navigation property to the user cart table
 
     }
 }

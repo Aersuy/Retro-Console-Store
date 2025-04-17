@@ -9,19 +9,22 @@ using RetroConsoleStoreDotDomain.Products;
 
 namespace RetroConsoleStoreDotDomain.User
 {
-    class UserCartT
-    {  
-        [Required]
+    public class UserCartT
+    {
+
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int CartID { get; set; }
 
-        [Required]
-        [ForeignKey("UDBTablecs")]
-        public int UDBTablecsId { get; set; } // Foreign key to the user table
+        public int UserID { get; set; }
+        
 
-        public List<PhysicalProductT> PhysicalProducts { get; } = new List<PhysicalProductT>(); // List of physical products in the cart
+        // Add the navigation property that matches the ForeignKey name
+        public virtual UDBTablecs User { get; set; }
 
-        public decimal TotalPrice { get; set; } // Total price of the cart
+        public virtual ICollection<CartItemT> Products { get; set; } = new List<CartItemT>(); 
+
+        public decimal TotalPrice => Products?.Sum(item => item.SubTotal) ?? 0;
 
     }
 }

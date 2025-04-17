@@ -61,9 +61,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     UDBTablecs NewUser = CreateNewUser(data);
                     
                     // Saving
-                    ctx.Users.Add(NewUser);
-                    ctx.SaveChanges();
-
+                   
                     //Result
                     var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
                     
@@ -135,7 +133,8 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
         private UDBTablecs CreateNewUser(UserLoginDTO data)
         {   try
             {
-                return new UDBTablecs
+                
+                var NewUser = new UDBTablecs
                 {
                     username = data.UserName,
                     password = _passwordHash.HashPassword(data.Password),
@@ -145,6 +144,33 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     LastIP = data.UserIp,
                     level = URole.User
                 };
+                var UserCart = new UserCartT
+                {
+                    UserID = NewUser.id
+                };
+
+                NewUser.UserCartID = UserCart.CartID;
+                using (var ctx = new UserContext())
+                {
+                    try
+                    {
+                       
+                        ctx.Users.Add(NewUser);
+                        ctx.SaveChanges(); 
+
+                        
+                        UserCart.UserID = NewUser.id;
+                        ctx.UserCarts.Add(UserCart);
+                        ctx.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.ErrorToDatabase(ex, "Error saving user and cart");
+                        throw;
+                    }
+                }
+                return NewUser;
+
             }
             catch (Exception ex)
             {

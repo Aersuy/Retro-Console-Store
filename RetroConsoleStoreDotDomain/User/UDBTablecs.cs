@@ -48,5 +48,11 @@ namespace RetroConsoleStoreDotDomain.User
         [Display(Name = "u_level")]
         public URole level { get; set; }
 
+        
+        public int UserCartID { get; set; }
+
+        // Navigational properti
+        public virtual UserCartT Cart { get; set; }
+
     }
 }
