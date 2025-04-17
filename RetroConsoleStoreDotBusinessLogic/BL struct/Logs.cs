@@ -8,6 +8,7 @@ using RetroConsoleStoreDotBusinessLogic.DBContext;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Logs;
+using RetroConsoleStoreDotDomain.Model.Product;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
@@ -82,6 +83,46 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             }
 
         }
-     }
+        public string ProductLog(ProductModelBack data)
+        {
+            try
+            { 
+                using (var ctx = new LogContext())
+                {
+                    var LogEntry = new LTable
+                    {
+                        UserName = data.Name
+                        Description = "Attempted to add Product",
+                        CreatedDate = DateTime.Now,
+                        // UserIp = data.UserIp,
+                        Type = "Product"
+                    };
+
+                    using (var ctx2 = new UserContext())
+                    {
+                        var product = ctx2.ProductTypes.FirstOrDefault(u => u.Id == data.Id);
+                        if (product != null)
+                        {
+                            LogEntry.UserId = product.Id;
+                            LogEntry.Description += " \n Successful \n";
+                        }
+                        else
+                        {
+                            LogEntry.Description += "\n Failed - User not found\n";
+                        }
+                    }
+                    //Everything up untill here works / Update method works perfectly
+                    ctx.Logs.Add(LogEntry);
+                    ctx.SaveChanges();
+                    return "Log created";
+                
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error in logging the process of adding a product to db");
+                return $"Error creating log entry: {ex.Message}";
+            }
+        }
 }
 
