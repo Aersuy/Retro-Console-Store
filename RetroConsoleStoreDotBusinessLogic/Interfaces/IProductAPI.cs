@@ -13,7 +13,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         bool UpdateProduct(ProductModelBack Product);
         ProductModelBack GetProductById(int Id);
         IEnumerable<ProductModelBack> GetAllProducts();
-        IEnumerable<ProductModelBack> GetProductsByCategory(string Category);   // Get products by category, category is name
         bool UpdateStock(int ProductID, int Quantity); // Update stock quantity
         IEnumerable<ProductModelBack> Seach(string SearchTerm); // Get products by brand
 
