@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RetroConsoleStoreDotBusinessLogic.BL_struct.CartAPI
+namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
-    public class CartAPI
+    internal interface IProduct
     {
+        bool AddProduct()
     }
 }
