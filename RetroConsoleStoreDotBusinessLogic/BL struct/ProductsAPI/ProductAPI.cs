@@ -84,6 +84,12 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Update product in the database
+        /// </summary>
+        /// <param name="Product"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public bool UpdateProduct(ProductModelBack Product)
         {
             using (var ctx = new UserContext())

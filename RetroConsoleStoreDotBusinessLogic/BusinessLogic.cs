@@ -26,7 +26,7 @@ namespace RetroConsoleStore.BusinessLogic
             _passwordHash = new PasswordHash();
             _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL);
             _loginBL = new LoginBL1();   
-            
+           
         }
 
         public IAuth GetAuthBL()

@@ -88,6 +88,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
         /// If everything checks out return nullable bool with it being 
         /// Null if the function fails.
         /// </summary>
+       
         private bool? ValidateUserInput(UserLoginDTO data)
         {
             try {

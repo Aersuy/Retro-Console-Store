@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RetroConsoleStoreDotBusinessLogic.DBContext
-{
+{ 
+   
     internal class DBContext
     {
     }
