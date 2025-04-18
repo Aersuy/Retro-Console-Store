@@ -12,6 +12,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
     public class AdminController : Controller
     {   private readonly BusinessLogic _businessLogic;
         // GET: Admin
+        public AdminController()
+        {
+            _businessLogic = new BusinessLogic();
+        }
         [HttpGet]
         public ActionResult AddProduct()
         {

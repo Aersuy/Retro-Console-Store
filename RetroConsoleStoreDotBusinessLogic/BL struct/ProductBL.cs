@@ -46,6 +46,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         }
         public bool AddProduct(ProductModelBack product)
         {
+
             try
             {
                 return _productAPI.AddProduct(product);
