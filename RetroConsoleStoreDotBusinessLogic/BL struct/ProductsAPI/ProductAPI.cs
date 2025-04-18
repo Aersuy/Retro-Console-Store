@@ -14,7 +14,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
     //TODO : Add error handling to the methods
     //TODO : Add validation to the methods
     
-    internal class ProductAPI : IProductAPI
+    public class ProductAPI : IProductAPI
     {
         readonly IError _error;
         readonly ILog _log;
@@ -156,7 +156,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
-        public IEnumerable<ProductModelBack> GetAllProducts()
+        public List<ProductModelBack> GetAllProducts()
         {
             using (var ctx = new UserContext())
             {

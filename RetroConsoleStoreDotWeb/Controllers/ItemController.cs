@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotWeb.Models.Articol;
+using RetroConsoleStoreDotDomain.Model.Product;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
     public class ItemController : Controller
     {
+        private readonly BusinessLogic _businessLogic;
         // GET: Item
+        [HttpGet]
         public ActionResult Catalog()
-        {
+        {  /*
             var products = new List<Product>
-            {
+            { 
                  new Product {
                 Id = 1,
                 Name = "Nintendo NES",
@@ -34,11 +38,35 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 Description = "Sony's groundbreaking 32-bit console",
                 ImagePath = "/Content/images/playstation-1.jpg",
                 Price = 179.99m
+            },   
+                
+          
+            }; */
+            
+          List<ProductModelBack> products = _businessLogic.GetProductBL().GetProductModelBacks();
+
+
+            List<Product> product2 = new List<Product> { };
+
+            foreach (var item in products)
+            { 
+                Product product = new Product();
+                product.Name = item.Name;
+                product.TimeCreated = item.TimeCreated;
+                product.Price = item.Price;
+                product.ImagePath = item.ImagePath;
+                product.Id = item.Id;  
+                product.Brand = item.Brand;
+                product.StockQuantity = item.StockQuantity;
+                product.Status = item.Status;
+                product.YearReleased = item.YearReleased;
+                
+                product2.Add(product);
             }
-            };
 
 
-            return View(products);
+
+            return View(product2);
         }
 
         public ActionResult Product(int id)

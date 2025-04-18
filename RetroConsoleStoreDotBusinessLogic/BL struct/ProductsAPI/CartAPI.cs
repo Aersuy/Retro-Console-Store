@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
+using RetroConsoleStoreDotDomain.Products;
+using RetroConsoleStoreDotDomain.User;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
     internal class CartAPI : ICartAPI
     {    
         private readonly IError _error;
-        private read
+        private readonly ILog _log;
+
+        internal CartAPI(IError error, ILog log)
+        {
+            _error = error;
+            _log = log;
+        }
+
         public bool AddProductTooCart(int ProductID, int Quantity)
         {   
-            using(var ctx = new UserContext())
-            {
-
-            }
+          
             throw new NotImplementedException();
         }
         public bool RemoveProductFromCart(int ProductID,int Quantity)
