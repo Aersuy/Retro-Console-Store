@@ -43,10 +43,11 @@ namespace RetroConsoleStore.BusinessLogic
         {
             return _loginBL;
         }
-        public IProductBL GetProductBL() {
+        public IProductBL GetProductBL()
+        {
             {
                 return _productBL;
             }
-       
+        }
     }
 }

@@ -1,63 +1,107 @@
-﻿@{
+﻿@model RetroConsoleStoreDotDomain.Model.Product.ProductModelBack
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Add Product";
 }
 
-<div class="catalogue-container">
-    <div class="catalogue-content">
-        <h2 class="retro-font-pixel">Add New Product</h2>
+<div class="contact-container">
+    <h2 class="retro-font-pixel">Add New Product</h2>
 
-        <div class="famicom-controller-ports">
-            <span></span>
-            <span></span>
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label for="Name">Product Name</label>
+            @Html.TextBoxFor(m => m.Name, new
+            {
+                required = "required",
+                placeholder = "Enter product name"
+            })
         </div>
 
-        <form method="post" action="@Url.Action("AddProduct", "Admin")" enctype="multipart/form-data">
-            <div>
-                <label for="Name">Product Name</label>
-                <input type="text" id="Name" name="Name" required placeholder="Enter product name">
-            </div>
+        <div>
+            <label for="Description">Description</label>
+            @Html.TextAreaFor(m => m.Description, new
+            {
+                required = "required",
+                placeholder = "Enter product description",
+                rows = "4"
+            })
+        </div>
 
-            <div>
-                <label for="Description">Description</label>
-                <textarea id="Description" name="Description" required placeholder="Enter product description"></textarea>
-            </div>
+        <div>
+            <label for="Price">Price</label>
+            @Html.TextBoxFor(m => m.Price, new
+            {
+                type = "number",
+                step = "0.01",
+                required = "required",
+                placeholder = "Enter price"
+            })
+        </div>
 
-            <div>
-                <label for="Price">Price</label>
-                <input type="number" id="Price" name="Price" step="0.01" required placeholder="Enter price">
-            </div>
+        <div>
+            <label for="StockQuantity">Stock Quantity</label>
+            @Html.TextBoxFor(m => m.StockQuantity, new
+            {
+                type = "number",
+                required = "required",
+                placeholder = "Enter stock quantity",
+                min = "0"
+            })
+        </div>
 
-            <div>
-                <label for="Category">Category</label>
-                <select id="Category" name="Category" required>
-                    <option value="">Select a category</option>
-                    <option value="Console">Console</option>
-                    <option value="Game">Game</option>
-                    <option value="Accessory">Accessory</option>
-                    <option value="Collectible">Collectible</option>
-                </select>
-            </div>
+        <div>
+            <label for="Brand">Brand</label>
+            @Html.TextBoxFor(m => m.Brand, new
+            {
+                required = "required",
+                placeholder = "Enter brand name"
+            })
+        </div>
 
-            <div>
-                <label for="ImageFile">Product Image</label>
-                <input type="file" id="ImageFile" name="ImageFile" accept="image/*" required>
-            </div>
+        <div>
+            <label for="YearReleased">Year Released</label>
+            @Html.TextBoxFor(m => m.YearReleased, new
+            {
+                type = "number",
+                required = "required",
+                placeholder = "Enter release year",
+                min = "1970",
+                max = "2024"
+            })
+        </div>
 
-            <div>
-                <label for="StockQuantity">Stock Quantity</label>
-                <input type="number" id="StockQuantity" name="StockQuantity" required placeholder="Enter stock quantity">
-            </div>
+        <div>
+            <label for="Status">Status</label>
+            @Html.DropDownListFor(m => m.Status, new SelectList(new[] {
+                new { Value = "Available", Text = "Available" },
+                new { Value = "Out of Stock", Text = "Out of Stock" },
+                new { Value = "Discontinued", Text = "Discontinued" }
+            }, "Value", "Text"), "Select status", new { required = "required" })
+        </div>
 
-            <div class="button-container">
-                <button type="submit" class="retro-font-8bit">Add Product</button>
-            </div>
-        </form>
+        <div>
+            <label for="ImageFile">Product Image</label>
+            <input type="file" name="ImageFile" id="ImageFile" accept="image/*" required />
+        </div>
 
-        <div class="famicom-cartridge-slot"></div>
+        <div class="button-container">
+            <button type="submit" class="retro-font-8bit">Add Product</button>
+        </div>
+    }
 
-        <p class="retro-font-8bit" style="margin-top: 20px;">
-            <a href="@Url.Action("ProductManagement", "Admin")" style="color: #ffcc33;">Back to Product Management</a>
-        </p>
-    </div>
+    <div class="famicom-cartridge-slot"></div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="message-box retro-font-8bit">
+            @ViewBag.Message
+        </div>
+    }
 </div>

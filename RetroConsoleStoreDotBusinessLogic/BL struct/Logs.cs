@@ -15,9 +15,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
     //TODO : Make the product log method work with just the id
     // need to query the db for other data
     public class Logs : ILog
-    {   private readonly IError _error;
-        public Logs(IError error) 
-        { 
+    {
+        private readonly IError _error;
+        public Logs(IError error)
+        {
             _error = error;
         }
         /// <summary>
@@ -45,7 +46,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                         var user = ctx2.Users.FirstOrDefault(u => u.username == data.UserName);
                         if (user != null)
                         {
-                            LogEntry.UserId = user.id;  
+                            LogEntry.UserId = user.id;
                             LogEntry.Description += " \n Successful \n";
                         }
                         else
@@ -59,9 +60,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     return "Log created";
                 }
 
-            } 
-            
-              catch (Exception ex)
+            }
+
+            catch (Exception ex)
             {
                 _error.ErrorToDatabase(ex, "Error in logging Auth process to db");
                 return $"Error creating log entry: {ex.Message}";
@@ -88,7 +89,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         public string ProductLog(ProductModelBack data, string Descr)
         {
             try
-            { 
+            {
                 using (var ctx = new LogContext())
                 {
                     var LogEntry = new LTable
@@ -117,7 +118,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     ctx.Logs.Add(LogEntry);
                     ctx.SaveChanges();
                     return "Log created";
-                
+
                 }
             }
             catch (Exception ex)
@@ -126,5 +127,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 return $"Error creating log entry: {ex.Message}";
             }
         }
+    }
 }
 
