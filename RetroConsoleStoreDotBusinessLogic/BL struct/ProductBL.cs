@@ -32,6 +32,18 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             }
         
         }
+        public ProductModelBack GetProduct(int id)
+        {
+            try
+            {
+                return _productAPI.GetProductById(id);
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting product");
+                throw;
+            }
+        }
 
     }
 }

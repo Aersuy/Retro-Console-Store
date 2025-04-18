@@ -70,7 +70,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         }
 
         public ActionResult Product(int id)
-        {
+        { /*
             var product = new Product
             {
                 Id = 1,
@@ -82,6 +82,28 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 YearReleased = 1985,
                 StockQuantity = 5
             };
+            */
+           ProductModelBack prod =  _businessLogic.GetProductBL().GetProduct(id);
+            var product = new Product();
+
+                product.Id = prod.Id;
+                product.Name = prod.Name;
+                product.Description = prod.Description;
+            if (prod.ImagePath != null)
+            {
+                product.ImagePath = prod.ImagePath;
+            }
+            else
+            { 
+                product.ImagePath = "/Content/images/missing-picture-page-website-design-600nw-1552421075";
+            }
+                product.Price = prod.Price;
+                product.Brand = prod.Brand;
+                product.YearReleased = prod.YearReleased;
+                product.StockQuantity = prod.StockQuantity;
+
+
+
             return View(product);
         }
         public ActionResult TradeIn()

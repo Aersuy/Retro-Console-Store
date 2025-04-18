@@ -222,6 +222,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Content\images\missing-picture-page-website-design-600nw-1552421075.webp" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\chart-chartjs.js" />
     <Content Include="Scripts\chart-easypie.js" />
