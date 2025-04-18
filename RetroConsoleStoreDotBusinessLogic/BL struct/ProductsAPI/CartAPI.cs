@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
     internal class CartAPI : ICartAPI
-    {
+    {    
+        private readonly IError _error;
+        private read
         public bool AddProductTooCart(int ProductID, int Quantity)
-        {
+        {   
+            using(var ctx = new UserContext())
+            {
+
+            }
             throw new NotImplementedException();
         }
         public bool RemoveProductFromCart(int ProductID,int Quantity)
