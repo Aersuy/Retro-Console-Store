@@ -35,8 +35,6 @@ namespace RetroConsoleStoreDotDomain.Products
         [Required]
         public int TotalSoldOnSite { get; set; }
 
-        public int? UserCartTId { get; set; } // Foreign key to the user cart table
-        public virtual UserCartT UserCartT { get; set; } // Navigation property to the user cart table
-
+     
     }
 }

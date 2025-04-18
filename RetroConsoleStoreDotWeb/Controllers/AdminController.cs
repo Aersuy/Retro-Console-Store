@@ -34,7 +34,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             ProductModelBack.YearReleased = model.YearReleased;
             ProductModelBack.Status = model.Status;
             ViewBag.Message = _businessLogic.GetProductBL().AddProduct(ProductModelBack);
-            return View(model);
+            return View(ProductModelBack);
         }
         public ActionResult EditProduct()
         {
