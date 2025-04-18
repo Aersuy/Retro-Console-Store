@@ -12,5 +12,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 
         List<ProductModelBack> GetProductModelBacks();
         ProductModelBack GetProduct(int id);
+
+        bool AddProduct(ProductModelBack product);
     }
 }

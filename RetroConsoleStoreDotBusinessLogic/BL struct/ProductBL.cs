@@ -44,6 +44,18 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 throw;
             }
         }
+        public bool AddProduct(ProductModelBack product)
+        {
+            try
+            {
+                return _productAPI.AddProduct(product);
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error adding product");
+                throw;
+            }
+        }
 
     }
 }
