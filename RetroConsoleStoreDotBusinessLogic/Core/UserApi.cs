@@ -8,5 +8,6 @@ namespace RetroConsoleStore.BusinessLogic.Core
 {
     public class UserApi
     {
+
     }
 }

@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBContext;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.User;
+using RetroConsoleStoreHelpers.Cookies;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
@@ -58,15 +63,54 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 
         private bool ValidateUserInput(UserLoginDTO data)
         {
-            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8)
+            var validate = new EmailAddressAttribute();
+
+            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8 && validate.IsValid(data.Email)
             {
                 return true;
             }
+            
             return false;
         }
         private bool UserWithNameAlreadyExists(UserLoginDTO data, UserContext ctx)
         {
             return ctx.Users.Any(u => u.username == data.UserName);
+        }
+        public HttpCookie GenCookie(UserLoginDTO data)
+        {  
+            var Cookie = new HttpCookie("X-KEY");
+            {
+                Cookie.Value = CreateCookie.Create(data.Password);
+            }
+            using (var ctx = new UserContext())
+            {
+                SessionT current;
+                 ValidateUserInput(data);
+
+                current = ctx.Sessions.FirstOrDefault(u => u.Name == data.UserName);
+
+                if (current != null)
+                {
+                    current.CookieString = Cookie.Value;
+                    current.ExpireTime = DateTime.Now.AddMinutes(60);
+                    using (var todo = new UserContext())
+                    {
+                        todo.Entry(current).State = EntityState.Modified;
+                        todo.SaveChanges();
+                    }
+                }
+                else
+                {
+                    ctx.Sessions.Add(new SessionT()
+                    {
+                        CookieString = Cookie.Value,
+                        Name = data.UserName,
+                        ExpireTime = DateTime.Now.AddMinutes(60)
+                    });
+                }
+
+            }
+            return null;
         }
     }
 }

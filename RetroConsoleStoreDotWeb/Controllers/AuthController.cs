@@ -29,7 +29,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult Auth(Auth model)
         {
             var ModelDtO = new UserLoginDTO
-            {
+            {   UserIp = Request.UserHostAddress,
                 UserName = model.Name,
                 Password = model.Password,
                 Email = model.Email,

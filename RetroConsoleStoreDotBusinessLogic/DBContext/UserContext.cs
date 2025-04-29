@@ -14,7 +14,7 @@ namespace RetroConsoleStoreDotBusinessLogic.DBModel
         public virtual DbSet<ProductTypeT> ProductTypes { get; set; }
         public virtual DbSet<CartItemT> CartItems { get; set; }
         public virtual DbSet<UserCartT> UserCarts { get; set; }
-
+        public virtual DbSet<SessionT> Sessions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

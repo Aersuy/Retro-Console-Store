@@ -48,9 +48,12 @@
     <Compile Include="Model\Product\CartItemModel.cs" />
     <Compile Include="Model\Product\ProductModelBack.cs" />
     <Compile Include="Model\User\UserLoginDTO.cs" />
+    <Compile Include="Model\User\UserLoginResponse.cs" />
+    <Compile Include="Model\User\UserSmall.cs" />
     <Compile Include="Products\CartItemT.cs" />
     <Compile Include="Products\ProductTypeT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\SessionT.cs" />
     <Compile Include="User\UDBTablecs.cs" />
     <Compile Include="User\UserCartT.cs" />
   </ItemGroup>

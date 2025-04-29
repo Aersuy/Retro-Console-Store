@@ -32,7 +32,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 {
                     var NewProduct = new ProductTypeT()
                     {
-                        Id = Product.Id,
                         Name = Product.Name,
                         Description = Product.Description,
                         ImagePath = Product.ImagePath,
