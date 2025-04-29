@@ -11,7 +11,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
     public interface ILogin
     {
-        string LoginLogic(UserLoginDTO data);
+        UserLoginResponse LoginLogic(UserLoginDTO data);
         HttpCookie GenCookie(UserLoginDTO data);
         UserSmall GetUserByCookie(string cookieName);
 

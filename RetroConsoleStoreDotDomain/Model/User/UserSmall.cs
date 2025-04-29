@@ -15,6 +15,7 @@ namespace RetroConsoleStoreDotDomain.Model.User
         public DateTime LastLogin { get; set; }
         public string LastIp { get; set; }  
         public URole Role { get; set; }
+        public int CartId { get; set; }
 
     }
 }

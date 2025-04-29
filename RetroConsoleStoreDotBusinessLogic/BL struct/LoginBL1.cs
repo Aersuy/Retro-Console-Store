@@ -6,56 +6,65 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBContext;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreHelpers.Cookies;
+using RetroConsoleStoreHelpers.Interfaces;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
     public class LoginBL1 : ILogin
     {
-        public string LoginLogic(UserLoginDTO data)
+        ILog _log;
+        IError _error;
+        IPasswordHash _passWordHash;
+        LoginBL1(IPasswordHash passWordHash, ILog log, IError error)
         {
+            _passWordHash = passWordHash;
+            _log = log;
+            _error = error;
+        }
+        public UserLoginResponse LoginLogic(UserLoginDTO data)
+        {   UserLoginResponse response = new UserLoginResponse();
             using (var ctx = new UserContext())
             {
                 try
                 {
                     if (!ValidateUserInput(data))
                     {
-                        return "Invalid username or password format";
+                        response.Success = false;
+                        response.Message = "Couldn't validate data format \n";
+                        return response;
                     }
-                    if (!UserWithNameAlreadyExists(data, ctx))
-                    {
-                        return "User does not exist";
-                    }
-                   
-                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
+                    
+                    string TempPass = _passWordHash.HashPassword(data.Password);
+                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName && u.password == TempPass);
                     if (user == null)
                     {
-                        return "User does not exist";
+                        response.Success = false;
+                        response.Message = "The username or password is incorect";
+                        return response;
                     }
-                    if (user.password != data.Password)
-                    {
-                        return "Wrong Password";
-                    }
+                   
 
                     user.LastRegisterDate = DateTime.Now;
                     user.LastIP = data.UserIp;
                     ctx.SaveChanges();
                     
-                    using (var ctx2 = new LogContext()) 
-                    {
-                        
-                    }
-                    return "Login successful";
+                    response.Success = true;
+
+                    return response;
                 }
                 catch (Exception ex)
-                {
-                    return $"An error occurred: {ex.Message}";
+                {   response.Message = ex.Message;
+                    _error.ErrorToDatabase(ex, "Login attempt failed");
+                    return response;
                 }
             }
 
@@ -65,7 +74,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             var validate = new EmailAddressAttribute();
 
-            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8 && validate.IsValid(data.Email)
+            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8 && validate.IsValid(data.Email))
             {
                 return true;
             }
@@ -110,7 +119,33 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 }
 
             }
-            return null;
+            return Cookie;
+        }
+        public UserSmall GetUserByCookie(string cookieText)
+        {   SessionT current;
+            using (var ctx = new UserContext())
+            {
+              current = ctx.Sessions.FirstOrDefault(u => u.CookieString == cookieText && u.ExpireTime > DateTime.Now);
+            }
+            if (current == null)
+            {
+                return null;
+            }
+            UDBTablecs user;
+            using (var ctx = new UserContext())
+            {
+                user = ctx.Users.FirstOrDefault(u => u.username == current.Name);
+            }
+
+            UserSmall userSmall = new UserSmall()
+            {
+                Email = user.email,
+                Id = user.id,
+                Role = user.level,
+                CartId = user.UserCartID,
+                Name = user.username
+            };
+            return userSmall;
         }
     }
 }
