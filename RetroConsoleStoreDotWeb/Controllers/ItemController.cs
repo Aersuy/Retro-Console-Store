@@ -9,7 +9,7 @@ using RetroConsoleStoreDotDomain.Model.Product;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
-    public class ItemController : Controller
+    public class ItemController : BaseController
     {
         private readonly BusinessLogic _businessLogic;
         // GET: Item

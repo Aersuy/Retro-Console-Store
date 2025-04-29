@@ -24,7 +24,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         ILog _log;
         IError _error;
         IPasswordHash _passWordHash;
-        LoginBL1(IPasswordHash passWordHash, ILog log, IError error)
+        public LoginBL1(IPasswordHash passWordHash, ILog log, IError error)
         {
             _passWordHash = passWordHash;
             _log = log;
@@ -86,40 +86,47 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             return ctx.Users.Any(u => u.username == data.UserName);
         }
         public HttpCookie GenCookie(UserLoginDTO data)
-        {  
-            var Cookie = new HttpCookie("X-KEY");
+        {  try
             {
-                Cookie.Value = CreateCookie.Create(data.Password);
-            }
-            using (var ctx = new UserContext())
-            {
-                SessionT current;
-                 ValidateUserInput(data);
-
-                current = ctx.Sessions.FirstOrDefault(u => u.Name == data.UserName);
-
-                if (current != null)
+                var Cookie = new HttpCookie("X-KEY");
                 {
-                    current.CookieString = Cookie.Value;
-                    current.ExpireTime = DateTime.Now.AddMinutes(60);
-                    using (var todo = new UserContext())
+                    Cookie.Value = CreateCookie.Create(data.Password);
+                }
+                using (var ctx = new UserContext())
+                {
+                    SessionT current;
+                    ValidateUserInput(data);
+
+                    current = ctx.Sessions.FirstOrDefault(u => u.Name == data.UserName);
+
+                    if (current != null)
                     {
-                        todo.Entry(current).State = EntityState.Modified;
-                        todo.SaveChanges();
+                        current.CookieString = Cookie.Value;
+                        current.ExpireTime = DateTime.Now.AddMinutes(60);
+                        using (var todo = new UserContext())
+                        {
+                            todo.Entry(current).State = EntityState.Modified;
+                            todo.SaveChanges();
+                        }
                     }
-                }
-                else
-                {
-                    ctx.Sessions.Add(new SessionT()
+                    else
                     {
-                        CookieString = Cookie.Value,
-                        Name = data.UserName,
-                        ExpireTime = DateTime.Now.AddMinutes(60)
-                    });
-                }
+                        ctx.Sessions.Add(new SessionT()
+                        {
+                            CookieString = Cookie.Value,
+                            Name = data.UserName,
+                            ExpireTime = DateTime.Now.AddMinutes(60)
+                        });
+                    }
 
+                }
+                return Cookie;
+            } catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error generating cookie");
+                throw;  
             }
-            return Cookie;
+           
         }
         public UserSmall GetUserByCookie(string cookieText)
         {   SessionT current;

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         // GET: User
         public ActionResult UserPage()

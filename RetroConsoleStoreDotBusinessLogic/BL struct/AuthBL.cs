@@ -53,10 +53,12 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     {
                         return "Enter valid data";
                     }
+                    /*
                     if((bool)UserWithNameAlreadyExists(data,ctx))
                     {
                         return "User with name already exists";
                     }
+                    */
                      // New user creation
                     UDBTablecs NewUser = CreateNewUser(data);
                     
@@ -116,6 +118,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
             try
             {
                 return ctx.Users.Any(u => u.username == data.UserName);
+
             }
             catch (Exception ex)
             {   

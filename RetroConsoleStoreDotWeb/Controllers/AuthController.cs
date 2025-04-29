@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotWeb.Models.Auth;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         // GET: Auth
 
@@ -55,11 +57,36 @@ namespace RetroConsoleStoreDotWeb.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(UserLoginDTO model)
-        {   ViewBag.Message = _businessLogic.GetLoginBL().LoginLogic(model);
-            return View(model);
+        public ActionResult Login(Login model)
+        {
+            //password doesn't arrive in the model??
+            if (ModelState.IsValid)
+            {
+                var ModelDtO = new UserLoginDTO
+                {
+                    UserIp = Request.UserHostAddress,
+                    UserName = model.UserName,
+                    Password = model.Password,
+
+                };
+                var userSession = _businessLogic.GetLoginBL().LoginLogic(ModelDtO);
+                if (userSession.Success)
+                {
+                    HttpCookie cookie = _businessLogic.GetLoginBL().GenCookie(ModelDtO);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", userSession.Message);
+                    return View();
+                }
+            }
+           
+            return View();
         }
-     
-      
+    
+
     }
 }
