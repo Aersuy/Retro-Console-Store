@@ -46,5 +46,14 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 }
             }
         }
+        public ActionResult RedirectIfNotLoggedIn()
+        {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            return null;
+        }
     }
 }

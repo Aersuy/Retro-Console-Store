@@ -44,14 +44,22 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                     }
                     
                     string TempPass = _passWordHash.HashPassword(data.Password);
-                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName && u.password == TempPass);
+                    var user = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
+                   
                     if (user == null)
                     {
                         response.Success = false;
                         response.Message = "The username or password is incorect";
                         return response;
                     }
+                    if (!_passWordHash.VerifyPassword(data.Password, user.password))
+                    {
+                        response.Success = false;
+                        response.Message = "Incorrect password";
+                        return response;
+                    }
                    
+                  
 
                     user.LastRegisterDate = DateTime.Now;
                     user.LastIP = data.UserIp;
@@ -72,9 +80,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 
         private bool ValidateUserInput(UserLoginDTO data)
         {
-            var validate = new EmailAddressAttribute();
+            
 
-            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8 && validate.IsValid(data.Email))
+            if (!string.IsNullOrEmpty(data.UserName) && !string.IsNullOrEmpty(data.Password) && data.UserName.Length >= 5 && data.Password.Length >= 8)
             {
                 return true;
             }
@@ -116,7 +124,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                             CookieString = Cookie.Value,
                             Name = data.UserName,
                             ExpireTime = DateTime.Now.AddMinutes(60)
+                            
                         });
+                        ctx.SaveChanges();
                     }
 
                 }
@@ -153,6 +163,21 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
                 Name = user.username
             };
             return userSmall;
+        }
+        public void ExpireSessionByCookieDB(string cookieValue)
+        {
+            if (string.IsNullOrEmpty(cookieValue))
+                return;
+
+            using (var ctx = new UserContext())
+            {
+                var session = ctx.Sessions.FirstOrDefault(s => s.CookieString == cookieValue);
+                if (session != null)
+                {
+                    session.ExpireTime = DateTime.Now.AddDays(-1); 
+                    ctx.SaveChanges();
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
@@ -57,22 +58,23 @@ namespace RetroConsoleStoreDotWeb.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Login model)
+        public ActionResult Login(UserLoginDTO model)
         {
             //password doesn't arrive in the model??
             if (ModelState.IsValid)
-            {
+            {   /*
                 var ModelDtO = new UserLoginDTO
                 {
                     UserIp = Request.UserHostAddress,
                     UserName = model.UserName,
                     Password = model.Password,
 
-                };
-                var userSession = _businessLogic.GetLoginBL().LoginLogic(ModelDtO);
+                };*/
+                var userSession = _businessLogic.GetLoginBL().LoginLogic(model);
+                ViewBag.Message = userSession.Message;
                 if (userSession.Success)
                 {
-                    HttpCookie cookie = _businessLogic.GetLoginBL().GenCookie(ModelDtO);
+                    HttpCookie cookie = _businessLogic.GetLoginBL().GenCookie(model);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
@@ -86,6 +88,25 @@ namespace RetroConsoleStoreDotWeb.Controllers
            
             return View();
         }
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            if (Request.Cookies["X-KEY"]!= null)
+            { string cookiValue = Request.Cookies["X-KEY"].Value;
+                _businessLogic.GetLoginBL().ExpireSessionByCookieDB(cookiValue);
+                var Cookie = new HttpCookie("X-KEY")
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    Value = ""
+                };
+                Response.Cookies.Add(Cookie);
+            }
+            return RedirectToAction("Login", "Auth");
+        }
+
     
 
     }

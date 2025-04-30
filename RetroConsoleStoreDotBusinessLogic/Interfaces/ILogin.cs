@@ -15,5 +15,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         HttpCookie GenCookie(UserLoginDTO data);
         UserSmall GetUserByCookie(string cookieName);
 
+        void ExpireSessionByCookieDB(string cookieString);
+
     }
 }
