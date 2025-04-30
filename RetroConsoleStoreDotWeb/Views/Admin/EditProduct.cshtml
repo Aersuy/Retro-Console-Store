@@ -1,8 +1,206 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "EditProduct";
+    ViewBag.Title = "Edit Product";
 }
+@model RetroConsoleStoreDotWeb.Models.Articol.Product
+<div class="catalogue-container">
+    <div class="catalogue-content">
+        <h2 class="retro-font-pixel">Edit Product</h2>
 
-<h2>EditProduct</h2>
+        <div class="famicom-controller-ports">
+            <span></span>
+            <span></span>
+        </div>
+
+        <form method="post" action="@Url.Action("EditProduct", "Admin")" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="product-edit-grid">
+                <div class="product-image-section">
+                    <div class="current-image-container">
+                        <h3 class="retro-font-8bit">Current Image</h3>
+                        <img src="@Model.ImagePath" alt="Current product image" class="current-product-image">
+                    </div>
+
+                    <div class="image-upload-section">
+                        <label for="ImageFile" class="retro-font-8bit">Upload New Image</label>
+                        <input type="file" id="ImageFile" name="ImageFile" accept="image/*">
+                        <p class="image-note">Leave empty to keep current image</p>
+                    </div>
+                </div>
+
+                <div class="product-details-section">
+                    <div class="form-group">
+                        <label for="Name">Product Name</label>
+                        <input type="text" id="Name" name="Name" value="@Model.Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea id="Description" name="Description" required>@Model.Description</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="Price">Price</label>
+                            <input type="number" id="Price" name="Price" value="@Model.Price" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="StockQuantity">Stock Quantity</label>
+                            <input type="number" id="StockQuantity" name="StockQuantity" value="@Model.StockQuantity" required>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label for="Status">Status</label>
+                        <select id="Status" name="Status" required>
+                            <option value="Active" @(Model.Status == "Active" ? "selected" : "")>Active</option>
+                            <option value="Inactive" @(Model.Status == "Inactive" ? "selected" : "")>Inactive</option>
+                            <option value="Discontinued" @(Model.Status == "Discontinued" ? "selected" : "")>Discontinued</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="retro-font-8bit">Save Changes</button>
+                <a href="@Url.Action("ProductManagement", "Admin")" class="cancel-button retro-font-8bit">Cancel</a>
+            </div>
+        </form>
+
+        <div class="famicom-cartridge-slot"></div>
+    </div>
+</div>
+
+<style>
+    /* Additional styles specific to the edit product page */
+    .product-edit-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+        margin: 20px 0;
+    }
+
+    .product-image-section {
+        background-color: #2a1144;
+        border: 3px solid #e6007e;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .current-image-container {
+        margin-bottom: 20px;
+    }
+
+    .current-product-image {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: contain;
+        border: 2px solid #e6007e;
+        border-radius: 3px;
+    }
+
+    .image-upload-section {
+        margin-top: 20px;
+    }
+
+    .image-note {
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    .product-details-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ffcc33;
+        font-family: 'Silkscreen', cursive;
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        background-color: #2a1144;
+        color: #ffffff;
+        border: 2px solid #e6007e;
+        border-radius: 3px;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .button-container button {
+        background-color: #2a1144;
+        color: #ffcc33;
+        border: 3px solid #e6007e;
+        padding: 12px 25px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .button-container button:hover {
+        background-color: #e6007e;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
+    .cancel-button {
+        background-color: #2a1144;
+        color: #f44336;
+        border: 3px solid #f44336;
+        padding: 12px 25px;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .cancel-button:hover {
+        background-color: #f44336;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
