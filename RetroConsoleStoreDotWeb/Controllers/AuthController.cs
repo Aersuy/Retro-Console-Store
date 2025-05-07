@@ -60,7 +60,6 @@ namespace RetroConsoleStoreDotWeb.Controllers
         [HttpPost]
         public ActionResult Login(UserLoginDTO model)
         {
-            //password doesn't arrive in the model??
             if (ModelState.IsValid)
             {   /*
                 var ModelDtO = new UserLoginDTO

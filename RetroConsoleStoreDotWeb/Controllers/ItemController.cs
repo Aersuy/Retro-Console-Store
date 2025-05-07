@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotWeb.Models.Articol;
 using RetroConsoleStoreDotDomain.Model.Product;
+using System.Web.UI;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -64,7 +65,11 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 product.StockQuantity = item.StockQuantity;
                 product.Status = item.Status;
                 product.YearReleased = item.YearReleased;
-                
+
+                if (product.ImagePath == null)
+                {
+                    product.ImagePath = "/content/images/Products/missing-picture-page-website-design-600nw-1552421075.webp";
+                }
                 product2.Add(product);
             }
 
@@ -74,19 +79,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         }
 
         public ActionResult Product(int id)
-        { /*
-            var product = new Product
-            {
-                Id = 1,
-                Name = "Nintendo NES",
-                Description = "The Nintendo Entertainment System (NES) is an 8-bit home video game console developed and manufactured by Nintendo. It was released in Japan in 1983 as the Family Computer (FC), and was redesigned as the NES for release in North America in 1985.",
-                ImagePath = "/Content/images/nintendo-famicom.jpg",
-                Price = 149.99m,
-                Brand = "Nintendo",
-                YearReleased = 1985,
-                StockQuantity = 5
-            };
-            */
+        { 
            ProductModelBack prod =  _businessLogic.GetProductBL().GetProduct(id);
             var product = new Product();
 
