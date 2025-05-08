@@ -44,6 +44,7 @@ namespace RetroConsoleStoreDotDomain.User
         [Display(Name = "last_reg_date")]
         public DateTime LastRegisterDate { get; set; }
 
+        public String ImagePath { get; set; }
 
         [Display(Name = "u_level")]
         public URole level { get; set; }

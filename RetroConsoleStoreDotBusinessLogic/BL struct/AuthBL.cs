@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RetroConsoleStore.BusinessLogic.Core;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
@@ -21,7 +20,7 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
       // Use auto object mapping for translation
       // between the presentation object and the BL
       // object
-    public class AuthBL : UserApi, IAuth
+    public class AuthBL :  IAuth
     {  
         private readonly IPasswordHash _passwordHash;
         private readonly IError _error;

@@ -347,6 +347,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\ProfilePictures\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RetroConsoleStoreDotBusinessLogic\RetroConsoleStore.BusinessLogic.csproj">

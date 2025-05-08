@@ -139,30 +139,40 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
            
         }
         public UserSmall GetUserByCookie(string cookieText)
-        {   SessionT current;
-            using (var ctx = new UserContext())
+        {   try 
             {
-              current = ctx.Sessions.FirstOrDefault(u => u.CookieString == cookieText && u.ExpireTime > DateTime.Now);
+                SessionT current;
+                using (var ctx = new UserContext())
+                {
+                    current = ctx.Sessions.FirstOrDefault(u => u.CookieString == cookieText && u.ExpireTime > DateTime.Now);
+                }
+                if (current == null)
+                {
+                    return null;
+                }
+                UDBTablecs user;
+                using (var ctx = new UserContext())
+                {
+                    user = ctx.Users.FirstOrDefault(u => u.username == current.Name);
+                }
+
+                UserSmall userSmall = new UserSmall()
+                {
+                    Email = user.email,
+                    Id = user.id,
+                    Role = user.level,
+                    CartId = user.UserCartID,
+                    Name = user.username,
+                    ImagePath = user.ImagePath
+                };
+                return userSmall;
             }
-            if (current == null)
+            catch(Exception ex)
             {
+                _error.ErrorToDatabase(ex, "Issue getting user from cookie");
                 return null;
             }
-            UDBTablecs user;
-            using (var ctx = new UserContext())
-            {
-                user = ctx.Users.FirstOrDefault(u => u.username == current.Name);
-            }
-
-            UserSmall userSmall = new UserSmall()
-            {
-                Email = user.email,
-                Id = user.id,
-                Role = user.level,
-                CartId = user.UserCartID,
-                Name = user.username
-            };
-            return userSmall;
+            
         }
         public void ExpireSessionByCookieDB(string cookieValue)
         {

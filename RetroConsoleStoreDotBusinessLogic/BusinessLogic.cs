@@ -7,6 +7,7 @@ using RetroConsoleStore.BusinessLogic.BL_Struct;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStoreDotBusinessLogic.BL_struct;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI;
+using RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreHelpers.Interfaces;
 using RetroConsoleStoreHelpers.PasswordHash;
@@ -21,6 +22,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly ILog _loggingBL;
         private readonly IProductAPI _productAPI;
         private readonly IProductBL _productBL;
+        private readonly IUserAPI _userAPI;
 
         public BusinessLogic()
         {
@@ -31,6 +33,7 @@ namespace RetroConsoleStore.BusinessLogic
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
             _productAPI = new ProductAPI(_errorBL, _loggingBL);
             _productBL = new ProductBL(_errorBL,_loggingBL,_productAPI);
+            _userAPI = new UserAPI();
            
         }
 
@@ -45,9 +48,13 @@ namespace RetroConsoleStore.BusinessLogic
         }
         public IProductBL GetProductBL()
         {
-            {
+            
                 return _productBL;
-            }
+            
+        }
+        public IUserAPI GetUserAPI()
+        {
+            return _userAPI;
         }
     }
 }
