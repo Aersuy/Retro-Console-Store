@@ -14,6 +14,8 @@ namespace RetroConsoleStoreDotDomain.Model.User
         public string Email { get; set; }
         public DateTime LastLogin { get; set; }
         public string LastIp { get; set; }  
+        public string ImagePath { get; set; }
+
         public URole Role { get; set; }
         public int CartId { get; set; }
 
