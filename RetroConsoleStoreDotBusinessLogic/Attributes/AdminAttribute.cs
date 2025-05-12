@@ -45,8 +45,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Attributes
                     {"errorMessa","Log on" }
                 } );
                 return;
-
-
             }
            
            
