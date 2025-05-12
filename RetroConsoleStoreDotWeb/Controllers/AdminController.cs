@@ -7,17 +7,20 @@ using RetroConsoleStoreDotWeb.Models.Articol;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStore.BusinessLogic;
 using System.IO;
+using RetroConsoleStoreDotBusinessLogic.Attributes;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
     public class AdminController : BaseController
-    {   private readonly BusinessLogic _businessLogic;
+    {   
+        private readonly BusinessLogic _businessLogic;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
         {
             _businessLogic = new BusinessLogic();
         }
+        [Admin]
         [HttpGet]
         public ActionResult AddProduct()
         {

@@ -28,8 +28,21 @@
         </ul>
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-            <li><a class="nav-link" href="@Url.Action("UserPage","User")"><img src="/Content/images/user.svg"></a></li>
-            <li><a class="nav-link" href="@Url.Action("Cart","User")"><img src="/Content/images/cart.svg"></a></li>
+            <li>
+                <a class="nav-link" href="@Url.Action("UserPage","User")">
+                    @{
+                        var user = System.Web.HttpContext.Current.Session["__SessionObject"] as RetroConsoleStoreDotDomain.Model.User.UserSmall;
+                        if (user != null && !string.IsNullOrEmpty(user.ImagePath))
+                        {
+                            <img src="@Url.Content(user.ImagePath)" alt="Profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #e6007e;" />
+                        }
+                        else
+                        {
+                            <img src="/Content/images/user.svg" alt="User" style="width:36px;height:36px;border-radius:50%;background:#2a1144;border:2px solid #e6007e;" />
+                        }
+                    }
+                </a>
+        <li><a class="nav-link" href="@Url.Action("Cart","User")"><img src="/Content/images/cart.svg"></a></li>
         </ul>
     </div>
 </div>
