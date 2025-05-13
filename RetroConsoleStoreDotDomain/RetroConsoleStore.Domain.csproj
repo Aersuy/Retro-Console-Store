@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +49,7 @@
     <Compile Include="Logs\LTable.cs" />
     <Compile Include="Model\Product\CartItemModel.cs" />
     <Compile Include="Model\Product\ProductModelBack.cs" />
+    <Compile Include="Model\User\UserCart.cs" />
     <Compile Include="Model\User\UserLoginDTO.cs" />
     <Compile Include="Model\User\UserLoginResponse.cs" />
     <Compile Include="Model\User\UserSmall.cs" />
@@ -63,6 +66,5 @@
       <Name>RetroConsoleStore.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
