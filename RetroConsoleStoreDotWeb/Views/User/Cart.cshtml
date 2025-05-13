@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Shopping Cart";
 }
-
+@model RetroConsoleStoreDomain.mode;
 <div class="catalogue-container">
     <div class="catalogue-content">
         <h2 class="retro-font-pixel">Shopping Cart</h2>
@@ -177,10 +177,10 @@
         transition: all 0.3s;
     }
 
-    .quantity-btn:hover {
-        background-color: #e6007e;
-        color: #ffffff;
-    }
+        .quantity-btn:hover {
+            background-color: #e6007e;
+            color: #ffffff;
+        }
 
     .quantity-input {
         width: 50px;
@@ -236,10 +236,10 @@
         transition: all 0.3s;
     }
 
-    .remove-btn:hover {
-        background-color: #f44336;
-        color: #ffffff;
-    }
+        .remove-btn:hover {
+            background-color: #f44336;
+            color: #ffffff;
+        }
 
     .cart-summary {
         background-color: #2a1144;
@@ -302,12 +302,12 @@
         transition: all 0.3s;
     }
 
-    .continue-shopping:hover,
-    .checkout-button:hover {
-        background-color: #e6007e;
-        color: #ffffff;
-        transform: scale(1.05);
-    }
+        .continue-shopping:hover,
+        .checkout-button:hover {
+            background-color: #e6007e;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
 
     .empty-cart {
         text-align: center;
@@ -336,35 +336,35 @@
         display: inline-block;
     }
 
-    .start-shopping:hover {
-        background-color: #e6007e;
-        color: #ffffff;
-        transform: scale(1.05);
+        .start-shopping:hover {
+            background-color: #e6007e;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+    .item-image {
+        margin: 0 auto;
     }
 
-        .item-image {
-            margin: 0 auto;
-        }
+    .item-details {
+        align-items: center;
+    }
 
-        .item-details {
-            align-items: center;
-        }
+    .item-quantity {
+        align-items: center;
+    }
 
-        .item-quantity {
-            align-items: center;
-        }
+    .item-total {
+        align-items: center;
+    }
 
-        .item-total {
-            align-items: center;
-        }
+    .item-actions {
+        justify-content: center;
+    }
 
-        .item-actions {
-            justify-content: center;
-        }
-
-        .cart-actions {
-            flex-direction: column;
-            gap: 10px;
-        }
+    .cart-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
     }
 </style>
