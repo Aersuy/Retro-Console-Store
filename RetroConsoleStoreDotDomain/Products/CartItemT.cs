@@ -16,23 +16,15 @@ namespace RetroConsoleStoreDotDomain.Products
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey("Cart")]
+        [ForeignKey("UserCartT")]
         public int CartId { get; set; }
 
         [Required]
-        [ForeignKey("Product")]
+        [ForeignKey("ProductTypeT")]
         public int ProductId { get; set; }
 
         [Required]
         public int Quantity { get; set; }
-        [Required]
-        public decimal UnitPrice { get; set; }  
-
-        // Navigation properties
-        public virtual UserCartT Cart { get; set; }
-        public virtual ProductTypeT Product { get; set; }
-
-        
-        public decimal SubTotal => Quantity * UnitPrice;
+       
     }
 }

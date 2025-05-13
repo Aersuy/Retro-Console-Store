@@ -21,10 +21,8 @@ namespace RetroConsoleStoreDotDomain.User
 
         // Add the navigation property that matches the ForeignKey name
         public virtual UDBTablecs User { get; set; }
-
-        public virtual ICollection<CartItemT> Products { get; set; } = new List<CartItemT>(); 
-
-        public decimal TotalPrice => Products?.Sum(item => item.SubTotal) ?? 0;
+        [ForeignKey("CartItemT")]
+        public virtual List<int> CartItemTIds { get; set; } 
 
     }
 }

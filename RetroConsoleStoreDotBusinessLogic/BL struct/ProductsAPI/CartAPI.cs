@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
+using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.Products;
 using RetroConsoleStoreDotDomain.User;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
@@ -15,16 +16,48 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         private readonly IError _error;
         private readonly ILog _log;
 
-        internal CartAPI(IError error, ILog log)
+        internal CartAPI(IError error, ILog log,ILogin login)
         {
             _error = error;
             _log = log;
         }
 
-        public bool AddProductTooCart(int ProductID, int Quantity)
+        public bool AddProductTooCart(int ProdunctID, int Quantity, UserSmall user)
         {
-
-            throw new NotImplementedException();
+            {
+               try
+                {
+                    CartItemT item = new CartItemT
+                    {
+                        ProductId = ProdunctID,
+                        Quantity = Quantity,
+                    };
+                    UserCartT cart;
+                    using (var ctx = new UserContext())
+                    {
+                        cart = ctx.UserCarts.FirstOrDefault(c => c.UserID == user.Id);
+                        if (cart == null)
+                        {
+                            cart = new UserCartT
+                            {
+                                UserID = user.Id,
+                                CartItemTIds = new List<int>()
+                            };
+                            ctx.UserCarts.Add(cart);
+                            ctx.SaveChanges();
+                        }
+                        cart.CartItemTIds.Add(item.Id);
+                        ctx.CartItems.Add(item);
+                        ctx.SaveChanges();
+                        return true;
+                    }
+                } catch (Exception ex)
+                {
+                    _error.ErrorToDatabase(ex, "Problem with adding product to the cart");
+                    return false;
+                }
+            }
+                return false;
         }
         public bool RemoveProductFromCart(int ProductID, int Quantity)
         {

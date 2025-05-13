@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RetroConsoleStoreDotDomain.Model.Product;
+using RetroConsoleStoreDotDomain.Model.User;
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
     public interface ICartAPI
     {
-        bool AddProductTooCart(int ProductID, int Quantity);
+        bool AddProductTooCart(int ProductID, int Quantity, UserSmall user);
         bool RemoveProductFromCart(int ProductID, int Quantity); // Remove product from cart
         IEnumerable<CartItemModel> GetCartItems(); // Get all items in the cart
         decimal GetTotalPrice(); // Get total price of all items in the cart
