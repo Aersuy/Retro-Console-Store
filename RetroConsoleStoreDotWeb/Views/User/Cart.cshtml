@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Shopping Cart";
 }
-@model RetroConsoleStoreDomain.mode;
+@model List<RetroConsoleStoreDotWeb.ViewModel.CartItemsViewModel>
 <div class="catalogue-container">
     <div class="catalogue-content">
         <h2 class="retro-font-pixel">Shopping Cart</h2>
@@ -12,27 +12,27 @@
             <span></span>
         </div>
 
-        @if (Model.Items.Any())
+      
         {
             <div class="cart-items">
-                @foreach (var item in Model.Items)
+                @foreach (var item in Model)
                 {
                     <div class="cart-item">
                         <div class="item-image">
-                            <img src="@item.ImageUrl" alt="@item.Name" class="product-image">
+                            <img src="@item.ImagePath" alt="@item.Name" class="product-image">
                         </div>
 
                         <div class="item-details">
                             <h3 class="item-name">@item.Name</h3>
-                            <p class="item-category">@item.Category</p>
+                            <p class="item-category">@item.Brand</p>
                             <div class="item-price">$@item.Price.ToString("F2")</div>
                         </div>
 
                         <div class="item-quantity">
                             <div class="quantity-controls">
-                                <button class="quantity-btn decrease" data-item-id="@item.Id">-</button>
-                                <input type="number" class="quantity-input" value="@item.Quantity" min="1" max="@item.StockQuantity" data-item-id="@item.Id">
-                                <button class="quantity-btn increase" data-item-id="@item.Id">+</button>
+                                <button class="quantity-btn decrease" data-item-id="@item.ProductId">-</button>
+                                <input type="number" class="quantity-input" value="@item.Quantity" min="1" max="@item.StockQuantity" data-item-id="@item.ProductId">
+                                <button class="quantity-btn increase" data-item-id="@item.ProductId">+</button>
                             </div>
                             <div class="stock-info">
                                 @if (item.Quantity >= item.StockQuantity)
@@ -48,27 +48,14 @@
                         </div>
 
                         <div class="item-actions">
-                            <button class="remove-btn" data-item-id="@item.Id">Remove</button>
+                            <button class="remove-btn" data-item-id="@item.ProductId">Remove</button>
                         </div>
                     </div>
                 }
             </div>
 
             <div class="cart-summary">
-                <div class="summary-details">
-                    <div class="summary-row">
-                        <span class="summary-label">Subtotal:</span>
-                        <span class="summary-value">$@Model.Subtotal.ToString("F2")</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Shipping:</span>
-                        <span class="summary-value">$@Model.ShippingCost.ToString("F2")</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span class="summary-label">Total:</span>
-                        <span class="summary-value">$@Model.Total.ToString("F2")</span>
-                    </div>
-                </div>
+         
 
                 <div class="cart-actions">
                     <a href="@Url.Action("Index", "Item")" class="continue-shopping retro-font-8bit">Continue Shopping</a>

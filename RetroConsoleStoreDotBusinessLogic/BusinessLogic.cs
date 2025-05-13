@@ -23,6 +23,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly IProductAPI _productAPI;
         private readonly IProductBL _productBL;
         private readonly IUserAPI _userAPI;
+        private readonly ICartAPI _cartAPI;
 
         public BusinessLogic()
         {
@@ -34,6 +35,7 @@ namespace RetroConsoleStore.BusinessLogic
             _productAPI = new ProductAPI(_errorBL, _loggingBL);
             _productBL = new ProductBL(_errorBL,_loggingBL,_productAPI);
             _userAPI = new UserAPI();
+            _cartAPI = new CartAPI(_errorBL, _loggingBL,_loginBL);
            
         }
 
@@ -55,6 +57,10 @@ namespace RetroConsoleStore.BusinessLogic
         public IUserAPI GetUserAPI()
         {
             return _userAPI;
+        }
+        public ICartAPI GetCartAPI()
+        {
+            return _cartAPI;
         }
     }
 }

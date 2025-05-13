@@ -93,230 +93,32 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CartItemModel> GetCartItems()
+        public IEnumerable<CartItemModel> GetCartItems(UserSmall user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var ctx = new UserContext())
+                {
+                    var products = ctx.CartItems.Where(ci => ci.CartId == user.CartId);
+                    var cartItems = ctx.CartItems
+                   .Where(ci => ci.CartId == user.CartId)
+                   .Select(ci => new CartItemModel
+                  {
+                     Id = ci.Id,
+                     ProductId = ci.ProductId,
+                     Quantity = ci.Quantity
+                   })
+                  .ToList();
+
+                    return cartItems;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting all cart itmes");
+                return new List<CartItemModel>();
+            }
         }
-    }
-    /*
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     */
-   
-        
-    };
+    }        
+};
 

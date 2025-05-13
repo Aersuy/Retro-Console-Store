@@ -11,7 +11,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         bool AddProductTooCart(int ProductID, int Quantity, UserSmall user);
         bool RemoveProductFromCart(int ProductID, int Quantity); // Remove product from cart
-        IEnumerable<CartItemModel> GetCartItems(); // Get all items in the cart
+        IEnumerable<CartItemModel> GetCartItems(UserSmall user); // Get all items in the cart
         decimal GetTotalPrice(); // Get total price of all items in the cart
         bool ClearCart(); // Clear all items in the cart
         bool UpdateCartItem(int ProductID, int Quantity); // Update quantity of a product in the cart

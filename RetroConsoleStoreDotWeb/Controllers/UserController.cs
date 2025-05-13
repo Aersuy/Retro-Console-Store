@@ -6,8 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
+using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Model.User;
+using RetroConsoleStoreDotDomain.Products;
+using RetroConsoleStoreDotWeb.ViewModel;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -56,7 +59,6 @@ namespace RetroConsoleStoreDotWeb.Controllers
                      var cookie = Request.Cookies["X-KEY"];
                 if (cookie != null)
                 {
-
                     model = businessLogic.GetLoginBL().GetUserByCookie(cookie.Value);
                     if (model == null)
                     {
@@ -72,7 +74,31 @@ namespace RetroConsoleStoreDotWeb.Controllers
         }
         public ActionResult Cart()
         {
-            return View();
+            List<CartItemsViewModel> viewModel = new List<CartItemsViewModel>();
+            var userCookie = HttpContext.Request.Cookies["X-KEY"];
+            if (userCookie != null)
+            {
+              UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                IEnumerable<CartItemModel> cartItemsModel = businessLogic.GetCartAPI().GetCartItems(user);
+                var productIds = cartItemsModel.Select(x => x.ProductId);
+                var products = businessLogic.GetProductBL().GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
+
+                    viewModel = cartItemsModel.Select(item => {
+                    var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+                    return new CartItemsViewModel
+                    {
+                        CartItemId = item.Id,
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        Name = product?.Name,
+                        ImagePath = product?.ImagePath,
+                        Price = product?.Price ?? 0,
+                        Brand = product?.Brand,
+                        StockQuantity = product?.StockQuantity ?? 0
+                    };
+                }).ToList();
+            }
+            return View(viewModel);
         }
         public ActionResult Statistics()
         {
