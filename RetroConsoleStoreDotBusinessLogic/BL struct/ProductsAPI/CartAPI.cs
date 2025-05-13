@@ -31,6 +31,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     {
                         ProductId = ProdunctID,
                         Quantity = Quantity,
+                        CartId = user.CartId,
                     };
                     UserCartT cart;
                     using (var ctx = new UserContext())
@@ -46,8 +47,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                             ctx.UserCarts.Add(cart);
                             ctx.SaveChanges();
                         }
-                        cart.CartItemTIds.Add(item.Id);
                         ctx.CartItems.Add(item);
+                        ctx.SaveChanges();
+                        cart.CartItemTIds.Add(item.Id);
                         ctx.SaveChanges();
                         return true;
                     }
@@ -57,7 +59,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     return false;
                 }
             }
-                return false;
         }
         public bool RemoveProductFromCart(int ProductID, int Quantity)
         {
