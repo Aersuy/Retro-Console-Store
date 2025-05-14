@@ -12,7 +12,8 @@
             <span></span>
         </div>
 
-      
+
+        @if (Model != null && Model.Any())
         {
             <div class="cart-items">
                 @foreach (var item in Model)
@@ -54,23 +55,23 @@
                 }
             </div>
 
-            <div class="cart-summary">
-         
+        <div class="cart-summary">
 
-                <div class="cart-actions">
-                    <a href="@Url.Action("Index", "Item")" class="continue-shopping retro-font-8bit">Continue Shopping</a>
-                    <a href="@Url.Action("Checkout", "Order")" class="checkout-button retro-font-8bit">Proceed to Checkout</a>
-                </div>
+
+            <div class="cart-actions">
+                <a href="@Url.Action("Index", "Item")" class="continue-shopping retro-font-8bit">Continue Shopping</a>
+                <a href="@Url.Action("Checkout", "Order")" class="checkout-button retro-font-8bit">Proceed to Checkout</a>
             </div>
+        </div>
         }
         else
         {
-            <div class="empty-cart">
-                <div class="empty-cart-icon">🕹️</div>
-                <h3 class="retro-font-8bit">Your cart is empty</h3>
-                <p class="empty-cart-message">Looks like you haven't added any items to your cart yet!</p>
-                <a href="@Url.Action("Index", "Item")" class="start-shopping retro-font-8bit">Start Shopping</a>
-            </div>
+        <div class="empty-cart">
+            <div class="empty-cart-icon">🕹️</div>
+            <h3 class="retro-font-8bit">Your cart is empty</h3>
+            <p class="empty-cart-message">Looks like you haven't added any items to your cart yet!</p>
+            <a href="@Url.Action("Index", "Item")" class="start-shopping retro-font-8bit">Start Shopping</a>
+        </div>
         }
 
         <div class="famicom-cartridge-slot"></div>

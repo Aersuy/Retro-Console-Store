@@ -25,8 +25,6 @@ namespace RetroConsoleStoreDotDomain.User
         [StringLength(500,MinimumLength = 8, ErrorMessage = "Invalid Password")]
         public string password { get; set; }
 
-
-
         [Required]
         [Display(Name = "email")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Invalid email")]
@@ -49,7 +47,7 @@ namespace RetroConsoleStoreDotDomain.User
         [Display(Name = "u_level")]
         public URole level { get; set; }
 
-        
+        [ForeignKey("Cart")]
         public int UserCartID { get; set; }
 
         // Navigational properti

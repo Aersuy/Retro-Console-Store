@@ -104,5 +104,28 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             return View();
         }
+        public ActionResult AddToCart(int productId,int quantity)
+        {
+        
+            UserSmall user;
+            var userCookie = HttpContext.Request.Cookies["X-KEY"];
+            if (userCookie != null)
+            {
+                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                if (user != null)
+                {
+                    var result = businessLogic.GetCartAPI().AddProductTooCart(productId, quantity,user);
+                    if(result)
+                        TempData["CartMessage"] = "Product added to cart!";
+                    else
+                        TempData["CartMessage"] = "Could not add product to cart.";
+
+                    return RedirectToAction("Product", "Item", new { id = productId });
+                }
+            }
+            
+          
+            return View();
+        }
     }
 }

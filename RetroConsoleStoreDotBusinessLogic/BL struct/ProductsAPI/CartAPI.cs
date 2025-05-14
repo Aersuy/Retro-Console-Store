@@ -27,12 +27,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             {
                try
                 {
-                    CartItemT item = new CartItemT
-                    {
-                        ProductId = ProdunctID,
-                        Quantity = Quantity,
-                        CartId = user.CartId,
-                    };
+                   
                     UserCartT cart;
                     using (var ctx = new UserContext())
                     {
@@ -42,14 +37,23 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                             cart = new UserCartT
                             {
                                 UserID = user.Id,
-                                CartItemTIds = new List<int>()
+                                
                             };
                             ctx.UserCarts.Add(cart);
                             ctx.SaveChanges();
+                            var user2 = ctx.Users.FirstOrDefault(c => c.id == user.Id);
+                            user2.UserCartID = cart.CartID;
+                            ctx.SaveChanges();
                         }
+                        CartItemT item = new CartItemT
+                        {
+                            ProductId = ProdunctID,
+                            Quantity = Quantity,
+                            CartId = cart.CartID,
+                        };
                         ctx.CartItems.Add(item);
                         ctx.SaveChanges();
-                        cart.CartItemTIds.Add(item.Id);
+                        cart.CartItems.Add(item);
                         ctx.SaveChanges();
                         return true;
                     }

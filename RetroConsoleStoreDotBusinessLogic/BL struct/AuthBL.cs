@@ -147,23 +147,21 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
                     LastIP = data.UserIp,
                     level = URole.User
                 };
-                var UserCart = new UserCartT
-                {
-                    UserID = NewUser.id
-                };
+                var cart = new UserCartT();
+                
 
-                NewUser.UserCartID = UserCart.CartID;
+                
                 using (var ctx = new UserContext())
                 {
                     try
                     {
+                        ctx.UserCarts.Add(cart);
                        
                         ctx.Users.Add(NewUser);
-                        ctx.SaveChanges(); 
+                        ctx.SaveChanges();
 
-                        
-                        UserCart.UserID = NewUser.id;
-                        ctx.UserCarts.Add(UserCart);
+                        NewUser.UserCartID = cart.CartID;
+                        cart.UserID = NewUser.id;
                         ctx.SaveChanges();
                     }
                     catch (Exception ex)

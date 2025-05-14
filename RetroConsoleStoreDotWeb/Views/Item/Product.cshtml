@@ -61,7 +61,15 @@
                     <div class="product-actions mt-4">
                         @if (Model.StockQuantity > 0)
                         {
-                            <button class="retro-btn add-to-cart-btn">Add to Cart</button>
+                             using (Html.BeginForm("AddToCart", "User", FormMethod.Post))
+                            {
+                                @Html.Hidden("productId", Model.Id)
+                                <div class="quantity-group" style="margin-bottom: 1rem;">
+                                    <label for="quantity" class="retro-font-8bit" style="margin-right: 10px;">Quantity:</label>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="@Model.StockQuantity" class="quantity-input" style="width: 60px; text-align: center;" />
+                                </div>
+                                <button type="submit" class="retro-btn add-to-cart-btn">Add to Cart</button>
+                            }
                         }
                         else
                         {

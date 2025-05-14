@@ -20,7 +20,6 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             _businessLogic = new BusinessLogic();
         }
-        [Admin]
         [HttpGet]
         public ActionResult AddProduct()
         {
