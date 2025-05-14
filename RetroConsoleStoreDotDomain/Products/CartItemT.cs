@@ -25,6 +25,10 @@ namespace RetroConsoleStoreDotDomain.Products
 
         [Required]
         public int Quantity { get; set; }
+
+        // Navigation properties
+        public virtual UserCartT UserCartT { get; set; }
+        public virtual ProductTypeT ProductTypeT { get; set; }
        
     }
 }
