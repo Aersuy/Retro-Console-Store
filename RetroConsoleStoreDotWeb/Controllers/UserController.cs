@@ -26,11 +26,11 @@ namespace RetroConsoleStoreDotWeb.Controllers
         [HttpGet]
         public ActionResult UserPage()
         {
-            
+
             var cookie = Request.Cookies["X-KEY"];
             if (cookie != null)
             {
-               
+
                 var userSmall = businessLogic.GetLoginBL().GetUserByCookie(cookie.Value);
                 if (userSmall != null)
                 {
@@ -40,7 +40,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             return RedirectToAction("Login", "Auth");
         }
         [HttpPost]
-        public ActionResult UserPage(UserSmall model,  HttpPostedFileBase imageFile)
+        public ActionResult UserPage(UserSmall model, HttpPostedFileBase imageFile)
         {
             if (imageFile != null && imageFile.ContentLength > 0)
             {
@@ -56,7 +56,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
 
                 string path = Path.Combine(uploadDir, fileName);
                 imageFile.SaveAs(path);
-                     var cookie = Request.Cookies["X-KEY"];
+                var cookie = Request.Cookies["X-KEY"];
                 if (cookie != null)
                 {
                     model = businessLogic.GetLoginBL().GetUserByCookie(cookie.Value);
@@ -78,12 +78,13 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-              UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 IEnumerable<CartItemModel> cartItemsModel = businessLogic.GetCartAPI().GetCartItems(user);
                 var productIds = cartItemsModel.Select(x => x.ProductId);
                 var products = businessLogic.GetProductBL().GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
 
-                    viewModel = cartItemsModel.Select(item => {
+                viewModel = cartItemsModel.Select(item =>
+                {
                     var product = products.FirstOrDefault(p => p.Id == item.ProductId);
                     return new CartItemsViewModel
                     {
@@ -104,9 +105,9 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             return View();
         }
-        public ActionResult AddToCart(int productId,int quantity)
+        public ActionResult AddToCart(int productId, int quantity)
         {
-        
+
             UserSmall user;
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
@@ -114,8 +115,8 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().AddProductTooCart(productId, quantity,user);
-                    if(result)
+                    var result = businessLogic.GetCartAPI().AddProductTooCart(productId, quantity, user);
+                    if (result)
                         TempData["CartMessage"] = "Product added to cart!";
                     else
                         TempData["CartMessage"] = "Could not add product to cart.";
@@ -123,9 +124,25 @@ namespace RetroConsoleStoreDotWeb.Controllers
                     return RedirectToAction("Product", "Item", new { id = productId });
                 }
             }
-            
-          
+
+
             return View();
+        }
+        public ActionResult RemoveItemFromCart(int productId)
+        {
+
+            UserSmall user;
+            var userCookie = HttpContext.Request.Cookies["X-KEY"];
+            if (userCookie != null)
+            {
+                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                if (user != null)
+                {
+                    var result = businessLogic.GetCartAPI().RemoveProductFromCart(productId, 9999999, user);
+                    return RedirectToAction("Cart", "User");
+                }
+            }
+            return RedirectToAction("Cart", "User");
         }
     }
 }

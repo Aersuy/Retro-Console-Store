@@ -31,7 +31,8 @@
 
                         <div class="item-quantity">
                             <div class="quantity-controls">
-                                <button class="quantity-btn decrease" data-item-id="@item.ProductId">-</button>
+                            
+                                    <button class="quantity-btn decrease" data-item-id="@item.ProductId">-</button>
                                 <input type="number" class="quantity-input" value="@item.Quantity" min="1" max="@item.StockQuantity" data-item-id="@item.ProductId">
                                 <button class="quantity-btn increase" data-item-id="@item.ProductId">+</button>
                             </div>
@@ -47,10 +48,13 @@
                             <span class="total-label">Total:</span>
                             <span class="total-amount">$@((item.Price * item.Quantity).ToString("F2"))</span>
                         </div>
-
+                      @using (Html.BeginForm("RemoveItemFromCart", "User", FormMethod.Post))
+                      {
                         <div class="item-actions">
-                            <button class="remove-btn" data-item-id="@item.ProductId">Remove</button>
+                        @Html.Hidden("productId",item.ProductId)
+                            <button type="submit" class="remove-btn">Remove</button>
                         </div>
+                      }
                     </div>
                 }
             </div>

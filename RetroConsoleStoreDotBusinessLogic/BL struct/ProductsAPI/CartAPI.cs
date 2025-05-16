@@ -22,7 +22,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             _log = log;
         }
 
-        public bool AddProductTooCart(int ProdunctID, int Quantity, UserSmall user)
+        public bool AddProductTooCart(int ProductID, int Quantity, UserSmall user)
         {
             {
                try
@@ -45,14 +45,19 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                             user2.UserCartID = cart.CartID;
                             ctx.SaveChanges();
                         }
+                        CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.CartId == user.CartId && c.ProductId == ProductID);
+                        if (cartItem != null)
+                        {
+                            cartItem.Quantity += Quantity;
+                            ctx.SaveChanges();
+                            return true;
+                        }
                         CartItemT item = new CartItemT
                         {
-                            ProductId = ProdunctID,
+                            ProductId = ProductID,
                             Quantity = Quantity,
                             CartId = cart.CartID,
                         };
-                        ctx.CartItems.Add(item);
-                        ctx.SaveChanges();
                         cart.CartItems.Add(item);
                         ctx.SaveChanges();
                         return true;
@@ -64,35 +69,53 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 }
             }
         }
-        public bool RemoveProductFromCart(int ProductID, int Quantity)
+        public bool RemoveProductFromCart(int ProductID, int Quantity,UserSmall user)
+        {
+            try
+            {
+                using (var ctx = new UserContext())
+                {
+                    CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.ProductId == ProductID && c.CartId == user.CartId);
+                    if (cartItem != null)
+                    {
+                        if (cartItem.Quantity - Quantity <= 0)
+                        {
+                            ctx.CartItems.Remove(cartItem);
+                            ctx.SaveChanges();
+                            return true;
+                        }
+                        cartItem.Quantity -= Quantity;
+                        ctx.SaveChanges();
+                    }
+                }
+            } catch(Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Issue removing product form cart");
+                return false;
+            }
+            throw new NotImplementedException();
+        }
+        public bool UpdateCartItem(int ProductID, int Quantity,UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool UpdateCartItem(int ProductID, int Quantity)
+        public decimal GetTotalPrice(UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public decimal GetTotalPrice()
+        public bool ClearCart(UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool ClearCart()
+        public bool Checkout(UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool Checkout()
+        public bool ApplyDiscountCode(string DiscountCode, UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool ApplyDiscountCode(string DiscountCode)
-        {
-            throw new NotImplementedException();
-        }
-        public bool RemoveDiscountCode(string DiscountCode)
-        {
-            throw new NotImplementedException();
-        }
-        public bool SaveCart()
+        public bool RemoveDiscountCode(string DiscountCode, UserSmall user)
         {
             throw new NotImplementedException();
         }
