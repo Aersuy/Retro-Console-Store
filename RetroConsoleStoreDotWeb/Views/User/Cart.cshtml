@@ -12,7 +12,6 @@
             <span></span>
         </div>
 
-
         @if (Model != null && Model.Any())
         {
             <div class="cart-items">
@@ -31,10 +30,19 @@
 
                         <div class="item-quantity">
                             <div class="quantity-controls">
-                            
-                                    <button class="quantity-btn decrease" data-item-id="@item.ProductId">-</button>
+                                @using (Html.BeginForm("UpdateCartItemQuantity", "User", FormMethod.Post)) 
+                                { 
+                                    @Html.Hidden("productId", item.ProductId)
+                                    @Html.Hidden("quantity", item.Quantity - 1)
+                                    <button type="submit" class="quantity-btn decrease" @(item.Quantity <= 1 ? "disabled" : "")>-</button>
+                                }
                                 <input type="number" class="quantity-input" value="@item.Quantity" min="1" max="@item.StockQuantity" data-item-id="@item.ProductId">
-                                <button class="quantity-btn increase" data-item-id="@item.ProductId">+</button>
+                                @using (Html.BeginForm("UpdateCartItemQuantity", "User", FormMethod.Post))
+                                {
+                                    @Html.Hidden("productId", item.ProductId)
+                                    @Html.Hidden("quantity", item.Quantity + 1)
+                                    <button type="submit" class="quantity-btn increase" @(item.Quantity >= item.StockQuantity ? "disabled" : "")>+</button>
+                                }
                             </div>
                             <div class="stock-info">
                                 @if (item.Quantity >= item.StockQuantity)
@@ -48,34 +56,33 @@
                             <span class="total-label">Total:</span>
                             <span class="total-amount">$@((item.Price * item.Quantity).ToString("F2"))</span>
                         </div>
-                      @using (Html.BeginForm("RemoveItemFromCart", "User", FormMethod.Post))
-                      {
+
                         <div class="item-actions">
-                        @Html.Hidden("productId",item.ProductId)
-                            <button type="submit" class="remove-btn">Remove</button>
+                            @using (Html.BeginForm("RemoveItemFromCart", "User", FormMethod.Post))
+                            {
+                                @Html.Hidden("productId", item.ProductId)
+                                <button type="submit" class="remove-btn">Remove</button>
+                            }
                         </div>
-                      }
                     </div>
                 }
             </div>
 
-        <div class="cart-summary">
-
-
-            <div class="cart-actions">
-                <a href="@Url.Action("Index", "Item")" class="continue-shopping retro-font-8bit">Continue Shopping</a>
-                <a href="@Url.Action("Checkout", "Order")" class="checkout-button retro-font-8bit">Proceed to Checkout</a>
+            <div class="cart-summary">
+                <div class="cart-actions">
+                    <a href="@Url.Action("Index", "Item")" class="continue-shopping retro-font-8bit">Continue Shopping</a>
+                    <a href="@Url.Action("Checkout", "Order")" class="checkout-button retro-font-8bit">Proceed to Checkout</a>
+                </div>
             </div>
-        </div>
         }
         else
         {
-        <div class="empty-cart">
-            <div class="empty-cart-icon">🕹️</div>
-            <h3 class="retro-font-8bit">Your cart is empty</h3>
-            <p class="empty-cart-message">Looks like you haven't added any items to your cart yet!</p>
-            <a href="@Url.Action("Index", "Item")" class="start-shopping retro-font-8bit">Start Shopping</a>
-        </div>
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🕹️</div>
+                <h3 class="retro-font-8bit">Your cart is empty</h3>
+                <p class="empty-cart-message">Looks like you haven't added any items to your cart yet!</p>
+                <a href="@Url.Action("Index", "Item")" class="start-shopping retro-font-8bit">Start Shopping</a>
+            </div>
         }
 
         <div class="famicom-cartridge-slot"></div>
@@ -154,13 +161,19 @@
         gap: 5px;
     }
 
+    .quantity-controls form {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
     .quantity-btn {
         background-color: #2a1144;
         color: #ffcc33;
         border: 2px solid #e6007e;
         width: 30px;
         height: 30px;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
@@ -169,10 +182,17 @@
         transition: all 0.3s;
     }
 
-        .quantity-btn:hover {
-            background-color: #e6007e;
-            color: #ffffff;
-        }
+    .quantity-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        border-color: #666;
+        color: #666;
+    }
+
+    .quantity-btn:not(:disabled):hover {
+        background-color: #e6007e;
+        color: #ffffff;
+    }
 
     .quantity-input {
         width: 50px;
@@ -183,6 +203,9 @@
         border: 2px solid #e6007e;
         font-family: 'VT323', monospace;
         font-size: 1rem;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
     }
 
     .stock-info {
@@ -239,35 +262,6 @@
         padding: 20px;
         border-radius: 5px;
         margin-top: 30px;
-    }
-
-    .summary-details {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .summary-row {
-        display: flex;
-        justify-content: space-between;
-        font-family: 'VT323', monospace;
-        font-size: 1.1rem;
-    }
-
-    .summary-label {
-        color: #ffcc33;
-    }
-
-    .summary-value {
-        color: #ffffff;
-    }
-
-    .summary-row.total {
-        font-size: 1.3rem;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 2px solid #e6007e;
     }
 
     .cart-actions {
@@ -333,30 +327,4 @@
             color: #ffffff;
             transform: scale(1.05);
         }
-
-    .item-image {
-        margin: 0 auto;
-    }
-
-    .item-details {
-        align-items: center;
-    }
-
-    .item-quantity {
-        align-items: center;
-    }
-
-    .item-total {
-        align-items: center;
-    }
-
-    .item-actions {
-        justify-content: center;
-    }
-
-    .cart-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-    }
 </style>

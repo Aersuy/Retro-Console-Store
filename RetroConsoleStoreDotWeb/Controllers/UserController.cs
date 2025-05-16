@@ -138,11 +138,28 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().RemoveProductFromCart(productId, 9999999, user);
+                    var result = businessLogic.GetCartAPI().RemoveProductFromCart(productId, user);
                     return RedirectToAction("Cart", "User");
                 }
             }
             return RedirectToAction("Cart", "User");
         }
+        public ActionResult UpdateCartItemQuantity(int productId, int quantity)
+        {
+
+            UserSmall user;
+            var userCookie = HttpContext.Request.Cookies["X-KEY"];
+            if (userCookie != null)
+            {
+                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                if (user != null)
+                {
+                    var result = businessLogic.GetCartAPI().UpdateCartItemQuantity(productId, quantity,user);
+                    return RedirectToAction("Cart", "User");
+                }
+            }
+            return RedirectToAction("Cart", "User");
+        }
+
     }
 }

@@ -69,7 +69,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 }
             }
         }
-        public bool RemoveProductFromCart(int ProductID, int Quantity,UserSmall user)
+        public bool RemoveProductFromCart(int ProductID,UserSmall user)
         {
             try
             {
@@ -78,14 +78,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.ProductId == ProductID && c.CartId == user.CartId);
                     if (cartItem != null)
                     {
-                        if (cartItem.Quantity - Quantity <= 0)
-                        {
                             ctx.CartItems.Remove(cartItem);
                             ctx.SaveChanges();
-                            return true;
-                        }
-                        cartItem.Quantity -= Quantity;
-                        ctx.SaveChanges();
+                            return true;  
                     }
                 }
             } catch(Exception ex)
@@ -95,9 +90,26 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
-        public bool UpdateCartItem(int ProductID, int Quantity,UserSmall user)
+        public bool UpdateCartItemQuantity(int ProductID, int Quantity, UserSmall user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var ctx = new UserContext())
+                {
+                    CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.ProductId == ProductID && c.CartId == user.CartId);
+                    if (cartItem != null)
+                    {
+                        cartItem.Quantity = Quantity;
+                        ctx.SaveChanges();
+                        return true;
+                    }
+                    return false;
+                }
+            } catch(Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Issue updating item quantity");
+                return false;
+            }
         }
         public decimal GetTotalPrice(UserSmall user)
         {
@@ -126,7 +138,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             {
                 using (var ctx = new UserContext())
                 {
-                    var products = ctx.CartItems.Where(ci => ci.CartId == user.CartId);
                     var cartItems = ctx.CartItems
                    .Where(ci => ci.CartId == user.CartId)
                    .Select(ci => new CartItemModel
