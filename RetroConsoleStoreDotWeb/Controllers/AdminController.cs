@@ -40,6 +40,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 }
                 string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName);
                 string extension = Path.GetExtension(imageFile.FileName);
+                //
 
                 fileName = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
 
