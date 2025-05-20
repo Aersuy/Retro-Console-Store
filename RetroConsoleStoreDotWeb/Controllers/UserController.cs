@@ -160,6 +160,12 @@ namespace RetroConsoleStoreDotWeb.Controllers
             }
             return RedirectToAction("Cart", "User");
         }
+        public ActionResult CheckOut()
+        {
+                
+    
+            return View();
+        }
 
     }
 }
