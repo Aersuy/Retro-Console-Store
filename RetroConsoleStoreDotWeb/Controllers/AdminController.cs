@@ -8,17 +8,19 @@ using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStore.BusinessLogic;
 using System.IO;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
     public class AdminController : BaseController
     {   
-        private readonly BusinessLogic _businessLogic;
+        private readonly BusinessLogic businessLogic;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
         {
-            _businessLogic = new BusinessLogic();
+            businessLogic = new BusinessLogic();
+            
         }
         [HttpGet]
         public ActionResult AddProduct()
@@ -57,7 +59,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             ProductModelBack.Brand = model.Brand;
             ProductModelBack.YearReleased = model.YearReleased;
             ProductModelBack.Status = model.Status;
-            ViewBag.Message = _businessLogic.GetProductBL().AddProduct(ProductModelBack);
+            ViewBag.Message = businessLogic.GetProductBL().AddProduct(ProductModelBack);
             return View(ProductModelBack);
         }
         public ActionResult EditProduct()
