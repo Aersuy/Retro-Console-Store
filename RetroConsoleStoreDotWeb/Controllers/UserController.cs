@@ -79,7 +79,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             if (userCookie != null)
             {
                 UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
-                IEnumerable<CartItemModel> cartItemsModel = businessLogic.GetCartAPI().GetCartItems(user);
+                IEnumerable<CartItemModel> cartItemsModel = businessLogic.GetCartBL().GetCartItems(user);
                 var productIds = cartItemsModel.Select(x => x.ProductId);
                 var products = businessLogic.GetProductBL().GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
 
@@ -115,7 +115,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().AddProductTooCart(productId, quantity, user);
+                    var result = businessLogic.GetCartBL().AddProductTooCart(productId, quantity, user);
                     if (result)
                         TempData["CartMessage"] = "Product added to cart!";
                     else
@@ -137,7 +137,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().RemoveProductFromCart(productId, user);
+                    var result = businessLogic.GetCartBL().RemoveProductFromCart(productId, user);
                     return RedirectToAction("Cart", "User");
                 }
             }
@@ -153,7 +153,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().UpdateCartItemQuantity(productId, quantity,user);
+                    var result = businessLogic.GetCartBL().UpdateCartItemQuantity(productId, quantity,user);
                     return RedirectToAction("Cart", "User");
                 }
             }
@@ -168,7 +168,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartAPI().Checkout(user);
+                    var result = businessLogic.GetCartBL().Checkout(user);
                     return RedirectToAction("Cart", "User");
                 }
             }
