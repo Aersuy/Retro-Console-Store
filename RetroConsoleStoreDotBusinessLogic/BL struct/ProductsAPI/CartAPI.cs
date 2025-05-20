@@ -11,7 +11,7 @@ using RetroConsoleStoreDotDomain.Products;
 using RetroConsoleStoreDotDomain.User;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
-    internal class CartAPI : ICartAPI
+    public class CartAPI : ICartAPI
     {
         private readonly IError _error;
         private readonly ILog _log;
@@ -136,7 +136,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 _error.ErrorToDatabase(ex, "Description");
                 return false;
             }
-            throw new NotImplementedException();
         }
         public bool ApplyDiscountCode(string DiscountCode, UserSmall user)
         {

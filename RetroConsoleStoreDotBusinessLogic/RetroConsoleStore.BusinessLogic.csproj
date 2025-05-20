@@ -85,6 +85,7 @@
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="BL struct\AuthBL.cs" />
+    <Compile Include="BL struct\CartBL.cs" />
     <Compile Include="BL struct\ErrorBL.cs" />
     <Compile Include="BL struct\LoginBL1.cs" />
     <Compile Include="BL struct\Logs.cs" />
