@@ -119,6 +119,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BL struct\MiscAPI\" />
     <Folder Include="DBContext\Seed\" />
   </ItemGroup>
   <ItemGroup>
