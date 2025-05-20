@@ -7,7 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
+using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotWeb.Models.Auth;
 
 namespace RetroConsoleStoreDotWeb.Controllers
@@ -16,11 +18,14 @@ namespace RetroConsoleStoreDotWeb.Controllers
     {
         // GET: Auth
 
-        private readonly BusinessLogic _businessLogic;
-
+        private readonly BusinessLogic businessLogic;
+        private readonly IAuth _auth;
+        private readonly ILogin _login;
         public AuthController()
         {
-            _businessLogic = new BusinessLogic();
+            businessLogic = new BusinessLogic();
+            _auth = businessLogic.GetAuthBL();
+            _login = businessLogic.GetLoginBL();
         }
 
         [HttpGet]
@@ -38,7 +43,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 Email = model.Email,
                 Phone = model.Phone,
             };
-            ViewBag.Message = _businessLogic.GetAuthBL().UserAuthLogic(ModelDtO);
+            ViewBag.Message = _auth.UserAuthLogic(ModelDtO);
             return View(model);
         }
         
@@ -62,11 +67,11 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             if (ModelState.IsValid)
             {   
-                var userSession = _businessLogic.GetLoginBL().LoginLogic(model);
+                var userSession = _login.LoginLogic(model);
                 ViewBag.Message = userSession.Message;
                 if (userSession.Success)
                 {
-                    HttpCookie cookie = _businessLogic.GetLoginBL().GenCookie(model);
+                    HttpCookie cookie = _login.GenCookie(model);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
@@ -88,7 +93,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
 
             if (Request.Cookies["X-KEY"]!= null)
             { string cookiValue = Request.Cookies["X-KEY"].Value;
-                _businessLogic.GetLoginBL().ExpireSessionByCookieDB(cookiValue);
+                _login.ExpireSessionByCookieDB(cookiValue);
                 var Cookie = new HttpCookie("X-KEY")
                 {
                     Expires = DateTime.Now.AddDays(-1),

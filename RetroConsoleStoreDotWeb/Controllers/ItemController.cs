@@ -7,22 +7,25 @@ using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotWeb.Models.Articol;
 using RetroConsoleStoreDotDomain.Model.Product;
 using System.Web.UI;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
     public class ItemController : BaseController
     {
-        private readonly BusinessLogic _businessLogic;
+        private readonly BusinessLogic businessLogic;
+        private readonly IProductBL _product;
         // GET: Item
         public ItemController()
         {
-            _businessLogic = new BusinessLogic();
+            businessLogic = new BusinessLogic();
+            _product = businessLogic.GetProductBL();
         }
         [HttpGet]
         public ActionResult Catalog()
         {  
             
-          List<ProductModelBack> products = _businessLogic.GetProductBL().GetProductModelBacks();
+          List<ProductModelBack> products = _product.GetProductModelBacks();
 
 
             List<Product> product2 = new List<Product> { };
@@ -54,7 +57,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
 
         public ActionResult Product(int id)
         { 
-           ProductModelBack prod =  _businessLogic.GetProductBL().GetProduct(id);
+           ProductModelBack prod =  _product.GetProduct(id);
             var product = new Product();
 
                 product.Id = prod.Id;

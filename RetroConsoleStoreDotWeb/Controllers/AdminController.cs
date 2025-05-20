@@ -15,11 +15,13 @@ namespace RetroConsoleStoreDotWeb.Controllers
     public class AdminController : BaseController
     {   
         private readonly BusinessLogic businessLogic;
+        private readonly IProductBL _productBL;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
         {
             businessLogic = new BusinessLogic();
+            _productBL = businessLogic.GetProductBL();
             
         }
         [HttpGet]
@@ -60,7 +62,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             ProductModelBack.Brand = model.Brand;
             ProductModelBack.YearReleased = model.YearReleased;
             ProductModelBack.Status = model.Status;
-            ViewBag.Message = businessLogic.GetProductBL().AddProduct(ProductModelBack);
+            ViewBag.Message = _productBL.AddProduct(ProductModelBack);
             return View(ProductModelBack);
         }
         public ActionResult EditProduct()

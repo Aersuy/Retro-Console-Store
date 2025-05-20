@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.Products;
@@ -17,10 +18,18 @@ namespace RetroConsoleStoreDotWeb.Controllers
     public class UserController : BaseController
     {
         private readonly BusinessLogic businessLogic;
+        private readonly ILogin _login;
+        private readonly IAccountBL _account;
+        private readonly IProductBL _product;
+        private readonly ICart _cart;
         private const string UploadPath = "~/Content/Images/ProfilePictures/";
         public UserController()
         {
             businessLogic = new BusinessLogic();
+            _login = businessLogic.GetLoginBL();
+            _account = businessLogic.GetAccountAPI();
+            _product = businessLogic.GetProductBL();
+            _cart = businessLogic.GetCartBL();
         }
         // GET: User
         [HttpGet]
@@ -31,7 +40,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             if (cookie != null)
             {
 
-                var userSmall = businessLogic.GetLoginBL().GetUserByCookie(cookie.Value);
+                var userSmall = _login.GetUserByCookie(cookie.Value);
                 if (userSmall != null)
                 {
                     return View(userSmall);
@@ -67,7 +76,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 }
                 // Use virtual path for database storage
                 model.ImagePath = UploadPath.Replace("~", "") + fileName;
-                businessLogic.GetUserAPI().AddProfilePicture(model);
+                _account.AddProfilePicture(model);
                 return RedirectToAction("UserPage");
             }
             return View(model);
@@ -78,10 +87,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-                UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
-                IEnumerable<CartItemModel> cartItemsModel = businessLogic.GetCartBL().GetCartItems(user);
+                UserSmall user = _login.GetUserByCookie(userCookie.Value);
+                IEnumerable<CartItemModel> cartItemsModel = _cart.GetCartItems(user);
                 var productIds = cartItemsModel.Select(x => x.ProductId);
-                var products = businessLogic.GetProductBL().GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
+                var products = _product.GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
 
                 viewModel = cartItemsModel.Select(item =>
                 {
@@ -112,10 +121,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                user = _login.GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartBL().AddProductTooCart(productId, quantity, user);
+                    var result = _cart.AddProductTooCart(productId, quantity, user);
                     if (result)
                         TempData["CartMessage"] = "Product added to cart!";
                     else
@@ -134,10 +143,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                user = _login.GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartBL().RemoveProductFromCart(productId, user);
+                    var result = _cart.RemoveProductFromCart(productId, user);
                     return RedirectToAction("Cart", "User");
                 }
             }
@@ -150,10 +159,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                user = _login.GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartBL().UpdateCartItemQuantity(productId, quantity,user);
+                    var result = _cart.UpdateCartItemQuantity(productId, quantity,user);
                     return RedirectToAction("Cart", "User");
                 }
             }
@@ -165,10 +174,10 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
             {
-                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                user = _login.GetUserByCookie(userCookie.Value);
                 if (user != null)
                 {
-                    var result = businessLogic.GetCartBL().Checkout(user);
+                    var result = _cart.Checkout(user);
                     return RedirectToAction("Cart", "User");
                 }
             }
