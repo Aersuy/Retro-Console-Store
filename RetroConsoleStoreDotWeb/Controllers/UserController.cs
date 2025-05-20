@@ -130,7 +130,6 @@ namespace RetroConsoleStoreDotWeb.Controllers
         }
         public ActionResult RemoveItemFromCart(int productId)
         {
-
             UserSmall user;
             var userCookie = HttpContext.Request.Cookies["X-KEY"];
             if (userCookie != null)
@@ -160,10 +159,20 @@ namespace RetroConsoleStoreDotWeb.Controllers
             }
             return RedirectToAction("Cart", "User");
         }
-        public ActionResult CheckOut()
+        public ActionResult Checkout()
         {
-                
-    
+            UserSmall user;
+            var userCookie = HttpContext.Request.Cookies["X-KEY"];
+            if (userCookie != null)
+            {
+                user = businessLogic.GetLoginBL().GetUserByCookie(userCookie.Value);
+                if (user != null)
+                {
+                    var result = businessLogic.GetCartAPI().Checkout(user);
+                    return RedirectToAction("Cart", "User");
+                }
+            }
+
             return View();
         }
 

@@ -61,14 +61,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult Login(UserLoginDTO model)
         {
             if (ModelState.IsValid)
-            {   /*
-                var ModelDtO = new UserLoginDTO
-                {
-                    UserIp = Request.UserHostAddress,
-                    UserName = model.UserName,
-                    Password = model.Password,
-
-                };*/
+            {   
                 var userSession = _businessLogic.GetLoginBL().LoginLogic(model);
                 ViewBag.Message = userSession.Message;
                 if (userSession.Success)

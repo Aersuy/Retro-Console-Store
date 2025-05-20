@@ -121,6 +121,21 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         }
         public bool Checkout(UserSmall user)
         {
+            try
+            {
+
+                using (var ctx = new UserContext())
+                {
+                    var cartItems = ctx.CartItems.Where(p => p.CartId == user.CartId).ToList();
+                    ctx.CartItems.RemoveRange(cartItems);
+                    ctx.SaveChanges();
+                    return true;
+                }
+            } catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Description");
+                return false;
+            }
             throw new NotImplementedException();
         }
         public bool ApplyDiscountCode(string DiscountCode, UserSmall user)
