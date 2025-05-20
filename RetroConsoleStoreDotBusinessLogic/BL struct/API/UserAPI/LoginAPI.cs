@@ -21,13 +21,13 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         private readonly ILog _log;
         private readonly IPasswordHash _passWordHash;
 
-        public LoginAPI(IPasswordHash passWordHash, ILog log, IError error)
+        internal LoginAPI(IPasswordHash passWordHash, ILog log, IError error)
         {
             _passWordHash = passWordHash;
             _log = log;
             _error = error;
         }
-        public UserLoginResponse LoginLogicAPI(UserLoginDTO data)
+        internal UserLoginResponse LoginLogicAPI(UserLoginDTO data)
         {
             UserLoginResponse response = new UserLoginResponse();
             using (var ctx = new UserContext())
@@ -77,7 +77,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
 
         }
 
-        private bool ValidateUserInputAPI(UserLoginDTO data)
+        internal bool ValidateUserInputAPI(UserLoginDTO data)
         {
 
 
@@ -88,11 +88,11 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
 
             return false;
         }
-        private bool UserWithNameAlreadyExistsAPI(UserLoginDTO data, UserContext ctx)
+        internal bool UserWithNameAlreadyExistsAPI(UserLoginDTO data, UserContext ctx)
         {
             return ctx.Users.Any(u => u.username == data.UserName);
         }
-        public HttpCookie GenCookieAPI(UserLoginDTO data)
+        internal HttpCookie GenCookieAPI(UserLoginDTO data)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             }
 
         }
-        public UserSmall GetUserByCookieAPI(string cookieText)
+        internal UserSmall GetUserByCookieAPI(string cookieText)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             }
 
         }
-        public void ExpireSessionByCookieDBAPI(string cookieValue)
+        internal void ExpireSessionByCookieDBAPI(string cookieValue)
         {
             if (string.IsNullOrEmpty(cookieValue))
                 return;

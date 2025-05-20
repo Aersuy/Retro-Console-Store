@@ -10,23 +10,15 @@ using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Logs;
 using RetroConsoleStoreDotDomain.Model.Product;
 
-namespace RetroConsoleStoreDotBusinessLogic.BL_struct
+namespace RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI
 {
-    //TODO : Make the product log method work with just the id
-    // need to query the db for other data
-    public class Logs : ILog
-    {
-        private readonly IError _error;
-        public Logs(IError error)
+    public class LogsAPI
+    {   private readonly IError _error;
+        public LogsAPI(IError error)
         {
             _error = error;
         }
-        /// <summary>
-        /// Method for loggign data to database.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public string AuthLog(UserLoginDTO data)
+        public string AuthLogAPI(UserLoginDTO data)
         {
             try
             {
@@ -73,7 +65,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public string LoginLog(UserLoginDTO data)
+        public string LoginLogAPI(UserLoginDTO data)
         {
             try
             {
@@ -86,7 +78,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
             }
 
         }
-        public string ProductLog(ProductModelBack data, string Descr)
+        public string ProductLogAPI(ProductModelBack data, string Descr)
         {
             try
             {
@@ -129,4 +121,3 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         }
     }
 }
-

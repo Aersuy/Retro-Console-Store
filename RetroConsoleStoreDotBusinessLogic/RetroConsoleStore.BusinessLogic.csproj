@@ -84,17 +84,20 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
-    <Compile Include="BL struct\AuthBL.cs" />
-    <Compile Include="BL struct\CartBL.cs" />
-    <Compile Include="BL struct\ErrorBL.cs" />
-    <Compile Include="BL struct\LoginBL1.cs" />
-    <Compile Include="BL struct\Logs.cs" />
-    <Compile Include="BL struct\ProductBL.cs" />
-    <Compile Include="BL struct\ProductsAPI\CartAPI.cs" />
-    <Compile Include="BL struct\ProductsAPI\ProductAPI.cs" />
-    <Compile Include="BL struct\UserAPI\AuthAPI.cs" />
-    <Compile Include="BL struct\UserAPI\LoginAPI.cs" />
-    <Compile Include="BL struct\UserAPI\UserAPI.cs" />
+    <Compile Include="BL struct\BL\User\AuthBL.cs" />
+    <Compile Include="BL struct\BL\Products\CartBL.cs" />
+    <Compile Include="BL struct\BL\Misc\ErrorBL.cs" />
+    <Compile Include="BL struct\BL\User\LoginBL1.cs" />
+    <Compile Include="BL struct\BL\Misc\Logs.cs" />
+    <Compile Include="BL struct\API\MiscAPI\ErrorAPI.cs" />
+    <Compile Include="BL struct\API\MiscAPI\LogsAPI.cs" />
+    <Compile Include="BL struct\BL\Products\ProductBL.cs" />
+    <Compile Include="BL struct\API\ProductsAPI\CartAPI.cs" />
+    <Compile Include="BL struct\API\ProductsAPI\ProductAPI.cs" />
+    <Compile Include="BL struct\API\UserAPI\AuthAPI.cs" />
+    <Compile Include="BL struct\API\UserAPI\LoginAPI.cs" />
+    <Compile Include="BL struct\API\UserAPI\UserAPI.cs" />
+    <Compile Include="BL struct\BL\User\UserBL.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="DBContext\DBContext.cs" />
     <Compile Include="DBContext\LogContext.cs" />
@@ -119,7 +122,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BL struct\MiscAPI\" />
     <Folder Include="DBContext\Seed\" />
   </ItemGroup>
   <ItemGroup>
