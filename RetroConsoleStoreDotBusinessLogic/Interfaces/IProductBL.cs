@@ -12,8 +12,11 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 
         List<ProductModelBack> GetProductModelBacks();
         ProductModelBack GetProduct(int id);
-
         bool AddProduct(ProductModelBack product);
-         
+        bool UpdateProduct(ProductModelBack product);
+        ProductModelBack GetProductById(int id);
+        bool UpdateStock(int productId, int quantity);
+        IEnumerable<ProductModelBack> Search(string searchTerm);
+
     }
 }

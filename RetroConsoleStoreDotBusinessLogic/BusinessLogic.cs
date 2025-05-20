@@ -58,9 +58,9 @@ namespace RetroConsoleStore.BusinessLogic
         {
             return _userAPI;
         }
-        public ICartAPI GetCartAPI()
+        public ICart GetCartAPI()
         {
-            return _cartAPI;
+            return _cart;
         }
     }
 }

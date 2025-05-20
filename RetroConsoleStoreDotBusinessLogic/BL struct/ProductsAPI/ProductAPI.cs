@@ -14,17 +14,17 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
     //TODO : Add error handling to the methods
     //TODO : Add validation to the methods
     
-    public class ProductAPI : IProductAPI
+    public class ProductAPI
     {
         readonly IError _error;
         readonly ILog _log;
 
-        public ProductAPI(IError error, ILog log)
+        internal ProductAPI(IError error, ILog log)
         {
             _error = error;
             _log = log;
         }
-        public bool AddProduct(ProductModelBack Product)
+        internal bool AddProductAPI(ProductModelBack Product)
         {
             using (var ctx = new UserContext())
             {
@@ -59,7 +59,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 
          
         }
-        public bool DeleteProduct(int Id)
+        internal bool DeleteProductAPI(int Id)
         {
             using (var ctx = new UserContext())
             {
@@ -81,7 +81,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     return false;
                 }
             }
-            throw new NotImplementedException();
         }
         /// <summary>
         /// Update product in the database
@@ -89,7 +88,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         /// <param name="Product"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public bool UpdateProduct(ProductModelBack Product)
+        internal bool UpdateProductAPI(ProductModelBack Product)
         {
             using (var ctx = new UserContext())
             {
@@ -118,9 +117,8 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     return false;
                 }
             }
-            throw new NotImplementedException();
         }
-        public ProductModelBack GetProductById(int Id)
+        internal ProductModelBack GetProductByIdAPI(int Id)
         {
             using (var ctx = new UserContext())
             {
@@ -153,9 +151,8 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     return null;
                 }
             }
-            throw new NotImplementedException();
         }
-        public List<ProductModelBack> GetAllProducts()
+        internal List<ProductModelBack> GetAllProductsAPI()
         {
             using (var ctx = new UserContext())
             {
@@ -184,10 +181,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     return null;
                 }
             }
-            throw new NotImplementedException();
         }
        
-        public bool UpdateStock(int ProductID, int Quantity)
+        internal bool UpdateStockAPI(int ProductID, int Quantity)
         {
             using (var ctx = new UserContext())
             {
@@ -210,7 +206,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
-        public IEnumerable<ProductModelBack> Seach(string SearchTerm)
+        internal IEnumerable<ProductModelBack> SeachAPI(string SearchTerm)
         {
             throw new NotImplementedException();
         }

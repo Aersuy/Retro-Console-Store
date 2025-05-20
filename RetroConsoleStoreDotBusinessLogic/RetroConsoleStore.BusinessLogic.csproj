@@ -102,7 +102,6 @@
     <Compile Include="Interfaces\IError.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
-    <Compile Include="Interfaces\IProductAPI.cs" />
     <Compile Include="Interfaces\IProductBL.cs" />
     <Compile Include="Interfaces\IUserAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
