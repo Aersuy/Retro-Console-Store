@@ -92,6 +92,8 @@
     <Compile Include="BL struct\ProductBL.cs" />
     <Compile Include="BL struct\ProductsAPI\CartAPI.cs" />
     <Compile Include="BL struct\ProductsAPI\ProductAPI.cs" />
+    <Compile Include="BL struct\UserAPI\AuthAPI.cs" />
+    <Compile Include="BL struct\UserAPI\LoginAPI.cs" />
     <Compile Include="BL struct\UserAPI\UserAPI.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="DBContext\DBContext.cs" />
