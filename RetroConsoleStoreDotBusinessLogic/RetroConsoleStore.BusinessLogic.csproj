@@ -96,8 +96,8 @@
     <Compile Include="BL struct\API\ProductsAPI\ProductAPI.cs" />
     <Compile Include="BL struct\API\UserAPI\AuthAPI.cs" />
     <Compile Include="BL struct\API\UserAPI\LoginAPI.cs" />
-    <Compile Include="BL struct\API\UserAPI\UserAPI.cs" />
-    <Compile Include="BL struct\BL\User\UserBL.cs" />
+    <Compile Include="BL struct\API\UserAPI\AccountAPI.cs" />
+    <Compile Include="BL struct\BL\User\AccountBL.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="DBContext\DBContext.cs" />
     <Compile Include="DBContext\LogContext.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\IProductBL.cs" />
-    <Compile Include="Interfaces\IUserAPI.cs" />
+    <Compile Include="Interfaces\IAccountBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

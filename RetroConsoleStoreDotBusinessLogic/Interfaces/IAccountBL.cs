@@ -7,7 +7,7 @@ using RetroConsoleStoreDotDomain.Model.User;
 
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
-    public interface IUserAPI
+    public interface IAccountBL
     {
         string AddProfilePicture(UserSmall model);
     }

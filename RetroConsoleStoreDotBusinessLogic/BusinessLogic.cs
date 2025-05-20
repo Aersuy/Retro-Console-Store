@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RetroConsoleStore.BusinessLogic.BL_Struct;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStoreDotBusinessLogic.BL_struct;
+using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
@@ -21,7 +22,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly IPasswordHash _passwordHash;
         private readonly ILog _loggingBL;
         private readonly IProductBL _productBL;
-        private readonly IUserAPI _userAPI;
+        private readonly IAccountBL _userAPI;
         private readonly ICart _cart;
 
         public BusinessLogic()
@@ -32,7 +33,7 @@ namespace RetroConsoleStore.BusinessLogic
             _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL);
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
             _productBL = new ProductBL(_errorBL,_loggingBL);
-            _userAPI = new UserAPI();
+            _userAPI = new AccountBL(_errorBL);
             _cart = new CartBL(_errorBL, _loggingBL,_loginBL);
            
         }
@@ -52,7 +53,7 @@ namespace RetroConsoleStore.BusinessLogic
                 return _productBL;
             
         }
-        public IUserAPI GetUserAPI()
+        public IAccountBL GetUserAPI()
         {
             return _userAPI;
         }

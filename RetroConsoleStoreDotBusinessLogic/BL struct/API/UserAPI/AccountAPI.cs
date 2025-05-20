@@ -10,11 +10,14 @@ using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
 {
-    internal class UserAPI : IUserAPI
+    public class AccountAPI
     {
         private readonly IError _error;
-        private readonly ILog _log;
-        public string AddProfilePicture(UserSmall model)
+        internal AccountAPI(IError error)
+        {
+            _error = error;
+        }
+        internal string AddProfilePictureAPI(UserSmall model)
         {
             using(var ctx = new UserContext())
             {
