@@ -11,7 +11,7 @@ using RetroConsoleStoreDotDomain.Products;
 using RetroConsoleStoreDotDomain.User;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
-    public class CartAPI : ICartAPI
+    public class CartAPI 
     {
         private readonly IError _error;
         private readonly ILog _log;
@@ -22,7 +22,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             _log = log;
         }
 
-        public bool AddProductTooCart(int ProductID, int Quantity, UserSmall user)
+        internal bool AddProductTooCartAPI(int ProductID, int Quantity, UserSmall user)
         {
             {
                try
@@ -69,7 +69,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 }
             }
         }
-        public bool RemoveProductFromCart(int ProductID,UserSmall user)
+        internal bool RemoveProductFromCartAPI(int ProductID,UserSmall user)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
-        public bool UpdateCartItemQuantity(int ProductID, int Quantity, UserSmall user)
+        internal bool UpdateCartItemQuantityAPI(int ProductID, int Quantity, UserSmall user)
         {
             try
             {
@@ -111,15 +111,15 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 return false;
             }
         }
-        public decimal GetTotalPrice(UserSmall user)
+        internal decimal GetTotalPriceAPI(UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool ClearCart(UserSmall user)
+        internal bool ClearCartAPI(UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool Checkout(UserSmall user)
+        internal bool CheckoutAPI(UserSmall user)
         {
             try
             {
@@ -137,16 +137,16 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 return false;
             }
         }
-        public bool ApplyDiscountCode(string DiscountCode, UserSmall user)
+        internal bool ApplyDiscountCodeAPI(string DiscountCode, UserSmall user)
         {
             throw new NotImplementedException();
         }
-        public bool RemoveDiscountCode(string DiscountCode, UserSmall user)
+        internal bool RemoveDiscountCodeAPI(string DiscountCode, UserSmall user)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CartItemModel> GetCartItems(UserSmall user)
+        internal IEnumerable<CartItemModel> GetCartItemsAPI(UserSmall user)
         {
             try
             {

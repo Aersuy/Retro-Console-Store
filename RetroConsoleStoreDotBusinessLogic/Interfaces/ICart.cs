@@ -7,7 +7,7 @@ using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Model.User;
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
-    public interface ICartAPI
+    public interface ICart
     {
         bool AddProductTooCart(int ProductID, int Quantity, UserSmall user);
         bool RemoveProductFromCart(int ProductID,UserSmall user); // Remove product from cart

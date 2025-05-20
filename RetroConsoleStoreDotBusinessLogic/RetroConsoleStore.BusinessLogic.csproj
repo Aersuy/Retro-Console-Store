@@ -98,7 +98,7 @@
     <Compile Include="DBContext\LogContext.cs" />
     <Compile Include="DBContext\UserContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
-    <Compile Include="Interfaces\ICartAPI.cs" />
+    <Compile Include="Interfaces\ICart.cs" />
     <Compile Include="Interfaces\IError.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
