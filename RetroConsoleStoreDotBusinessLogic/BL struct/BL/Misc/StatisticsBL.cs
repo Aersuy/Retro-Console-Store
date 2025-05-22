@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.User;
+
+namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
+{
+    public class StatisticsBL : StatisticsAPI, IStatistics
+    {
+        public StatisticsBL(IError error) : base(error)
+        {
+        }
+        public bool CheckoutStat(UserSmall user)
+        {
+            return CheckoutStatsAPI(user);
+        }
+
+    }
+}

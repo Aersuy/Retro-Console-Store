@@ -87,6 +87,7 @@
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="BL struct\API\MiscAPI\StatisticsAPI.cs" />
+    <Compile Include="BL struct\BL\Misc\StatisticsBL.cs" />
     <Compile Include="BL struct\BL\User\AuthBL.cs" />
     <Compile Include="BL struct\BL\Products\CartBL.cs" />
     <Compile Include="BL struct\BL\Misc\ErrorBL.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\IProductBL.cs" />
     <Compile Include="Interfaces\IAccountBL.cs" />
+    <Compile Include="Interfaces\IStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
