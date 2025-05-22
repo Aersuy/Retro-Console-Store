@@ -126,6 +126,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 
                 using (var ctx = new UserContext())
                 {
+
                     var cartItems = ctx.CartItems.Where(p => p.CartId == user.CartId).ToList();
                     ctx.CartItems.RemoveRange(cartItems);
                     ctx.SaveChanges();

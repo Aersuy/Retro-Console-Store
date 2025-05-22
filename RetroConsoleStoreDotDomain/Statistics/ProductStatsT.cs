@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using RetroConsoleStoreDotDomain.Products;
 
-namespace RetroConsoleStoreDotDomain.Model.Statistics
+namespace RetroConsoleStoreDotDomain.Statistics
 {
-    internal class ProductStatsT
+    public class ProductStatsT
     {
      
         [Key]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Reflection.Emit;
+using RetroConsoleStoreDotDomain.Model.Statistics;
 using RetroConsoleStoreDotDomain.Products;
 using RetroConsoleStoreDotDomain.User;
 
@@ -15,6 +16,9 @@ namespace RetroConsoleStoreDotBusinessLogic.DBModel
         public virtual DbSet<CartItemT> CartItems { get; set; }
         public virtual DbSet<UserCartT> UserCarts { get; set; }
         public virtual DbSet<SessionT> Sessions { get; set; }
+        public virtual DbSet<ProductStatsT> ProductStatistics { get; set; }
+        public virtual DbSet<UserStatsT> UserStatsTs { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
