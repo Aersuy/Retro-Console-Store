@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
@@ -16,7 +11,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
 {
     public class AuthController : BaseController
     {
-        // GET: Auth
+        // GET: Auth       
 
         private readonly BusinessLogic businessLogic;
         private readonly IAuth _auth;
