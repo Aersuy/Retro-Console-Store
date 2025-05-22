@@ -65,10 +65,11 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                                 totalProductsPurchased = 0,     
                             };
                             ctx.UserStatsTs.Add(userSt);
-                            userSt.totalSpent = allRoundSpent;
-                            userSt.totalProductsPurchased = totalQuantity;
-                            ctx.SaveChanges();
+                           
                         }
+                        userSt.totalSpent = allRoundSpent;
+                        userSt.totalProductsPurchased = totalQuantity;
+                        ctx.SaveChanges();
                     }
                     return true;
                 }
