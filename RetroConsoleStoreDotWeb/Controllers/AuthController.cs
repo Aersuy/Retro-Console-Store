@@ -87,7 +87,8 @@ namespace RetroConsoleStoreDotWeb.Controllers
             Session.Abandon();
 
             if (Request.Cookies["X-KEY"]!= null)
-            { string cookiValue = Request.Cookies["X-KEY"].Value;
+            {
+                string cookiValue = Request.Cookies["X-KEY"].Value;
                 _login.ExpireSessionByCookieDB(cookiValue);
                 var Cookie = new HttpCookie("X-KEY")
                 {

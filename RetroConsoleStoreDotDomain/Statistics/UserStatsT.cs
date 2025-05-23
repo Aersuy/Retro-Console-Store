@@ -11,6 +11,8 @@ namespace RetroConsoleStoreDotDomain.Model.Statistics
 {
     public class UserStatsT
     {
+
+        [Key]
         [Required]
         [ForeignKey("User")]
         public int UserId { get; set; }

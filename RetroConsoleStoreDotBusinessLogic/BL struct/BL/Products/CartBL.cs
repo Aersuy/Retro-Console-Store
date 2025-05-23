@@ -13,7 +13,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
     public class CartBL : CartAPI, ICart
     {
-        public CartBL(IError error, ILog log, ILogin login) : base(error, log, login)
+        public CartBL(IError error, ILog log, ILogin login, IStatistics stats) : base(error, log, login, stats)
         {
         }
         public bool AddProductTooCart(int ProductID, int Quantity, UserSmall user)

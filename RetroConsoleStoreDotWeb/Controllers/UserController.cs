@@ -35,17 +35,12 @@ namespace RetroConsoleStoreDotWeb.Controllers
         [HttpGet]
         public ActionResult UserPage()
         {
-
-            var cookie = Request.Cookies["X-KEY"];
-            if (cookie != null)
-            {
-
-                var userSmall = _login.GetUserByCookie(cookie.Value);
+                var userSmall = GetCurrentUser();
                 if (userSmall != null)
                 {
                     return View(userSmall);
-                }
-            }
+                }       
+
             return RedirectToAction("Login", "Auth");
         }
         [HttpPost]
@@ -84,10 +79,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult Cart()
         {
             List<CartItemsViewModel> viewModel = new List<CartItemsViewModel>();
-            var userCookie = HttpContext.Request.Cookies["X-KEY"];
-            if (userCookie != null)
-            {
-                UserSmall user = _login.GetUserByCookie(userCookie.Value);
+                UserSmall user = GetCurrentUser();
                 IEnumerable<CartItemModel> cartItemsModel = _cart.GetCartItems(user);
                 var productIds = cartItemsModel.Select(x => x.ProductId);
                 var products = _product.GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
@@ -107,7 +99,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                         StockQuantity = product?.StockQuantity ?? 0
                     };
                 }).ToList();
-            }
+            
             return View(viewModel);
         }
         public ActionResult Statistics()
@@ -117,70 +109,51 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult AddToCart(int productId, int quantity)
         {
 
-            UserSmall user;
-            var userCookie = HttpContext.Request.Cookies["X-KEY"];
-            if (userCookie != null)
+            UserSmall user = GetCurrentUser();
+            if (user != null)
             {
-                user = _login.GetUserByCookie(userCookie.Value);
-                if (user != null)
-                {
-                    var result = _cart.AddProductTooCart(productId, quantity, user);
-                    if (result)
-                        TempData["CartMessage"] = "Product added to cart!";
-                    else
-                        TempData["CartMessage"] = "Could not add product to cart.";
+                var result = _cart.AddProductTooCart(productId, quantity, user);
+                if (result)
+                    TempData["CartMessage"] = "Product added to cart!";
+                else
+                    TempData["CartMessage"] = "Could not add product to cart.";
 
-                    return RedirectToAction("Product", "Item", new { id = productId });
-                }
+                return RedirectToAction("Product", "Item", new { id = productId });
             }
-
-
             return View();
         }
         public ActionResult RemoveItemFromCart(int productId)
         {
-            UserSmall user;
-            var userCookie = HttpContext.Request.Cookies["X-KEY"];
-            if (userCookie != null)
-            {
-                user = _login.GetUserByCookie(userCookie.Value);
+            UserSmall user = GetCurrentUser();
+
                 if (user != null)
                 {
                     var result = _cart.RemoveProductFromCart(productId, user);
                     return RedirectToAction("Cart", "User");
                 }
-            }
             return RedirectToAction("Cart", "User");
         }
         public ActionResult UpdateCartItemQuantity(int productId, int quantity)
         {
-
-            UserSmall user;
-            var userCookie = HttpContext.Request.Cookies["X-KEY"];
-            if (userCookie != null)
-            {
-                user = _login.GetUserByCookie(userCookie.Value);
+            UserSmall user = GetCurrentUser();
+  
                 if (user != null)
                 {
                     var result = _cart.UpdateCartItemQuantity(productId, quantity,user);
                     return RedirectToAction("Cart", "User");
                 }
-            }
+
             return RedirectToAction("Cart", "User");
         }
         public ActionResult Checkout()
         {
-            UserSmall user;
-            var userCookie = HttpContext.Request.Cookies["X-KEY"];
-            if (userCookie != null)
-            {
-                user = _login.GetUserByCookie(userCookie.Value);
+            UserSmall user = GetCurrentUser();
+
                 if (user != null)
                 {
                     var result = _cart.Checkout(user);
                     return RedirectToAction("Cart", "User");
-                }
-            }
+                }       
 
             return View();
         }

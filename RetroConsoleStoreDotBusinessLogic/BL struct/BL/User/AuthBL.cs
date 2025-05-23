@@ -23,14 +23,8 @@ namespace RetroConsoleStore.BusinessLogic.BL_Struct
       // object
     public class AuthBL : AuthAPI,  IAuth
     {  
-        private readonly IPasswordHash _passwordHash;
-        private readonly IError _error;
-        private readonly ILog _log;
-        public AuthBL(IPasswordHash passwordHash, IError error, ILog log) : base(error, log, passwordHash)
+        public AuthBL(IPasswordHash passwordHash, IError error, ILog log, IStatistics statistics) : base(error, log, passwordHash,statistics)
         {
-            _error = error;
-            _passwordHash = passwordHash;
-            _log = log;
         }
         /// <summary>
         /// Main auth logic for website, first validates user input

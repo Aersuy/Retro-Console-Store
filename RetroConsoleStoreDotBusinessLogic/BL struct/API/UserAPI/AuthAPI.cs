@@ -7,6 +7,7 @@ using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Enums;
+using RetroConsoleStoreDotDomain.Model.Statistics;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreHelpers.Interfaces;
 
@@ -17,12 +18,15 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         private readonly IError _error;
         private readonly ILog _log;
         private readonly IPasswordHash _passwordHash;
+        private readonly IStatistics _statistics;
 
-        public AuthAPI(IError error, ILog log,IPasswordHash passwordHash)
+        public AuthAPI(IError error, ILog log,IPasswordHash passwordHash, IStatistics statistics)
         {
             _passwordHash = passwordHash;
             _error = error;
             _log = log;
+            _statistics = statistics;
+            
         }
         internal string UserAuthLogicAPI(UserLoginDTO data)
         {
@@ -120,15 +124,23 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                     level = URole.User
                 };
                 var cart = new UserCartT();
-
-
+                var newStats = new UserStatsT
+                {
+                    User = NewUser,
+                    totalPagesViewed = 0,
+                    totalProductsAddedToCart = 0,
+                    totalSpent = 0,
+                    totalProductsPurchased = 0,
+                    totalTimesLoggedOn = 0,
+                };
+                
 
                 using (var ctx = new UserContext())
                 {
                     try
                     {
                         ctx.UserCarts.Add(cart);
-
+                        ctx.UserStatsTs.Add(newStats);
                         ctx.Users.Add(NewUser);
                         ctx.SaveChanges();
 

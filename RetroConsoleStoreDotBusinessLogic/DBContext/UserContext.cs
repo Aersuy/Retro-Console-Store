@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Reflection.Emit;
 using RetroConsoleStoreDotDomain.Model.Statistics;
 using RetroConsoleStoreDotDomain.Products;
+using RetroConsoleStoreDotDomain.Statistics;
 using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotBusinessLogic.DBModel

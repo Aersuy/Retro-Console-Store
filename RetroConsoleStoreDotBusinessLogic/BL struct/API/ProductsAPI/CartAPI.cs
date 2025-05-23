@@ -15,11 +15,12 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
     {
         private readonly IError _error;
         private readonly ILog _log;
-
-        internal CartAPI(IError error, ILog log,ILogin login)
+        private readonly IStatistics _statistics;
+        internal CartAPI(IError error, ILog log,ILogin login, IStatistics statistics)
         {
             _error = error;
             _log = log;
+            _statistics = statistics;
         }
 
         internal bool AddProductTooCartAPI(int ProductID, int Quantity, UserSmall user)
@@ -123,7 +124,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         {
             try
             {
-
+                _statistics.CheckoutStat(user);
                 using (var ctx = new UserContext())
                 {
 

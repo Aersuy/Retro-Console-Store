@@ -18,6 +18,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         {
             return CheckoutStatsAPI(user);
         }
-
+        public bool UserVisitedPage(UserSmall user, int productId)
+        {
+            return UserVisitedPageAPI(user, productId);
+        }
     }
 }

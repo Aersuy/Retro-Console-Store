@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotWeb.Extensions;
 
 namespace RetroConsoleStoreDotWeb.Controllers
@@ -54,6 +55,19 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 return RedirectToAction("Login", "Auth");
             }
             return null;
+        }
+        protected UserSmall GetCurrentUser() 
+        {
+            var cookie = Request.Cookies["X-KEY"];
+            if (cookie != null)
+            {
+                var userSmall = _login.GetUserByCookie(cookie.Value);
+                if (userSmall != null)
+                {
+                    return userSmall;
+                }
+            }
+            return new UserSmall();
         }
     }
 }

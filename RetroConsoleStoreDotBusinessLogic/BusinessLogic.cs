@@ -33,11 +33,11 @@ namespace RetroConsoleStore.BusinessLogic
             _loggingBL = new Logs(_errorBL);
             _statisticsBL = new StatisticsBL(_errorBL);
             _passwordHash = new PasswordHash();
-            _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL);
+            _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL,_statisticsBL);
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
             _productBL = new ProductBL(_errorBL,_loggingBL);
             _accountBL = new AccountBL(_errorBL);
-            _cart = new CartBL(_errorBL, _loggingBL,_loginBL);    
+            _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);    
         }
 
         public IAuth GetAuthBL()
