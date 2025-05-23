@@ -90,7 +90,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                     ctx.SaveChanges();
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
