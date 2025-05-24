@@ -14,12 +14,15 @@ namespace RetroConsoleStoreDotWeb.Controllers
     public class ItemController : BaseController
     {
         private readonly BusinessLogic businessLogic;
+        private readonly ILogin _login;
         private readonly IProductBL _product;
+        private readonly IStatistics _statistics;
         // GET: Item
         public ItemController()
         {
             businessLogic = new BusinessLogic();
             _product = businessLogic.GetProductBL();
+            _statistics = businessLogic.GetStatsBL();
         }
         [HttpGet]
         public ActionResult Catalog()
@@ -58,6 +61,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult Product(int id)
         { 
            ProductModelBack prod =  _product.GetProduct(id);
+            _statistics.UserVisitedPage(GetCurrentUser(),id);
             var product = new Product();
 
                 product.Id = prod.Id;

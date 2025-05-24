@@ -12,5 +12,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         bool CheckoutStat(UserSmall user);
         bool UserVisitedPage(UserSmall user,int ProductId);
+        bool AddToCartStatBl (UserSmall user);
+        bool LoginStatBL(UserSmall user);
     }
 }

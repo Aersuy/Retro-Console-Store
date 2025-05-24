@@ -16,12 +16,14 @@ namespace RetroConsoleStoreDotWeb.Controllers
     {   
         private readonly BusinessLogic businessLogic;
         private readonly IProductBL _productBL;
+        private readonly IAccountBL _accountBL;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
         {
             businessLogic = new BusinessLogic();
             _productBL = businessLogic.GetProductBL();
+            _accountBL = businessLogic.GetAccountAPI();
             
         }
         [HttpGet]
@@ -77,9 +79,12 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             return View();
         }
+        [HttpGet]
         public ActionResult AdminUserPage()
         {
-            return View();
+            var userModel = _accountBL.GetUsersBL();
+            
+            return View(userModel);
         }
     }
 }

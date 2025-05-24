@@ -40,5 +40,37 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             }
             
         }
+        internal List<UserSmall> GetUsersAPI()
+        {
+            try
+            {
+                using (var ctx = new UserContext())
+                {
+                    var users = ctx.Users.ToList();
+                    return users.Select(MapToUserSmall).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting users");
+                return new List<UserSmall>();
+            }
+        }
+        private UserSmall MapToUserSmall(UDBTablecs user)
+        {
+            if (user == null) return null;
+
+            return new UserSmall
+            {
+                Id = user.id,
+                Name = user.username,
+                Email = user.email,
+                Role = user.level,
+                CartId = user.UserCartID,
+                ImagePath = user.ImagePath,
+                LastIp = user.LastIP
+            };
+        }
     }
 }

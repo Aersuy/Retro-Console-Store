@@ -16,11 +16,13 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly BusinessLogic businessLogic;
         private readonly IAuth _auth;
         private readonly ILogin _login;
+        private readonly IStatistics _statistics;
         public AuthController()
         {
             businessLogic = new BusinessLogic();
             _auth = businessLogic.GetAuthBL();
             _login = businessLogic.GetLoginBL();
+            _statistics = businessLogic.GetStatsBL();
         }
 
         [HttpGet]
@@ -68,7 +70,8 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 {
                     HttpCookie cookie = _login.GenCookie(model);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-
+                    var userSmall = GetCurrentUser();
+                    _statistics.LoginStatBL(userSmall);
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -44,7 +44,10 @@ namespace RetroConsoleStore.BusinessLogic
         {
             return _authBL;
         }
-        
+        public IStatistics GetStatsBL()
+        {
+            return _statisticsBL;
+        }
         public ILogin GetLoginBL()
         {
             return _loginBL;

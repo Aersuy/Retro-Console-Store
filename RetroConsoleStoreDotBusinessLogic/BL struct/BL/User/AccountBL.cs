@@ -1,6 +1,7 @@
 ﻿using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI;
+using System.Collections.Generic;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
 {
     public class AccountBL : AccountAPI, IAccountBL
@@ -14,6 +15,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         public string AddProfilePicture(UserSmall model)
         {
             return AddProfilePictureAPI(model);
+        }
+        public List<UserSmall> GetUsersBL()
+        {
+            return GetUsersAPI();
         }
     }
 }

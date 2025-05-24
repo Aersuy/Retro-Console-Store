@@ -22,5 +22,13 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         {
             return UserVisitedPageAPI(user, productId);
         }
+        public bool AddToCartStatBl(UserSmall user)
+        {
+            return AddToCartStatAPI(user);
+        }
+        public bool LoginStatBL(UserSmall user)
+        {
+            return LoginStatAPI(user);  
+        }
     }
 }

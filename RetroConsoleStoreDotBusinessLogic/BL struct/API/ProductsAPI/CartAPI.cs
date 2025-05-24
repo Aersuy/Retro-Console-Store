@@ -51,6 +51,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         {
                             cartItem.Quantity += Quantity;
                             ctx.SaveChanges();
+                            _statistics.AddToCartStatBl(user, ProductID);
                             return true;
                         }
                         CartItemT item = new CartItemT
@@ -61,6 +62,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         };
                         cart.CartItems.Add(item);
                         ctx.SaveChanges();
+                        _statistics.AddToCartStatBl(user, ProductID);
                         return true;
                     }
                 } catch (Exception ex)
