@@ -30,7 +30,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         internal UserLoginResponse LoginLogicAPI(UserLoginDTO data)
         {
             UserLoginResponse response = new UserLoginResponse();
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -88,7 +88,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
 
             return false;
         }
-        internal bool UserWithNameAlreadyExistsAPI(UserLoginDTO data, UserContext ctx)
+        internal bool UserWithNameAlreadyExistsAPI(UserLoginDTO data, MainContext ctx)
         {
             return ctx.Users.Any(u => u.username == data.UserName);
         }
@@ -100,7 +100,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 {
                     Cookie.Value = CreateCookie.Create(data.Password);
                 }
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     SessionT current;
                     ValidateUserInputAPI(data);
@@ -111,7 +111,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                     {
                         current.CookieString = Cookie.Value;
                         current.ExpireTime = DateTime.Now.AddMinutes(60);
-                        using (var todo = new UserContext())
+                        using (var todo = new MainContext())
                         {
                             todo.Entry(current).State = EntityState.Modified;
                             todo.SaveChanges();
@@ -144,7 +144,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             try
             {
                 SessionT current;
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     current = ctx.Sessions.FirstOrDefault(u => u.CookieString == cookieText && u.ExpireTime > DateTime.Now);
                 }
@@ -153,7 +153,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                     return null;
                 }
                 UDBTablecs user;
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     user = ctx.Users.FirstOrDefault(u => u.username == current.Name);
                 }
@@ -181,7 +181,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             if (string.IsNullOrEmpty(cookieValue))
                 return;
 
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 var session = ctx.Sessions.FirstOrDefault(s => s.CookieString == cookieValue);
                 if (session != null)
@@ -189,6 +189,61 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                     session.ExpireTime = DateTime.Now.AddDays(-1);
                     ctx.SaveChanges();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Expires all active sessions for a specific user - used for forced logout (e.g., when banned)
+        /// </summary>
+        /// <param name="username">Username to expire sessions for</param>
+        internal bool ExpireAllUserSessionsAPI(string username)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(username))
+                    return false;
+
+                using (var ctx = new MainContext())
+                {
+                    var sessions = ctx.Sessions.Where(s => s.Name == username && s.ExpireTime > DateTime.Now).ToList();
+                    foreach (var session in sessions)
+                    {
+                        session.ExpireTime = DateTime.Now.AddDays(-1);
+                    }
+                    ctx.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error expiring all user sessions");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Expires all active sessions for a specific user by user ID - used for forced logout
+        /// </summary>
+        /// <param name="userId">User ID to expire sessions for</param>
+        internal bool ExpireAllUserSessionsByIdAPI(int userId)
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    // First get the username
+                    var user = ctx.Users.FirstOrDefault(u => u.id == userId);
+                    if (user == null)
+                        return false;
+
+                    // Expire all sessions for this username
+                    return ExpireAllUserSessionsAPI(user.username);
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error expiring user sessions by ID");
+                return false;
             }
         }
     }

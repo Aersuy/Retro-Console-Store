@@ -7,7 +7,6 @@ using RetroConsoleStoreDotWeb.Models.Articol;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStore.BusinessLogic;
 using System.IO;
-using RetroConsoleStoreDotBusinessLogic.Attributes;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 
 namespace RetroConsoleStoreDotWeb.Controllers

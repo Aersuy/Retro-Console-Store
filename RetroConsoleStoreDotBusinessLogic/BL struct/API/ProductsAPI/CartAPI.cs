@@ -30,7 +30,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 {
                    
                     UserCartT cart;
-                    using (var ctx = new UserContext())
+                    using (var ctx = new MainContext())
                     {
                         cart = ctx.UserCarts.FirstOrDefault(c => c.UserID == user.Id);
                         if (cart == null)
@@ -51,7 +51,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         {
                             cartItem.Quantity += Quantity;
                             ctx.SaveChanges();
-                            _statistics.AddToCartStatBl(user, ProductID);
+                            _statistics.AddToCartStatBl(user);
                             return true;
                         }
                         CartItemT item = new CartItemT
@@ -62,7 +62,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         };
                         cart.CartItems.Add(item);
                         ctx.SaveChanges();
-                        _statistics.AddToCartStatBl(user, ProductID);
+                        _statistics.AddToCartStatBl(user);
                         return true;
                     }
                 } catch (Exception ex)
@@ -76,7 +76,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.ProductId == ProductID && c.CartId == user.CartId);
                     if (cartItem != null)
@@ -97,7 +97,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     CartItemT cartItem = ctx.CartItems.FirstOrDefault(c => c.ProductId == ProductID && c.CartId == user.CartId);
                     if (cartItem != null)
@@ -127,7 +127,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             try
             {
                 _statistics.CheckoutStat(user);
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
 
                     var cartItems = ctx.CartItems.Where(p => p.CartId == user.CartId).ToList();
@@ -154,7 +154,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     var cartItems = ctx.CartItems
                    .Where(ci => ci.CartId == user.CartId)

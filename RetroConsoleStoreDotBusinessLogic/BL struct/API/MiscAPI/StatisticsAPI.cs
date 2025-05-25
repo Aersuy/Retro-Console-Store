@@ -21,7 +21,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     decimal totalSpent = 0;
                     int totalQuantity = 0;
@@ -80,7 +80,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     var userStats = ctx.UserStatsTs.FirstOrDefault(p => p.UserId == user.Id);
                     var productStats = ctx.ProductStatistics.FirstOrDefault(p => p.ProductId == productId);
@@ -101,7 +101,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     var userSt = ctx.UserStatsTs.FirstOrDefault(p => p.UserId == user.Id);
                     {
@@ -135,7 +135,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     var userSt = ctx.UserStatsTs.FirstOrDefault(p => p.UserId == user.Id);
                     {

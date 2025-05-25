@@ -33,7 +33,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI
                         Type = "Auth"
                     };
 
-                    using (var ctx2 = new UserContext())
+                    using (var ctx2 = new MainContext())
                     {
                         var user = ctx2.Users.FirstOrDefault(u => u.username == data.UserName);
                         if (user != null)
@@ -93,7 +93,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI
                         Type = "Product"
                     };
 
-                    using (var ctx2 = new UserContext())
+                    using (var ctx2 = new MainContext())
                     {
                         var product = ctx2.ProductTypes.FirstOrDefault(u => u.Id == data.Id);
                         if (product != null)

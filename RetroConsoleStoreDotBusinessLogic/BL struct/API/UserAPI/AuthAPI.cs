@@ -30,7 +30,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         }
         internal string UserAuthLogicAPI(UserLoginDTO data)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {    // Validation
@@ -87,7 +87,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         /// <param name="data"></param>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        private bool? UserWithNameAlreadyExistsAPI(UserLoginDTO data, UserContext ctx)
+        private bool? UserWithNameAlreadyExistsAPI(UserLoginDTO data, MainContext ctx)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 };
                 
 
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     try
                     {

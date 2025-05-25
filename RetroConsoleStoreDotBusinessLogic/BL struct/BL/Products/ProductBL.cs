@@ -10,9 +10,7 @@ using RetroConsoleStoreDotDomain.Model.Product;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
     public class ProductBL : ProductAPI, IProductBL
-    {   private readonly IError _error;
-        private readonly ILog _log;
-
+    {  
         public ProductBL(IError error, ILog log) : base(error, log)
         {
 

@@ -26,7 +26,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         }
         internal bool AddProductAPI(ProductModelBack Product)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -61,7 +61,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         }
         internal bool DeleteProductAPI(int Id)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         /// <exception cref="NotImplementedException"></exception>
         internal bool UpdateProductAPI(ProductModelBack Product)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -120,7 +120,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         }
         internal ProductModelBack GetProductByIdAPI(int Id)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -154,7 +154,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         }
         internal List<ProductModelBack> GetAllProductsAPI()
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {
@@ -185,7 +185,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
        
         internal bool UpdateStockAPI(int ProductID, int Quantity)
         {
-            using (var ctx = new UserContext())
+            using (var ctx = new MainContext())
             {
                 try
                 {

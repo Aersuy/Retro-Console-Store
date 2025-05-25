@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "User Management";
 }
-@Model IEnumerable.
+@model IEnumerable<RetroConsoleStoreDotDomain.Model.User.UserSmall>
 <div class="catalogue-container">
     <div class="catalogue-content">
         <h2 class="retro-font-pixel">User Management</h2>
@@ -32,25 +32,14 @@
                     @foreach (var user in Model)
                     {
                         <tr>
-                            <td>@user.Username</td>
+                            <td>@user.Name</td>
                             <td>@user.Email</td>
                             <td>@user.Role</td>
                             <td>
-                                <span class="status-badge @(user.IsActive ? "active" : "inactive")">
-                                    @(user.IsActive ? "Active" : "Inactive")
-                                </span>
                             </td>
                             <td class="action-buttons">
-                                <a href="@Url.Action("EditUser", "Admin", new { id = user.Id })" class="action-button edit">Edit</a>
-                                <a href="@Url.Action("UserDetails", "Admin", new { id = user.Id })" class="action-button view">View</a>
-                                @if (user.IsActive)
-                                {
-                                    <a href="@Url.Action("DeactivateUser", "Admin", new { id = user.Id })" class="action-button deactivate">Deactivate</a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("ActivateUser", "Admin", new { id = user.Id })" class="action-button activate">Activate</a>
-                                }
+                                <a href="@Url.Action("EditUser", "Admin")" class="action-button edit">Edit</a>
+                                <a href="@Url.Action("UserDetails", "Admin")" class="action-button view">View</a>
                             </td>
                         </tr>
                     }

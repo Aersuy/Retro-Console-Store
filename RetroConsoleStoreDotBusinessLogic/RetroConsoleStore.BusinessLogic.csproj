@@ -87,6 +87,7 @@
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="BL struct\API\MiscAPI\StatisticsAPI.cs" />
+    <Compile Include="BL struct\API\UserAPI\AdminAPI.cs" />
     <Compile Include="BL struct\BL\Misc\StatisticsBL.cs" />
     <Compile Include="BL struct\BL\User\AuthBL.cs" />
     <Compile Include="BL struct\BL\Products\CartBL.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="DBContext\DBContext.cs" />
     <Compile Include="DBContext\LogContext.cs" />
-    <Compile Include="DBContext\UserContext.cs" />
+    <Compile Include="DBContext\MainContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
     <Compile Include="Interfaces\ICart.cs" />
     <Compile Include="Interfaces\IError.cs" />

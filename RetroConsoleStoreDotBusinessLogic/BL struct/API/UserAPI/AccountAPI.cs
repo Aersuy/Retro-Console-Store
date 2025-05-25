@@ -19,7 +19,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         }
         internal string AddProfilePictureAPI(UserSmall model)
         {
-            using(var ctx = new UserContext())
+            using(var ctx = new MainContext())
             {
                 try
                 {
@@ -44,7 +44,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         {
             try
             {
-                using (var ctx = new UserContext())
+                using (var ctx = new MainContext())
                 {
                     var users = ctx.Users.ToList();
                     return users.Select(MapToUserSmall).ToList();

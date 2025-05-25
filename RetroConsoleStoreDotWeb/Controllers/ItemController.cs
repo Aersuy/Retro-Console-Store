@@ -14,7 +14,6 @@ namespace RetroConsoleStoreDotWeb.Controllers
     public class ItemController : BaseController
     {
         private readonly BusinessLogic businessLogic;
-        private readonly ILogin _login;
         private readonly IProductBL _product;
         private readonly IStatistics _statistics;
         // GET: Item
