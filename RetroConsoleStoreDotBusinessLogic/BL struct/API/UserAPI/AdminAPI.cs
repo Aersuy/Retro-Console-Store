@@ -7,7 +7,7 @@ using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.User;
-using RetroConsoleStoreDotDomain.Enums
+using RetroConsoleStoreDotDomain.Enums;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
 {
     internal class AdminAPI
@@ -42,7 +42,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                     };
                     ctx.UserBannedTs.Add(banReport);
                     ctx.SaveChanges();
-                    _login.
+                    
                     return true;
                 }
 
