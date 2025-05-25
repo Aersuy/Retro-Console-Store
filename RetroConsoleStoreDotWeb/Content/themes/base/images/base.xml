@@ -1,0 +1,1092 @@
+﻿<Window x:Class="CPM.WSettings"
+        xmlns:y="CPM.CPM_Core"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:CPM"
+        xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
+        d:DataContext="{d:DesignInstance vm:ViewModelSettings}"
+        FontFamily="Microsoft Sans Serif"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="Settings"
+        Height="1080"
+        Width="1920"
+        Background="Black"
+        Foreground="White"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="720"
+        MinWidth="1280"
+        MouseDown="Cancel_Click"
+        WindowState="Maximized"
+        >
+
+	<!-- ========== ========== ========== ========== ========== WINDOW RESOURCES ========== ========== ========== ========== ========== -->
+	<Window.Resources>
+
+		<Style TargetType="Window">
+			<Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+		</Style>
+		<Style TargetType="{x:Type Control}">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== CheckBox Default ========== ========== ========== ========== ========== -->
+		<!--
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>-->
+		<!-- ========== ========== ========== ========== ========== Label Default ========== ========== ========== ========== ========== -->
+		<!--<Style TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="{StaticResource Gray48}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>-->
+		<!-- ========== ========== ========== ========== ========== Label Content ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type Label}" x:Key="Content">
+			<Setter Property="Background" Value="{StaticResource Gray64}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="Content" Value="0"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== Label Content2 ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type Label}" x:Key="Content2">
+			<Setter Property="Background" Value="{StaticResource Gray80}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Content" Value="0"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== Label Header ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type Label}" x:Key="Header">
+			<Setter Property="Background" Value="{StaticResource Gray32}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Content" Value="0"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== TextBox Default ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Background" Value="{StaticResource Gray80}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="16"/>
+			<EventSetter Event="PreviewMouseUp" Handler="TextBox_MouseUp"/>
+			<!--<EventSetter Event="GotFocus" Handler="TextBox_GotFocus"/>-->
+
+		</Style>
+		<!-- ========== ========== ========== ========== ========== TextBox HotAir ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type TextBox}" x:Key="HotAir">
+			<Setter Property="Background" Value="{StaticResource Gray128}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="16"/>
+			<EventSetter Event="MouseDown" Handler="TextBox_MouseUp"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== TextBox Console ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type TextBox}" x:Key="Console">
+			<Setter Property="Background" Value="Black"/>
+			<Setter Property="Foreground" Value="LimeGreen"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="FontSize" Value="10"/>
+			<Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+			<Setter Property="IsReadOnly" Value="True"/>
+			<Setter Property="TextWrapping" Value="Wrap"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== Button Box32 ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type Button}" x:Key="ButtonBox32">
+			<Setter Property="Background" Value="{StaticResource Gray128}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Width" Value="36"/>
+			<Setter Property="Height" Value="36"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="20"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== Button Box64 ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type Button}" x:Key="ButtonBox64">
+			<Setter Property="Background" Value="{StaticResource Gray96}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="4,4,4,4"/>
+			<Setter Property="Width" Value="64"/>
+			<Setter Property="Height" Value="64"/>
+			<!--<Setter Property="HorizontalAlignment" Value="Center"/>-->
+			<!--<Setter Property="VerticalAlignment" Value="Center"/>-->
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="36"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== CheckBox Default ========== ========== ========== ========== ========== -->
+		<Style TargetType="CheckBox">
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="4,4,4,4"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="Foreground" Value="White"/>
+			<!--<Setter Property="TextBlock.Background" Value="{StaticResource Gray96}"/>-->
+			<!--<Setter Property="TextBlock" Value="{StaticResource Gray96}"/>-->
+			<!--<Setter Property="TextBlock.Foreground" Value="White"/>-->
+			<!--<Setter Property="Background" Value="{StaticResource Gray96}"/>-->
+			<!--<Setter Property="Width" Value="32"/>-->
+		</Style>
+		<!-- ========== ========== ========== ========== ========== ComboBox Int0123 ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type ComboBox}" x:Key="Int0123">
+
+			<Setter Property="Background" Value="{StaticResource Gray96}"/>
+			<!--<Setter Property="Height" Value="32"/>-->
+			<Setter Property="Margin" Value="2,4,2,4"/>
+			<Setter Property="ItemsSource">
+				<Setter.Value>
+					<x:Array Type="{x:Type sys:Int32}">
+						<sys:Int32>0</sys:Int32>
+						<sys:Int32>1</sys:Int32>
+						<sys:Int32>2</sys:Int32>
+						<sys:Int32>3</sys:Int32>
+					</x:Array>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ComboBox">
+						<Grid>
+							<ToggleButton Grid.Column="2" Focusable="false"
+                              IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+								<ToggleButton.Template>
+									<ControlTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="24" />
+											</Grid.ColumnDefinitions>
+											<Border x:Name="Border"  Grid.ColumnSpan="2" Background="{StaticResource Gray80}"
+                                                    BorderBrush="Black" BorderThickness="1" />
+											<Border Grid.Column="0" Margin="1"  Background="{StaticResource Gray96}"
+                                                    BorderBrush="Black" BorderThickness="0,0,1,0" />
+											<Path x:Name="Arrow" Grid.Column="1"  Fill="White" HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+										</Grid>
+										<ControlTemplate.Triggers>
+											<Trigger Property="ToggleButton.IsMouseOver" Value="true">
+												<Setter TargetName="Border" Property="Background" Value="Green" />
+											</Trigger>
+											<Trigger Property="ToggleButton.IsChecked" Value="true">
+												<Setter TargetName="Border" Property="Background" Value="Blue" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</ToggleButton.Template>
+							</ToggleButton>
+							<ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+							<TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+							<Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"
+                                   Focusable="False" PopupAnimation="Slide">
+								<Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}"
+                                       MaxHeight="{TemplateBinding MaxDropDownHeight}">
+									<Border x:Name="DropDownBorder" Background="{StaticResource Gray96}" />
+									<ScrollViewer SnapsToDevicePixels="True">
+										<StackPanel IsItemsHost="True" />
+									</ScrollViewer>
+								</Grid>
+							</Popup>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<EventSetter Event="SelectionChanged" Handler="cboCameraSelect_SelectionChanged"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== ComboBox CamSelect ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type ComboBox}" x:Key="CamSelect">
+			<Setter Property="Margin" Value="2,2,2,2"/>
+			<EventSetter Event="SelectionChanged" Handler="cboCameraSelect_SelectionChanged"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== StackPanel Default ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type StackPanel}">
+			<Setter Property="VerticalAlignment" Value="Top"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== RowDefinition RowTable ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type RowDefinition}" x:Key="RowTable">
+			<Setter Property="Height" Value="36"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== RowDefinition RowTable ========== ========== ========== ========== ========== -->
+		<Style TargetType="{x:Type RowDefinition}" x:Key="RowTable2">
+			<Setter Property="Height" Value="40"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== Other ========== ========== ========== ========== ========== -->
+		<Thickness x:Key="LabelMargin1" Top="0" Left="0" Right="0" Bottom="4"/>
+
+		<Style x:Key="FontMSS">
+			<Setter Property="TextElement.FontFamily" Value="fonts/#Microsoft Sans Serif"/>
+		</Style>
+		<!-- ========== ========== ========== ========== ========== ComboBox Dark ========== ========== ========== ========== ========== -->
+		<Style x:Key="ComboBoxDark" TargetType="{x:Type ComboBox}">
+			<Setter Property="Margin" Value="2,4,2,4"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ComboBox">
+						<Grid>
+							<ToggleButton Grid.Column="2" Focusable="false"
+                                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+								<ToggleButton.Template>
+									<ControlTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="5*" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<Border x:Name="Border"  Grid.ColumnSpan="2" Background="Green"
+                                                    BorderBrush="Black" BorderThickness="1" />
+											<Border Grid.Column="0" Margin="1"  Background="{StaticResource Gray96}"
+                                                    BorderBrush="Black" BorderThickness="0,0,1,0" />
+											<Path x:Name="Arrow" Grid.Column="1"  Fill="Green" HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+										</Grid>
+										<ControlTemplate.Triggers>
+											<Trigger Property="ToggleButton.IsMouseOver" Value="true">
+												<Setter TargetName="Border" Property="Background" Value="Green" />
+											</Trigger>
+											<Trigger Property="ToggleButton.IsChecked" Value="true">
+												<Setter TargetName="Border" Property="Background" Value="Green" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</ToggleButton.Template>
+							</ToggleButton>
+							<ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+							<TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+							<Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"
+                                   Focusable="False" PopupAnimation="Slide">
+								<Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}"
+                                       MaxHeight="{TemplateBinding MaxDropDownHeight}">
+									<Border x:Name="DropDownBorder" Background="Blue" />
+									<ScrollViewer SnapsToDevicePixels="True">
+										<StackPanel IsItemsHost="True" />
+									</ScrollViewer>
+								</Grid>
+							</Popup>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+			</Style.Triggers>
+		</Style>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+	</Window.Resources>
+	<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+
+	<Grid x:Name="GridMain" MouseDown="Cancel_Click" Background="Black" Width="1920" Height="1080" VerticalAlignment="Top">
+
+		<!-- ========== ========== ========== ========== ========== TEMPORARY CAMERA CONFIG ========== ========== ========== ========== ========== -->
+		<!--<Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,180,1400,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Style="{StaticResource RowTable}"/>
+                <RowDefinition Style="{StaticResource RowTable}"/>
+                <RowDefinition Style="{StaticResource RowTable}"/>
+                <RowDefinition Style="{StaticResource RowTable}"/>
+                <RowDefinition Style="{StaticResource RowTable}"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="128"/>
+                <ColumnDefinition Width="192"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="1" Style="{StaticResource Header}" Content="Camera" Grid.ColumnSpan="1"/>
+
+            <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboCameraSelect1" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboCameraSelect2" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboCameraSelect3" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboCameraSelect4" Style="{StaticResource CamSelect}"/>
+        </Grid>-->
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== PROBLEMS ========== ========== ========== ========== ========== -->
+		<Grid x:Name="GridProblems" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,496,760,0">
+			<!--0,536,760,0-->
+			<Grid.RowDefinitions>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+				<RowDefinition Style="{StaticResource RowTable2}"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<!--<ColumnDefinition Width="128"/>-->
+				<ColumnDefinition Width="288"/>
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Row="0" Style="{StaticResource Header}" Content="PROBLEMS:" Grid.ColumnSpan="1"/>
+			<Label Grid.Row="1" Name="labelProblem1" Style="{StaticResource Header}" Foreground="Gray" Content="ONE EXTRA LAYER" Grid.ColumnSpan="1"/>
+			<Label Grid.Row="2" Name="labelProblem2" Style="{StaticResource Header}" Foreground="Gray" Content="TOO MANY LAYERS" Grid.ColumnSpan="1"/>
+			<Label Grid.Row="3" Name="labelProblem3" Style="{StaticResource Header}" Foreground="Gray" Content="." Grid.ColumnSpan="1"/>
+			<Label Grid.Row="4" Name="labelProblem4" Style="{StaticResource Header}" Foreground="Gray" Content="." Grid.ColumnSpan="1"/>
+			<Label Grid.Row="5" Name="labelProblem5" Style="{StaticResource Header}" Foreground="Gray" Content="." Grid.ColumnSpan="1"/>
+
+			<!--<ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboCameraSelect1" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboCameraSelect2" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboCameraSelect3" Style="{StaticResource CamSelect}"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboCameraSelect4" Style="{StaticResource CamSelect}"/>-->
+		</Grid>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== FUNCTIONAL BUTTONS ========== ========== ========== ========== ========== -->
+		<Rectangle x:Name="RectTopPanel" Panel.ZIndex="9" Fill="Transparent" Width="1920" Height="40" VerticalAlignment="Top"/>
+		<Grid Panel.ZIndex="10" x:Name="GridTopPanel" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<!--<ColumnDefinition Width="144"/>-->
+				<ColumnDefinition Width="144"/>
+				<ColumnDefinition Width="144"/>
+				<ColumnDefinition Width="144"/>
+				<ColumnDefinition Width="108"/>
+				<ColumnDefinition Width="108"/>
+
+				<ColumnDefinition Width="624"/>
+
+				<ColumnDefinition Width="108"/>
+				<ColumnDefinition Width="108"/>
+				<ColumnDefinition Width="144"/>
+				<ColumnDefinition Width="144"/>
+				<ColumnDefinition Width="144"/>
+				<!--<ColumnDefinition Width="144"/>-->
+			</Grid.ColumnDefinitions>
+			<Button x:Name="ButtonExit" Grid.Column="10" Style="{StaticResource Function}" Background="Red" Content="EXIT" Tag="EXIT" Click="EXIT_Click"/>
+			<Button x:Name="ButtonLock" Grid.Column="9" Style="{StaticResource Function}" Background="Yellow" Content="LOCK" Tag="LOCK_MAINTENANCE" Foreground="Black" Click="Button_LOCK_Click"/>
+			<!--<Button Grid.Column="4" Style="{StaticResource Function}" Background="DimGray" Content="Maintenance"/>-->
+			<Button x:Name="ButtonAppFolder" Grid.Column="6" Style="{StaticResource Function}" Background="{StaticResource Gray64}" Content="App Folder" Tag="APP_FOLDER" Click="Button_AppFolder_Click" Height="32" Margin="4,4,4,0" VerticalAlignment="Top"/>
+			<ProgressBar Grid.Column="5" Margin="4,4,4,4" Foreground="Green" Value="{Binding Progress, Mode=OneWay}"/>
+
+			<Button x:Name="ButtonLogOut" Grid.Column="4" Style="{StaticResource Function}" Background="Green" Content="LOG OUT" Tag="LOG_OUT" Click="LogOut_Click" Margin="4,4,4,4"/>
+
+			<Button Grid.Column="1" Style="{StaticResource Function}" Background="Blue" Content="PRODUCTION" Tag="PRODUCTION" Click="Production_Click" x:Name="ButtonProduction"/>
+			<Button x:Name="ButtonClose" Grid.Column="0" Style="{StaticResource Function}" Background="DodgerBlue" Content="CLOSE" Tag="CLOSE_M" Click="Button_Close_Click"/>
+			<!--<Button Grid.Column="3" Style="{StaticResource Function}" Background="DimGray" Content="Close" Click="Button_Click"/>
+            <Button Grid.Column="2" Style="{StaticResource Function}" Background="DimGray" Content="Open"/>
+            <ComboBox Grid.Column="1" Margin="4" Background="DimGray" />
+            <Label Grid.Column="0" Content="Zaber" Background="{StaticResource Gray16}" Foreground="LightSkyBlue"/>-->
+
+		</Grid>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== COM PORTS CONFIG ========== ========== ========== ========== ========== -->
+		<!--<Grid VerticalAlignment="Top" HorizontalAlignment="Left" Margin="4,48,4,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="108"/>
+                <ColumnDefinition Width="108"/>
+                <ColumnDefinition Width="108"/>
+                <ColumnDefinition Width="108"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="PLC" Background="{StaticResource Gray16}" Foreground="LightSkyBlue"/>
+            <ComboBox Grid.Column="1" Margin="4" Background="DimGray" />
+            <Button Grid.Column="2" Style="{StaticResource Function}" Background="DimGray" Content="Open"/>
+            <Button Grid.Column="3" Style="{StaticResource Function}" Background="DimGray" Content="Close"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Content="HotAir" Background="{StaticResource Gray16}" Foreground="LightSkyBlue"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="4" Background="DimGray" />
+            <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Function}" Background="DimGray" Content="Open"/>
+            <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource Function}" Background="DimGray" Content="Close"/>
+        </Grid>-->
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== ACTIONS BUTTONS ========== ========== ========== ========== ========== -->
+		<Grid x:Name="GridButtonsZaber" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="632,0,0,344">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="48"/>
+				<RowDefinition Height="48"/>
+				<RowDefinition Height="48"/>
+				<RowDefinition Height="48"/>
+				<RowDefinition Height="64"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Button x:Name="btn_AllAxesHome" Grid.Row="0" Width="224" Style="{StaticResource Function}" FontSize="16" Background="{StaticResource Gray64}"
+                    Content="All Axes Home" Click="AllAxesHome_Click"/>
+			<Button x:Name="btn_WireAutoFixation" Grid.Row="1" Width="224" Style="{StaticResource Function}" FontSize="16" Background="{StaticResource Gray64}"
+                    Foreground="Gray" Content="Wire Auto Fixation"/>
+			<Button x:Name="btn_GoStartPosition" Grid.Row="2" Width="224" Style="{StaticResource Function}" FontSize="16" Background="{StaticResource Gray64}"
+                    Content="Go Start Position" Click="GoStartPosition_Click"/>
+			<Button x:Name="btn_StartWinding" Grid.Row="3" Width="224" Style="{StaticResource Function}" FontSize="16" Background="{StaticResource Gray64}"
+                    Content="Start Winding" Click="StartWinding_Click"/>
+			<Button x:Name="btn_StopAllMotors" Grid.Row="4" Width="224" Style="{StaticResource Function}" FontSize="16" Background="#FFDC0000"
+                    Content="Stop All Motors" Click="Button_AllAxesStop_Click"/>
+		</Grid>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== MOTORS OPERATE ========== ========== ========== ========== ========== -->
+		<!--<Rectangle Panel.ZIndex="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,840,8" Height="320" Width="448" Fill="#7F000000"/>-->
+		<Rectangle Panel.ZIndex="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,760,8" Height="320" Width="528" Fill="#7F000000"
+                   Name="rectMovement" Opacity="50"/>
+		<Grid x:Name="GridMovement" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,760,8" Background="{StaticResource Gray32}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="320"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<!--<ColumnDefinition Width="248"/>-->
+			</Grid.ColumnDefinitions>
+
+			<!-- ========== ========== ========== ========== ========== AXES SETTINGS ========== ========== ========== ========== ========== -->
+			<Grid x:Name="GridMotors" Grid.Column="0" Margin="16,16,16,16">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="96"/>
+					<ColumnDefinition Width="36"/>
+					<ColumnDefinition Width="36"/>
+					<ColumnDefinition Width="96"/>
+				</Grid.ColumnDefinitions>
+
+				<Button Grid.Row="0" Grid.Column="0" Height="40" Margin="8,8,8,8" FontSize="20"
+                        Background="{StaticResource Gray64}" Foreground="White" Content="Absolute" Grid.ColumnSpan="2" Click="ButtonRelative_Click"
+                        Name="ButtonRelative"/>
+				<Button Grid.Row="0" Grid.Column="2" Height="40" Margin="8,8,8,8" FontSize="20"
+                        Background="{StaticResource Gray64}" Foreground="LimeGreen" Content="Relative" Grid.ColumnSpan="2" Click="ButtonAbsolute_Click"
+                        Name="ButtonAbsolute"/>
+
+				<Label Grid.Row="1" Grid.Column="0" Height="36" Margin="4,4,4,4" Content="X, μm"/>
+				<Label Grid.Row="2" Grid.Column="0" Height="36" Margin="4,4,4,4" Content="Y, μm"/>
+				<Label Grid.Row="3" Grid.Column="0" Height="36" Margin="4,4,4,4" Content="A,deg"/>
+
+				<Button Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content="H" Grid.ColumnSpan="2"/>
+				<Button Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content="H" Grid.ColumnSpan="2"/>
+				<Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content="H" Grid.ColumnSpan="2"/>
+
+				<TextBox Grid.Row="1" Grid.Column="3" Height="40" Margin="4,4,4,4" Background="White" Foreground="Black" FontSize="24"
+                         Text="{Binding ValueX}" Name="MoveX" Tag="3"/>
+				<TextBox Grid.Row="2" Grid.Column="3" Height="40" Margin="4,4,4,4" Background="White" Foreground="Black" FontSize="24"
+                         Text="{Binding ValueY}" Name="MoveY" Tag="3"/>
+				<TextBox Grid.Row="3" Grid.Column="3" Height="40" Margin="4,4,4,4" Background="White" Foreground="Black" FontSize="24"
+                         Text="{Binding ValueA}" Name="MoveA" Tag="3"/>
+
+			</Grid>
+			<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+			<!-- ========== ========== ========== ========== ========== AXIS MOVEMENT ========== ========== ========== ========== ========== -->
+			<Grid x:Name="GridAxes" Grid.Column="1" Margin="0,16,16,16">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10.053"/>
+					<RowDefinition Height="61.947"/>
+					<RowDefinition Height="72"/>
+					<RowDefinition Height="72"/>
+					<RowDefinition Height="72"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="72"/>
+					<ColumnDefinition Width="72"/>
+					<ColumnDefinition Width="72"/>
+				</Grid.ColumnDefinitions>
+
+				<!--<RadioButton/>-->
+				<!--<ToggleButton Panel.ZIndex="4" Width="40" Height="40" Margin="28,4,4,28" Background="Red" Content="OFF" Grid.Column="2" Click="ToggleButton_Click" Grid.RowSpan="2"/>-->
+
+				<Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content="↑"
+                        Click="ButtonMoveUp_Click" Margin="4,4,4,4" Grid.RowSpan="2"/>
+				<Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content="↓"
+                        Click="ButtonMoveDown_Click" Margin="4,4,4,4"/>
+
+				<Button Grid.Row="2" Grid.Column="0" Style="{StaticResource ButtonBox64}" Content="←"
+                        Click="ButtonMoveLeft_Click" Margin="4,4,4,4"/>
+				<Button Grid.Row="2" Grid.Column="2" Style="{StaticResource ButtonBox64}" Content="→"
+                        Click="ButtonMoveRight_Click" Margin="4,4,4,4"/>
+				<!--<Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonBox64}" Content=""/>-->
+
+				<Button Grid.Row="4" Grid.Column="0" Style="{StaticResource ButtonBox64}" Content="↺"
+                        Click="ButtonRotateLeft_Click" Margin="4,4,4,4"/>
+				<Button Grid.Row="4" Grid.Column="2" Style="{StaticResource ButtonBox64}" Content="↻"
+                        Click="ButtonRotateRight_Click" Margin="4,4,4,4"/>
+
+			</Grid>
+			<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		</Grid>
+		<Button x:Name="MoveOnOff" Panel.ZIndex="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,780,268" Width="40" Height="40"
+                Background="Red" Content="OFF" Click="ButtonActivateMovement_Click"/>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== Right Side Information ========== ========== ========== ========== ========== -->
+		<StackPanel x:Name="StackPanelRightSide" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,64,8,0" Background="{StaticResource Gray24}">
+
+			<!-- ========== ========== ========== ========== ========== RIGHT SIDE SETTINGS ========== ========== ========== ========== ========== -->
+			<StackPanel x:Name="Parameters" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,8,0" Background="{StaticResource Gray48}">
+
+				<!-- ========== ========== ========== ========== ========== PARAMETERS ========== ========== ========== ========== ========== -->
+				<Grid Name="gridParameters">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="144"/>
+						<ColumnDefinition Width="192"/>
+						<ColumnDefinition Width="36"/>
+						<ColumnDefinition Width="36"/>
+					</Grid.ColumnDefinitions>
+
+					<Label Style="{StaticResource Header}" Content="PARAMETERS" Grid.ColumnSpan="4"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="Speed, rpm"/>
+					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Speed}" Name="Speed" Tag="1"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Pitch, μm"/>
+					<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Pitch}" Name="textBoxPitch" Tag="1"/>
+					<Button Grid.Row="2" Grid.Column="2" Content="&lt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonPitchDown_Click"/>
+					<Button Grid.Row="2" Grid.Column="3" Content="&gt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonPitchUp_Click"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Length, μm"/>
+					<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Length}" Name="Length" Tag="1"/>
+					<Button Grid.Row="3" Grid.Column="2" Content="&lt;" Style="{StaticResource ButtonBox32}"/>
+					<Button Grid.Row="3" Grid.Column="3" Content="&gt;" Style="{StaticResource ButtonBox32}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Width="128" Content="Turns"/>
+					<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Turns}" Name="Turns" Tag="1"/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== SET COORDINATES ========== ========== ========== ========== ========== -->
+				<Grid Name="gridSetCoordinates">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="144"/>
+						<ColumnDefinition Width="56"/>
+						<ColumnDefinition Width="136"/>
+						<ColumnDefinition Width="36"/>
+						<ColumnDefinition Width="36"/>
+					</Grid.ColumnDefinitions>
+
+					<Label Style="{StaticResource Header}" Content="COORDINATES" Grid.ColumnSpan="5"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="Start Position X"/>
+					<Label Grid.Row="1" Grid.Column="1" Content="μm"/>
+					<TextBox Grid.Row="1" Grid.Column="2" Text="{Binding StartPosX}" Name="StartPosX" Tag="1"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Start Position Y"/>
+					<Label Grid.Row="2" Grid.Column="1" Content="μm"/>
+					<TextBox Grid.Row="2" Grid.Column="2" Text="{Binding StartPosY}" Name="StartPosY" Tag="1"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Cut Position Y"/>
+					<Label Grid.Row="3" Grid.Column="1" Content="μm"/>
+					<TextBox Grid.Row="3" Grid.Column="2" Text="{Binding CutPosY}" Name="CutPosY" Tag="1"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Content="Start gap"/>
+					<Label Grid.Row="4" Grid.Column="1" Content="μm"/>
+					<TextBox Grid.Row="4" Grid.Column="2" Text="{Binding StartGap}" Name="StartGap" Tag="1"/>
+					<Button Grid.Row="4" Grid.Column="3" Content="&lt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonStartGapDown_Click"/>
+					<Button Grid.Row="4" Grid.Column="4" Content="&gt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonStartGapUp_Click"/>
+
+					<Label Grid.Row="5" Grid.Column="0" Content="End gap"/>
+					<Label Grid.Row="5" Grid.Column="1" Content="turns"/>
+					<TextBox Grid.Row="5" Grid.Column="2" Text="{Binding EndGap}" Name="EndGap" Tag="1"/>
+					<Button Grid.Row="5" Grid.Column="3" Content="&lt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonEndGapDown_Click"/>
+					<Button Grid.Row="5" Grid.Column="4" Content="&gt;" Style="{StaticResource ButtonBox32}"
+                            Click="ButtonEndGapUp_Click"/>
+
+					<Label Grid.Row="6" Grid.Column="0" Content="Offset A"/>
+					<Label Grid.Row="6" Grid.Column="1" Content="deg"/>
+					<TextBox Grid.Row="6" Grid.Column="2" Text="{Binding OffsetFixA}" Name="OffsetFixA" Tag="1"/>
+					<Button Grid.Row="6" Grid.Column="3" Content="&lt;" Style="{StaticResource ButtonBox32}"/>
+					<Button Grid.Row="6" Grid.Column="4" Content="&gt;" Style="{StaticResource ButtonBox32}"/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== CAMERA CONFIG ========== ========== ========== ========== ========== -->
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="128"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="96"/>
+						<ColumnDefinition Width="64"/>
+					</Grid.ColumnDefinitions>
+
+					<Rectangle Panel.ZIndex="2" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" Fill="#7F000000"/>
+
+					<Label Grid.Column="0" Style="{StaticResource Header}" Content="Camera" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="1" Style="{StaticResource Header}" Content="Resolution" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="2" Style="{StaticResource Header}" Content="Source" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="3" Style="{StaticResource Header}" Content="Active" Grid.ColumnSpan="1"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="Production-L" Name="labelProdL"/>
+					<Label Grid.Row="2" Grid.Column="0" Content="Packing-L" Name="labelPackL"/>
+					<Label Grid.Row="3" Grid.Column="0" Content="Production-R"/>
+					<Label Grid.Row="4" Grid.Column="0" Content="Packing-R"/>
+
+					<ComboBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Int0123}" Tag="0" SelectionChanged="cbo_ResolutionSelectionChanged" Name="cbo_resProdL"/>
+					<ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Int0123}" Tag="1" Name="cbo_resPackL"/>
+					<ComboBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Int0123}" Tag="2"/>
+					<ComboBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Int0123}" Tag="3"/>
+
+					<ComboBox Grid.Row="1" Grid.Column="2" Style="{StaticResource Int0123}" SelectionChanged="ComboBox_SourceSelectionChanged" Tag="0" Name="cbo_sourceProdL"/>
+					<ComboBox Grid.Row="2" Grid.Column="2" Style="{StaticResource Int0123}" SelectionChanged="ComboBox_SourceSelectionChanged" Tag="1" Name="cbo_sourcePackL"/>
+					<ComboBox Grid.Row="3" Grid.Column="2" Style="{StaticResource Int0123}" SelectionChanged="ComboBox_SourceSelectionChanged" Tag="2"/>
+					<ComboBox Grid.Row="4" Grid.Column="2" Style="{StaticResource Int0123}" SelectionChanged="ComboBox_SourceSelectionChanged" Tag="3"/>
+
+					<CheckBox Grid.Row="1" Grid.Column="3" Name="checkBoxCamL1"/>
+					<CheckBox Grid.Row="2" Grid.Column="3" Name="checkBoxCamL2"/>
+					<CheckBox Grid.Row="3" Grid.Column="3"/>
+					<CheckBox Grid.Row="4" Grid.Column="3"/>
+
+					<!--<ComboBox Grid.Row="5" Grid.Column="1"
+                              Width="96"
+                              Background="{StaticResource Gray64}"
+                              Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="{StaticResource Gray64}"/>
+                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                        <ComboBoxItem Content="0"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                    </ComboBox>
+
+                    <ComboBox Grid.Row="5" Grid.Column="2" Width="96"
+                              Style="{StaticResource ComboBoxDark}">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="{StaticResource Gray64}"/>
+                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                        <ComboBoxItem Content="0"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                    </ComboBox>-->
+
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== HOT AIR CONFIG ========== ========== ========== ========== ========== -->
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="144"/>
+						<ColumnDefinition Width="132"/>
+						<ColumnDefinition Width="132"/>
+					</Grid.ColumnDefinitions>
+
+					<!--<Rectangle Panel.ZIndex="2" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="1" Fill="#7F000000"/>-->
+
+
+					<Label Grid.Column="0" Style="{StaticResource Header}" Content="HOT AIR" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="1" Style="{StaticResource Header}" Content="LEFT" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="2" Style="{StaticResource Header}" Content="RIGHT" Grid.ColumnSpan="1"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="ON/OFF"/>
+					<CheckBox Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+					<CheckBox Grid.Row="1" Grid.Column="2" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Set Temperature"/>
+					<TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource HotAir}" Text="setTemp" Tag="2" IsEnabled="False" Foreground="Black"/>
+					<TextBox Grid.Row="2" Grid.Column="2" Text="{Binding SetRightTemp}" Tag="2"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Fan Speed, %"/>
+					<TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource HotAir}" Text="fanSpeed" Tag="2" IsEnabled="False" Foreground="Black"/>
+					<TextBox Grid.Row="3" Grid.Column="2" Text="{Binding SetRightFanSpeed}" Tag="2"/>
+
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== VIEW CALCULATIONS ========== ========== ========== ========== ========== -->
+				<Grid Name="gridCalculations">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<!--<RowDefinition Style="{StaticResource RowTable}"/>-->
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="144"/>
+						<ColumnDefinition Width="132"/>
+						<ColumnDefinition Width="132"/>
+					</Grid.ColumnDefinitions>
+
+					<Label Grid.Column="0" Style="{StaticResource Header}" Content="CALCULATIONS" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="1" Style="{StaticResource Header}" Content="Primary" Grid.ColumnSpan="1"/>
+					<Label Grid.Column="2" Style="{StaticResource Header}" Content="Last" Grid.ColumnSpan="1"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="Length / layer"/>
+					<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content2}" Content="length/layer" Name="textBox_lengthPrimary"/>
+					<Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Content2}" Content="length/layer" Name="label_lengthLast"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Turns / layer"/>
+					<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content2}" Content="{Binding PrimaryLayerTurns}" Name="label_layersPrimary"/>
+					<Label Grid.Row="2" Grid.Column="2" Style="{StaticResource Content2}" Content="{Binding LastLayerTurns}" Name="label_layersLast"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Layers"/>
+					<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content2}" Content="{Binding Layers}" Grid.ColumnSpan="2" Name="label_layers"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Content="CutPositionX"/>
+					<Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Content2}" Content="{Binding CutPosition}" Grid.ColumnSpan="2" Name="label_cutPosition"/>
+
+					<Label Grid.Row="5" Grid.Column="0" Style="{StaticResource Header}" Content="" Grid.ColumnSpan="3"/>
+
+
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+			</StackPanel>
+			<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+			<!-- ========== ========== ========== ========== ========== INFORMATION ========== ========== ========== ========== ========== -->
+			<StackPanel x:Name="Informations" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,0,0" Width="316" Background="{StaticResource Gray48}">
+
+				<!-- ========== ========== ========== ========== ========== PRODUCTION INFORMATION ========== ========== ========== ========== ========== -->
+				<Grid Name="gridProduction">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="124"/>
+						<ColumnDefinition Width="96"/>
+						<ColumnDefinition Width="96"/>
+					</Grid.ColumnDefinitions>
+
+					<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Header}" Content="STATISTICS" Grid.ColumnSpan="1"/>
+					<Label Grid.Row="0" Grid.Column="1" Style="{StaticResource Header}" Content="Today" Grid.ColumnSpan="1"/>
+					<Label Grid.Row="0" Grid.Column="2" Style="{StaticResource Header}" Content="All time" Grid.ColumnSpan="1"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="Executed"/>
+					<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding ExecutedRightToday}"/>
+					<Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding ExecutedRightAllTime}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Packed"/>
+					<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding PackedRightToday}"/>
+					<Label Grid.Row="2" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding PackedRightAllTime}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Defect"/>
+					<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding DefectRightToday}"/>
+					<Label Grid.Row="3" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding DefectRightAllTime}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Content="Efficiency"/>
+					<Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding EfficiencyRightToday}"/>
+					<Label Grid.Row="4" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding EfficiencyRightAllTime}"/>
+
+					<Label Grid.Row="5" Grid.Column="0" Content="Sampled"/>
+					<Label Grid.Row="5" Grid.Column="1" Style="{StaticResource Content}" Content=""/>
+					<Label Grid.Row="5" Grid.Column="2" Style="{StaticResource Content}" Content=""/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== MODBUS REGISTERS ========== ========== ========== ========== ========== -->
+				<Grid Name="gridMBServerRegisters">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="192"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Label Style="{StaticResource Header}" Content="ModBus Registers" Grid.ColumnSpan="2"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="PC"/>
+					<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding StatusPC}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="PLC"/>
+					<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding StatusPLC}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Command"/>
+					<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding CurrentCommand}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Content="Message"/>
+					<Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Content}" Content="{Binding CurrentMessage}"/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== AXES COORDINATES ========== ========== ========== ========== ========== -->
+				<Grid Name="gridCoordinates">
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="124"/>
+						<ColumnDefinition Width="96"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Label Style="{StaticResource Header}" Content="Axes Coordinates" Grid.ColumnSpan="3"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="X , μm"/>
+					<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content}" Grid.ColumnSpan="2" Name="labelPosX" Content="{Binding PositionX, BindsDirectlyToSource=True, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Y , μm"/>
+					<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content}" Grid.ColumnSpan="2" Name="labelPosY" Content="{Binding PositionY, BindsDirectlyToSource=True, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="A , turns"/>
+					<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content}" Name="labelPosA" Content="{Binding PositionA}"/>
+					<Label Grid.Row="3" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding PositionA_deg}"/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== HOTAIR INFO DATA ========== ========== ========== ========== ========== -->
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<!--<RowDefinition Height="32"/>-->
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="124"/>
+						<ColumnDefinition Width="96"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Header}" Content="HotAir"/>
+					<Label Grid.Row="0" Grid.Column="1" Style="{StaticResource Header}" Content="Left" />
+					<Label Grid.Row="0" Grid.Column="2" Style="{StaticResource Header}" Content="Right"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content="State"/>
+					<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content}" Foreground="Black"/>
+					<Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding RightOnOff}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Temp (current)"/>
+					<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content}" Foreground="Black"/>
+					<Label Grid.Row="2" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding RightTemp}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Content="Temp (set)"/>
+					<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content}" Foreground="Black"/>
+					<Label Grid.Row="3" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding RightTempSet}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Content="Fan Speed"/>
+					<Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Content}" Foreground="Black"/>
+					<Label Grid.Row="4" Grid.Column="2" Style="{StaticResource Content}" Content="{Binding RightFanSpeed}"/>
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+				<!-- ========== ========== ========== ========== ========== RESERVED ========== ========== ========== ========== ========== -->
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<RowDefinition Style="{StaticResource RowTable}"/>
+						<!--<RowDefinition Style="{StaticResource RowTable}"/>-->
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="192"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Header}" Content=""/>
+					<Label Grid.Row="0" Grid.Column="1" Style="{StaticResource Header}" Content=""/>
+
+					<Label Grid.Row="1" Grid.Column="0" Content=""/>
+					<!--<Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Content}"/>-->
+
+					<Label Grid.Row="2" Grid.Column="0" Content=""/>
+					<!--<Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Content}"/>-->
+
+					<Label Grid.Row="3" Grid.Column="0" Content=""/>
+					<!--<Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Content}"/>-->
+
+					<Label Grid.Row="4" Grid.Column="0" Content=""/>
+					<!--<Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Content}"/>-->
+				</Grid>
+				<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+			</StackPanel>
+			<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		</StackPanel>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== DEBUGGING CONSOLES ========== ========== ========== ========== ========== -->
+		<TextBox Style="{StaticResource Console}" Margin="8,0,0,8" Text="{Binding GCodeText}" Width="360" Height="1008" x:Name="tb_GCode" FontSize="13"/>
+		<TextBox Style="{StaticResource Console}" Margin="376,0,0,347" Text="{Binding TextPLC}" Width="254" Height="330" x:Name="textBox_ModBus" FontSize="12"/>
+		<!--<TextBox Style="{StaticResource Console}" Margin="658,0,0,641" Text="PLC" Width="180" Height="330" x:Name="textBox_PLC"/>-->
+		<TextBox Style="{StaticResource Console}" Margin="376,0,0,686" Text="{Binding TextError}" Width="254" Height="330" x:Name="textBox_Serial" FontSize="13"/>
+		<TextBox Style="{StaticResource Console}" Margin="376,0,0,8" Text="" Width="254" Height="330" x:Name="textBox_Logs" FontSize="13"/>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== OTHER BUTTONS ========== ========== ========== ========== ========== -->
+		<Grid x:Name="GridButtonsOther" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="632,64,0,344">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="44"/>
+				<RowDefinition Height="20"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Button x:Name="btn_ResetPackedCoils" Grid.Row="0" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset Packed Coils" Click="btn_ResetPackedCoils_Click" />
+			<Button x:Name="btn_ResetCounters" Grid.Row="1" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset Counters" Click="btn_ResetCounters_Click"/>
+			<Button x:Name="btn_ResetHotAir" Grid.Row="2" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset HotAir" Click="btn_ResetHotAir_Click" />
+			<Button x:Name="btn_ResetCamera" Grid.Row="3" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset Camera" Click="Button_ResetCamera_Click" />
+			<Button Grid.Row="4" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset PLC" Name="ButtonResetPLC" Click="Button_ResetPLC_Click" />
+			<Button Grid.Row="5" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Test 1 Data Change" Click="Button_Test1_DataChange_Click"/>
+			<Button Grid.Row="6" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="" />
+			<Button x:Name="btn_DisableZaberstream" Grid.Row="7" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Disable Motors Stream" Click="btn_DisableZaberstream_Click"/>
+			<Button x:Name="btn_ResetAwaitingCoils" Grid.Row="8" Width="224" Style="{StaticResource Function}" FontSize="16"
+                    Content="Reset awaitingCoils" Click="btn_ResetAwaitingCoils_Click"/>
+			<Rectangle Grid.Row="9" Width="224" Height="4" Fill="Green"/>
+		</Grid>
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== CONFIGURATION ========== ========== ========== ========== ========== -->
+		<StackPanel x:Name="CheckBoxes" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,808,584">
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="-empty-" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Dual Head" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Lime"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Awaiting Coils Box" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Awaiting Coils Message" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Left HotAir Auto OFF" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Right HotAir Auto OFF" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Left Head" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Line Width="220" Height="4"/>
+			<CheckBox Content="Right Head" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+		</StackPanel>
+
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+		<!-- ========== ========== ========== ========== ========== CAMERA CONFIG ========== ========== ========== ========== ========== -->
+		<!--<ComboBox HorizontalAlignment="Left" Margin="226,96,0,0" VerticalAlignment="Top" Width="120" x:FieldModifier="public" x:Name="cboCameraSelect1"/>-->
+		<!--<ComboBox HorizontalAlignment="Left" Margin="226,132,0,0" VerticalAlignment="Top" Width="120" x:FieldModifier="public" x:Name="cboCameraSelect2"/>
+        <ComboBox HorizontalAlignment="Left" Margin="226,176,0,0" VerticalAlignment="Top" Width="120" x:FieldModifier="public" x:Name="cboCameraSelect3"/>
+        <ComboBox HorizontalAlignment="Left" Margin="226,226,0,0" VerticalAlignment="Top" Width="120" x:FieldModifier="public" x:Name="cboCameraSelect4"/>-->
+		<!-- ========== ========== ========== ========== ==========  ========== ========== ========== ========== ========== -->
+
+	</Grid>
+</Window>
