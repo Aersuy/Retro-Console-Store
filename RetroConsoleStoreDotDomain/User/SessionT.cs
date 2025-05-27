@@ -15,10 +15,6 @@ namespace RetroConsoleStoreDotDomain.User
         public int SessionID { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string Name { get; set; } // Redundant, delete when doing next db refresh.
-
-        [Required]
         [ForeignKey("User")]
         public int UserID { get; set; }
 

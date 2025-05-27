@@ -102,5 +102,15 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _adminBL.BanUserBl(model);
             return RedirectToAction("AdminUserPage", "Admin");
         }
+        public ActionResult UnBanUser(int userId)
+        {
+            UnbanMessage unbanMessage = new UnbanMessage
+            {
+                UserID = userId,
+                adminB = GetCurrentUser()
+            };
+            _adminBL.UnbanUserBL(unbanMessage);
+            return RedirectToAction("AdminUserPage", "Admin");
+        }
     }
 }

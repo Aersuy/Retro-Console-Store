@@ -120,7 +120,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                         ctx.Sessions.Add(new SessionT()
                         {
                             CookieString = Cookie.Value,
-                            Name = data.UserName,
                             ExpireTime = DateTime.Now.AddMinutes(60),
                             User = userForNewSession
 

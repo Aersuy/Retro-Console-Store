@@ -15,5 +15,6 @@ namespace RetroConsoleStoreDotDomain.Model.User
         public String reason { get; set; }
         public String UserIp { get; set; }
         public int numberOfDays { get; set; }
+   
     }
 }

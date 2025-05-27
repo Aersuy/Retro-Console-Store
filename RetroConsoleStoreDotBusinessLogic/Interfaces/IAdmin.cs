@@ -10,5 +10,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     public interface IAdmin
     {
         bool BanUserBl(BanReport report);
+        bool UnbanUserBL(UnbanMessage message);
     }
 }

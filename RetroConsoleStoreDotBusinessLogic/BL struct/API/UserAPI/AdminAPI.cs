@@ -39,6 +39,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                         DateBanned = DateTime.Now,
                         DateUnbanned = DateTime.Now.AddDays(report.numberOfDays),
                         LastIp = report.UserIp,
+                        roleBeforeBeingBanned = user.level
                     };
                     user.level = URole.Banned;
                     var cookie = _login.GetCookieByUserIdBL(user.id);
@@ -54,6 +55,35 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 _error.ErrorToDatabase(ex, "Error banning user/API Layer");
                 return false;
             }
+        }
+        internal bool UnbanUserAPI(UnbanMessage message)
+        {
+            try
+            {
+                using(var ctx = new MainContext())
+                {
+                    if (message.adminB == null || message.adminB.Role != URole.Administrator)
+                    {
+                        return false;
+                    }
+                    UDBTablecs user = ctx.Users.FirstOrDefault(p => p.id == message.UserID);
+                    UserBannedT banReport = ctx.UserBannedTs.FirstOrDefault(p => p.User.id == message.UserID);
+
+                    if (banReport != null)
+                    {
+                        user.level = banReport.roleBeforeBeingBanned;
+                        ctx.SaveChanges();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error unbanning user");
+                return false ;
+            }
+
         }
         internal UserSmall GetUserByID(int id)
         {

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RetroConsoleStoreDotDomain.Enums;
 using RetroConsoleStoreDotDomain.User;
 
 namespace RetroConsoleStoreDotDomain.Model.User
@@ -22,6 +23,9 @@ namespace RetroConsoleStoreDotDomain.Model.User
 
         [Required]
         public string LastIp { get; set; }
+
+        [Required]
+        public URole roleBeforeBeingBanned { get; set; }
 
         [Required]
         [ForeignKey("AdmBanner")]

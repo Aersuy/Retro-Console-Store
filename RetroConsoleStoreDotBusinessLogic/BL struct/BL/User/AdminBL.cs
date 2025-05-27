@@ -19,5 +19,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         {
             return BanUserAPI(report);
         }
+        public bool UnbanUserBL(UnbanMessage message)
+        {
+            return UnbanUserAPI(message);
+        }
     }
 }
