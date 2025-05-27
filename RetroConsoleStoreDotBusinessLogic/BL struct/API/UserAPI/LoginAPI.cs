@@ -16,7 +16,7 @@ using RetroConsoleStoreHelpers.Interfaces;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
 {
     public class LoginAPI
-    {   
+    {
         private readonly IError _error;
         private readonly ILog _log;
         private readonly IPasswordHash _passWordHash;
@@ -105,25 +105,24 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                     SessionT current;
                     ValidateUserInputAPI(data);
 
-                    current = ctx.Sessions.FirstOrDefault(u => u.Name == data.UserName);
+                    current = ctx.Sessions.FirstOrDefault(u => u.User.username == data.UserName);
+                    
 
                     if (current != null)
                     {
                         current.CookieString = Cookie.Value;
-                        current.ExpireTime = DateTime.Now.AddMinutes(60);
-                        using (var todo = new MainContext())
-                        {
-                            todo.Entry(current).State = EntityState.Modified;
-                            todo.SaveChanges();
-                        }
+                        current.ExpireTime = DateTime.Now.AddMinutes(60);   
+                        ctx.SaveChanges();
                     }
                     else
-                    {
+                    { 
+                        UDBTablecs userForNewSession = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
                         ctx.Sessions.Add(new SessionT()
                         {
                             CookieString = Cookie.Value,
                             Name = data.UserName,
-                            ExpireTime = DateTime.Now.AddMinutes(60)
+                            ExpireTime = DateTime.Now.AddMinutes(60),
+                            User = userForNewSession
 
                         });
                         ctx.SaveChanges();
@@ -147,27 +146,28 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 using (var ctx = new MainContext())
                 {
                     current = ctx.Sessions.FirstOrDefault(u => u.CookieString == cookieText && u.ExpireTime > DateTime.Now);
-                }
-                if (current == null)
-                {
-                    return null;
-                }
-                UDBTablecs user;
-                using (var ctx = new MainContext())
-                {
-                    user = ctx.Users.FirstOrDefault(u => u.username == current.Name);
-                }
 
-                UserSmall userSmall = new UserSmall()
-                {
-                    Email = user.email,
-                    Id = user.id,
-                    Role = user.level,
-                    CartId = user.UserCartID,
-                    Name = user.username,
-                    ImagePath = user.ImagePath
-                };
-                return userSmall;
+                    if (current == null)
+                    {
+                        return null;
+                    }
+
+
+                    UDBTablecs user = ctx.Users.FirstOrDefault(u => u.username == current.User.username);
+                
+                    UserSmall userSmall = new UserSmall()
+                    {
+                        Email = user.email,
+                        Id = user.id,
+                        Role = user.level,
+                        CartId = user.UserCartID,
+                        Name = user.username,
+                        ImagePath = user.ImagePath
+                    };
+                    return userSmall;
+
+                }
+               
             }
             catch (Exception ex)
             {
@@ -191,62 +191,22 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 }
             }
         }
-
-        /// <summary>
-        /// Expires all active sessions for a specific user - used for forced logout (e.g., when banned)
-        /// </summary>
-        /// <param name="username">Username to expire sessions for</param>
-        internal bool ExpireAllUserSessionsAPI(string username)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(username))
-                    return false;
-
-                using (var ctx = new MainContext())
-                {
-                    var sessions = ctx.Sessions.Where(s => s.Name == username && s.ExpireTime > DateTime.Now).ToList();
-                    foreach (var session in sessions)
-                    {
-                        session.ExpireTime = DateTime.Now.AddDays(-1);
-                    }
-                    ctx.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                _error.ErrorToDatabase(ex, "Error expiring all user sessions");
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Expires all active sessions for a specific user by user ID - used for forced logout
-        /// </summary>
-        /// <param name="userId">User ID to expire sessions for</param>
-        internal bool ExpireAllUserSessionsByIdAPI(int userId)
+        internal string GetCookieByUserIdAPI(int userId)
         {
             try
             {
                 using (var ctx = new MainContext())
                 {
-                    // First get the username
-                    var user = ctx.Users.FirstOrDefault(u => u.id == userId);
-                    if (user == null)
-                        return false;
-
-                    // Expire all sessions for this username
-                    return ExpireAllUserSessionsAPI(user.username);
+                    var session = ctx.Sessions.FirstOrDefault(s => s.User.id == userId);
+                    return session.CookieString;
                 }
             }
             catch (Exception ex)
             {
-                _error.ErrorToDatabase(ex, "Error expiring user sessions by ID");
-                return false;
+                _error.ErrorToDatabase(ex, "Issue getting cookie form db using user id");
+                return null;
             }
         }
     }
 }
-   
 

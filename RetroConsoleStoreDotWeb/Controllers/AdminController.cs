@@ -8,6 +8,7 @@ using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStore.BusinessLogic;
 using System.IO;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.User;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -16,6 +17,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly BusinessLogic businessLogic;
         private readonly IProductBL _productBL;
         private readonly IAccountBL _accountBL;
+        private readonly IAdmin _adminBL;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
@@ -23,7 +25,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             businessLogic = new BusinessLogic();
             _productBL = businessLogic.GetProductBL();
             _accountBL = businessLogic.GetAccountAPI();
-            
+            _adminBL = businessLogic.GetAdminBl();
         }
         [HttpGet]
         public ActionResult AddProduct()
@@ -84,6 +86,21 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var userModel = _accountBL.GetUsersBL();
             
             return View(userModel);
+        }
+        [HttpPost]
+        public ActionResult BanUser(int userId, string reason, int days)
+        {
+            BanReport model = new BanReport
+            {
+                UserID = userId,
+                reason = reason,
+                UserIp = Request.UserHostAddress,
+                adminB = GetCurrentUser(),
+                numberOfDays = days
+            };
+
+            _adminBL.BanUserBl(model);
+            return RedirectToAction("AdminUserPage", "Admin");
         }
     }
 }

@@ -142,7 +142,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                         if (userSt == null)
                         {
                             userSt = new UserStatsT
-                            {
+                            {   UserId = user.Id,
                                 totalPagesViewed = 0,
                                 totalProductsAddedToCart = 0,
                                 totalSpent = 0,

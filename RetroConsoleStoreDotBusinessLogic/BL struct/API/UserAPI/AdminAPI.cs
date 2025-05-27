@@ -10,7 +10,7 @@ using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreDotDomain.Enums;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
 {
-    internal class AdminAPI
+    public class AdminAPI
     {
         private readonly IError _error;
         private readonly ILogin _login;
@@ -26,7 +26,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 using (var ctx = new MainContext())
                 {
                     UDBTablecs admin = ctx.Users.FirstOrDefault(p => p.id == report.adminB.Id);
-                    UDBTablecs user = ctx.Users.FirstOrDefault(p => p.id == report.userBanned.Id);
+                    UDBTablecs user = ctx.Users.FirstOrDefault(p => p.id == report.UserID);
                     if (admin == null || admin.level != URole.Administrator) 
                     {
                         return false;
@@ -40,9 +40,11 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                         DateUnbanned = DateTime.Now.AddDays(report.numberOfDays),
                         LastIp = report.UserIp,
                     };
+                    user.level = URole.Banned;
+                    var cookie = _login.GetCookieByUserIdBL(user.id);
+                    _login.ExpireSessionByCookieDB(cookie);
                     ctx.UserBannedTs.Add(banReport);
-                    ctx.SaveChanges();
-                    
+                    ctx.SaveChanges();    
                     return true;
                 }
 
@@ -52,7 +54,6 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 _error.ErrorToDatabase(ex, "Error banning user/API Layer");
                 return false;
             }
-            return true;
         }
         internal UserSmall GetUserByID(int id)
         {

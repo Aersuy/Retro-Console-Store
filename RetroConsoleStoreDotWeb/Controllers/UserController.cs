@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
+using RetroConsoleStoreDotBusinessLogic.Attributes;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
@@ -15,6 +16,7 @@ using RetroConsoleStoreDotWeb.ViewModel;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
+    [User]
     public class UserController : BaseController
     {
         private readonly BusinessLogic businessLogic;

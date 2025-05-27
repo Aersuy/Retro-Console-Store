@@ -21,6 +21,7 @@
             <table class="user-table">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -32,14 +33,51 @@
                     @foreach (var user in Model)
                     {
                         <tr>
+                            <td>@user.Id</td>
                             <td>@user.Name</td>
                             <td>@user.Email</td>
                             <td>@user.Role</td>
                             <td>
+                                @if (user.Role == RetroConsoleStoreDotDomain.Enums.URole.Banned)
+                                {
+                                    <span class="status-badge banned">Banned</span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge active">Active</span>
+                                }
                             </td>
                             <td class="action-buttons">
                                 <a href="@Url.Action("EditUser", "Admin")" class="action-button edit">Edit</a>
                                 <a href="@Url.Action("UserDetails", "Admin")" class="action-button view">View</a>
+                                @if (user.Role != RetroConsoleStoreDotDomain.Enums.URole.Banned && user.Role != RetroConsoleStoreDotDomain.Enums.URole.Administrator)
+                                {
+                                    <div class="ban-form-container">
+                                        <form method="post" action="@Url.Action("BanUser", "Admin")" class="ban-form">
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <div class="ban-inputs">
+                                                <input type="text" name="reason" placeholder="Ban reason" required class="ban-reason-input" />
+                                                <select name="days" class="ban-duration-select" required>
+                                                    <option value="">Select duration</option>
+                                                    <option value="1">1 Day</option>
+                                                    <option value="3">3 Days</option>
+                                                    <option value="7">1 Week</option>
+                                                    <option value="30">1 Month</option>
+                                                    <option value="0">Permanent</option>
+                                                </select>
+                                                <button type="submit" class="action-button ban">Ban</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                }
+                                @if (user.Role == RetroConsoleStoreDotDomain.Enums.URole.Banned)
+                                {
+                                    <form method="post" action="@Url.Action("Unbanning", "Admin")" style="display: inline;">
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="userName" value="@user.Name" />
+                                        <button type="submit" class="action-button unban" onclick="return confirm('Are you sure you want to unban user @user.Name?')">Unban</button>
+                                    </form>
+                                }
                             </td>
                         </tr>
                     }
@@ -132,7 +170,7 @@
             border: 1px solid #4caf50;
         }
 
-        .status-badge.inactive {
+        .status-badge.banned {
             background-color: #2a1144;
             color: #f44336;
             border: 1px solid #f44336;
@@ -141,6 +179,7 @@
     .action-buttons {
         display: flex;
         gap: 8px;
+        align-items: center;
     }
 
     .action-button {
@@ -149,6 +188,9 @@
         text-decoration: none;
         font-size: 0.9rem;
         transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-family: 'VT323', monospace;
     }
 
         .action-button.edit {
@@ -163,13 +205,13 @@
             border: 1px solid #2196f3;
         }
 
-        .action-button.deactivate {
+        .action-button.ban {
             background-color: #2a1144;
             color: #f44336;
             border: 1px solid #f44336;
         }
 
-        .action-button.activate {
+        .action-button.unban {
             background-color: #2a1144;
             color: #4caf50;
             border: 1px solid #4caf50;
@@ -204,5 +246,51 @@
 
     .page-info {
         color: #ffcc33;
+    }
+
+    /* Ban Form Styles */
+    .ban-form-container {
+        margin-top: 10px;
+    }
+
+    .ban-form {
+        background-color: #1a0b2e;
+        border: 2px solid #e6007e;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .ban-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .ban-reason-input,
+    .ban-duration-select {
+        padding: 6px 8px;
+        background-color: #2a1144;
+        border: 1px solid #e6007e;
+        color: #ffffff;
+        font-family: 'VT323', monospace;
+        font-size: 1rem;
+        border-radius: 3px;
+    }
+
+    .ban-reason-input::placeholder {
+        color: #999;
+    }
+
+    .ban-reason-input:focus,
+    .ban-duration-select:focus {
+        outline: none;
+        border-color: #ffcc33;
+        box-shadow: 0 0 5px rgba(255, 204, 51, 0.3);
+    }
+
+    .ban-duration-select option {
+        background-color: #2a1144;
+        color: #ffffff;
     }
 </style>

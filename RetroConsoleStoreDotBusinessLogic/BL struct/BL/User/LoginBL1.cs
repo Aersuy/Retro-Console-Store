@@ -48,5 +48,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             ExpireSessionByCookieDBAPI(cookieString);
         }
+        public string GetCookieByUserIdBL (int userId)
+        {
+            return GetCookieByUserIdAPI(userId);
+        }
     }
 }

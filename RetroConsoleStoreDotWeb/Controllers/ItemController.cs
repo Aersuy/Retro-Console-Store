@@ -8,9 +8,11 @@ using RetroConsoleStoreDotWeb.Models.Articol;
 using RetroConsoleStoreDotDomain.Model.Product;
 using System.Web.UI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotBusinessLogic.Attributes;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
+    [User]
     public class ItemController : BaseController
     {
         private readonly BusinessLogic businessLogic;

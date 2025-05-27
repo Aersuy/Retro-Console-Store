@@ -26,6 +26,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly IProductBL _productBL;
         private readonly IAccountBL _accountBL;
         private readonly ICart _cart;
+        private readonly IAdmin _adminBL;
 
         public BusinessLogic()
         {
@@ -37,7 +38,8 @@ namespace RetroConsoleStore.BusinessLogic
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
             _productBL = new ProductBL(_errorBL,_loggingBL);
             _accountBL = new AccountBL(_errorBL);
-            _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);    
+            _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
+            _adminBL = new AdminBL(_errorBL, _loginBL);
         }
 
         public IAuth GetAuthBL()
@@ -63,6 +65,10 @@ namespace RetroConsoleStore.BusinessLogic
         public ICart GetCartBL()
         {
             return _cart;
+        }
+        public IAdmin GetAdminBl()
+        {
+            return _adminBL;
         }
     }
 }

@@ -16,12 +16,20 @@ namespace RetroConsoleStoreDotDomain.User
 
         [Required]
         [StringLength(30)]
-        public string Name { get; set; }
+        public string Name { get; set; } // Redundant, delete when doing next db refresh.
+
+        [Required]
+        [ForeignKey("User")]
+        public int UserID { get; set; }
 
         [Required]
         public string CookieString { get; set; }
 
         [Required]
         public DateTime ExpireTime { get; set; }
+
+
+        // Navigation property
+        public virtual UDBTablecs User { get; set; }
     }
 }

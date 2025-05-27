@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotDomain.Model.User;
+using RetroConsoleStoreDotDomain.Enums;
 namespace RetroConsoleStoreDotBusinessLogic.Attributes
 {
     public class UserAttribute : ActionFilterAttribute
@@ -30,7 +31,16 @@ namespace RetroConsoleStoreDotBusinessLogic.Attributes
                      });
                     return;
                 }
+                if (user.Role == URole.Banned)
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                       new RouteValueDictionary {
+                        {"controller","Error"},
+                        {"action", "Banned" },
+                        {"errorMessage", "Banned" }
+                    });
                 }
+            }
             else
             {
                 filterContext.Result = new RedirectToRouteResult(

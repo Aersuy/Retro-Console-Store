@@ -268,6 +268,7 @@
     <Content Include="Vendors\datables\jquery.dataTables.min.js" />
     <Content Include="Vendors\datables\jquery.dataTables_themeroller.css" />
     <Content Include="Web.config" />
+    <Content Include="Views\Error\Banned.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -281,6 +282,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
