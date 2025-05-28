@@ -8,10 +8,18 @@ using System.Web.Routing;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.Enums;
+using RetroConsoleStoreDotBusinessLogic.Interfaces;
 namespace RetroConsoleStoreDotBusinessLogic.Attributes
 {
     public class UserAttribute : ActionFilterAttribute
-    {
+    {   private readonly IAdmin _admin;
+        private readonly ILogin _login;
+        public UserAttribute()
+        { var businessLogic = new BusinessLogic();
+            _admin = businessLogic.GetAdminBl();
+            _login = businessLogic.GetLoginBL();
+            
+        }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var authCookie = filterContext.HttpContext.Request.Cookies["X-KEY"];
@@ -19,7 +27,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Attributes
 
             if (authCookie != null)
                 {
-                  UserSmall user = businessLogic.GetLoginBL().GetUserByCookie(authCookie.Value);
+                  UserSmall user = _login.GetUserByCookie(authCookie.Value);
                 if (user == null)
                     {
                     filterContext.Result = new RedirectToRouteResult(
@@ -33,12 +41,18 @@ namespace RetroConsoleStoreDotBusinessLogic.Attributes
                 }
                 if (user.Role == URole.Banned)
                 {
-                    filterContext.Result = new RedirectToRouteResult(
+                    _admin.AutoUnbanBL(user);
+                    user = _login.GetUserByCookie(authCookie.Value);
+                    if (user.Role == URole.Banned)
+                    {
+                        filterContext.Result = new RedirectToRouteResult(
                        new RouteValueDictionary {
                         {"controller","Error"},
                         {"action", "Banned" },
                         {"errorMessage", "Banned" }
                     });
+                    }
+                    
                 }
             }
             else

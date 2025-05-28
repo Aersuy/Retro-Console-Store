@@ -1,4 +1,14 @@
-﻿<div class="container">
+﻿﻿@using RetroConsoleStoreDotDomain.Model.User
+@using RetroConsoleStoreDotDomain.Enums
+
+@{
+    // Extract user session logic for better maintainability
+    var currentUser = System.Web.HttpContext.Current.Session["__SessionObject"] as UserSmall;
+    var isLoggedIn = (string)Session["LoginStatus"] == "login";
+    var isAdmin = currentUser != null && (currentUser.Role == URole.Administrator || currentUser.Role == URole.Moderator);
+}
+
+<div class="container">
     <a class="navbar-brand retro-font-pixel" href="@Url.Action("Index","Home")">RetroConsoleStore</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,28 +23,36 @@
             <li><a class="nav-link" href="@Url.Action("Catalog","Item")">Catalogue</a></li>
             <li><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
             <li><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+            
+            @* Admin menu - only show for administrators and moderators *@
+            @if (isAdmin)
+            {
+                <li><a class="nav-link" href="@Url.Action("AdminUserPage","Admin")">Admin</a></li>
+            }
+            
             <li><a class="nav-link" href="@Url.Action("Auth","Auth")">Register</a></li>
-            @if ((string)Session["LoginStatus"] == "login")
+            
+            @if (isLoggedIn)
             {
                 <li>
                     <a class="nav-link" href="@Url.Action("Logout", "Auth")">Logout</a>
                 </li>
             }
-            @if ((string)Session["LoginStatus"] != "login")
+            @if (!isLoggedIn)
             {
                 <li><a class="nav-link" href="@Url.Action("Login","Auth")">Login</a></li>
             }
-            
+
         </ul>
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
             <li>
                 <a class="nav-link" href="@Url.Action("UserPage","User")">
                     @{
-                        var user = System.Web.HttpContext.Current.Session["__SessionObject"] as RetroConsoleStoreDotDomain.Model.User.UserSmall;
-                        if (user != null && !string.IsNullOrEmpty(user.ImagePath))
+                        // Keep the exact same user image logic
+                        if (currentUser != null && !string.IsNullOrEmpty(currentUser.ImagePath))
                         {
-                            <img src="@Url.Content(user.ImagePath)" alt="Profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #e6007e;" />
+                            <img src="@Url.Content(currentUser.ImagePath)" alt="Profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #e6007e;" />
                         }
                         else
                         {
@@ -42,7 +60,7 @@
                         }
                     }
                 </a>
-        <li><a class="nav-link" href="@Url.Action("Cart","User")"><img src="/Content/images/cart.svg"></a></li>
+            <li><a class="nav-link" href="@Url.Action("Cart","User")"><img src="/Content/images/cart.svg"></a></li>
         </ul>
     </div>
 </div>

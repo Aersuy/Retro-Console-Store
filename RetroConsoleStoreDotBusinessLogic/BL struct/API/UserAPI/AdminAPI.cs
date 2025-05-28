@@ -14,10 +14,12 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
     {
         private readonly IError _error;
         private readonly ILogin _login;
-        public AdminAPI(IError error, ILogin login)
+        private readonly IMessaging _messaging;
+        public AdminAPI(IError error, ILogin login, IMessaging messaging)
         {
             _error = error;
             _login = login;
+            _messaging = messaging;
         }
         internal bool BanUserAPI(BanReport report)
         {
@@ -45,7 +47,8 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                     var cookie = _login.GetCookieByUserIdBL(user.id);
                     _login.ExpireSessionByCookieDB(cookie);
                     ctx.UserBannedTs.Add(banReport);
-                    ctx.SaveChanges();    
+                    ctx.SaveChanges();
+                    _messaging.SendBanEmailBL(report);
                     return true;
                 }
 
@@ -72,6 +75,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                     if (banReport != null)
                     {
                         user.level = banReport.roleBeforeBeingBanned;
+                        ctx.UserBannedTs.Remove(banReport);
                         ctx.SaveChanges();
                         return true;
                     }
@@ -85,13 +89,74 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
             }
 
         }
+        internal bool AutoUnbanAPI(UserSmall user)
+        {
+            try
+            {
+                if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user));
+                }
+                using (var ctx = new MainContext())
+                {
+                    UDBTablecs userM = ctx.Users.FirstOrDefault(p => p.id == user.Id);
+                    UserBannedT banReport = ctx.UserBannedTs.FirstOrDefault(p => p.User.id == user.Id);
+                    if (banReport == null || userM == null)
+                    {
+                        {
+                            throw new ArgumentNullException();
+                        }
+                    }
+                    if (banReport.DateUnbanned < DateTime.Now)
+                    {
+                        userM.level = banReport.roleBeforeBeingBanned;
+                        ctx.UserBannedTs.Remove(banReport);
+                        ctx.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error auto unbanning user");
+                return false;
+            }
+        }
         internal UserSmall GetUserByID(int id)
         {
             return new UserSmall();
         }
-        internal bool UpdateUser(UserSmall user)
-        {
-            return true;
+        internal bool UpdateUserAPI(UserSmall user)
+        {  try
+            {
+                if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user));
+                }
+                using (var ctx = new MainContext())
+                {
+                    UDBTablecs userM = ctx.Users.FirstOrDefault(p => p.id == user.Id);
+                    if (userM == null)
+                    {
+                        throw new ArgumentNullException(nameof(userM));
+                    }
+                    userM.username = user.Name;
+                    userM.email = user.Email;
+                    userM.ImagePath = user.ImagePath;
+                    userM.level = user.Role;
+                    ctx.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error updating user");
+                return false;
+            }
         }
     }
 }

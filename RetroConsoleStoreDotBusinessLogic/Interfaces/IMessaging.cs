@@ -7,11 +7,8 @@ using RetroConsoleStoreDotDomain.Model.User;
 
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
-    public interface IAdmin
+    public interface IMessaging
     {
-        bool BanUserBl(BanReport report);
-        bool UnbanUserBL(UnbanMessage message);
-        bool AutoUnbanBL(UserSmall user);
-        bool UpdateUserBL(UserSmall user);
+        bool SendBanEmailBL(BanReport report);
     }
 }

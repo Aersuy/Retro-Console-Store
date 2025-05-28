@@ -29,7 +29,6 @@ namespace RetroConsoleStoreDotBusinessLogic.DBModel
             modelBuilder.Entity<UserCartT>().HasKey(k => k.UserID);
             modelBuilder.Entity<UDBTablecs>().HasOptional(e => e.Cart)
                 .WithRequired(a => a.User);
-            
             base.OnModelCreating(modelBuilder);
         }
     }

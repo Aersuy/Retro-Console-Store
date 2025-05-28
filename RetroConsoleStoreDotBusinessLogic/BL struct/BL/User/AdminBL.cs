@@ -11,7 +11,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
 {
     public class AdminBL : AdminAPI, IAdmin
     {
-        public AdminBL(IError error, ILogin login) : base(error,login)
+        public AdminBL(IError error, ILogin login,IMessaging messaging) : base(error,login,messaging)
         {
         }
 
@@ -22,6 +22,14 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         public bool UnbanUserBL(UnbanMessage message)
         {
             return UnbanUserAPI(message);
+        }
+        public bool AutoUnbanBL(UserSmall user)
+        {
+            return AutoUnbanAPI(user);
+        }
+        public bool UpdateUserBL(UserSmall user)
+        {
+            return UpdateUserAPI(user);
         }
     }
 }

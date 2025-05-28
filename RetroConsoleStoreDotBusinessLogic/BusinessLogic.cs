@@ -23,6 +23,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly IStatistics _statisticsBL;
         private readonly IPasswordHash _passwordHash;
         private readonly ILog _loggingBL;
+        private readonly IMessaging _messaging;
         private readonly IProductBL _productBL;
         private readonly IAccountBL _accountBL;
         private readonly ICart _cart;
@@ -36,10 +37,11 @@ namespace RetroConsoleStore.BusinessLogic
             _passwordHash = new PasswordHash();
             _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL,_statisticsBL);
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
+            _messaging = new MessaginBL(_errorBL);
             _productBL = new ProductBL(_errorBL,_loggingBL);
             _accountBL = new AccountBL(_errorBL);
             _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
-            _adminBL = new AdminBL(_errorBL, _loginBL);
+            _adminBL = new AdminBL(_errorBL, _loginBL,_messaging);
         }
 
         public IAuth GetAuthBL()

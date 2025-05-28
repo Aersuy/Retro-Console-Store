@@ -9,9 +9,11 @@ using RetroConsoleStore.BusinessLogic;
 using System.IO;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
+using RetroConsoleStoreDotBusinessLogic.Attributes;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
+    [Admin]
     public class AdminController : BaseController
     {   
         private readonly BusinessLogic businessLogic;
