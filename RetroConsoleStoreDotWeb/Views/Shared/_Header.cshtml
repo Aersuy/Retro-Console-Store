@@ -27,7 +27,7 @@
             @* Admin menu - only show for administrators and moderators *@
             @if (isAdmin)
             {
-                <li><a class="nav-link" href="@Url.Action("AdminUserPage","Admin")">Admin</a></li>
+                <li><a class="nav-link" href="@Url.Action("DashBoard","Admin")">Admin</a></li>
             }
             
             <li><a class="nav-link" href="@Url.Action("Auth","Auth")">Register</a></li>

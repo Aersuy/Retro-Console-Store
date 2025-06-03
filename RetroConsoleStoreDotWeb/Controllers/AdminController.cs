@@ -70,15 +70,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             ViewBag.Message = _productBL.AddProduct(ProductModelBack);
             return View(ProductModelBack);
         }
-        public ActionResult EditProduct()
-        {
-            return View();
-        }
-        public ActionResult ManageUsers()
-        {
-            return View();
-        }
-        public ActionResult ManageRoles()
+        public ActionResult DashBoard()
         {
             return View();
         }
@@ -113,6 +105,70 @@ namespace RetroConsoleStoreDotWeb.Controllers
             };
             _adminBL.UnbanUserBL(unbanMessage);
             return RedirectToAction("AdminUserPage", "Admin");
+        }
+        
+        public ActionResult ManageProducts()
+        {
+
+            List<ProductModelBack> products = _productBL.GetProductModelBacks();
+
+            List<Product> product2 = new List<Product> { };
+
+            foreach (var item in products)
+            {
+                Product product = new Product();
+                product.Name = item.Name;
+                product.TimeCreated = item.TimeCreated;
+                product.Price = item.Price;
+                product.ImagePath = item.ImagePath;
+                product.Id = item.Id;
+                product.Brand = item.Brand;
+                product.StockQuantity = item.StockQuantity;
+                product.Status = item.Status;
+                product.YearReleased = item.YearReleased;
+
+                if (product.ImagePath == null)
+                {
+                    product.ImagePath = "/content/images/Products/missing-picture-page-website-design-600nw-1552421075.webp";
+                }
+                product2.Add(product);
+            }
+            return View(products);
+        }
+
+        [HttpGet]
+        public ActionResult EditProduct(int id)
+        {
+            ProductModelBack prod = _productBL.GetProduct(id);
+            var product = new Product();
+
+            product.Id = prod.Id;
+            product.Name = prod.Name;
+            product.Description = prod.Description;
+            if (prod.ImagePath != null)
+            {
+                product.ImagePath = prod.ImagePath;
+            }
+            else
+            {
+                product.ImagePath = "/Content/images/missing-picture-page-website-design-600nw-1552421075";
+            }
+            product.Price = prod.Price;
+            product.Brand = prod.Brand;
+            product.YearReleased = prod.YearReleased;
+            product.StockQuantity = prod.StockQuantity;
+
+            return View(product);
+        }
+        [HttpPost]
+        public ActionResult EditProduct(ProductModelBack product)
+        {
+            _productBL.UpdateProduct(product);
+            return View();
+        }
+        public ActionResult ProductDetails(int id)
+        {
+            return View();
         }
     }
 }

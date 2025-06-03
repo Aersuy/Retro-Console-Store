@@ -26,7 +26,7 @@
                         <span class="price-tag">$@Model.product.Price.ToString("0.00")</span>
                     </div>
 
-                    <!-- ✅ REVIEW SUMMARY SECTION -->
+                  
                     @if (Model.reviews != null && Model.reviews.Any())
                     {
                         var averageRating = Model.reviews.Average(r => r.Rating);
@@ -103,11 +103,10 @@
             </div>
         </div>
 
-        <!-- ✅ COMPREHENSIVE REVIEW SECTION -->
+    
         <div class="row mt-5">
             <div class="col-12">
-                <div class="reviews-section retro-card">
-                    <!-- Review Header -->
+                <div class="reviews-section retro-card">                  
                     <div class="review-header">
                         <h3 class="retro-font-pixel">🎮 Player Reviews</h3>
                         <div class="review-tabs">
@@ -117,7 +116,6 @@
                         </div>
                     </div>
 
-                    <!-- Write Review Section -->
                     <div class="write-review-section mb-4">
                         <h4 class="retro-font-8bit">✍️ Share Your Experience</h4>
 
@@ -174,7 +172,6 @@
                         }
                     </div>
 
-                    <!-- Reviews List -->
                     <div class="reviews-list">
                         <div class="reviews-container">
                             @if (Model.reviews != null && Model.reviews.Any())
@@ -234,7 +231,6 @@
 </div>
 
 <style>
-    /* Review Section Styles */
     .reviews-section {
         background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
         border: 2px solid #e6007e;

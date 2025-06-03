@@ -269,6 +269,8 @@
     <Content Include="Vendors\datables\jquery.dataTables_themeroller.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Error\Banned.cshtml" />
+    <Content Include="Views\Admin\DashBoard.cshtml" />
+    <Content Include="Views\Admin\ManageProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

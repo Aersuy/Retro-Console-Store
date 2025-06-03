@@ -2,98 +2,276 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit Product";
 }
-@model RetroConsoleStoreDotWeb.Models.Articol.Product
-<div class="catalogue-container">
-    <div class="catalogue-content">
-        <h2 class="retro-font-pixel">Edit Product</h2>
+@model RetroConsoleStoreDotDomain.Model.Product.ProductModelBack
 
-        <div class="famicom-controller-ports">
-            <span></span>
-            <span></span>
+<div class="edit-product-container">
+    <div class="page-header">
+        <h1 class="retro-font-pixel">✏️ Edit Product</h1>
+        <div class="header-actions">
+            <a href="@Url.Action("ManageProducts", "Admin")" class="action-btn back-btn">
+                <span class="btn-icon">←</span>
+                Back to Products
+            </a>
+            <a href="@Url.Action("Product", "Item", new { id = Model.Id })" class="action-btn view-btn" target="_blank">
+                <span class="btn-icon">👁️</span>
+                Preview
+            </a>
+        </div>
+    </div>
+
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    <form method="post" action="@Url.Action("EditProduct", "Admin")" enctype="multipart/form-data" class="edit-form">
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-container">
+            <!-- Image Section -->
+            <div class="image-section retro-card">
+                <div class="section-header">
+                    <h3 class="retro-font-8bit">📸 Product Image</h3>
+                </div>
+                
+                <div class="current-image-container">
+                    <div class="image-preview">
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                        {
+                            <img src="@Model.ImagePath" alt="Current product image" class="current-product-image">
+                        }
+                        else
+                        {
+                            <div class="no-image-placeholder">
+                                <span class="placeholder-icon">📦</span>
+                                <p>No image available</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="image-upload-section">
+                    <label for="ImageFile" class="upload-label retro-font-8bit">
+                        📁 Choose New Image
+                    </label>
+                    <input type="file" id="ImageFile" name="ImageFile" accept="image/*" class="file-input">
+                    <p class="upload-note">Leave empty to keep current image</p>
+                    <div class="upload-info">
+                        <small>Recommended: 800x600px, JPG/PNG, Max 5MB</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Section -->
+            <div class="details-section retro-card">
+                <div class="section-header">
+                    <h3 class="retro-font-8bit">📝 Product Details</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="Name" class="form-label">Product Name *</label>
+                        @Html.TextBoxFor(m => m.Name, new { 
+                            @class = "form-input", 
+                            required = "required",
+                            placeholder = "Enter product name"
+                        })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="Description" class="form-label">Description *</label>
+                        @Html.TextAreaFor(m => m.Description, new { 
+                            @class = "form-textarea", 
+                            required = "required",
+                            placeholder = "Describe this retro gaming product...",
+                            rows = "6"
+                        })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Brand" class="form-label">Brand *</label>
+                        @Html.TextBoxFor(m => m.Brand, new { 
+                            @class = "form-input", 
+                            required = "required",
+                            placeholder = "e.g. Nintendo, Sega"
+                        })
+                        @Html.ValidationMessageFor(m => m.Brand, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YearReleased" class="form-label">Year Released *</label>
+                        @Html.TextBoxFor(m => m.YearReleased, new { 
+                            @class = "form-input", 
+                            type = "number",
+                            required = "required",
+                            min = "1970",
+                            max = DateTime.Now.Year.ToString(),
+                            placeholder = "e.g. 1985"
+                        })
+                        @Html.ValidationMessageFor(m => m.YearReleased, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Price" class="form-label">Price ($) *</label>
+                        @Html.TextBoxFor(m => m.Price, new { 
+                            @class = "form-input price-input", 
+                            type = "number",
+                            step = "0.01",
+                            min = "0",
+                            required = "required",
+                            placeholder = "0.00"
+                        })
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StockQuantity" class="form-label">Stock Quantity *</label>
+                        @Html.TextBoxFor(m => m.StockQuantity, new { 
+                            @class = "form-input stock-input", 
+                            type = "number",
+                            min = "0",
+                            required = "required",
+                            placeholder = "0"
+                        })
+                        @Html.ValidationMessageFor(m => m.StockQuantity, "", new { @class = "validation-error" })
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="Status" class="form-label">Status *</label>
+                        @Html.DropDownListFor(m => m.Status, new SelectList(new[] {
+                            new { Value = "Active", Text = "✅ Active - Available for purchase" },
+                            new { Value = "Inactive", Text = "⏸️ Inactive - Hidden from store" },
+                            new { Value = "Discontinued", Text = "🚫 Discontinued - No longer available" },
+                            new { Value = "Out of Stock", Text = "📦 Out of Stock - Temporarily unavailable" }
+                        }, "Value", "Text", Model.Status), new { @class = "form-select" })
+                        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "validation-error" })
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <form method="post" action="@Url.Action("EditProduct", "Admin")" enctype="multipart/form-data">
-            @Html.HiddenFor(m => m.Id)
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button type="submit" class="submit-btn retro-font-8bit">
+                <span class="btn-icon">💾</span>
+                Save Changes
+            </button>
+            <a href="@Url.Action("ManageProducts", "Admin")" class="cancel-btn retro-font-8bit">
+                <span class="btn-icon">❌</span>
+                Cancel
+            </a>
+        </div>
+    </form>
 
-            <div class="product-edit-grid">
-                <div class="product-image-section">
-                    <div class="current-image-container">
-                        <h3 class="retro-font-8bit">Current Image</h3>
-                        <img src="@Model.ImagePath" alt="Current product image" class="current-product-image">
-                    </div>
-
-                    <div class="image-upload-section">
-                        <label for="ImageFile" class="retro-font-8bit">Upload New Image</label>
-                        <input type="file" id="ImageFile" name="ImageFile" accept="image/*">
-                        <p class="image-note">Leave empty to keep current image</p>
-                    </div>
-                </div>
-
-                <div class="product-details-section">
-                    <div class="form-group">
-                        <label for="Name">Product Name</label>
-                        <input type="text" id="Name" name="Name" value="@Model.Name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Description">Description</label>
-                        <textarea id="Description" name="Description" required>@Model.Description</textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="Price">Price</label>
-                            <input type="number" id="Price" name="Price" value="@Model.Price" step="0.01" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="StockQuantity">Stock Quantity</label>
-                            <input type="number" id="StockQuantity" name="StockQuantity" value="@Model.StockQuantity" required>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="form-group">
-                        <label for="Status">Status</label>
-                        <select id="Status" name="Status" required>
-                            <option value="Active" @(Model.Status == "Active" ? "selected" : "")>Active</option>
-                            <option value="Inactive" @(Model.Status == "Inactive" ? "selected" : "")>Inactive</option>
-                            <option value="Discontinued" @(Model.Status == "Discontinued" ? "selected" : "")>Discontinued</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button type="submit" class="retro-font-8bit">Save Changes</button>
-                <a href="@Url.Action("ProductManagement", "Admin")" class="cancel-button retro-font-8bit">Cancel</a>
-            </div>
-        </form>
-
-        <div class="famicom-cartridge-slot"></div>
-    </div>
+    <div class="famicom-cartridge-slot"></div>
 </div>
 
 <style>
-    /* Additional styles specific to the edit product page */
-    .product-edit-grid {
+    .edit-product-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: linear-gradient(135deg, #1a0b2e 0%, #2a1144 100%);
+        min-height: 100vh;
+        color: white;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-header h1 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+    }
+
+    .action-btn:hover {
+        border-color: #ffcc33;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 0, 126, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+    .back-btn {
+        border-color: #666;
+        color: #ccc;
+    }
+
+    .back-btn:hover {
+        border-color: #e6007e;
+        color: white;
+    }
+
+    .view-btn {
+        border-color: #2196f3;
+        color: #2196f3;
+    }
+
+    .view-btn:hover {
+        background: #2196f3;
+        color: white;
+        border-color: #2196f3;
+    }
+
+    .form-container {
         display: grid;
         grid-template-columns: 1fr 2fr;
-        gap: 30px;
-        margin: 20px 0;
+        gap: 2rem;
+        margin-bottom: 2rem;
     }
 
-    .product-image-section {
-        background-color: #2a1144;
-        border: 3px solid #e6007e;
-        padding: 20px;
-        border-radius: 5px;
+    .retro-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid #666;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+    .section-header {
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-header h3 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    /* Image Section */
+    .image-preview {
         text-align: center;
-    }
-
-    .current-image-container {
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
     }
 
     .current-product-image {
@@ -102,105 +280,184 @@
         max-height: 300px;
         object-fit: contain;
         border: 2px solid #e6007e;
-        border-radius: 3px;
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .no-image-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        border: 2px dashed #666;
+        border-radius: 6px;
+        color: #666;
+    }
+
+    .placeholder-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
     }
 
     .image-upload-section {
-        margin-top: 20px;
+        text-align: center;
     }
 
-    .image-note {
-        color: #ffcc33;
-        font-family: 'VT323', monospace;
+    .upload-label {
+        display: inline-block;
+        background: linear-gradient(135deg, #e6007e 0%, #ff1493 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+    }
+
+    .upload-label:hover {
+        background: linear-gradient(135deg, #ff1493 0%, #e6007e 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 0, 126, 0.4);
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .upload-note {
+        color: #ccc;
         font-size: 0.9rem;
-        margin-top: 5px;
+        margin: 1rem 0 0.5rem 0;
+        font-style: italic;
     }
 
-    .product-details-section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+    .upload-info {
+        color: #666;
+        font-size: 0.8rem;
+    }
+
+    /* Form Section */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
     }
 
     .form-group {
-        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
     }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #ffcc33;
-        font-family: 'Silkscreen', cursive;
-        font-size: 1.1rem;
+    .form-group.full-width {
+        grid-column: 1 / -1;
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        background-color: #2a1144;
-        color: #ffffff;
-        border: 2px solid #e6007e;
-        border-radius: 3px;
+    .form-label {
+        color: #e6007e;
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #666;
+        border-radius: 6px;
+        color: white;
+        padding: 0.75rem;
         font-family: 'VT323', monospace;
         font-size: 1.1rem;
+        transition: border-color 0.3s;
     }
 
-    .form-group textarea {
-        min-height: 150px;
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+        border-color: #e6007e;
+        outline: none;
+        box-shadow: 0 0 10px rgba(230, 0, 126, 0.3);
+    }
+
+    .form-textarea {
         resize: vertical;
+        min-height: 120px;
     }
 
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+    .price-input,
+    .stock-input {
+        position: relative;
     }
 
-    .button-container {
+    .price-input::before {
+        content: '$';
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #4caf50;
+        font-weight: bold;
+    }
+
+    .validation-error {
+        color: #f44336;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+        font-family: 'VT323', monospace;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
         display: flex;
         justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
+        gap: 2rem;
+        margin-top: 2rem;
     }
 
-    .button-container button {
-        background-color: #2a1144;
-        color: #ffcc33;
-        border: 3px solid #e6007e;
-        padding: 12px 25px;
-        font-family: 'Press Start 2P', cursive;
-        font-size: 0.9rem;
+    .submit-btn,
+    .cancel-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border: 2px solid;
+        border-radius: 6px;
+        font-size: 1.1rem;
         cursor: pointer;
         transition: all 0.3s;
-    }
-
-    .button-container button:hover {
-        background-color: #e6007e;
-        color: #ffffff;
-        transform: scale(1.05);
-    }
-
-    .cancel-button {
-        background-color: #2a1144;
-        color: #f44336;
-        border: 3px solid #f44336;
-        padding: 12px 25px;
         text-decoration: none;
-        transition: all 0.3s;
     }
 
-    .cancel-button:hover {
-        background-color: #f44336;
-        color: #ffffff;
-        transform: scale(1.05);
+    .submit-btn {
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        border-color: #4caf50;
+        color: white;
     }
 
-
-        .form-row {
-            grid-template-columns: 1fr;
-        }
+    .submit-btn:hover {
+        background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
     }
+
+    .cancel-btn {
+        background: transparent;
+        border-color: #666;
+        color: #ccc;
+    }
+
+    .cancel-btn:hover {
+        border-color: #f44336;
+        color: #f44336;
+        text-decoration: none;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(244, 67, 54, 0.3);
+    }
+
+   
 </style>
 
