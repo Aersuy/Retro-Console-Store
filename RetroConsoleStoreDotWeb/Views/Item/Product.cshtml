@@ -1,4 +1,4 @@
-﻿@model RetroConsoleStoreDotWeb.Models.Articol.Product
+﻿@model RetroConsoleStoreDotWeb.ViewModel.ProductPageViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,19 +16,41 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="product-image-container retro-card">
-                    <img src="@Model.ImagePath" class="img-fluid" alt="@Model.Name">
+                    <img src="@Model.product.ImagePath" class="img-fluid" alt="@Model.product.Name">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-details retro-card">
-                    <h2 class="retro-font-8bit mb-3">@Model.Name</h2>
+                    <h2 class="retro-font-8bit mb-3">@Model.product.Name</h2>
                     <div class="price-badge">
-                        <span class="price-tag">$@Model.Price.ToString("0.00")</span>
+                        <span class="price-tag">$@Model.product.Price.ToString("0.00")</span>
                     </div>
+
+                    <!-- ✅ REVIEW SUMMARY SECTION -->
+                    @if (Model.reviews != null && Model.reviews.Any())
+                    {
+                        var averageRating = Model.reviews.Average(r => r.Rating);
+                        var totalReviews = Model.reviews.Count;
+                        
+                        <div class="review-summary mt-3 mb-4">
+                            <div class="rating-display">
+                                <div class="stars-container">
+                                    <div class="stars">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <span class="star @(i <= averageRating ? "filled" : "")">★</span>
+                                        }
+                                    </div>
+                                    <span class="rating-text retro-font-8bit">@averageRating.ToString("F1")/5</span>
+                                    <span class="review-count">(@totalReviews reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                     <div class="product-description mt-4">
                         <h4 class="retro-font-8bit">Description</h4>
-                        <p>@Model.Description</p>
+                        <p>@Model.product.Description</p>
                     </div>
 
                     <div class="product-specs mt-4">
@@ -36,18 +58,18 @@
                         <div class="specs-table">
                             <div class="spec-row">
                                 <div class="spec-label">Brand</div>
-                                <div class="spec-value">@Model.Brand</div>
+                                <div class="spec-value">@Model.product.Brand</div>
                             </div>
                             <div class="spec-row">
                                 <div class="spec-label">Year Released</div>
-                                <div class="spec-value">@Model.YearReleased</div>
+                                <div class="spec-value">@Model.product.YearReleased</div>
                             </div>
                             <div class="spec-row">
                                 <div class="spec-label">Availability</div>
                                 <div class="spec-value">
-                                    @if (Model.StockQuantity > 0)
+                                    @if (Model.product.StockQuantity > 0)
                                     {
-                                        <span class="in-stock">In Stock (@Model.StockQuantity available)</span>
+                                        <span class="in-stock">In Stock (@Model.product.StockQuantity available)</span>
                                     }
                                     else
                                     {
@@ -59,14 +81,14 @@
                     </div>
 
                     <div class="product-actions mt-4">
-                        @if (Model.StockQuantity > 0)
+                        @if (Model.product.StockQuantity > 0)
                         {
-                             using (Html.BeginForm("AddToCart", "User", FormMethod.Post))
+                            using (Html.BeginForm("AddToCart", "User", FormMethod.Post))
                             {
-                                @Html.Hidden("productId", Model.Id)
+                                @Html.Hidden("productId", Model.product.Id)
                                 <div class="quantity-group" style="margin-bottom: 1rem;">
                                     <label for="quantity" class="retro-font-8bit" style="margin-right: 10px;">Quantity:</label>
-                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="@Model.StockQuantity" class="quantity-input" style="width: 60px; text-align: center;" />
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="@Model.product.StockQuantity" class="quantity-input" style="width: 60px; text-align: center;" />
                                 </div>
                                 <button type="submit" class="retro-btn add-to-cart-btn">Add to Cart</button>
                             }
@@ -80,5 +102,412 @@
                 </div>
             </div>
         </div>
+
+        <!-- ✅ COMPREHENSIVE REVIEW SECTION -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="reviews-section retro-card">
+                    <!-- Review Header -->
+                    <div class="review-header">
+                        <h3 class="retro-font-pixel">🎮 Player Reviews</h3>
+                        <div class="review-tabs">
+                            <span class="review-tab active retro-font-8bit">
+                                All Reviews (@(Model.reviews != null ? Model.reviews.Count : 0))
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Write Review Section -->
+                    <div class="write-review-section mb-4">
+                        <h4 class="retro-font-8bit">✍️ Share Your Experience</h4>
+
+                        @using (Html.BeginForm("Review", "Item", FormMethod.Post, new { @class = "review-form" }))
+                        {
+                            @Html.HiddenFor(m => m.ReviewMessage.ProductId, new { Value = Model.product.Id })
+
+                            <div class="form-group">
+                                <label class="retro-font-8bit">Your Rating:</label>
+                                <div class="star-rating-input">
+                                    @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "5", new { id = "star5" })
+                                    <label for="star5" class="star-label">★</label>
+                                    @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "4", new { id = "star4" })
+                                    <label for="star4" class="star-label">★</label>
+                                    @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "3", new { id = "star3" })
+                                    <label for="star3" class="star-label">★</label>
+                                    @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "2", new { id = "star2" })
+                                    <label for="star2" class="star-label">★</label>
+                                    @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "1", new { id = "star1" })
+                                    <label for="star1" class="star-label">★</label>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ReviewMessage.Rating, "", new { @class = "validation-error" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Title" class="retro-font-8bit">Review Title:</label>
+                                @Html.TextBoxFor(m => m.ReviewMessage.Title, new
+                                {
+                                    @class = "retro-input",
+                                    placeholder = "Sum up your experience...",
+                                    maxlength = "100",
+                                    required = "required"
+                                })
+                                @Html.ValidationMessageFor(m => m.ReviewMessage.Title, "", new { @class = "validation-error" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Message" class="retro-font-8bit">Your Review:</label>
+                                @Html.TextAreaFor(m => m.ReviewMessage.Message, new
+                                {
+                                    @class = "retro-textarea",
+                                    placeholder = "Tell other retro gamers about this product...",
+                                    rows = "6",
+                                    maxlength = "2000",
+                                    required = "required"
+                                })
+                                <div class="char-limit-note">Maximum 2000 characters</div>
+                                @Html.ValidationMessageFor(m => m.ReviewMessage.Message, "", new { @class = "validation-error" })
+                            </div>
+
+                            <button type="submit" class="retro-btn review-submit-btn">
+                                🎮 Submit Review
+                            </button>
+                        }
+                    </div>
+
+                    <!-- Reviews List -->
+                    <div class="reviews-list">
+                        <div class="reviews-container">
+                            @if (Model.reviews != null && Model.reviews.Any())
+                            {
+                                foreach (var review in Model.reviews)
+                                {
+                                    <div class="review-item">
+                                        <div class="review-header-item">
+                                            <div class="reviewer-info">
+                                                <div class="reviewer-avatar">
+                                                    @if (review.User != null && !string.IsNullOrEmpty(review.User.ImagePath))
+                                                    {
+                                                        <img src="@review.User.ImagePath" alt="@review.User.username" class="avatar-img">
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="avatar-placeholder">🎮</div>
+                                                    }
+                                                </div>
+                                                <div class="reviewer-details">
+                                                    <h5 class="reviewer-name retro-font-8bit">@(review.User?.username ?? "Anonymous")</h5>
+                                                    <div class="review-meta">
+                                                        <div class="review-rating">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                <span class="star @(i <= review.Rating ? "filled" : "")">★</span>
+                                                            }
+                                                        </div>
+                                                        <span class="review-date">@review.DateCreated.ToString("MMM dd, yyyy")</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="review-content">
+                                            <h4 class="review-title">@review.Title</h4>
+                                            <p class="review-text">@review.ReviewText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="no-reviews">
+                                    <div class="retro-message-box">
+                                        <h4 class="retro-font-8bit">📝 No Reviews Yet</h4>
+                                        <p>Be the first to review this retro gaming product!</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    /* Review Section Styles */
+    .reviews-section {
+        background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
+        border: 2px solid #e6007e;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    .review-header {
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .review-header h3 {
+        color: #ffcc33;
+        margin: 0;
+    }
+
+    .review-tabs {
+        margin-top: 1rem;
+    }
+
+    .review-tab {
+        color: #e6007e;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        background: rgba(230, 0, 126, 0.1);
+        border: 1px solid #e6007e;
+        border-radius: 4px;
+    }
+
+    .review-tab.active {
+        background: #e6007e;
+        color: white;
+    }
+
+    /* Write Review Form */
+    .write-review-section {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .write-review-section h4 {
+        color: #ffcc33;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: #e6007e;
+        margin-bottom: 0.5rem;
+    }
+
+    .retro-input,
+    .retro-textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #666;
+        border-radius: 4px;
+        color: white;
+        padding: 0.75rem;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+    }
+
+    .retro-input:focus,
+    .retro-textarea:focus {
+        border-color: #e6007e;
+        outline: none;
+        box-shadow: 0 0 10px rgba(230, 0, 126, 0.3);
+    }
+
+    /* Star Rating Input */
+    .star-rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 0.2rem;
+    }
+
+    .star-rating-input input[type="radio"] {
+        display: none;
+    }
+
+    .star-label {
+        font-size: 2rem;
+        color: #666;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .star-rating-input input[type="radio"]:checked ~ .star-label,
+    .star-rating-input .star-label:hover,
+    .star-rating-input .star-label:hover ~ .star-label {
+        color: #ffcc33;
+    }
+
+    /* Review Items */
+    .review-item {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .review-header-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #e6007e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .avatar-placeholder {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .reviewer-name {
+        color: #e6007e;
+        margin: 0;
+    }
+
+    .review-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.25rem;
+    }
+
+    .review-rating .star {
+        color: #666;
+        font-size: 1.2rem;
+    }
+
+    .review-rating .star.filled {
+        color: #ffcc33;
+    }
+
+    .review-date {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .review-content {
+        color: white;
+    }
+
+    .review-title {
+        color: #ffcc33;
+        margin-bottom: 0.5rem;
+    }
+
+    .review-text {
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Review Summary */
+    .review-summary {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid #e6007e;
+        border-radius: 6px;
+        padding: 1rem;
+    }
+
+    .stars-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .stars .star {
+        color: #666;
+        font-size: 1.5rem;
+    }
+
+    .stars .star.filled {
+        color: #ffcc33;
+    }
+
+    .rating-text {
+        color: #e6007e;
+        font-size: 1.2rem;
+    }
+
+    .review-count {
+        color: #ccc;
+    }
+
+    /* Buttons */
+    .review-submit-btn {
+        background: linear-gradient(135deg, #e6007e 0%, #ff1493 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 6px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .review-submit-btn:hover {
+        background: linear-gradient(135deg, #ff1493 0%, #e6007e 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(230, 0, 126, 0.4);
+    }
+
+    /* No Reviews Message */
+    .no-reviews {
+        text-align: center;
+        padding: 3rem;
+    }
+
+    .retro-message-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid #666;
+        border-radius: 6px;
+        padding: 2rem;
+        display: inline-block;
+    }
+
+    .retro-message-box h4 {
+        color: #ffcc33;
+        margin-bottom: 1rem;
+    }
+
+    .retro-message-box p {
+        color: #ccc;
+        margin: 0;
+    }
+
+    .char-limit-note {
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 0.25rem;
+    }
+
+    .validation-error {
+        color: #ff4444;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+        display: block;
+    }
+</style>

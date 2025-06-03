@@ -21,7 +21,7 @@ namespace RetroConsoleStoreDotDomain.Products
         public int UserId { get; set; }
 
         [Required]
-        public int rating { get; set; }
+        public int Rating { get; set; }
 
         [Required]
         public string ReviewText { get; set; }
@@ -32,7 +32,7 @@ namespace RetroConsoleStoreDotDomain.Products
         public bool VerifiedPurchase { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime DateCreated { get; set; }
 
 
         // Navigation properties

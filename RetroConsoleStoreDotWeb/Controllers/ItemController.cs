@@ -10,6 +10,7 @@ using System.Web.UI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
 using Microsoft.Ajax.Utilities;
+using RetroConsoleStoreDotWeb.ViewModel;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -84,20 +85,23 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 product.YearReleased = prod.YearReleased;
                 product.StockQuantity = prod.StockQuantity;
 
+            ProductPageViewModel productPageViewModel = new ProductPageViewModel();
+            productPageViewModel.product = prod;
+            productPageViewModel.reviews = _review.GetReviewsForProudctBL(id);
+            productPageViewModel.ReviewMessage = new ReviewMessage();
 
-
-            return View(product);
+            return View(productPageViewModel);
         }
         public ActionResult TradeIn()
         {
             return View();
         }
-        public ActionResult Review(ReviewMessage message)
+        public ActionResult Review(ProductPageViewModel model)
         {
-            message.UserId = GetCurrentUser().Id;
-            _review.ReviewProduct(message);
+            model.ReviewMessage.UserId = GetCurrentUser().Id;
+            _review.ReviewProduct(model.ReviewMessage);
 
-            return Product(message.ProductId);
+            return RedirectToAction("Product", new { id = model.ReviewMessage.ProductId }); ;
         }
       
     }

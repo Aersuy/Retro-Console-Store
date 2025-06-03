@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
+using RetroConsoleStoreDotDomain.Products;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Products
 {
@@ -18,6 +19,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Products
         public bool ReviewProduct(ReviewMessage message)
         {
             return ReviewProductAPI(message);
+        }
+        public List<ReviewT> GetReviewsForProudctBL(int productId)
+        {
+            return GetReviewsForProudctAPI(productId);
         }
     }
 }

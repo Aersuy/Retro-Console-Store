@@ -297,6 +297,7 @@
     <Compile Include="Models\UserVisible\UserOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CartItemsViewModel.cs" />
+    <Compile Include="ViewModel\ProductWithReviewsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -34,13 +34,13 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI
                     {
                         ProductId = message.ProductId,
                         UserId = message.UserId,
-                        rating = message.Rating,
+                        Rating = message.Rating,
                         ReviewText = message.Message,
                         Title = message.Title,
                         VerifiedPurchase = false, // To add this implementation need to add 
                         // more statistics, including saving every single product that a user has
                         // purchased, will see if I have time
-                        DateTime = DateTime.Now
+                        DateCreated = DateTime.Now
                     };
                     ctx.Reviews.Add(review);
                     user.Reviews.Add(review);
@@ -53,6 +53,25 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI
             {
                 _error.ErrorToDatabase(ex, "Error leaving review//API");
                 return false;
+            }
+        }
+        public List<ReviewT> GetReviewsForProudctAPI(int productId)
+        {
+            try
+            {
+                using(var ctx = new MainContext())
+                {
+                    var reviews = ctx.Reviews
+                    .Include("User") 
+                    .Where(r => r.ProductId == productId)
+                    .ToList();
+                    return reviews;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting reviews for product//API");
+                return null;
             }
         }
     }
