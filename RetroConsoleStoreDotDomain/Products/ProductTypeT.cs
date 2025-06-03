@@ -35,6 +35,11 @@ namespace RetroConsoleStoreDotDomain.Products
         [Required]
         public int TotalSoldOnSite { get; set; }
 
+
+        // Navigation properties
+
+        public virtual List<ReviewT> Reviews { get; set; } = new List<ReviewT>(); // list of reviews
+
      
     }
 }

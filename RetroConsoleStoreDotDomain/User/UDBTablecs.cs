@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RetroConsoleStoreDotDomain.Enums;
+using RetroConsoleStoreDotDomain.Products;
 
 namespace RetroConsoleStoreDotDomain.User
 {
@@ -50,8 +51,11 @@ namespace RetroConsoleStoreDotDomain.User
         [ForeignKey("Cart")]
         public int UserCartID { get; set; }
 
-        // Navigational properti
+
+
+        // Navigational properties
         public virtual UserCartT Cart { get; set; }
+        public virtual List<ReviewT> Reviews { get; set; } = new List<ReviewT>(); 
 
     }
 }

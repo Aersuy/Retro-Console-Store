@@ -69,8 +69,10 @@
     <Compile Include="Logs\LTable.cs" />
     <Compile Include="Model\Product\CartItemModel.cs" />
     <Compile Include="Model\Product\ProductModelBack.cs" />
+    <Compile Include="Model\Product\ReviewMessage.cs" />
     <Compile Include="Model\User\BanReport.cs" />
     <Compile Include="Model\User\UnbanMessage.cs" />
+    <Compile Include="Products\ReviewT.cs" />
     <Compile Include="User\UserBannedT.cs" />
     <Compile Include="Statistics\ProductStatsT.cs" />
     <Compile Include="Statistics\UserStatsT.cs" />

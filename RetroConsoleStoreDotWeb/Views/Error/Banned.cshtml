@@ -1,5 +1,309 @@
 ﻿@{
-    ViewBag.Title = "Banned";
+    ViewBag.Title = "Account Banned";
 }
 
-<h2>Banned</h2>
+<div class="banned-error-container">
+    <div class="retro-error-header">
+        <div class="pixel-art-skull">💀</div>
+        <h1 class="retro-font-8bit error-title">GAME OVER</h1>
+        <h2 class="retro-font-pixel error-subtitle">ACCESS DENIED</h2>
+    </div>
+
+    <div class="banned-content-wrapper">
+        <div class="crt-screen-effect">
+            <div class="banned-message-box">
+                <div class="error-code">
+                    <span class="retro-font-8bit">ERROR CODE: 403.BANNED</span>
+                </div>
+
+                <div class="ban-alert">
+                    <h3 class="retro-font-pixel">🚫 ACCOUNT SUSPENDED 🚫</h3>
+                    <p class="ban-description">
+                        Your account has been temporarily or permanently suspended from the Retro Console Store.
+                    </p>
+                </div>
+
+                <div class="ban-reasons">
+                    <h4 class="retro-font-8bit">POSSIBLE REASONS:</h4>
+                    <ul class="pixel-list">
+                        <li>🔸 Violation of Terms of Service</li>
+                        <li>🔸 Inappropriate conduct or behavior</li>
+                        <li>🔸 Fraudulent activity detected</li>
+                        <li>🔸 Multiple policy violations</li>
+                        <li>🔸 Spam or harassment reports</li>
+                    </ul>
+                </div>
+
+                <div class="contact-section">
+                    <h4 class="retro-font-8bit">NEED HELP?</h4>
+                    <p>If you believe this is an error, contact our support team:</p>
+                    <div class="contact-buttons">
+                        <a href="mailto:support@retroconsolestore.com" class="retro-btn-contact">
+                            📧 EMAIL SUPPORT
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Retro Gaming Elements -->
+    <div class="pixelated-decorations">
+        <div class="floating-pixel pixel-1">█</div>
+        <div class="floating-pixel pixel-2">▓</div>
+        <div class="floating-pixel pixel-3">▒</div>
+        <div class="floating-pixel pixel-4">░</div>
+        <div class="floating-pixel pixel-5">█</div>
+        <div class="floating-pixel pixel-6">▓</div>
+    </div>
+</div>
+
+<style>
+    /* Main Container */
+    .banned-error-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1a0b2e 0%, #2a1144 25%, #3a1f5d 50%, #2a1144 75%, #1a0b2e 100%);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Header Section */
+    .retro-error-header {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .pixel-art-skull {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: skull-glow 2s infinite alternate;
+        filter: drop-shadow(0 0 10px #e6007e);
+    }
+
+    .error-title {
+        font-size: 3rem;
+        color: #ff4444;
+        text-shadow: 3px 3px 0 #000000, 6px 6px 0 #e6007e;
+        margin-bottom: 10px;
+        animation: text-flicker 3s infinite;
+        letter-spacing: 4px;
+    }
+
+    .error-subtitle {
+        font-size: 1.8rem;
+        color: #ffcc33;
+        border: 3px solid #e6007e;
+        background-color: rgba(58, 31, 93, 0.8);
+        padding: 10px 20px;
+        display: inline-block;
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(230, 0, 126, 0.5);
+    }
+
+    /* Content Wrapper */
+    .banned-content-wrapper {
+        max-width: 800px;
+        width: 100%;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* CRT Screen Effect */
+    .crt-screen-effect {
+        background-color: #000000;
+        border: 8px solid #333333;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow:
+            inset 0 0 50px rgba(0, 255, 0, 0.1),
+            0 0 30px rgba(230, 0, 126, 0.3),
+            0 0 60px rgba(230, 0, 126, 0.2);
+        position: relative;
+    }
+
+    .crt-screen-effect::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 0, 0.03) 2px,
+            rgba(0, 255, 0, 0.03) 4px
+        );
+        pointer-events: none;
+        border-radius: 12px;
+    }
+
+    /* Message Box */
+    .banned-message-box {
+        background: linear-gradient(145deg, #2a1144, #1a0b2e);
+        border: 4px solid #e6007e;
+        border-radius: 10px;
+        padding: 30px;
+        color: #ffffff;
+        font-family: 'VT323', monospace;
+        position: relative;
+    }
+
+    .error-code {
+        text-align: center;
+        margin-bottom: 25px;
+        padding: 10px;
+        background-color: #ff4444;
+        border: 2px solid #ffcc33;
+        border-radius: 5px;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    .ban-alert {
+        text-align: center;
+        background: linear-gradient(45deg, #ff4444, #cc0000);
+        border: 3px solid #ffcc33;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 25px 0;
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+    }
+
+    .ban-alert h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.8rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px #000000;
+    }
+
+    .ban-description {
+        font-size: 1.3rem;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* Ban Reasons Section */
+    .ban-reasons {
+        background-color: #1a0b2e;
+        border: 3px solid #e6007e;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+    }
+
+    .ban-reasons h4 {
+        color: #ffcc33;
+        font-size: 1.4rem;
+        margin: 0 0 20px 0;
+        text-align: center;
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 10px;
+    }
+
+    .pixel-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pixel-list li {
+        padding: 8px 0;
+        font-size: 1.2rem;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(230, 0, 126, 0.2);
+    }
+
+    .pixel-list li:last-child {
+        border-bottom: none;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        background-color: #2a1144;
+        border: 3px solid #ffcc33;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0 0 0;
+        text-align: center;
+    }
+
+    .contact-section h4 {
+        color: #ffcc33;
+        font-size: 1.4rem;
+        margin: 0 0 15px 0;
+    }
+
+    .contact-section p {
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .retro-btn-contact, .retro-btn-home {
+        background: linear-gradient(45deg, #e6007e, #ff1493);
+        color: #ffffff;
+        border: 2px solid #ffcc33;
+        padding: 12px 25px;
+        text-decoration: none;
+        font-family: 'Silkscreen', cursive;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: all 0.3s;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .retro-btn-contact:hover, .retro-btn-home:hover {
+        background: linear-gradient(45deg, #ffcc33, #ffd700);
+        color: #2a1144;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+    }
+
+    /* Floating Pixel Decorations */
+    .pixelated-decorations {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .floating-pixel {
+        position: absolute;
+        font-size: 2rem;
+        color: #e6007e;
+        opacity: 0.3;
+        animation: float-pixel 8s infinite ease-in-out;
+    }
+
+    .pixel-1 { top: 10%; left: 10%; animation-delay: 0s; }
+    .pixel-2 { top: 20%; right: 15%; animation-delay: 1s; }
+    .pixel-3 { bottom: 30%; left: 20%; animation-delay: 2s; }
+    .pixel-4 { bottom: 20%; right: 25%; animation-delay: 3s; }
+    .pixel-5 { top: 60%; left: 5%; animation-delay: 4s; }
+    .pixel-6 { top: 80%; right: 10%; animation-delay: 5s; }
+
+</style>

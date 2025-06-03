@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RetroConsoleStore.BusinessLogic.BL_Struct;
+﻿using RetroConsoleStore.BusinessLogic.BL_Struct;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStoreDotBusinessLogic.BL_struct;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc;
+using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Products;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User;
-using RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI;
-using RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreHelpers.Interfaces;
 using RetroConsoleStoreHelpers.PasswordHash;
@@ -28,6 +22,7 @@ namespace RetroConsoleStore.BusinessLogic
         private readonly IAccountBL _accountBL;
         private readonly ICart _cart;
         private readonly IAdmin _adminBL;
+        private readonly IReview _review;
 
         public BusinessLogic()
         {
@@ -42,6 +37,7 @@ namespace RetroConsoleStore.BusinessLogic
             _accountBL = new AccountBL(_errorBL);
             _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
             _adminBL = new AdminBL(_errorBL, _loginBL,_messaging);
+            _review = new ReviewBL(_errorBL);
         }
 
         public IAuth GetAuthBL()
@@ -71,6 +67,10 @@ namespace RetroConsoleStore.BusinessLogic
         public IAdmin GetAdminBl()
         {
             return _adminBL;
+        }
+        public IReview GetReviewBl()
+        {
+            return _review;
         }
     }
 }

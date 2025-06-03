@@ -9,6 +9,7 @@ using RetroConsoleStoreDotDomain.Model.Product;
 using System.Web.UI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
+using Microsoft.Ajax.Utilities;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -18,12 +19,14 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly BusinessLogic businessLogic;
         private readonly IProductBL _product;
         private readonly IStatistics _statistics;
+        private readonly IReview _review;
         // GET: Item
         public ItemController()
         {
             businessLogic = new BusinessLogic();
             _product = businessLogic.GetProductBL();
             _statistics = businessLogic.GetStatsBL();
+            _review = businessLogic.GetReviewBl();
         }
         [HttpGet]
         public ActionResult Catalog()
@@ -88,6 +91,13 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult TradeIn()
         {
             return View();
+        }
+        public ActionResult Review(ReviewMessage message)
+        {
+            message.UserId = GetCurrentUser().Id;
+            _review.ReviewProduct(message);
+
+            return Product(message.ProductId);
         }
       
     }

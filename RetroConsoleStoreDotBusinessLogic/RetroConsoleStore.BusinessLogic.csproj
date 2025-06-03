@@ -126,9 +126,11 @@
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="BL struct\API\MiscAPI\MessagingAPI.cs" />
     <Compile Include="BL struct\API\MiscAPI\StatisticsAPI.cs" />
+    <Compile Include="BL struct\API\ProductsAPI\ReviewAPI.cs" />
     <Compile Include="BL struct\API\UserAPI\AdminAPI.cs" />
     <Compile Include="BL struct\BL\Misc\MessaginBL.cs" />
     <Compile Include="BL struct\BL\Misc\StatisticsBL.cs" />
+    <Compile Include="BL struct\BL\Products\ReviewBL.cs" />
     <Compile Include="BL struct\BL\User\AdminBL.cs" />
     <Compile Include="BL struct\BL\User\AuthBL.cs" />
     <Compile Include="BL struct\BL\Products\CartBL.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Interfaces\IMessaging.cs" />
     <Compile Include="Interfaces\IProductBL.cs" />
     <Compile Include="Interfaces\IAccountBL.cs" />
+    <Compile Include="Interfaces\IReview.cs" />
     <Compile Include="Interfaces\IStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
