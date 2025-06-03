@@ -43,6 +43,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             return SeachAPI(searchTerm);
         }
+        public bool DeleteProductBL(int id)
+        {
+            return DeleteProductAPI(id);
+        }
 
     }
 }

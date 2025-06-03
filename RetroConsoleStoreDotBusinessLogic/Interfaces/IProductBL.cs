@@ -17,6 +17,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         ProductModelBack GetProductById(int id);
         bool UpdateStock(int productId, int quantity);
         IEnumerable<ProductModelBack> Search(string searchTerm);
+        bool DeleteProductBL(int id);
 
     }
 }

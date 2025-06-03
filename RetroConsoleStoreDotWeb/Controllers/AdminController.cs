@@ -68,7 +68,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             ProductModelBack.YearReleased = model.YearReleased;
             ProductModelBack.Status = model.Status;
             ViewBag.Message = _productBL.AddProduct(ProductModelBack);
-            return View(ProductModelBack);
+            return RedirectToAction("ManageProducts", "Admin");
         }
         public ActionResult DashBoard()
         {
@@ -165,6 +165,11 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             _productBL.UpdateProduct(product);
             return View();
+        }
+        public ActionResult DeleteProduct(int id)
+        {
+            _productBL.DeleteProductBL(id);
+            return RedirectToAction("ManageProducts", "Admin");
         }
         public ActionResult ProductDetails(int id)
         {
