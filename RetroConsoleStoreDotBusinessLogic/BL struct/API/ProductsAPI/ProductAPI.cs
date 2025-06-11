@@ -8,6 +8,7 @@ using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Products;
+using RetroConsoleStoreDotDomain.Statistics;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
 {
     //TODO : Add logging to the methods
@@ -44,7 +45,17 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         YearReleased = Product.YearReleased,
                         TotalSoldOnSite = 0
                     };
+                    var ProductStats = new ProductStatsT()
+                    {
+                        numberSold = 0,
+                        pageViews = 0,
+                        ProductTypeT = NewProduct,
+                        totalRevenue = 0,
+                    };
                     ctx.ProductTypes.Add(NewProduct);
+                    ctx.SaveChanges();
+                    ProductStats.ProductId = NewProduct.Id; 
+                    ctx.ProductStatistics.Add(ProductStats);
                     ctx.SaveChanges();
                     _log.ProductLog(Product, "Adding product to DB");
                     return true;

@@ -1,0 +1,1079 @@
+﻿@model RetroConsoleStoreDotWeb.ViewModel.ProductWithStatsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Product Details - " + Model.product.Name;
+}
+
+<div class="product-detail-container">
+    <div class="page-header">
+        <h1 class="retro-font-pixel">Product Details</h1>
+        <div class="header-actions">
+            <a href="@Url.Action("ManageProducts", "Admin")" class="action-btn back-btn">
+                <span class="btn-icon">🔙</span>
+                Back to Products
+            </a>
+            <a href="@Url.Action("EditProduct", "Admin", new { id = Model.product.Id })" class="action-btn edit-btn">
+                <span class="btn-icon">✏️</span>
+                Edit Product
+            </a>
+            <a href="@Url.Action("Product", "Item", new { id = Model.product.Id })" class="action-btn view-btn" target="_blank">
+                <span class="btn-icon">👁️</span>
+                View on Site
+            </a>
+        </div>
+    </div>
+
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="product-info-container">
+        <!-- Product Image Section -->
+        <div class="image-section retro-card">
+            <div class="section-header">
+                <h3 class="retro-font-8bit">🖼️ Product Image</h3>
+            </div>
+
+            <div class="image-display">
+                @if (!string.IsNullOrEmpty(Model.product.ImagePath))
+                {
+                    <img src="@Model.product.ImagePath" alt="@Model.product.Name" class="product-image">
+                }
+                else
+                {
+                    <div class="no-image-placeholder">
+                        <span class="placeholder-icon">📦</span>
+                        <p>No image available for this product</p>
+                    </div>
+                }
+            </div>
+
+            <div class="image-info">
+                <p class="image-path">
+                    <strong>Image Path:</strong>
+                    @if (!string.IsNullOrEmpty(Model.product.ImagePath))
+                    {
+                        <span class="path-text">@Model.product.ImagePath</span>
+                    }
+                    else
+                    {
+                        <span class="no-path">No image uploaded</span>
+                    }
+                </p>
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="details-section retro-card">
+            <div class="section-header">
+                <h3 class="retro-font-8bit">📊 Product Information</h3>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label class="detail-label">Product ID</label>
+                    <div class="detail-value id-value">#@Model.product.Id</div>
+                </div>
+
+                <div class="detail-item full-width">
+                    <label class="detail-label">Product Name</label>
+                    <div class="detail-value name-value">@Model.product.Name</div>
+                </div>
+
+                <div class="detail-item full-width">
+                    <label class="detail-label">Description</label>
+                    <div class="detail-value description-value">@Model.product.Description</div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Brand</label>
+                    <div class="detail-value">@Model.product.Brand</div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Year Released</label>
+                    <div class="detail-value">@Model.product.YearReleased</div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Price</label>
+                    <div class="detail-value price-value">$@Model.product.Price.ToString("F2")</div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Stock Quantity</label>
+                    <div class="detail-value stock-value">
+                        <span class="stock-badge @(Model.product.StockQuantity <= 5 ? "low-stock" : Model.product.StockQuantity == 0 ? "no-stock" : "in-stock")">
+                            @Model.product.StockQuantity units
+                        </span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Status</label>
+                    <div class="detail-value">
+                        <span class="status-badge @Model.product.Status.ToLower().Replace(" ", "-")">@Model.product.Status</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <label class="detail-label">Created Date</label>
+                    <div class="detail-value">
+                        @if (Model.product.TimeCreated != null)
+                        {
+                            @Model.product.TimeCreated.ToString("MMMM dd, yyyy 'at' hh:mm tt");
+                        }
+                        else
+                        {
+                            <span class="no-data">Not available</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="stats-section retro-card">
+        <div class="section-header">
+            <h3 class="retro-font-8bit">📈 Product Statistics</h3>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-value">@(Model.statsT?.pageViews ?? 0)</div>
+                <div class="stat-label">Total Views</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🛒</div>
+                <div class="stat-value">@(Model.statsT?.numberSold ?? 0)</div>
+                <div class="stat-label">Total Purchases</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">@((Model.statsT?.totalRevenue ?? 0).ToString("C"))</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value">@(Model.reviews?.Count ?? 0)</div>
+                <div class="stat-label">Total Reviews</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section retro-card">
+        <div class="section-header">
+            <h3 class="retro-font-8bit">💬 Customer Reviews</h3>
+            @if (Model.reviews != null && Model.reviews.Any())
+            {
+                <div class="review-summary">
+                    @{
+                        var avgRating = Model.reviews.Average(r => r.Rating);
+                        var totalReviews = Model.reviews.Count;
+                    }
+                    <div class="rating-display">
+                        <div class="stars">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="star @(i <= avgRating ? "filled" : "")">★</span>
+                            }
+                        </div>
+                        <span class="rating-text retro-font-8bit">@avgRating.ToString("F1")/5</span>
+                        <span class="review-count">(@totalReviews reviews)</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="no-reviews-summary">
+                    <span class="no-reviews-text">No reviews yet</span>
+                </div>
+            }
+        </div>
+        <div class="reviews-list">
+            @if (Model.reviews != null && Model.reviews.Any())
+            {
+                foreach (var review in Model.reviews.OrderByDescending(r => r.DateCreated).Take(5))
+                {
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    @if (review.User != null && !string.IsNullOrEmpty(review.User.ImagePath))
+                                    {
+                                        <img src="@review.User.ImagePath" alt="@review.User.username" class="avatar-img">
+                                    }
+                                    else
+                                    {
+                                        <div class="avatar-placeholder">🎮</div>
+                                    }
+                                </div>
+                                <div class="reviewer-details">
+                                    <h5 class="reviewer-name retro-font-8bit">@(review.User?.username ?? "Anonymous")</h5>
+                                    <div class="review-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <span class="star @(i <= review.Rating ? "filled" : "")">★</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="review-date">@review.DateCreated?.ToString("MMM dd, yyyy")</span>
+                        </div>
+                        <h4 class="review-title">@review.Title</h4>
+                        <p class="review-text">@review.ReviewText</p>
+                    </div>
+                }
+                if (Model.reviews.Count > 5)
+                {
+                    <div class="show-more-reviews">
+                        <button type="button" class="retro-btn" onclick="toggleAllReviews()">
+                            Show All @Model.reviews.Count Reviews
+                        </button>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="no-reviews-placeholder">
+                    <div class="retro-message-box">
+                        <div class="message-icon">📝</div>
+                        <h4 class="retro-font-8bit">No Reviews Yet</h4>
+                        <p>This product hasn't received any customer reviews yet.</p>
+                        <p class="encourage-text">Encourage customers to leave reviews to build trust and provide valuable feedback!</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Action Panel -->
+    <div class="action-panel retro-card">
+        <div class="section-header">
+            <h3 class="retro-font-8bit">🎮 Quick Actions</h3>
+        </div>
+
+        <div class="action-grid">
+            <a href="@Url.Action("EditProduct", "Admin", new { id = Model.product.Id })" class="quick-action-btn edit-action">
+                <div class="action-icon">✏️</div>
+                <div class="action-text">Edit Product</div>
+                <div class="action-description">Modify product details</div>
+            </a>
+
+            <a href="@Url.Action("Product", "Item", new { id = Model.product.Id })" class="quick-action-btn view-action" target="_blank">
+                <div class="action-icon">👁️</div>
+                <div class="action-text">View on Store</div>
+                <div class="action-description">See how customers see it</div>
+            </a>
+
+            <a href="@Url.Action("ManageProducts", "Admin")" class="quick-action-btn list-action">
+                <div class="action-icon">📋</div>
+                <div class="action-text">All Products</div>
+                <div class="action-description">Return to product list</div>
+            </a>
+
+            <a href="#" class="quick-action-btn delete-action" onclick="confirmDelete(@Model.product.Id, '@Model.product.Name')">
+                <div class="action-icon">🗑️</div>
+                <div class="action-text">Delete Product</div>
+                <div class="action-description">Permanently remove</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="famicom-cartridge-slot"></div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="retro-modal" style="display: none;">
+    <div class="modal-backdrop" onclick="closeDeleteModal()"></div>
+    <div class="modal-content retro-card">
+        <div class="modal-header">
+            <h3 class="retro-font-8bit">⚠️ Confirm Deletion</h3>
+            <button type="button" class="modal-close" onclick="closeDeleteModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this product?</p>
+            <p class="product-name"><strong id="productToDelete"></strong></p>
+            <p class="warning-text">This action cannot be undone!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="action-btn back-btn" onclick="closeDeleteModal()">Cancel</button>
+            <a id="deleteConfirmBtn" href="#" class="action-btn delete-btn">Delete Product</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmDelete(productId, productName) {
+    document.getElementById('productToDelete').textContent = productName;
+    document.getElementById('deleteConfirmBtn').href = '@Url.Action("DeleteProduct", "Admin")' + '?id=' + productId;
+    document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').style.display = 'none';
+}
+
+function toggleAllReviews() {
+    alert('Feature to show all reviews can be implemented here');
+}
+
+// Close modal when clicking escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeDeleteModal();
+    }
+});
+</script>
+
+<style>
+    .product-detail-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: linear-gradient(135deg, #1a0b2e 0%, #2a1144 100%);
+        min-height: 100vh;
+        color: white;
+        font-family: 'VT323', monospace;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-header h1 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .action-btn:hover {
+        border-color: #ffcc33;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 0, 126, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+    .back-btn {
+        border-color: #666;
+        color: #ccc;
+    }
+
+    .back-btn:hover {
+        border-color: #e6007e;
+        color: white;
+    }
+
+    .edit-btn {
+        border-color: #ffcc33;
+        color: #ffcc33;
+    }
+
+    .edit-btn:hover {
+        background: #ffcc33;
+        color: #2a1144;
+        border-color: #ffcc33;
+    }
+
+    .view-btn {
+        border-color: #2196f3;
+        color: #2196f3;
+    }
+
+    .view-btn:hover {
+        background: #2196f3;
+        color: white;
+        border-color: #2196f3;
+    }
+
+    .delete-btn {
+        border-color: #f44336;
+        color: #f44336;
+    }
+
+    .delete-btn:hover {
+        background: #f44336;
+        color: white;
+        border-color: #f44336;
+    }
+
+    .famicom-controller-ports {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .famicom-controller-ports span {
+        width: 120px;
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .famicom-controller-ports span::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 60%;
+        background: #000;
+        border-radius: 5px;
+    }
+
+    .product-info-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .retro-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid #666;
+        border-radius: 8px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .section-header {
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .section-header h3 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    /* Image Section */
+    .image-display {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: contain;
+        border: 2px solid #e6007e;
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .no-image-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 250px;
+        border: 2px dashed #666;
+        border-radius: 6px;
+        color: #666;
+    }
+
+    .placeholder-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .image-info {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid #666;
+        border-radius: 4px;
+        padding: 1rem;
+    }
+
+    .path-text {
+        color: #4caf50;
+        font-family: 'VT323', monospace;
+        word-break: break-all;
+    }
+
+    .no-path {
+        color: #666;
+        font-style: italic;
+    }
+
+    /* Details Section */
+    .details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .detail-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-item.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .detail-label {
+        color: #e6007e;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .detail-value {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid #666;
+        border-radius: 4px;
+        padding: 0.75rem;
+        color: white;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        min-height: 1.5rem;
+    }
+
+    .id-value {
+        color: #ffcc33;
+        font-weight: bold;
+    }
+
+    .name-value {
+        color: #e6007e;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .description-value {
+        min-height: 4rem;
+        line-height: 1.4;
+    }
+
+    .price-value {
+        color: #4caf50;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .stock-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .stock-badge.in-stock {
+        background: rgba(76, 175, 80, 0.2);
+        color: #4caf50;
+        border: 1px solid #4caf50;
+    }
+
+    .stock-badge.low-stock {
+        background: rgba(255, 152, 0, 0.2);
+        color: #ff9800;
+        border: 1px solid #ff9800;
+    }
+
+    .stock-badge.no-stock {
+        background: rgba(244, 67, 54, 0.2);
+        color: #f44336;
+        border: 1px solid #f44336;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid #666;
+    }
+
+    .status-badge.active {
+        color: #4caf50;
+        border-color: #4caf50;
+        background: rgba(76, 175, 80, 0.2);
+    }
+
+    .status-badge.inactive {
+        color: #666;
+        border-color: #666;
+    }
+
+    .status-badge.discontinued {
+        color: #ff9800;
+        border-color: #ff9800;
+        background: rgba(255, 152, 0, 0.2);
+    }
+
+    .status-badge.out-of-stock {
+        color: #f44336;
+        border-color: #f44336;
+        background: rgba(244, 67, 54, 0.2);
+    }
+
+    .no-data {
+        color: #666;
+        font-style: italic;
+    }
+
+    /* Statistics Section */
+    .stats-section {
+        margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .stat-item:hover {
+        border-color: #e6007e;
+        transform: translateY(-2px);
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+        color: #ffcc33;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: #ccc;
+        font-size: 1rem;
+    }
+
+    /* Reviews Section */
+    .review-summary {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .rating-display {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .stars {
+        display: flex;
+        gap: 0.125rem;
+    }
+
+    .star {
+        color: #666;
+        font-size: 1.2rem;
+    }
+
+    .star.filled {
+        color: #ffcc33;
+    }
+
+    .rating-text {
+        color: #e6007e;
+        font-weight: bold;
+    }
+
+    .review-count {
+        color: #ccc;
+    }
+
+    .reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .review-item {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #e6007e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .avatar-placeholder {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .reviewer-name {
+        color: #e6007e;
+        margin: 0;
+    }
+
+    .review-rating {
+        display: flex;
+        gap: 0.125rem;
+        margin-top: 0.25rem;
+    }
+
+    .review-date {
+        color: #666;
+    }
+
+    .review-title {
+        color: #ffcc33;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .review-text {
+        color: #ccc;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .show-more-reviews {
+        text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid #666;
+        margin-top: 1rem;
+    }
+
+    .retro-btn {
+        background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .retro-btn:hover {
+        border-color: #ffcc33;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 0, 126, 0.3);
+    }
+
+    /* Action Panel */
+    .action-panel {
+        margin-top: 2rem;
+    }
+
+    .action-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .quick-action-btn {
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        text-decoration: none;
+        transition: all 0.3s;
+        text-align: center;
+        display: block;
+        color: white;
+    }
+
+    .quick-action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        color: white;
+    }
+
+    .edit-action {
+        border-color: #ffcc33;
+    }
+
+    .edit-action:hover {
+        border-color: #ffcc33;
+        background: rgba(255, 204, 51, 0.1);
+    }
+
+    .view-action {
+        border-color: #2196f3;
+    }
+
+    .view-action:hover {
+        border-color: #2196f3;
+        background: rgba(33, 150, 243, 0.1);
+    }
+
+    .list-action {
+        border-color: #e6007e;
+    }
+
+    .list-action:hover {
+        border-color: #e6007e;
+        background: rgba(230, 0, 126, 0.1);
+    }
+
+    .delete-action {
+        border-color: #f44336;
+    }
+
+    .delete-action:hover {
+        border-color: #f44336;
+        background: rgba(244, 67, 54, 0.1);
+    }
+
+    .action-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-text {
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 0.25rem;
+    }
+
+    .action-description {
+        font-family: 'VT323', monospace;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+
+    .famicom-cartridge-slot {
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 3px;
+        margin-top: 3rem;
+        position: relative;
+    }
+
+    .famicom-cartridge-slot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        right: 10%;
+        height: 8px;
+        background: #000;
+        border-radius: 2px;
+        transform: translateY(-50%);
+    }
+
+    /* Modal Styles */
+    .retro-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        font-family: 'VT323', monospace;
+    }
+
+    .modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+        width: 90%;
+        max-width: 500px;
+        z-index: 1001;
+        background: linear-gradient(135deg, #1a0b2e 0%, #2a1144 100%);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        color: #ffcc33;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        color: #e6007e;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-close:hover {
+        color: #ffcc33;
+    }
+
+    .modal-body {
+        color: white;
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+
+    .modal-body p {
+        margin: 0 0 1rem 0;
+    }
+
+    .product-name {
+        color: #e6007e;
+        font-weight: bold;
+    }
+
+    .warning-text {
+        color: #f44336;
+        font-weight: bold;
+    }
+
+    .modal-footer {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+
+    /* No Reviews Styling */
+    .no-reviews-summary {
+        display: flex;
+        align-items: center;
+    }
+
+    .no-reviews-text {
+        color: #666;
+        font-style: italic;
+        font-size: 1rem;
+    }
+
+    .no-reviews-placeholder {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .retro-message-box {
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px dashed #666;
+        border-radius: 8px;
+        padding: 2rem;
+        color: #ccc;
+    }
+
+    .message-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .retro-message-box h4 {
+        color: #ffcc33;
+        margin: 0 0 1rem 0;
+        font-size: 1.3rem;
+    }
+
+    .retro-message-box p {
+        margin: 0 0 0.5rem 0;
+        line-height: 1.4;
+    }
+
+    .encourage-text {
+        color: #e6007e;
+        font-weight: bold;
+        margin-top: 1rem !important;
+    }
+
+    /* Responsive Design */
+</style>

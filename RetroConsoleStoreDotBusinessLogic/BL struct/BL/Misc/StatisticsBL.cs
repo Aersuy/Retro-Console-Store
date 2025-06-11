@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
+using RetroConsoleStoreDotDomain.Statistics;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
 {
@@ -29,6 +30,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         public bool LoginStatBL(UserSmall user)
         {
             return LoginStatAPI(user);  
+        }
+        public ProductStatsT GetProductStatsBL(int productId)
+        {
+            return GetProdStatsAPI(productId);
         }
     }
 }

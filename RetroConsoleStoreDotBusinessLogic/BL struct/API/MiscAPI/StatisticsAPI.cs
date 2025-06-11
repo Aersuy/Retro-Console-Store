@@ -165,5 +165,23 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                 return false;
             }
         }
+        internal ProductStatsT GetProdStatsAPI(int id)
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                
+                    var stats =  ctx.ProductStatistics.FirstOrDefault(p => p.ProductId == id);
+
+                    return stats;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting prod stats");
+                return null;
+            }
+        }
     }
 }

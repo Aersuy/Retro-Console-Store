@@ -10,6 +10,7 @@ using System.IO;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
+using RetroConsoleStoreDotWeb.ViewModel;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -20,6 +21,8 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly IProductBL _productBL;
         private readonly IAccountBL _accountBL;
         private readonly IAdmin _adminBL;
+        private readonly IStatistics _statisticsBL;
+        private readonly IReview _reviewBL;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
@@ -28,6 +31,8 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _productBL = businessLogic.GetProductBL();
             _accountBL = businessLogic.GetAccountAPI();
             _adminBL = businessLogic.GetAdminBl();
+            _reviewBL = businessLogic.GetReviewBl();
+            _statisticsBL = businessLogic.GetStatsBL();
         }
         [HttpGet]
         public ActionResult AddProduct()
@@ -140,29 +145,12 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult EditProduct(int id)
         {
             ProductModelBack prod = _productBL.GetProduct(id);
-            var product = new Product();
-
-            product.Id = prod.Id;
-            product.Name = prod.Name;
-            product.Description = prod.Description;
-            if (prod.ImagePath != null)
-            {
-                product.ImagePath = prod.ImagePath;
-            }
-            else
-            {
-                product.ImagePath = "/Content/images/missing-picture-page-website-design-600nw-1552421075";
-            }
-            product.Price = prod.Price;
-            product.Brand = prod.Brand;
-            product.YearReleased = prod.YearReleased;
-            product.StockQuantity = prod.StockQuantity;
-
-            return View(product);
+            return View(prod);
         }
         [HttpPost]
-        public ActionResult EditProduct(ProductModelBack product)
+        public ActionResult EditProduct(int id,bool edit)
         {
+            var product = _productBL.GetProduct(id);
             _productBL.UpdateProduct(product);
             return View();
         }
@@ -171,9 +159,13 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _productBL.DeleteProductBL(id);
             return RedirectToAction("ManageProducts", "Admin");
         }
-        public ActionResult ProductDetails(int id)
+        public ActionResult ProductDetail(int id)
         {
-            return View();
+            var model = new ProductWithStatsViewModel();
+            model.product = _productBL.GetProduct(id);
+            model.reviews = _reviewBL.GetReviewsForProudctBL(id);
+            model.statsT = _statisticsBL.GetProductStatsBL(id);
+            return View(model);
         }
     }
 }

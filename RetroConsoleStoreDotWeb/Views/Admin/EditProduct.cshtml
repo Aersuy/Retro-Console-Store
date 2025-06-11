@@ -115,14 +115,16 @@
 
                     <div class="form-group">
                         <label for="Price" class="form-label">Price ($) *</label>
-                        @Html.TextBoxFor(m => m.Price, new { 
-                            @class = "form-input price-input", 
-                            type = "number",
-                            step = "0.01",
-                            min = "0",
-                            required = "required",
-                            placeholder = "0.00"
-                        })
+                        <div class="price-input-wrapper">
+                            @Html.TextBoxFor(m => m.Price, new { 
+                                @class = "form-input price-input", 
+                                type = "number",
+                                step = "0.01",
+                                min = "0",
+                                required = "required",
+                                placeholder = "0.00"
+                            })
+                        </div>
                         @Html.ValidationMessageFor(m => m.Price, "", new { @class = "validation-error" })
                     </div>
 
@@ -247,13 +249,20 @@
         grid-template-columns: 1fr 2fr;
         gap: 2rem;
         margin-bottom: 2rem;
+        min-height: 600px;
     }
 
     .retro-card {
         background: rgba(0, 0, 0, 0.2);
         border: 2px solid #666;
         border-radius: 8px;
-        padding: 2rem;
+        padding: 2rem 2rem 3rem 2rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .section-header {
@@ -340,14 +349,18 @@
 
     /* Form Section */
     .form-grid {
+        flex: 1;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
+        margin-bottom: 3rem;
+        width: 100%;
     }
 
     .form-group {
         display: flex;
         flex-direction: column;
+        margin-bottom: 1rem;
     }
 
     .form-group.full-width {
@@ -393,16 +406,6 @@
         position: relative;
     }
 
-    .price-input::before {
-        content: '$';
-        position: absolute;
-        left: 0.75rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #4caf50;
-        font-weight: bold;
-    }
-
     .validation-error {
         color: #f44336;
         font-size: 0.9rem;
@@ -433,15 +436,15 @@
     }
 
     .submit-btn {
-        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-        border-color: #4caf50;
+        background: linear-gradient(135deg, #9c27b0 0%, #ba68c8 100%);
+        border-color: #9c27b0;
         color: white;
     }
 
     .submit-btn:hover {
-        background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+        background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%);
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
     }
 
     .cancel-btn {
@@ -458,6 +461,344 @@
         box-shadow: 0 6px 20px rgba(244, 67, 54, 0.3);
     }
 
-   
+    /* Famicom Controller Ports */
+    .famicom-controller-ports {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .famicom-controller-ports span {
+        width: 120px;
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .famicom-controller-ports span::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 60%;
+        background: #000;
+        border-radius: 5px;
+    }
+
+    /* Famicom Cartridge Slot */
+    .famicom-cartridge-slot {
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 3px;
+        margin-top: 3rem;
+        position: relative;
+    }
+
+    .famicom-cartridge-slot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        right: 10%;
+        height: 8px;
+        background: #000;
+        border-radius: 2px;
+        transform: translateY(-50%);
+    }
+
+    /* Font Family Declarations */
+    .edit-product-container {
+        font-family: 'VT323', monospace;
+    }
+
+    .retro-font-pixel {
+        font-family: 'Press Start 2P', 'VT323', monospace;
+    }
+
+    .retro-font-8bit {
+        font-family: 'VT323', monospace;
+    }
+
+    /* Enhanced Retro Card Styling */
+    .retro-card {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Fix Price Input Styling - Use wrapper approach instead of pseudo-elements */
+    .price-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .price-input-wrapper::before {
+        content: '$';
+        position: absolute;
+        left: 0.75rem;
+        color: #9c27b0;
+        font-weight: bold;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .price-input-wrapper .form-input {
+        padding-left: 2rem;
+    }
+
+    /* Form Input Placeholders */
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+        color: #666;
+        opacity: 1;
+    }
+
+    .form-input::-webkit-input-placeholder,
+    .form-textarea::-webkit-input-placeholder {
+        color: #666;
+    }
+
+    .form-input::-moz-placeholder,
+    .form-textarea::-moz-placeholder {
+        color: #666;
+        opacity: 1;
+    }
+
+    .form-input:-ms-input-placeholder,
+    .form-textarea:-ms-input-placeholder {
+        color: #666;
+    }
+
+    /* Form Select Styling */
+    .form-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6007e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1rem;
+        padding-right: 2.5rem;
+    }
+
+    /* Error State Styling */
+    .form-input.input-validation-error,
+    .form-textarea.input-validation-error,
+    .form-select.input-validation-error {
+        border-color: #f44336;
+        background: rgba(244, 67, 54, 0.1);
+    }
+
+    /* Valid State Styling - Using CSS :valid pseudo-class */
+    .form-input:valid:not(:placeholder-shown),
+    .form-textarea:valid:not(:placeholder-shown),
+    .form-select:valid {
+        border-color: #9c27b0;
+        background: rgba(156, 39, 176, 0.05);
+    }
+
+    /* Loading State for Submit Button - Removed JS dependency */
+    .submit-btn:active {
+        transform: translateY(-1px);
+        opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @@media (max-width: 1024px) {
+        .edit-product-container {
+            padding: 1.5rem;
+        }
+        
+        .form-container {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .edit-product-container {
+            padding: 1rem;
+        }
+        
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .submit-btn,
+        .cancel-btn {
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+        
+        .header-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .action-btn {
+            justify-content: center;
+        }
+        
+        .famicom-controller-ports {
+            gap: 1rem;
+        }
+        
+        .famicom-controller-ports span {
+            width: 80px;
+            height: 16px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .edit-product-container {
+            padding: 0.5rem;
+        }
+        
+        .retro-card {
+            padding: 1rem;
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+        
+        .price-input-wrapper::before {
+            left: 0.5rem;
+        }
+        
+        .price-input-wrapper .form-input {
+            padding-left: 1.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+        
+        .submit-btn,
+        .cancel-btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+
+    /* Print Styles */
+    @@media print {
+        .edit-product-container {
+            background: white !important;
+            color: black !important;
+        }
+        
+        .action-buttons,
+        .header-actions,
+        .famicom-controller-ports,
+        .famicom-cartridge-slot {
+            display: none !important;
+        }
+        
+        .retro-card {
+            border: 1px solid #000 !important;
+            background: white !important;
+        }
+    }
+
+    /* High Contrast Mode Support */
+    @@media (prefers-contrast: high) {
+        .form-input,
+        .form-textarea,
+        .form-select {
+            border-width: 3px;
+        }
+        
+        .action-btn,
+        .submit-btn,
+        .cancel-btn {
+            border-width: 3px;
+        }
+    }
+
+    /* Reduced Motion Support */
+    @@media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    .details-section {
+        height: auto;
+        overflow: visible;
+        padding-bottom: 4rem;
+    }
+
+    .details-section.retro-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid #666;
+        border-radius: 8px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        min-height: calc(100vh - 200px);
+        height: auto;
+    }
+
+    .details-section.retro-card::after {
+        display: none;
+    }
+
+    .details-section .section-header {
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .details-section .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        width: 100%;
+        padding-bottom: 2rem;
+    }
 </style>
 

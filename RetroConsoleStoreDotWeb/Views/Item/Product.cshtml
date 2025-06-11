@@ -106,7 +106,7 @@
     
         <div class="row mt-5">
             <div class="col-12">
-                <div class="reviews-section retro-card">                  
+                <div class="reviews-section retro-card">
                     <div class="review-header">
                         <h3 class="retro-font-pixel">🎮 Player Reviews</h3>
                         <div class="review-tabs">
@@ -117,59 +117,59 @@
                     </div>
 
                     <div class="write-review-section mb-4">
-                        <h4 class="retro-font-8bit">✍️ Share Your Experience</h4>
+                                <h4 class="retro-font-8bit">✍️ Share Your Experience</h4>
 
                         @using (Html.BeginForm("Review", "Item", FormMethod.Post, new { @class = "review-form" }))
-                        {
+                                {
                             @Html.HiddenFor(m => m.ReviewMessage.ProductId, new { Value = Model.product.Id })
 
-                            <div class="form-group">
-                                <label class="retro-font-8bit">Your Rating:</label>
-                                <div class="star-rating-input">
+                                            <div class="form-group">
+                                                <label class="retro-font-8bit">Your Rating:</label>
+                                                <div class="star-rating-input">
                                     @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "5", new { id = "star5" })
-                                    <label for="star5" class="star-label">★</label>
+                                                    <label for="star5" class="star-label">★</label>
                                     @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "4", new { id = "star4" })
-                                    <label for="star4" class="star-label">★</label>
+                                                    <label for="star4" class="star-label">★</label>
                                     @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "3", new { id = "star3" })
-                                    <label for="star3" class="star-label">★</label>
+                                                    <label for="star3" class="star-label">★</label>
                                     @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "2", new { id = "star2" })
-                                    <label for="star2" class="star-label">★</label>
+                                                    <label for="star2" class="star-label">★</label>
                                     @Html.RadioButtonFor(m => m.ReviewMessage.Rating, "1", new { id = "star1" })
-                                    <label for="star1" class="star-label">★</label>
-                                </div>
+                                                    <label for="star1" class="star-label">★</label>
+                                                </div>
                                 @Html.ValidationMessageFor(m => m.ReviewMessage.Rating, "", new { @class = "validation-error" })
-                            </div>
+                                            </div>
 
-                            <div class="form-group">
-                                <label for="Title" class="retro-font-8bit">Review Title:</label>
+                                            <div class="form-group">
+                                                <label for="Title" class="retro-font-8bit">Review Title:</label>
                                 @Html.TextBoxFor(m => m.ReviewMessage.Title, new
-                                {
-                                    @class = "retro-input",
-                                    placeholder = "Sum up your experience...",
-                                    maxlength = "100",
-                                    required = "required"
-                                })
+                                           {
+                                               @class = "retro-input",
+                                               placeholder = "Sum up your experience...",
+                                               maxlength = "100",
+                                               required = "required"
+                                           })
                                 @Html.ValidationMessageFor(m => m.ReviewMessage.Title, "", new { @class = "validation-error" })
-                            </div>
+                                            </div>
 
-                            <div class="form-group">
+                                            <div class="form-group">
                                 <label for="Message" class="retro-font-8bit">Your Review:</label>
                                 @Html.TextAreaFor(m => m.ReviewMessage.Message, new
-                                {
-                                    @class = "retro-textarea",
-                                    placeholder = "Tell other retro gamers about this product...",
-                                    rows = "6",
-                                    maxlength = "2000",
-                                    required = "required"
-                                })
-                                <div class="char-limit-note">Maximum 2000 characters</div>
+                                           {
+                                               @class = "retro-textarea",
+                                               placeholder = "Tell other retro gamers about this product...",
+                                               rows = "6",
+                                               maxlength = "2000",
+                                               required = "required"
+                                           })
+                                                <div class="char-limit-note">Maximum 2000 characters</div>
                                 @Html.ValidationMessageFor(m => m.ReviewMessage.Message, "", new { @class = "validation-error" })
-                            </div>
+                                            </div>
 
-                            <button type="submit" class="retro-btn review-submit-btn">
-                                🎮 Submit Review
-                            </button>
-                        }
+                                            <button type="submit" class="retro-btn review-submit-btn">
+                                                🎮 Submit Review
+                                            </button>
+                                                }
                     </div>
 
                     <div class="reviews-list">
@@ -177,51 +177,51 @@
                             @if (Model.reviews != null && Model.reviews.Any())
                             {
                                 foreach (var review in Model.reviews)
-                                {
-                                    <div class="review-item">
-                                        <div class="review-header-item">
-                                            <div class="reviewer-info">
-                                                <div class="reviewer-avatar">
+                                        {
+                                            <div class="review-item">
+                                                <div class="review-header-item">
+                                                    <div class="reviewer-info">
+                                                        <div class="reviewer-avatar">
                                                     @if (review.User != null && !string.IsNullOrEmpty(review.User.ImagePath))
-                                                    {
-                                                        <img src="@review.User.ImagePath" alt="@review.User.username" class="avatar-img">
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="avatar-placeholder">🎮</div>
-                                                    }
-                                                </div>
-                                                <div class="reviewer-details">
-                                                    <h5 class="reviewer-name retro-font-8bit">@(review.User?.username ?? "Anonymous")</h5>
-                                                    <div class="review-meta">
-                                                        <div class="review-rating">
-                                                            @for (int i = 1; i <= 5; i++)
                                                             {
-                                                                <span class="star @(i <= review.Rating ? "filled" : "")">★</span>
+                                                        <img src="@review.User.ImagePath" alt="@review.User.username" class="avatar-img">
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="avatar-placeholder">🎮</div>
                                                             }
                                                         </div>
+                                                        <div class="reviewer-details">
+                                                    <h5 class="reviewer-name retro-font-8bit">@(review.User?.username ?? "Anonymous")</h5>
+                                                            <div class="review-meta">
+                                                                <div class="review-rating">
+                                                                    @for (int i = 1; i <= 5; i++)
+                                                                    {
+                                                                        <span class="star @(i <= review.Rating ? "filled" : "")">★</span>
+                                                                    }
+                                                                </div>
                                                         <span class="review-date">@review.DateCreated.ToString("MMM dd, yyyy")</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
 
-                                        <div class="review-content">
-                                            <h4 class="review-title">@review.Title</h4>
-                                            <p class="review-text">@review.ReviewText</p>
+                                                <div class="review-content">
+                                                    <h4 class="review-title">@review.Title</h4>
+                                                    <p class="review-text">@review.ReviewText</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="no-reviews">
+                                            <div class="retro-message-box">
+                                                <h4 class="retro-font-8bit">📝 No Reviews Yet</h4>
+                                                <p>Be the first to review this retro gaming product!</p>
                                         </div>
                                     </div>
                                 }
-                            }
-                            else
-                            {
-                                <div class="no-reviews">
-                                    <div class="retro-message-box">
-                                        <h4 class="retro-font-8bit">📝 No Reviews Yet</h4>
-                                        <p>Be the first to review this retro gaming product!</p>
-                                    </div>
-                                </div>
-                            }
                         </div>
                     </div>
                 </div>

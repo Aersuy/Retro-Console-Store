@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using RetroConsoleStoreDotDomain.Model.User;
+using RetroConsoleStoreDotDomain.Statistics;
 
 namespace RetroConsoleStoreDotBusinessLogic.Interfaces
 {
@@ -14,5 +15,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         bool UserVisitedPage(UserSmall user,int ProductId);
         bool AddToCartStatBl (UserSmall user);
         bool LoginStatBL(UserSmall user);
+        ProductStatsT GetProductStatsBL(int productId);
     }
 }
