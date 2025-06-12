@@ -12,5 +12,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         bool ReviewProduct(ReviewMessage message);
         List<ReviewT> GetReviewsForProudctBL(int productId);
+        List<ReviewT> GetAllBL();
     }
 }

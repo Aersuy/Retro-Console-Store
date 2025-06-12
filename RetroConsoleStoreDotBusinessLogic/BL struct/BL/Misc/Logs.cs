@@ -10,6 +10,8 @@ using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Logs;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI;
+using System.Runtime.InteropServices.WindowsRuntime;
+using RetroConsoleStoreDotDomain.Model.Misc;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct
 {
     //TODO : Make the product log method work with just the id
@@ -42,6 +44,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         public string ProductLog(ProductModelBack data, string Descr)
         {
            return ProductLogAPI(data, Descr);
+        }
+        public List<LogM> GetRecentBL(int? days)
+        {
+            return GetRecentAPI(days);
         }
     }
 }

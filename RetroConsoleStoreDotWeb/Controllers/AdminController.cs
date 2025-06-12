@@ -12,6 +12,7 @@ using RetroConsoleStoreDotBusinessLogic.Attributes;
 using RetroConsoleStoreDotWeb.ViewModel;
 using System.Text;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc;
+using RetroConsoleStoreDotDomain.Logs;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -24,6 +25,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly IAdmin _adminBL;
         private readonly IStatistics _statisticsBL;
         private readonly IReview _reviewBL;
+        private readonly ILog _log;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
@@ -34,6 +36,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _adminBL = businessLogic.GetAdminBl();
             _reviewBL = businessLogic.GetReviewBl();
             _statisticsBL = businessLogic.GetStatsBL();
+            _log = businessLogic.GetLogBL();
         }
         [HttpGet]
         public ActionResult AddProduct()
@@ -178,6 +181,16 @@ namespace RetroConsoleStoreDotWeb.Controllers
             var csv = _statisticsBL.GenerateCSVBL();
             var fileName = $"ProductStatistics_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
             return File(Encoding.UTF8.GetBytes(csv.ToString()), "text/csv", fileName);
+        }
+        public ActionResult Logs(int? days)
+        {
+            var logs = _log.GetRecentBL(days);
+            return View(logs);
+        }
+        public ActionResult Reviews()
+        {
+            var reviews = _reviewBL.GetAllBL();
+            return View(reviews);
         }
     }
 }

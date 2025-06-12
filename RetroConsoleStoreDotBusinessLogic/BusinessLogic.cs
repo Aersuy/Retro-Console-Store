@@ -72,5 +72,9 @@ namespace RetroConsoleStore.BusinessLogic
         {
             return _review;
         }
+        public ILog GetLogBL()
+        {
+            return _loggingBL;
+        }
     }
 }

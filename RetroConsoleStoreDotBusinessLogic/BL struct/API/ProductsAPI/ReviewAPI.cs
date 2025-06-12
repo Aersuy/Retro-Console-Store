@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,16 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI
         {
             _error = error;
         }
-        
-        public bool ReviewProductAPI(ReviewMessage message)
+
+        internal bool ReviewProductAPI(ReviewMessage message)
         {
             try
-            {   if (message == null)
+            {
+                if (message == null)
                 {
                     throw new ArgumentNullException("message");
                 }
-                
+
                 using (var ctx = new MainContext())
                 {
                     var user = ctx.Users.FirstOrDefault(p => p.id == message.UserId);
@@ -49,20 +51,20 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI
                 }
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 _error.ErrorToDatabase(ex, "Error leaving review//API");
                 return false;
             }
         }
-        public List<ReviewT> GetReviewsForProudctAPI(int productId)
+        internal List<ReviewT> GetReviewsForProudctAPI(int productId)
         {
             try
             {
-                using(var ctx = new MainContext())
+                using (var ctx = new MainContext())
                 {
                     var reviews = ctx.Reviews
-                    .Include("User") 
+                    .Include("User")
                     .Where(r => r.ProductId == productId)
                     .ToList();
                     return reviews;
@@ -72,6 +74,23 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.ProductsAPI
             {
                 _error.ErrorToDatabase(ex, "Error getting reviews for product//API");
                 return null;
+            }
+        }
+        internal List<ReviewT> GetAllAPI()
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var reviews = ctx.Reviews.Include(i => i.User).Include(i => i.Product).ToList();
+                 
+                    return reviews;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting all review");
+                return new List<ReviewT> { };
             }
         }
     }

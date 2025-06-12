@@ -1,0 +1,152 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "System Logs | RetroConsoleStore";
+}
+@model List<RetroConsoleStoreDotDomain.Model.Misc.LogM>
+
+<div class="container retro-section">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-5">
+            <h1 class="retro-font-pixel">System Logs</h1>
+        </div>
+    </div>
+
+    <!-- Filter Form -->
+    <div class="row mb-4">
+        <div class="col-md-6 mx-auto">
+            <form method="get" action="@Url.Action("Logs", "Admin")" class="search-form">
+                <div class="input-group">
+                    <select name="days" class="form-control retro-input">
+                        <option value="1">Last 24 Hours</option>
+                        <option value="7">Last 7 Days</option>
+                        <option value="30">Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                    </select>
+                    <button type="submit" class="btn retro-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Logs Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-dark table-striped retro-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>IP Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var log in Model)
+                            {
+                                <tr>
+                                    <td>@log.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    <td>@log.UserName</td>
+                                    <td>
+                                        <span class="badge @(log.Type.ToLower() == "error" ? "badge-danger" : 
+                                                          log.Type.ToLower() == "warning" ? "badge-warning" : 
+                                                          "badge-info")">
+                                            @log.Type
+                                        </span>
+                                    </td>
+                                    <td>@log.Description</td>
+                                    <td>@log.UserIp</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center">No logs found for the selected period</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .retro-table {
+        background-color: #2a1144;
+        border: 2px solid #e6007e;
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+    }
+
+    .retro-table thead th {
+        background-color: #1a0a2a;
+        border-bottom: 2px solid #e6007e;
+        color: #ffcc33;
+        font-size: 1.2rem;
+    }
+
+    .retro-table tbody td {
+        border-bottom: 1px solid #e6007e;
+        font-size: 1.1rem;
+    }
+
+    .retro-table tbody tr:hover {
+        background-color: #3a1a54 !important;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .badge-danger {
+        background-color: #e6007e;
+    }
+
+    .badge-warning {
+        background-color: #ffcc33;
+        color: #2a1144;
+    }
+
+    .badge-info {
+        background-color: #00ccff;
+        color: #2a1144;
+    }
+
+    .retro-input {
+        background-color: #2a1144;
+        border: 2px solid #e6007e;
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+    }
+
+    .retro-input:focus {
+        background-color: #2a1144;
+        border-color: #ffcc33;
+        color: #ffcc33;
+        box-shadow: 0 0 0 0.2rem rgba(230, 0, 126, 0.25);
+    }
+
+    .retro-btn {
+        background-color: #e6007e;
+        border: 2px solid #ffcc33;
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .retro-btn:hover {
+        background-color: #ffcc33;
+        border-color: #e6007e;
+        color: #2a1144;
+    }
+</style> 

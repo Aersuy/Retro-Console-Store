@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using RetroConsoleStoreDotBusinessLogic.DBContext;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Logs;
+using RetroConsoleStoreDotDomain.Model.Misc;
 using RetroConsoleStoreDotDomain.Model.Product;
 
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI
@@ -117,6 +119,51 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.MiscAPI
             {
                 _error.ErrorToDatabase(ex, "Error in logging the process of adding a product to db");
                 return $"Error creating log entry: {ex.Message}";
+            }
+        }
+        internal LogM TableToModelLogMap(LTable table)
+        {
+            var logMap = new LogM()
+            {
+                CreatedDate = table.CreatedDate,
+                LogId = table.LogId,
+                Description = table.Description,
+                Type = table.Type,  
+                UserId = table.UserId,
+                UserIp = table.UserIp,
+                UserName = table.UserName
+            };
+            return logMap;
+        }
+        internal List<LogM> GetRecentAPI(int? days)
+        {
+            try 
+            {
+                if (days < 0)
+                {
+                    throw new InvalidDataException("Days parameter cannot be negative");
+                }
+
+                using (var ctx = new LogContext())
+                {
+                    var cutoffDate = DateTime.Now.AddDays(-(days ?? 1));
+                    var logs = ctx.Logs
+                        .Where(p => p.CreatedDate >= cutoffDate)
+                        .OrderByDescending(p => p.CreatedDate)
+                        .ToList();
+
+                    return logs.Select(TableToModelLogMap).ToList();
+                }
+            }
+            catch (InvalidDataException ex)
+            {
+                _error.ErrorToDatabase(ex, "Invalid days parameter for log retrieval");
+                return new List<LogM>();
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error retrieving logs from database");
+                return new List<LogM>();
             }
         }
     }

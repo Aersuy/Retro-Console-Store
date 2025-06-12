@@ -1,0 +1,223 @@
+@model IEnumerable<RetroConsoleStoreDotDomain.Products.ReviewT>
+
+@{
+    ViewBag.Title = "Product Reviews | RetroConsoleStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="retro-title">Product Reviews</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="retro-card">
+                <div class="card-body">
+                    <h5 class="card-title">Review Statistics</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <span class="stat-label">Total Reviews</span>
+                                <span class="stat-value">@Model.Count()</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <span class="stat-label">Average Rating</span>
+                                <span class="stat-value">@(Model.Any() ? Model.Average(r => r.Rating).ToString("F1") : "0.0")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="retro-card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover retro-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Product</th>
+                            <th>User</th>
+                            <th>Rating</th>
+                            <th>Title</th>
+                            <th>Review</th>
+                            <th>Verified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var review in Model.OrderByDescending(r => r.DateCreated))
+                        {
+                            <tr>
+                                <td>@review.DateCreated.ToString("MM/dd/yyyy HH:mm")</td>
+                                <td>
+                                    <a href="@Url.Action("ProductDetail", "Admin", new { id = review.ProductId })" class="retro-link">
+                                        @review.Product.Name
+                                    </a>
+                                </td>
+                                <td>@review.User.username</td>
+                                <td>
+                                    <div class="rating-stars">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="fa fa-star @(i <= review.Rating ? "text-warning" : "text-muted")"></i>
+                                        }
+                                    </div>
+                                </td>
+                                <td>@review.Title</td>
+                                <td>@review.ReviewText</td>
+                                <td>
+                                    @if (review.VerifiedPurchase)
+                                    {
+                                        <span class="badge badge-success">Verified</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-secondary">Unverified</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .retro-title {
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        text-shadow: 3px 3px 0 #ff0000, 5px 5px 0 #000;
+        letter-spacing: 2px;
+    }
+
+    .retro-card {
+        background: #3a1f5d;
+        border: 4px solid #e6007e;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(230, 0, 126, 0.5), inset 0 0 20px rgba(230, 0, 126, 0.2);
+        margin-bottom: 1.5rem;
+    }
+
+    .card-body {
+        background: #2a1144;
+        border-radius: 4px;
+    }
+
+    .retro-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #2a1144;
+    }
+
+    .retro-table th {
+        background: #3a1f5d;
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        padding: 1rem;
+        text-transform: uppercase;
+        border-bottom: 3px solid #e6007e;
+    }
+
+    .retro-table td {
+        border-bottom: 1px solid #e6007e;
+        padding: 1rem;
+        vertical-align: middle;
+        color: #ffffff;
+        background: #2a1144;
+    }
+
+    .retro-table tr:hover td {
+        background: rgba(230, 0, 126, 0.2);
+    }
+
+    .retro-link {
+        color: #ffcc33;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .retro-link:hover {
+        color: #e6007e;
+        text-decoration: none;
+    }
+
+    .rating-stars {
+        font-size: 1.2rem;
+    }
+
+    .rating-stars .fa-star {
+        margin-right: 2px;
+    }
+
+    .rating-stars .text-warning {
+        color: #ffcc33 !important;
+    }
+
+    .rating-stars .text-muted {
+        color: #3a1f5d !important;
+    }
+
+    .badge {
+        font-family: 'VT323', monospace;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .badge-success {
+        background: #2a1144;
+        color: #ffcc33;
+        border: 2px solid #e6007e;
+    }
+
+    .badge-secondary {
+        background: #3a1f5d;
+        color: #ffcc33;
+        border: 2px solid #e6007e;
+    }
+
+    .stat-box {
+        background: #2a1144;
+        border: 3px solid #e6007e;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .stat-label {
+        color: #ffcc33;
+        display: block;
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+        color: #e6007e;
+        display: block;
+        font-family: 'VT323', monospace;
+        font-size: 2rem;
+    }
+
+    .card-title {
+        color: #ffcc33;
+        font-family: 'VT323', monospace;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .table-responsive {
+        background: #2a1144;
+        border-radius: 4px;
+    }
+</style> 

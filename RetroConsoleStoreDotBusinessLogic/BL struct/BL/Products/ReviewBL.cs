@@ -24,5 +24,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Products
         {
             return GetReviewsForProudctAPI(productId);
         }
+        public List<ReviewT> GetAllBL()
+        {
+            return GetAllAPI();
+        }
     }
 }
