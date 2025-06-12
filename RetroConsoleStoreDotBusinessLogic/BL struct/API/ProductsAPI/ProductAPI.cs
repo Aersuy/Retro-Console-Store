@@ -217,9 +217,64 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             }
             throw new NotImplementedException();
         }
-        internal IEnumerable<ProductModelBack> SeachAPI(string SearchTerm)
+        internal ProductModelBack TableToModelMapping(ProductTypeT modelType)
         {
-            throw new NotImplementedException();
+            var product = new ProductModelBack()
+            {   Id = modelType.Id,
+                Price = modelType.Price,
+                ImagePath = modelType.ImagePath,
+                Brand = modelType.Brand,
+                Description = modelType.Description,
+                Name = modelType.Name,
+                Status = modelType.Status,
+                TimeCreated = modelType.TimeCreated,
+                StockQuantity = modelType.StockQuantity,
+                YearReleased = modelType.YearReleased,
+                TimeUpdated = modelType.TimeUpdated,
+            };
+            return product;
+        }
+        internal IEnumerable<ProductModelBack> SearchAPI(string SearchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                return Enumerable.Empty<ProductModelBack>();
+            }
+
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var searchTermLower = SearchTerm.ToLower();
+
+                    var results = ctx.ProductTypes
+                        .Where(p => 
+                            p.Name.ToLower().Contains(searchTermLower) ||
+                            p.Brand.ToLower().Contains(searchTermLower) ||
+                            p.Description.ToLower().Contains(searchTermLower))
+                        .ToList();
+
+
+                    var sortedResults = results
+                        .OrderBy(p =>
+                         p.Name.ToLower().Contains(searchTermLower) ? 0 :
+                         p.Brand.ToLower().Contains(searchTermLower) ? 1 : 2)
+                         .ThenBy(p => p.Name) 
+                         .ToList();
+
+                    var resultM = new List<ProductModelBack>();
+                    foreach (var item in sortedResults)
+                    {
+                        resultM.Add(TableToModelMapping(item));
+                    }
+                    return resultM;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error searching products in the database");
+                return Enumerable.Empty<ProductModelBack>();
+            }
         }
     }
 }

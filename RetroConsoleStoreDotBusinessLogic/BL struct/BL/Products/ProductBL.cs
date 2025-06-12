@@ -41,7 +41,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         }
         public IEnumerable<ProductModelBack> Search(string searchTerm)
         {
-            return SeachAPI(searchTerm);
+            return SearchAPI(searchTerm);
         }
         public bool DeleteProductBL(int id)
         {

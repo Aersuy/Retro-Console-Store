@@ -30,12 +30,17 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _review = businessLogic.GetReviewBl();
         }
         [HttpGet]
-        public ActionResult Catalog()
-        {  
-            
-          List<ProductModelBack> products = _product.GetProductModelBacks();
-            // test
-
+        public ActionResult Catalog(string searchTerm)
+        {
+            IEnumerable<ProductModelBack> products = new List<ProductModelBack>(); 
+            if (searchTerm.IsNullOrWhiteSpace())
+            {
+                 products = _product.GetProductModelBacks();
+            }
+            else
+            {
+                products = _product.Search(searchTerm);
+            }
             List<Product> product2 = new List<Product> { };
 
             foreach (var item in products)
@@ -57,9 +62,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
                 }
                 product2.Add(product);
             }
-
-
-
+            ViewBag.SearchTerm = searchTerm;
             return View(product2);
         }
 

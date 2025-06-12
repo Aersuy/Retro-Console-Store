@@ -11,7 +11,18 @@
                 <h1 class="retro-font-pixel">Game Catalogue</h1>
             </div>
         </div>
-
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <form method="get" action="@Url.Action("Catalog", "Item")" class="search-form">
+                    <div class="input-group">
+                        <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control retro-input" placeholder="Search games..." />
+                        <button type="submit" class="btn retro-btn">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row">
             @if (Model != null && Model.Any())
             {
@@ -34,9 +45,9 @@
             }
             else
             {
-                <div class="col-12 text-center">
-                    <p class="retro-font-8bit">No products available</p>
-                </div>
+        <div class="col-12 text-center">
+            <p class="retro-font-8bit">@(string.IsNullOrEmpty(ViewBag.SearchTerm) ? "No products available" : "No products found matching your search")</p>
+        </div>
             }
         </div>
     </div>

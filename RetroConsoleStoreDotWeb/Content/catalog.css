@@ -35,3 +35,27 @@
 .retro-section {
     padding: 40px 0;
 }
+.search-form {
+    margin-bottom: 2rem;
+}
+
+.retro-input {
+    background-color: #2a1144;
+    border: 2px solid #e6007e;
+    color: #ffcc33;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+}
+
+    .retro-input:focus {
+        background-color: #2a1144;
+        border-color: #ffcc33;
+        color: #ffcc33;
+        box-shadow: 0 0 0 0.2rem rgba(230, 0, 126, 0.25);
+    }
+
+    .retro-input::placeholder {
+        color: #e6007e;
+        opacity: 0.7;
+    }
