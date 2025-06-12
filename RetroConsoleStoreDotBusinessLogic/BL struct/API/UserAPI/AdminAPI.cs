@@ -158,5 +158,21 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 return false;
             }
         }
+        internal int GetNumberOfUsersAPI()
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var users = ctx.Users.ToList();
+                    return users.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting the number of users");
+                return 0;
+            }
+        }
     }
 }

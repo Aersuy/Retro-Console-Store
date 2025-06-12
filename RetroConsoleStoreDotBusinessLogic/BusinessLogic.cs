@@ -27,8 +27,7 @@ namespace RetroConsoleStore.BusinessLogic
         public BusinessLogic()
         {
             _errorBL = new ErrorBL();
-            _loggingBL = new Logs(_errorBL);
-            _statisticsBL = new StatisticsBL(_errorBL);
+            _loggingBL = new Logs(_errorBL); 
             _passwordHash = new PasswordHash();
             _authBL = new AuthBL(_passwordHash,_errorBL,_loggingBL,_statisticsBL);
             _loginBL = new LoginBL1(_passwordHash,_loggingBL,_errorBL);
@@ -37,6 +36,7 @@ namespace RetroConsoleStore.BusinessLogic
             _accountBL = new AccountBL(_errorBL);
             _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
             _adminBL = new AdminBL(_errorBL, _loginBL,_messaging);
+            _statisticsBL = new StatisticsBL(_errorBL, _adminBL);
             _review = new ReviewBL(_errorBL);
         }
 

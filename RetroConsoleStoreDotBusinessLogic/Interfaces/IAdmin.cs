@@ -13,5 +13,6 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         bool UnbanUserBL(UnbanMessage message);
         bool AutoUnbanBL(UserSmall user);
         bool UpdateUserBL(UserSmall user);
+        int GetNumberOfUsersBL();
     }
 }

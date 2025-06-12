@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.Statistics;
 
@@ -12,7 +13,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
 {
     public class StatisticsBL : StatisticsAPI, IStatistics
     {
-        public StatisticsBL(IError error) : base(error)
+        public StatisticsBL(IError error,IAdmin admin) : base(error,admin)
         {
         }
         public bool CheckoutStat(UserSmall user)
@@ -34,6 +35,18 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         public ProductStatsT GetProductStatsBL(int productId)
         {
             return GetProdStatsAPI(productId);
+        }
+        public TotalStatsProducts GetOverallStats()
+        {
+            return GetOverallProductStatsAPI();
+        }
+        public List<ProductStatsT> GetProductsStatsListBl()
+        {
+            return GetListProductStatsAPI();
+        }
+        public StringBuilder GenerateCSVBL()
+        {
+            return GenerateStatsCSVAPI();
         }
     }
 }

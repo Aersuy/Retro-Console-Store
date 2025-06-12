@@ -31,5 +31,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         {
             return UpdateUserAPI(user);
         }
+        public int GetNumberOfUsersBL()
+        {
+            return GetNumberOfUsersAPI();
+        }
     }
 }

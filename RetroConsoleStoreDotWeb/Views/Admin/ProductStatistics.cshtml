@@ -1,0 +1,698 @@
+@model RetroConsoleStoreDotDomain.Model.Product.TotalStatsProducts
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Product Statistics Dashboard";
+}
+
+<div class="stats-dashboard-container">
+    <div class="page-header">
+        <h1 class="retro-font-pixel">&#128202; Product Statistics Dashboard</h1>
+        <div class="header-actions">
+            <a href="@Url.Action("DashBoard", "Admin")" class="action-btn back-btn">
+                <span class="btn-icon">&#8592;</span>
+                Back to Dashboard
+            </a>
+            <a href="@Url.Action("ManageProducts", "Admin")" class="action-btn products-btn">
+                <span class="btn-icon">&#128230;</span>
+                Manage Products
+            </a>
+            <a href="@Url.Action("AdminUserPage", "Admin")" class="action-btn users-btn">
+                <span class="btn-icon">&#128101;</span>
+                User Management
+            </a>
+            <a href="@Url.Action("ExportCSV", "Admin", new { id = 1 })" class="action-btn export-btn">
+                <span class="btn-icon">&#128190;</span>
+                Export CSV
+            </a>
+        </div>
+    </div>
+
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Overview Statistics -->
+    <div class="overview-section retro-card">
+        <div class="section-header">
+            <h3 class="retro-font-8bit">&#127918; Store Overview</h3>
+            <div class="refresh-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Real-time Data</span>
+            </div>
+        </div>
+
+        <div class="stats-grid-main">
+            <div class="stat-card revenue-card">
+                <div class="stat-icon-bg revenue-bg">
+                    <div class="stat-icon">&#128176;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@Model.TotalRevenue.ToString("C")</div>
+                    <div class="stat-label">Total Revenue</div>
+                    <div class="stat-description">All-time earnings from product sales</div>
+                </div>
+            </div>
+
+            <div class="stat-card sales-card">
+                <div class="stat-icon-bg sales-bg">
+                    <div class="stat-icon">&#128722;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@Model.TotalItemsSold.ToString("N0")</div>
+                    <div class="stat-label">Items Sold</div>
+                    <div class="stat-description">Total products purchased by customers</div>
+                </div>
+            </div>
+
+            <div class="stat-card views-card">
+                <div class="stat-icon-bg views-bg">
+                    <div class="stat-icon">&#128065;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@Model.TotalPageViews.ToString("N0")</div>
+                    <div class="stat-label">Page Views</div>
+                    <div class="stat-description">Total product page visits</div>
+                </div>
+            </div>
+
+            <div class="stat-card inventory-card">
+                <div class="stat-icon-bg inventory-bg">
+                    <div class="stat-icon">&#128230;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@Model.TotalItemsAdded.ToString("N0")</div>
+                    <div class="stat-label">Products Added</div>
+                    <div class="stat-description">Total items in store inventory</div>
+                </div>
+            </div>
+
+            <div class="stat-card users-card">
+                <div class="stat-icon-bg users-bg">
+                    <div class="stat-icon">&#128101;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@Model.TotalUsers.ToString("N0")</div>
+                    <div class="stat-label">Registered Users</div>
+                    <div class="stat-description">Total customer accounts created</div>
+                </div>
+            </div>
+
+            <div class="stat-card conversion-card">
+                <div class="stat-icon-bg conversion-bg">
+                    <div class="stat-icon">&#128200;</div>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">@(Model.TotalPageViews > 0 ? ((decimal)Model.TotalItemsSold / Model.TotalPageViews * 100).ToString("F1") + "%" : "0%")</div>
+                    <div class="stat-label">Conversion Rate</div>
+                    <div class="stat-description">Views to purchases ratio</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Metrics -->
+    <div class="metrics-section retro-card">
+        <div class="section-header">
+            <h3 class="retro-font-8bit">&#9889; Performance Metrics</h3>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <div class="metric-header">
+                    <span class="metric-icon">&#128181;</span>
+                    <span class="metric-title">Average Order Value</span>
+                </div>
+                <div class="metric-value">
+                    @(Model.TotalItemsSold > 0 ? (Model.AverageOrderValue).ToString("C") : "$0.00")
+                </div>
+                <div class="metric-trend positive">
+                    <span class="trend-icon">&#128200;</span>
+                    <span class="trend-text">Revenue per sale</span>
+                </div>
+            </div>
+
+            <div class="metric-item">
+                <div class="metric-header">
+                    <span class="metric-icon">&#127919;</span>
+                    <span class="metric-title">Engagement Score</span>
+                </div>
+                <div class="metric-value">
+                    @(Model.TotalUsers > 0 ? (Model.ViewsPerUser).ToString("F1") : "0")
+                </div>
+                <div class="metric-trend positive">
+                    <span class="trend-icon">&#128202;</span>
+                    <span class="trend-text">Views per user</span>
+                </div>
+            </div>
+
+            <div class="metric-item">
+                <div class="metric-header">
+                    <span class="metric-icon">&#127970;</span>
+                    <span class="metric-title">Store Productivity</span>
+                </div>
+                <div class="metric-value">
+                    @(Model.TotalItemsAdded > 0 ? (Model.SalesEfficiency).ToString("F1") + "%" : "0%")
+                </div>
+                <div class="metric-trend positive">
+                    <span class="trend-icon">&#9889;</span>
+                    <span class="trend-text">Sales efficiency</span>
+                </div>
+            </div>
+
+            <div class="metric-item">
+                <div class="metric-header">
+                    <span class="metric-icon">&#127918;</span>
+                    <span class="metric-title">Customer Activity</span>
+                </div>
+                <div class="metric-value">
+                    @((Model.CustomerActivity).ToString("N0"))
+                </div>
+                <div class="metric-trend positive">
+                    <span class="trend-icon">&#128293;</span>
+                    <span class="trend-text">Total interactions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="famicom-cartridge-slot"></div>
+</div>
+
+<style>
+    .stats-dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: linear-gradient(135deg, #1a0b2e 0%, #2a1144 100%);
+        min-height: 100vh;
+        color: white;
+        font-family: 'VT323', monospace;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-header h1 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #2a1144 0%, #3a1f5d 100%);
+        border: 2px solid #e6007e;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+    }
+
+    .action-btn:hover {
+        border-color: #ffcc33;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 0, 126, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+    .back-btn {
+        border-color: #666;
+        color: #ccc;
+    }
+
+    .back-btn:hover {
+        border-color: #e6007e;
+        color: white;
+    }
+
+    .products-btn {
+        border-color: #9c27b0;
+        color: #9c27b0;
+    }
+
+    .products-btn:hover {
+        background: #9c27b0;
+        color: white;
+        border-color: #9c27b0;
+    }
+
+    .users-btn {
+        border-color: #2196f3;
+        color: #2196f3;
+    }
+
+    .users-btn:hover {
+        background: #2196f3;
+        color: white;
+        border-color: #2196f3;
+    }
+
+    .export-btn {
+        border-color: #4caf50;
+        color: #4caf50;
+    }
+
+    .export-btn:hover {
+        background: #4caf50;
+        color: white;
+        border-color: #4caf50;
+    }
+
+    /* Famicom Controller Ports */
+    .famicom-controller-ports {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .famicom-controller-ports span {
+        width: 120px;
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .famicom-controller-ports span::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 60%;
+        background: #000;
+        border-radius: 5px;
+    }
+
+    /* Retro Card Styling */
+    .retro-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid #666;
+        border-radius: 8px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        margin-bottom: 2rem;
+        min-height: calc(100vh - 200px);
+        height: auto;
+    }
+
+    .section-header {
+        border-bottom: 2px solid #e6007e;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .section-header h3 {
+        color: #ffcc33;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    .refresh-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #4caf50;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+
+    .status-text {
+        color: #4caf50;
+        font-size: 0.9rem;
+    }
+
+    /* Main Stats Grid */
+    .stats-grid-main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #666;
+        border-radius: 8px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card:hover {
+        border-color: #e6007e;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon-bg {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .revenue-bg { background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%); }
+    .sales-bg { background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%); }
+    .views-bg { background: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%); }
+    .inventory-bg { background: linear-gradient(135deg, #9c27b0 0%, #ba68c8 100%); }
+    .users-bg { background: linear-gradient(135deg, #f44336 0%, #ef5350 100%); }
+    .conversion-bg { background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%); }
+
+    .stat-icon {
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #ffcc33;
+        margin-bottom: 0.25rem;
+        font-family: 'VT323', monospace;
+    }
+
+    .stat-label {
+        color: #e6007e;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-description {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .metric-item {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        transition: all 0.3s;
+    }
+
+    .metric-item:hover {
+        border-color: #9c27b0;
+        transform: translateY(-2px);
+    }
+
+    .metric-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .metric-icon {
+        font-size: 1.2rem;
+    }
+
+    .metric-title {
+        color: #e6007e;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .metric-value {
+        font-size: 1.8rem;
+        color: #ffcc33;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .metric-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .metric-trend.positive {
+        color: #4caf50;
+    }
+
+    .trend-icon {
+        font-size: 0.9rem;
+    }
+
+    .trend-text {
+        font-size: 0.9rem;
+    }
+
+    /* Actions Grid */
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .quick-action-btn {
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #666;
+        border-radius: 6px;
+        padding: 1.5rem;
+        text-decoration: none;
+        transition: all 0.3s;
+        text-align: center;
+        display: block;
+        color: white;
+    }
+
+    .quick-action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        color: white;
+    }
+
+    .add-product-action {
+        border-color: #4caf50;
+    }
+
+    .add-product-action:hover {
+        border-color: #4caf50;
+        background: rgba(76, 175, 80, 0.1);
+    }
+
+    .manage-action {
+        border-color: #9c27b0;
+    }
+
+    .manage-action:hover {
+        border-color: #9c27b0;
+        background: rgba(156, 39, 176, 0.1);
+    }
+
+    .users-action {
+        border-color: #2196f3;
+    }
+
+    .users-action:hover {
+        border-color: #2196f3;
+        background: rgba(33, 150, 243, 0.1);
+    }
+
+    .dashboard-action {
+        border-color: #ff9800;
+    }
+
+    .dashboard-action:hover {
+        border-color: #ff9800;
+        background: rgba(255, 152, 0, 0.1);
+    }
+
+    .action-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-text {
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 0.25rem;
+    }
+
+    .action-description {
+        font-family: 'VT323', monospace;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+
+    /* Famicom Cartridge Slot */
+    .famicom-cartridge-slot {
+        height: 20px;
+        background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+        border: 2px solid #666;
+        border-radius: 3px;
+        margin-top: 3rem;
+        position: relative;
+    }
+
+    .famicom-cartridge-slot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        right: 10%;
+        height: 8px;
+        background: #000;
+        border-radius: 2px;
+        transform: translateY(-50%);
+    }
+
+    /* Font Family Declarations */
+    .retro-font-pixel {
+        font-family: 'Press Start 2P', 'VT323', monospace;
+    }
+
+    .retro-font-8bit {
+        font-family: 'VT323', monospace;
+    }
+
+    /* Responsive Design */
+    @@media (max-width: 1024px) {
+        .stats-dashboard-container {
+            padding: 1.5rem;
+        }
+        
+        .stats-grid-main {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .stats-dashboard-container {
+            padding: 1rem;
+        }
+        
+        .stats-grid-main {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .metrics-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .actions-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .header-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .action-btn {
+            justify-content: center;
+        }
+        
+        .famicom-controller-ports {
+            gap: 1rem;
+        }
+        
+        .famicom-controller-ports span {
+            width: 80px;
+            height: 16px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .stats-dashboard-container {
+            padding: 0.5rem;
+        }
+        
+        .retro-card {
+            padding: 1rem;
+        }
+        
+        .stat-card {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+        
+        .actions-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+    }
+</style> 

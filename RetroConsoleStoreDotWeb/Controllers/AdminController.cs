@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RetroConsoleStoreDotWeb.Models.Articol;
@@ -11,6 +10,8 @@ using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
 using RetroConsoleStoreDotWeb.ViewModel;
+using System.Text;
+using RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc;
 
 namespace RetroConsoleStoreDotWeb.Controllers
 {
@@ -166,6 +167,17 @@ namespace RetroConsoleStoreDotWeb.Controllers
             model.reviews = _reviewBL.GetReviewsForProudctBL(id);
             model.statsT = _statisticsBL.GetProductStatsBL(id);
             return View(model);
+        }
+        public ActionResult ProductStatistics()
+        {
+            TotalStatsProducts statistics = _statisticsBL.GetOverallStats();
+            return View(statistics);
+        }
+        public ActionResult ExportCSV(int id)
+        {
+            var csv = _statisticsBL.GenerateCSVBL();
+            var fileName = $"ProductStatistics_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+            return File(Encoding.UTF8.GetBytes(csv.ToString()), "text/csv", fileName);
         }
     }
 }
