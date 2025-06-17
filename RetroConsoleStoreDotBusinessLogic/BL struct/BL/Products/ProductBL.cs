@@ -47,6 +47,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             return DeleteProductAPI(id);
         }
+        public IEnumerable<ProductModelBack> SortProductsBL(string sortBy, bool Ascending, IEnumerable<ProductModelBack> products)
+        {
+            return SortProductsAPI(sortBy, Ascending, products);
+        }
 
     }
 }

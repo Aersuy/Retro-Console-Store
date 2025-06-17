@@ -7,11 +7,9 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStoreDotBusinessLogic.Attributes;
-using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
 using RetroConsoleStoreDotDomain.Model.User;
-using RetroConsoleStoreDotDomain.Products;
 using RetroConsoleStoreDotWeb.ViewModel;
 
 namespace RetroConsoleStoreDotWeb.Controllers

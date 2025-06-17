@@ -19,5 +19,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         IEnumerable<ProductModelBack> Search(string searchTerm);
         bool DeleteProductBL(int id);
 
+        IEnumerable<ProductModelBack> SortProductsBL(string sortBy, bool Ascending, IEnumerable<ProductModelBack> products);
+
     }
 }

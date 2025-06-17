@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using MimeKit.Cryptography;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.Product;
@@ -14,7 +15,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
     //TODO : Add logging to the methods
     //TODO : Add error handling to the methods
     //TODO : Add validation to the methods
-    
+
     public class ProductAPI
     {
         readonly IError _error;
@@ -54,7 +55,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     };
                     ctx.ProductTypes.Add(NewProduct);
                     ctx.SaveChanges();
-                    ProductStats.ProductId = NewProduct.Id; 
+                    ProductStats.ProductId = NewProduct.Id;
                     ctx.ProductStatistics.Add(ProductStats);
                     ctx.SaveChanges();
                     _log.ProductLog(Product, "Adding product to DB");
@@ -65,10 +66,10 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     _error.ErrorToDatabase(ex, "Problem with adding product to the database");
                     return false;
                 }
-                
+
             }
 
-         
+
         }
         internal bool DeleteProductAPI(int Id)
         {
@@ -83,7 +84,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     }
                     ctx.ProductTypes.Remove(Product);
                     ctx.SaveChanges();
-                   // _log.ProductLog(Product, "Adding product to DB");
+                    // _log.ProductLog(Product, "Adding product to DB");
                     return true;
                 }
                 catch (Exception ex)
@@ -193,7 +194,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                 }
             }
         }
-       
+
         internal bool UpdateStockAPI(int ProductID, int Quantity)
         {
             using (var ctx = new MainContext())
@@ -220,7 +221,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
         internal ProductModelBack TableToModelMapping(ProductTypeT modelType)
         {
             var product = new ProductModelBack()
-            {   Id = modelType.Id,
+            { Id = modelType.Id,
                 Price = modelType.Price,
                 ImagePath = modelType.ImagePath,
                 Brand = modelType.Brand,
@@ -248,7 +249,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                     var searchTermLower = SearchTerm.ToLower();
 
                     var results = ctx.ProductTypes
-                        .Where(p => 
+                        .Where(p =>
                             p.Name.ToLower().Contains(searchTermLower) ||
                             p.Brand.ToLower().Contains(searchTermLower) ||
                             p.Description.ToLower().Contains(searchTermLower))
@@ -259,7 +260,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
                         .OrderBy(p =>
                          p.Name.ToLower().Contains(searchTermLower) ? 0 :
                          p.Brand.ToLower().Contains(searchTermLower) ? 1 : 2)
-                         .ThenBy(p => p.Name) 
+                         .ThenBy(p => p.Name)
                          .ToList();
 
                     var resultM = new List<ProductModelBack>();
@@ -274,6 +275,37 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.ProductsAPI
             {
                 _error.ErrorToDatabase(ex, "Error searching products in the database");
                 return Enumerable.Empty<ProductModelBack>();
+            }
+        }
+        internal IEnumerable<ProductModelBack> SortProductsAPI(string sortBy, bool Ascending, IEnumerable<ProductModelBack> products)
+        {
+            try
+            {
+                var allowedSorts = new[] { "Name", "Price", "ReleaseDate" };
+                if (!allowedSorts.Contains(sortBy)) sortBy = "Name";
+
+                IEnumerable<ProductModelBack> sorted;
+                switch (sortBy)
+                {
+                    case "Name":
+                        sorted = Ascending ? products.OrderBy(p => p.Name) : products.OrderByDescending(p => p.Name);
+                        break;
+                    case "Price":
+                        sorted = Ascending ? products.OrderBy(p => p.Price) : products.OrderByDescending(p => p.Price);
+                        break;
+                    case "ReleaseDate":
+                        sorted = Ascending ? products.OrderBy(p => p.YearReleased) : products.OrderByDescending(p => p.YearReleased);
+                        break;
+                    default:
+                        sorted = products;
+                        break;
+                }
+                return sorted;
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error sorting //API");
+                return products;
             }
         }
     }

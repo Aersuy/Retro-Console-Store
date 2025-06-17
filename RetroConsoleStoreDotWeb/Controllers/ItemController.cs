@@ -30,7 +30,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _review = businessLogic.GetReviewBl();
         }
         [HttpGet]
-        public ActionResult Catalog(string searchTerm)
+        public ActionResult Catalog(string searchTerm, string sortBy = "Price", bool ascending = true)
         {
             IEnumerable<ProductModelBack> products = new List<ProductModelBack>(); 
             if (searchTerm.IsNullOrWhiteSpace())
@@ -41,6 +41,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             {
                 products = _product.Search(searchTerm);
             }
+           products = _product.SortProductsBL(sortBy, ascending,products);
             List<Product> product2 = new List<Product> { };
 
             foreach (var item in products)
