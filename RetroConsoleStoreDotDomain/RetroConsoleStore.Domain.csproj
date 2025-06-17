@@ -73,6 +73,7 @@
     <Compile Include="Model\Product\ReviewMessage.cs" />
     <Compile Include="Model\Product\TotalStatsProducts.cs" />
     <Compile Include="Model\User\BanReport.cs" />
+    <Compile Include="Model\User\ModifyPasswordRequest.cs" />
     <Compile Include="Model\User\UnbanMessage.cs" />
     <Compile Include="Products\ReviewT.cs" />
     <Compile Include="User\UserBannedT.cs" />

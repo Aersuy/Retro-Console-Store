@@ -19,5 +19,9 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         {
             return SendBanEmail(report);
         }
+        public bool SendConfirmationEmailBl(ModifyPasswordRequest request)
+        {
+            return SendConfirmationEmailAPI(request);
+        }
     }
 }

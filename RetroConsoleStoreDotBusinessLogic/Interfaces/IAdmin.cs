@@ -14,5 +14,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         bool AutoUnbanBL(UserSmall user);
         bool UpdateUserBL(UserSmall user);
         int GetNumberOfUsersBL();
+        ModifyPasswordRequest ModifyPasswordBeginBL(UserSmall user, string newPassword, string newPassword2, string oldPassword);
+        bool ModifyPasswordBL(UserSmall user, string newPassword);
     }
 }

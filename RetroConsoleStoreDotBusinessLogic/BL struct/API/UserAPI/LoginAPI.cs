@@ -161,9 +161,11 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                         Role = user.level,
                         CartId = user.UserCartID,
                         Name = user.username,
-                        ImagePath = user.ImagePath
+                        ImagePath = user.ImagePath,
+                        LastLogin = user.LastRegisterDate
+                        
                     };
-                    return userSmall;
+                     return userSmall;
 
                 }
                

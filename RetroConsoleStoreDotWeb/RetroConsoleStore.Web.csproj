@@ -278,6 +278,9 @@
     <Content Include="Views\Admin\ProductStatistics.cshtml" />
     <Content Include="Views\Admin\Logs.cshtml" />
     <Content Include="Views\Admin\Reviews.cshtml" />
+    <Content Include="Views\User\UpdateUser.cshtml" />
+    <Content Include="Views\User\ModifyPassword.cshtml" />
+    <Content Include="Views\User\TwoFactorPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

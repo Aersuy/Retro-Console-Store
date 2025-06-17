@@ -72,5 +72,24 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 LastIp = user.LastIP
             };
         }
+        internal UserSmall GetUserByIDAPI(int id)
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var user = ctx.Users.FirstOrDefault(p => p.id == id);
+
+                    var userS = MapToUserSmall(user);
+                    return userS;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting user by id//API");
+                return null;
+            }
+        }
     }
 }

@@ -1,0 +1,381 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Update User | RetroConsoleStore";
+}
+@model RetroConsoleStoreDotDomain.Model.User.UserSmall
+
+<div class="catalogue-container retro-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-5">
+                <h1 class="retro-font-pixel text-light">Update User Profile</h1>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card retro-card">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            @if (!string.IsNullOrEmpty(Model.ImagePath))
+                            {
+                                <img src="@Url.Content(Model.ImagePath)" class="rounded-circle profile-image mb-3" alt="Profile Picture">
+                            }
+                            else
+                            {
+                                <div class="default-profile-image mb-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                            <h2 class="retro-font-8bit text-light">@Model.Name</h2>
+                        </div>
+
+                        @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { @class = "update-user-form" }))
+                        {
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.ImagePath)
+                            @Html.HiddenFor(m => m.CartId)
+                            @Html.HiddenFor(m => m.LastLogin)
+                            @Html.HiddenFor(m => m.LastIp)
+
+                            <div class="form-group mb-4">
+                                <label for="Name" class="retro-font-8bit text-warning">Username:</label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control retro-input", placeholder = "Enter username" })
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="Email" class="retro-font-8bit text-warning">Email:</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control retro-input", type = "email", placeholder = "Enter email address" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="Role" class="retro-font-8bit text-warning">Role:</label>
+                                @Html.DropDownListFor(m => m.Role, 
+                                    new SelectList(Enum.GetValues(typeof(RetroConsoleStoreDotDomain.Enums.URole))
+                                        .Cast<RetroConsoleStoreDotDomain.Enums.URole>()
+                                        .Where(r => r != RetroConsoleStoreDotDomain.Enums.URole.Banned && 
+                                                   r != RetroConsoleStoreDotDomain.Enums.URole.FraudulentUser && 
+                                                   r != RetroConsoleStoreDotDomain.Enums.URole.Deleted && 
+                                                   r != RetroConsoleStoreDotDomain.Enums.URole.None), 
+                                        "ToString()"), 
+                                    "Select Role", 
+                                    new { @class = "form-control retro-select" })
+                                @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="button-container">
+                                <button type="submit" class="btn retro-btn me-3">
+                                    <i class="fas fa-save"></i> Update Profile
+                                </button>
+                                <button type="button" class="btn retro-btn" onclick="window.location='@Url.Action("ModifyPassword", "User", new { id = Model.Id })'">
+                                    <i class="fas fa-key"></i> Change Password
+                                </button>
+                                <button type="button" class="btn retro-btn" onclick="window.location='@Url.Action("UserPage", "User")'">
+                                    <i class="fas fa-arrow-left"></i> Back to Profile
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .retro-section {
+        background-color: #1a1a1a;
+        padding: 2rem 0;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .retro-card {
+        background-color: #2a2a2a;
+        border: 3px solid #800080;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(128, 0, 128, 0.3);
+    }
+
+    .card-body {
+        color: #ffffff;
+        padding: 2rem;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 4px solid #800080;
+    }
+
+    .default-profile-image {
+        width: 120px;
+        height: 120px;
+        background-color: #3a3a3a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid #800080;
+        margin: 0 auto;
+    }
+
+    .default-profile-image i {
+        font-size: 48px;
+        color: #800080;
+    }
+
+    .update-user-form {
+        background-color: #3a1f5d;
+        border: 4px solid #e6007e;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-top: 1.5rem;
+        position: relative;
+        box-shadow: 0 0 15px rgba(230, 0, 126, 0.4);
+    }
+
+    .update-user-form::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+        border: 2px dashed #e6007e;
+        border-radius: 12px;
+        pointer-events: none;
+        opacity: 0.6;
+        animation: glow 2s infinite alternate;
+    }
+
+    @@keyframes glow {
+        from { opacity: 0.4; }
+        to { opacity: 0.8; }
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .retro-input, .retro-select {
+        width: 100%;
+        padding: 12px 15px;
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        background-color: #2a1144;
+        color: #ffffff;
+        border: 3px solid #e6007e;
+        border-radius: 4px;
+        outline: none;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .retro-input:focus, .retro-select:focus {
+        border-color: #800080;
+        box-shadow: 0 0 10px rgba(230, 0, 126, 0.6);
+        background-color: rgba(230, 0, 126, 0.1);
+    }
+
+    .retro-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .retro-select option {
+        background-color: #2a1144;
+        color: #ffffff;
+        padding: 8px;
+    }
+
+    .current-info {
+        background-color: #2a1144;
+        border: 2px solid #e6007e;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .info-label {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+        color: #800080;
+        text-transform: uppercase;
+    }
+
+    .info-value {
+        font-family: 'VT323', monospace;
+        font-size: 1.1rem;
+        color: #ffffff;
+        background-color: rgba(230, 0, 126, 0.2);
+        padding: 0.5rem;
+        border-radius: 4px;
+        border-left: 3px solid #e6007e;
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 2rem;
+        position: relative;
+    }
+
+    .button-container::before {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #e6007e, transparent);
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .retro-btn {
+        background-color: #800080;
+        color: #ffffff;
+        border: 3px solid #e6007e;
+        border-radius: 6px;
+        padding: 12px 25px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .retro-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .retro-btn:hover {
+        background-color: #9370DB;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(128, 0, 128, 0.4);
+    }
+
+    .retro-btn:hover::before {
+        left: 100%;
+    }
+
+    .retro-btn-secondary {
+        background-color: #800080;
+        color: #ffffff;
+        border: 3px solid #e6007e;
+        border-radius: 6px;
+        padding: 12px 25px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .retro-btn-secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .retro-btn-secondary:hover {
+        background-color: #9370DB;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(128, 0, 128, 0.4);
+        text-decoration: none;
+    }
+
+    .retro-btn-secondary:hover::before {
+        left: 100%;
+    }
+
+    .text-light {
+        color: #ffffff !important;
+    }
+
+    .text-warning {
+        color: #800080 !important;
+    }
+
+    .text-danger {
+        color: #ff6b6b !important;
+        font-family: 'VT323', monospace;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        display: block;
+    }
+
+    .famicom-controller-ports {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .famicom-controller-ports span {
+        width: 30px;
+        height: 30px;
+        background-color: #e6007e;
+        border-radius: 50%;
+        position: relative;
+        display: inline-block;
+    }
+
+    .famicom-controller-ports span::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background-color: #2a1144;
+        border-radius: 50%;
+    }
+
+    @@media (max-width: 768px) {
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .retro-btn, .retro-btn-secondary {
+            width: 100%;
+        }
+    }
+</style>
+

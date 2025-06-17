@@ -11,5 +11,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         string AddProfilePicture(UserSmall model);
         List<UserSmall> GetUsersBL();
+
+        UserSmall GetUserByIDBL(int id);
     }
 }

@@ -8,6 +8,8 @@ using RetroConsoleStoreDotBusinessLogic.Interfaces;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.User;
 using RetroConsoleStoreDotDomain.Enums;
+using System.Security.Cryptography;
+using RetroConsoleStoreHelpers.Interfaces;
 namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
 {
     public class AdminAPI
@@ -15,11 +17,13 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
         private readonly IError _error;
         private readonly ILogin _login;
         private readonly IMessaging _messaging;
-        public AdminAPI(IError error, ILogin login, IMessaging messaging)
+        private readonly IPasswordHash _passwordHash;
+        public AdminAPI(IError error, ILogin login, IMessaging messaging,IPasswordHash passwordHash)
         {
             _error = error;
             _login = login;
             _messaging = messaging;
+            _passwordHash = passwordHash;
         }
         internal bool BanUserAPI(BanReport report)
         {
@@ -126,10 +130,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 return false;
             }
         }
-        internal UserSmall GetUserByID(int id)
-        {
-            return new UserSmall();
-        }
+       
         internal bool UpdateUserAPI(UserSmall user)
         {  try
             {
@@ -173,6 +174,77 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
                 _error.ErrorToDatabase(ex, "Error getting the number of users");
                 return 0;
             }
+        }
+        internal string Generate2FactorCode()
+        {
+            int minValue = 0;
+            int maxValue = 999999;
+            int range = maxValue - minValue;
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                // Generate a uniformly distributed number in [minValue, maxValue)
+                byte[] bytes = new byte[4];
+                uint result;
+                do
+                {
+                    rng.GetBytes(bytes);
+                    result = BitConverter.ToUInt32(bytes, 0);
+                } while (result >= uint.MaxValue - (uint.MaxValue % (uint)range)); // Avoid modulo bias
+
+              return (minValue + (int)(result % range)).ToString("D6");
+            }
+
+        }
+        internal ModifyPasswordRequest ModifyPasswordBegin(UserSmall user, string newPassword, string newPassword2, string oldPassword)
+        {
+            try
+            {
+                var modPass = new ModifyPasswordRequest()
+                {
+                    code = Generate2FactorCode(),
+                    user = user,
+                    password = newPassword,
+                    status = true
+                };
+                using (var ctx = new MainContext()) 
+                {
+                    var userM = ctx.Users.FirstOrDefault(p => p.id == user.Id);
+                    if (newPassword != newPassword2 || !_passwordHash.VerifyPassword(oldPassword,userM.password))
+                    {
+                        modPass.status = false;
+                    }
+                }
+                if (modPass.status)
+                {
+                    modPass.status = _messaging.SendConfirmationEmailBl(modPass);
+
+                }
+                return modPass;
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error mod pass begin //API");
+                return null;
+            }
+        }
+        internal bool ModifyPassword(UserSmall user, string newPassword)
+        {
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var userL = ctx.Users.FirstOrDefault(p => p.id == user.Id);
+                    userL.password = _passwordHash.HashPassword(newPassword);
+                    ctx.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex,"Error modifying password");
+                return false;
+                
+            }   
         }
     }
 }

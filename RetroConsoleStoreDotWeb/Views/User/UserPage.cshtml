@@ -56,16 +56,12 @@
                                 <label class="retro-font-8bit text-warning">Role:</label>
                                 <p class="text-light">@Model.Role</p>
                             </div>
-
-                            <div class="info-group">
-                                <label class="retro-font-8bit text-warning">Cart ID:</label>
-                                <p class="text-light">@Model.CartId</p>
-                            </div>
                         </div>
 
                         <div class="text-center mt-4">
                             <a href="@Url.Action("Cart", "User")" class="btn retro-btn me-2">View Cart</a>
-                            <a href="@Url.Action("Statistics", "User")" class="btn retro-btn">View Statistics</a>
+                            <a href="@Url.Action("Statistics", "User")" class="btn retro-btn me-2">View Statistics</a>
+                            <a href="@Url.Action("UpdateUser", "User", new { id = Model.Id })" class="btn retro-btn">Update Profile</a>
                         </div>
                     </div>
                 </div>

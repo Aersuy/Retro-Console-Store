@@ -24,6 +24,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly IAccountBL _account;
         private readonly IProductBL _product;
         private readonly ICart _cart;
+        private readonly IAdmin _admin;
         private const string UploadPath = "~/Content/Images/ProfilePictures/";
         public UserController()
         {
@@ -32,16 +33,17 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _account = businessLogic.GetAccountAPI();
             _product = businessLogic.GetProductBL();
             _cart = businessLogic.GetCartBL();
+            _admin = businessLogic.GetAdminBl();
         }
         // GET: User
         [HttpGet]
         public ActionResult UserPage()
         {
-                var userSmall = GetCurrentUser();
-                if (userSmall != null)
-                {
-                    return View(userSmall);
-                }       
+            var userSmall = GetCurrentUser();
+            if (userSmall != null)
+            {
+                return View(userSmall);
+            }
 
             return RedirectToAction("Login", "Auth");
         }
@@ -81,27 +83,27 @@ namespace RetroConsoleStoreDotWeb.Controllers
         public ActionResult Cart()
         {
             List<CartItemsViewModel> viewModel = new List<CartItemsViewModel>();
-                UserSmall user = GetCurrentUser();
-                IEnumerable<CartItemModel> cartItemsModel = _cart.GetCartItems(user);
-                var productIds = cartItemsModel.Select(x => x.ProductId);
-                var products = _product.GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
+            UserSmall user = GetCurrentUser();
+            IEnumerable<CartItemModel> cartItemsModel = _cart.GetCartItems(user);
+            var productIds = cartItemsModel.Select(x => x.ProductId);
+            var products = _product.GetProductModelBacks().Where(p => productIds.Contains(p.Id)).ToList();
 
-                viewModel = cartItemsModel.Select(item =>
+            viewModel = cartItemsModel.Select(item =>
+            {
+                var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+                return new CartItemsViewModel
                 {
-                    var product = products.FirstOrDefault(p => p.Id == item.ProductId);
-                    return new CartItemsViewModel
-                    {
-                        CartItemId = item.Id,
-                        ProductId = item.ProductId,
-                        Quantity = item.Quantity,
-                        Name = product?.Name,
-                        ImagePath = product?.ImagePath,
-                        Price = product?.Price ?? 0,
-                        Brand = product?.Brand,
-                        StockQuantity = product?.StockQuantity ?? 0
-                    };
-                }).ToList();
-            
+                    CartItemId = item.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Name = product?.Name,
+                    ImagePath = product?.ImagePath,
+                    Price = product?.Price ?? 0,
+                    Brand = product?.Brand,
+                    StockQuantity = product?.StockQuantity ?? 0
+                };
+            }).ToList();
+
             return View(viewModel);
         }
         public ActionResult Statistics()
@@ -128,22 +130,22 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             UserSmall user = GetCurrentUser();
 
-                if (user != null)
-                {
-                    var result = _cart.RemoveProductFromCart(productId, user);
-                    return RedirectToAction("Cart", "User");
-                }
+            if (user != null)
+            {
+                var result = _cart.RemoveProductFromCart(productId, user);
+                return RedirectToAction("Cart", "User");
+            }
             return RedirectToAction("Cart", "User");
         }
         public ActionResult UpdateCartItemQuantity(int productId, int quantity)
         {
             UserSmall user = GetCurrentUser();
-  
-                if (user != null)
-                {
-                    var result = _cart.UpdateCartItemQuantity(productId, quantity,user);
-                    return RedirectToAction("Cart", "User");
-                }
+
+            if (user != null)
+            {
+                var result = _cart.UpdateCartItemQuantity(productId, quantity, user);
+                return RedirectToAction("Cart", "User");
+            }
 
             return RedirectToAction("Cart", "User");
         }
@@ -151,14 +153,63 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             UserSmall user = GetCurrentUser();
 
-                if (user != null)
-                {
-                    var result = _cart.Checkout(user);
-                    return RedirectToAction("Cart", "User");
-                }       
+            if (user != null)
+            {
+                var result = _cart.Checkout(user);
+                return RedirectToAction("Cart", "User");
+            }
 
             return View();
         }
+        [HttpGet]
+        public ActionResult UpdateUser(int id)
+        {
+            var modelM = _account.GetUserByIDBL(id);
+
+            return View(modelM);
+        }
+        [HttpPost]
+        public ActionResult UpdateUser(UserSmall model)
+        {
+            _admin.UpdateUserBL(model);
+            return RedirectToAction("UserPage", "User", model.Id);
+        }
+        [HttpGet]
+        public ActionResult ModifyPassword(int id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ModifyPassword(string OldPassword, string newPass1, string newPass2)
+        {
+            var ModPassReq = _admin.ModifyPasswordBeginBL(GetCurrentUser(), newPass1, newPass2, OldPassword);
+            if (ModPassReq.status == false)
+            {
+                return RedirectToAction("ModifyPassword", "User", GetCurrentUser().Id);
+            }
+            return RedirectToAction("TwoFactorPage", "User", ModPassReq);
+        }
+        [HttpGet]
+        public ActionResult TwoFactorPage(ModifyPasswordRequest model)
+        {
+            model.user = GetCurrentUser();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult TwoFactorPage(ModifyPasswordRequest model,string inputCode)
+        {
+            model.user = GetCurrentUser();
+            if (model.code == inputCode)
+            {
+                _admin.ModifyPasswordBL(model.user, model.password);
+            }
+            else
+            {
+                ViewBag.message = "Failed 2 factor";
+            }
+            return RedirectToAction("UserPage","User",model.user.Id);
+        }
+
 
     }
 }

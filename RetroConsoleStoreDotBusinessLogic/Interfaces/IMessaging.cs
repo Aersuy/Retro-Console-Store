@@ -10,5 +10,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     public interface IMessaging
     {
         bool SendBanEmailBL(BanReport report);
+
+        bool SendConfirmationEmailBl(ModifyPasswordRequest request);
     }
 }
