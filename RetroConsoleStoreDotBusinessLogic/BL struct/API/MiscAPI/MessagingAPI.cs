@@ -41,18 +41,32 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
             }
             return true;
         }
-        internal bool SendConfirmationEmailAPI(ModifyPasswordRequest request)
+        internal bool SendConfirmationEmailAPI(OTPRequest request)
         {
             try
             {
-                string subject = "Modify Password - Retro Console Store";
-                string body = Generate2FactorEmailTemplate(request);
-                SendEmail(request.user.Email, subject, body);
+                string subject = "Password change - Retro Console Store";
+                string body = GeneratePasswordChangeTempalte(request);
+                SendEmail(request.email, subject, body);
                 return true;
             }
             catch (Exception ex)
             {
                 _error.ErrorToDatabase(ex,"Error sending 2 factor emeail");
+                return false;
+            }
+        }
+        internal bool Send2FAEmailAPI(OTPRequest request)
+        {
+            try
+            {
+                string subject = "Two-Factor Authentication Code - Retro Console Store";
+                string body = Generate2FactorEmailTemplate(request);
+                return SendEmail(request.email, subject, body);
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error sending 2FA email");
                 return false;
             }
         }
@@ -92,7 +106,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                 return false;
             }
         }
-        internal string Generate2FactorEmailTemplate(ModifyPasswordRequest request)
+        internal string Generate2FactorEmailTemplate(OTPRequest request)
         {
             return $@"
             <!DOCTYPE html>
@@ -176,19 +190,121 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                         <div class='divider'></div>
                     </div>
                     <p style='font-size: 1.1rem; color: #ffcc33; text-align: center; margin-bottom: 24px;'>
-                        Hello <b>{request.user.Name}</b>,<br>
                         To complete your login, please enter the following code:
                     </p>
                     <div class='code-box'>
                         {request.code}
                     </div>
                     <p style='color: #fff; font-size: 1rem; text-align: center; margin-bottom: 16px;'>
-                        This code will expire in <b>10 minutes</b>.<br>
                         If you did not request this code, please ignore this email.
                     </p>
                     <div class='support'>
                         <span>Need help?</span><br>
-                        <span style='color: #fff;'>Contact our support team at <a href='mailto:support@retroconsolestore.com'>support@retroconsolestore.com</a></span>
+                        <span style='color: #fff;'>Contact our support team at <a href='mailto:rgstoreinbox@gmail.com'>rgstoreinbox@gmail.com</a></span>
+                    </div>
+                    <div class='footer'>
+                        <em>Thank you for keeping your account secure!<br>Retro Console Store Team</em>
+                    </div>
+                </div>
+            </body>
+            </html>
+            ";
+        }
+        internal string GeneratePasswordChangeTempalte(OTPRequest request)
+        {
+            return $@"
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset='utf-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen&family=Press+Start+2P&display=swap');
+                body {{
+                    background: #1a1a1a;
+                    color: #fff;
+                    font-family: 'Press Start 2P', 'Silkscreen', 'VT323', monospace, Arial, sans-serif;
+                    padding: 32px;
+                }}
+                .container {{
+                    border: 4px solid #e6007e;
+                    border-radius: 12px;
+                    max-width: 480px;
+                    margin: 0 auto;
+                    background: #1a1a1a;
+                    box-shadow: 0 0 20px #80008044;
+                }}
+                .header {{
+                    text-align: center;
+                    margin-bottom: 24px;
+                }}
+                .header h1 {{
+                    color: #ffcc33;
+                    font-size: 2rem;
+                    margin: 0 0 8px 0;
+                    letter-spacing: 2px;
+                }}
+                .subtitle {{
+                    font-size: 1.1rem;
+                    color: #e6007e;
+                    margin-bottom: 8px;
+                }}
+                .divider {{
+                    height: 4px;
+                    background: #800080;
+                    margin: 0 auto 16px auto;
+                    width: 60%;
+                    border-radius: 2px;
+                }}
+                .code-box {{
+                    background: #2a1144;
+                    color: #ffcc33;
+                    font-size: 2.2rem;
+                    letter-spacing: 8px;
+                    text-align: center;
+                    padding: 18px 0;
+                    border: 3px dashed #e6007e;
+                    border-radius: 8px;
+                    margin-bottom: 24px;
+                }}
+                .support {{
+                    margin-top: 32px;
+                    text-align: center;
+                }}
+                .support span {{
+                    color: #ffcc33;
+                }}
+                .support a {{
+                    color: #e6007e;
+                    text-decoration: none;
+                }}
+                .footer {{
+                    margin-top: 32px;
+                    text-align: center;
+                    color: #444;
+                    font-size: 0.9rem;
+                }}
+            </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <div class='header'>
+                        <h1>RETRO CONSOLE STORE</h1>
+                        <div class='subtitle'>Password change</div>
+                        <div class='divider'></div>
+                    </div>
+                    <p style='font-size: 1.1rem; color: #ffcc33; text-align: center; margin-bottom: 24px;'>
+                        To change your password, please enter the following code:
+                    </p>
+                    <div class='code-box'>
+                        {request.code}
+                    </div>
+                    <p style='color: #fff; font-size: 1rem; text-align: center; margin-bottom: 16px;'>
+                        If you did not request this code, please ignore this email.
+                    </p>
+                    <div class='support'>
+                        <span>Need help?</span><br>
+                        <span style='color: #fff;'>Contact our support team at <a href='mailto:support@rgstoreinbox@gmail.com'>rgstoreinbox@gmail.com</a></span>
                     </div>
                     <div class='footer'>
                         <em>Thank you for keeping your account secure!<br>Retro Console Store Team</em>

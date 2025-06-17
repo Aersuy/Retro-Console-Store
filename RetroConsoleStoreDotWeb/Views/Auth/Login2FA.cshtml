@@ -1,0 +1,60 @@
+@model RetroConsoleStoreDotDomain.Model.User.OTPRequest
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Enter Verification Code | RetroConsoleStore";
+}
+
+<div class="contact-container">
+    <h2 class="retro-font-pixel">Enter Verification Code</h2>
+    
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="message-box retro-font-8bit">@ViewBag.Message</div>
+    }
+
+    <p class="retro-font-8bit" style="color: #ffcc33; text-align: center;">
+        A verification code has been sent to <b>@Model.email</b>.<br />
+        Please enter the code below to complete your login.
+    </p>
+
+    @using (Html.BeginForm("Login2FA", "Auth", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.email)
+        @Html.HiddenFor(m => m.code)
+
+        <div>
+            <label for="inputCode">Verification Code</label>
+            <input type="text" 
+                   name="inputCode" 
+                   id="inputCode" 
+                   required 
+                   placeholder="Enter 6-digit code" 
+                   maxlength="6" 
+                   pattern="[0-9]{6}"
+                   class="form-input"
+                   style="letter-spacing: 2px; font-family: 'Press Start 2P', monospace;" />
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="retro-font-8bit">Verify</button>
+        </div>
+    }
+
+    <div class="famicom-cartridge-slot"></div>
+
+    <p class="retro-font-8bit" style="margin-top: 20px; text-align: center;">
+        <span style="color: #e6007e;">Didn't receive the code?</span><br />
+        <a href="@Url.Action("OTPLogin", "Auth", new { email = Model.email })" style="color: #ffcc33;">Request a new code</a>
+    </p>
+
+    <p class="retro-font-8bit" style="margin-top: 10px; text-align: center; font-size: 0.8em; color: #888;">
+        The code will expire in 10 minutes
+    </p>
+</div>
+

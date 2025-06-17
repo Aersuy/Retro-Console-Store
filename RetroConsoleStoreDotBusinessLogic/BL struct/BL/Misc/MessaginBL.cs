@@ -19,9 +19,13 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.Misc
         {
             return SendBanEmail(report);
         }
-        public bool SendConfirmationEmailBl(ModifyPasswordRequest request)
+        public bool SendConfirmationEmailBl(OTPRequest request)
         {
             return SendConfirmationEmailAPI(request);
+        }
+        public bool Send2FAEmailBL(OTPRequest request)
+        {
+            return Send2FAEmailAPI(request);
         }
     }
 }

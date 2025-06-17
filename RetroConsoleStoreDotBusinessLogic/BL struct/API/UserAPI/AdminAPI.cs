@@ -195,14 +195,14 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.UserAPI
             }
 
         }
-        internal ModifyPasswordRequest ModifyPasswordBegin(UserSmall user, string newPassword, string newPassword2, string oldPassword)
+        internal OTPRequest ModifyPasswordBegin(UserSmall user, string newPassword, string newPassword2, string oldPassword)
         {
             try
             {
-                var modPass = new ModifyPasswordRequest()
+                var modPass = new OTPRequest()
                 {
                     code = Generate2FactorCode(),
-                    user = user,
+                    email = user.Email,
                     password = newPassword,
                     status = true
                 };

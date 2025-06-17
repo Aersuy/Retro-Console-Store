@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RetroConsoleStoreDotDomain.Model.User
 {
-    public class ModifyPasswordRequest
+    public class OTPRequest
     {
-        public UserSmall user;
+        public string email {  get; set; }
         public string code {  get; set; }
         public string password { get; set; }
         public bool status { get; set; }

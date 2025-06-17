@@ -1,0 +1,49 @@
+﻿@model RetroConsoleStoreDotDomain.Model.User.OTPRequest
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Two-Factor Authentication | RetroConsoleStore";
+}
+
+<div class="contact-container">
+    <h2 class="retro-font-pixel">Two-Factor Authentication</h2>
+
+    <div class="famicom-controller-ports">
+        <span></span>
+        <span></span>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="message-box retro-font-8bit">@ViewBag.Message</div>
+    }
+
+    <p class="retro-font-8bit" style="color: #ffcc33; text-align: center;">
+        Enter your email address to receive a verification code.
+    </p>
+
+    @using (Html.BeginForm("OTPLogin", "Auth", FormMethod.Post))
+    {
+        <div>
+            <label for="email">Email Address</label>
+            @Html.TextBoxFor(m => m.email, new
+            {
+                required = "required",
+                placeholder = "Enter your email address",
+                type = "email",
+                @class = "form-input"
+            })
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="retro-font-8bit">Send Code</button>
+        </div>
+    }
+
+    <div class="famicom-cartridge-slot"></div>
+
+    <p class="retro-font-8bit" style="margin-top: 20px;">
+        <a href="@Url.Action("Login", "Auth")" style="color: #ffcc33;">Back to Login</a>
+    </p>
+</div>
+

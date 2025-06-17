@@ -71,6 +71,21 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 {
                     return true;
                 }
+                using(var ctx = new MainContext())
+                {
+                  var user = ctx.Users.FirstOrDefault(u => u.email == data.Email);
+                    if (user != null)
+                    {
+                        return true; 
+                    }
+                   var user2 = ctx.Users.FirstOrDefault(u => u.username == data.UserName);
+                    {
+                        if (user != null)
+                        {
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
             catch (Exception ex)
@@ -80,28 +95,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             }
 
         }
-        /// <summary>
-        /// This function returns a nullable bool which is true if a user with
-        /// the same name exists, false otherwise and null if the function fail
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="ctx"></param>
-        /// <returns></returns>
-        private bool? UserWithNameAlreadyExistsAPI(UserLoginDTO data, MainContext ctx)
-        {
-            try
-            {
-                return ctx.Users.Any(u => u.username == data.UserName);
-
-            }
-            catch (Exception ex)
-            {
-                _error.ErrorToDatabase(ex, "Problem with verifying if user with this name already exists" +
-                    "most likely input data issue, or the entire program is f-ed");
-                return null;
-            }
-
-        }
+      
         /// <summary>
         /// Function that creates a new user who's atributes match
         /// the user table in the db using the UserLoginDTO model

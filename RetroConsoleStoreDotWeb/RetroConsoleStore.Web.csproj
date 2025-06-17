@@ -281,6 +281,8 @@
     <Content Include="Views\User\UpdateUser.cshtml" />
     <Content Include="Views\User\ModifyPassword.cshtml" />
     <Content Include="Views\User\TwoFactorPage.cshtml" />
+    <Content Include="Views\Auth\Login2FA.cshtml" />
+    <Content Include="Views\Auth\OTPLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -5,6 +5,7 @@ using RetroConsoleStore.BusinessLogic;
 using RetroConsoleStore.BusinessLogic.Interface;
 using RetroConsoleStore.Domain.Model.User;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotWeb.Models.Auth;
 
 namespace RetroConsoleStoreDotWeb.Controllers
@@ -17,12 +18,14 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly IAuth _auth;
         private readonly ILogin _login;
         private readonly IStatistics _statistics;
+        private readonly IAdmin _admin;
         public AuthController()
         {
             businessLogic = new BusinessLogic();
             _auth = businessLogic.GetAuthBL();
             _login = businessLogic.GetLoginBL();
             _statistics = businessLogic.GetStatsBL();
+            _admin = businessLogic.GetAdminBl();
         }
 
         [HttpGet]
@@ -102,8 +105,47 @@ namespace RetroConsoleStoreDotWeb.Controllers
             }
             return RedirectToAction("Login", "Auth");
         }
-
-    
-
+        [HttpGet]
+        public ActionResult OTPLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult OTPLogin(OTPRequest request)
+        {
+            request.code = _admin.Generate2FactorCodeBL();
+            if (_login.Login2FABL(request).Success)
+            {
+                return RedirectToAction("Login2FA", "Auth", request);
+            }
+            return RedirectToAction("Login", "Auth");
+        }
+        [HttpPost]
+        public ActionResult Login2FA(OTPRequest request, string inputCode)
+        {
+            if (request.code == inputCode)
+            {
+               var response = _login.Login2FAEndBL(request.email);
+                if (response.Success)
+                {
+                    HttpCookie cookie = _login.GenCookie(new UserLoginDTO { 
+                        Email = request.email,
+                        UserName = response.Message
+                        });
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", response.Message);
+                }
+            }
+            return View(request);
+        }
+        [HttpGet]
+        public ActionResult Login2FA(OTPRequest request)
+        {
+            return View(request);
+        }
     }
 }

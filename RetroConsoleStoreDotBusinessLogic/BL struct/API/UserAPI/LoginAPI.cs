@@ -20,12 +20,14 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
         private readonly IError _error;
         private readonly ILog _log;
         private readonly IPasswordHash _passWordHash;
+        private readonly IMessaging _messaging;
 
-        internal LoginAPI(IPasswordHash passWordHash, ILog log, IError error)
+        internal LoginAPI(IPasswordHash passWordHash, ILog log, IError error, IMessaging messaging)
         {
             _passWordHash = passWordHash;
             _log = log;
             _error = error;
+            _messaging = messaging;
         }
         internal UserLoginResponse LoginLogicAPI(UserLoginDTO data)
         {
@@ -98,7 +100,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             {
                 var Cookie = new HttpCookie("X-KEY");
                 {
-                    Cookie.Value = CreateCookie.Create(data.Password);
+                    Cookie.Value = CreateCookie.Create(data.UserName);
                 }
                 using (var ctx = new MainContext())
                 {
@@ -206,6 +208,60 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
             {
                 _error.ErrorToDatabase(ex, "Issue getting cookie form db using user id");
                 return null;
+            }
+        }
+        internal UserLoginResponse Login2FA(OTPRequest request)
+        {   var response = new UserLoginResponse();
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    if (!string.IsNullOrEmpty(request.email))
+                    {
+                        var user = ctx.Users.FirstOrDefault(p => p.email == request.email);
+                        if (user != null)
+                        {
+
+                            _messaging.Send2FAEmailBL(request);
+                            response.Success = true;
+                        }
+                    }
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error logging in with 2fa//API");
+                response.Success = false;
+                return response;
+            }
+        }
+        internal UserLoginResponse Login2FAEnd(string email)
+        {   
+            var response = new UserLoginResponse();
+            try
+            { 
+               using(var ctx = new MainContext())
+                {
+                    var user = ctx.Users.FirstOrDefault(p => p.email == email);
+                    if (user == null)
+                    {
+                        response.Message = "No account matches email ";
+                        response.Success = false;
+                    }
+                    else
+                    {
+                        response.Message = user.username;
+                        response.Success = true;
+                    }
+                    return response;
+                }
+
+            } catch(Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error logging in with 2fa//API");
+                response.Success = false;
+                return response;    
             }
         }
     }

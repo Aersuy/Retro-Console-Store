@@ -25,7 +25,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         ILog _log;
         IError _error;
         IPasswordHash _passWordHash;
-        public LoginBL1(IPasswordHash passWordHash, ILog log, IError error) : base(passWordHash, log, error)
+        public LoginBL1(IPasswordHash passWordHash, ILog log, IError error,IMessaging messaging) : base(passWordHash, log, error,messaging)
         {
             _passWordHash = passWordHash;
             _log = log;
@@ -48,9 +48,17 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct
         {
             ExpireSessionByCookieDBAPI(cookieString);
         }
-        public string GetCookieByUserIdBL (int userId)
+        public string GetCookieByUserIdBL(int userId)
         {
             return GetCookieByUserIdAPI(userId);
+        }
+        public UserLoginResponse Login2FABL(OTPRequest request)
+        {
+            return Login2FA(request);
+        }
+        public UserLoginResponse Login2FAEndBL(string email)
+        {
+            return Login2FAEnd(email);
         }
     }
 }

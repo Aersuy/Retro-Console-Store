@@ -46,6 +46,10 @@
         Don't have an account? <a href="@Url.Action("Auth", "Auth")" style="color: #ffcc33;">Register here</a>
     </p>
 
+    <p class="retro-font-8bit" style="margin-top: 20px;">
+        <a href="@Url.Action("OTPLogin", "Auth")" style="color: #ffcc33;">Login with Email Verification</a>
+    </p>
+
     @if (ViewBag.Message != null)
     {
         <div class="message-box retro-font-8bit">

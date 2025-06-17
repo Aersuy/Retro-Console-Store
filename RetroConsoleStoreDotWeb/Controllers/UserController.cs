@@ -188,24 +188,24 @@ namespace RetroConsoleStoreDotWeb.Controllers
             return RedirectToAction("TwoFactorPage", "User", ModPassReq);
         }
         [HttpGet]
-        public ActionResult TwoFactorPage(ModifyPasswordRequest model)
+        public ActionResult TwoFactorPage(OTPRequest model)
         {
-            model.user = GetCurrentUser();
+            model.email = GetCurrentUser().Email;
             return View(model);
         }
         [HttpPost]
-        public ActionResult TwoFactorPage(ModifyPasswordRequest model,string inputCode)
+        public ActionResult TwoFactorPage(OTPRequest model,string inputCode)
         {
-            model.user = GetCurrentUser();
+            model.email = GetCurrentUser().Email;
             if (model.code == inputCode)
             {
-                _admin.ModifyPasswordBL(model.user, model.password);
+                _admin.ModifyPasswordBL(GetCurrentUser(), model.password);
             }
             else
             {
                 ViewBag.message = "Failed 2 factor";
             }
-            return RedirectToAction("UserPage","User",model.user.Id);
+            return RedirectToAction("UserPage","User",GetCurrentUser().Id);
         }
 
 

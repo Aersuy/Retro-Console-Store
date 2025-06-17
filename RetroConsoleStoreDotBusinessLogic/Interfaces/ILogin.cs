@@ -16,5 +16,7 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
         UserSmall GetUserByCookie(string cookieName);
         void ExpireSessionByCookieDB(string cookieString);
         string GetCookieByUserIdBL(int userId);
+        UserLoginResponse Login2FABL(OTPRequest request);
+        UserLoginResponse Login2FAEndBL(string email);
     }
 }

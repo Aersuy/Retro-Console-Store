@@ -37,13 +37,17 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         {
             return GetNumberOfUsersAPI();
         }
-        public ModifyPasswordRequest ModifyPasswordBeginBL(UserSmall user, string newPassword, string newPassword2, string oldPassword)
+        public OTPRequest ModifyPasswordBeginBL(UserSmall user, string newPassword, string newPassword2, string oldPassword)
         {
             return ModifyPasswordBegin(user, newPassword, newPassword2, oldPassword);
         }
         public bool ModifyPasswordBL(UserSmall user, string newPassword)
         {
             return ModifyPassword(user, newPassword);
+        }
+        public string Generate2FactorCodeBL()
+        {
+            return Generate2FactorCode();
         }
     }
 }

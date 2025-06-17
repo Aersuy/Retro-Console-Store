@@ -11,6 +11,8 @@ namespace RetroConsoleStoreDotBusinessLogic.Interfaces
     {
         bool SendBanEmailBL(BanReport report);
 
-        bool SendConfirmationEmailBl(ModifyPasswordRequest request);
+        bool SendConfirmationEmailBl(OTPRequest request);
+
+        bool Send2FAEmailBL(OTPRequest request);
     }
 }

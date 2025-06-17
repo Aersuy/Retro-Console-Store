@@ -1,4 +1,4 @@
-@model RetroConsoleStoreDotDomain.Model.User.ModifyPasswordRequest
+@model RetroConsoleStoreDotDomain.Model.User.OTPRequest
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Two-Factor Authentication | RetroConsoleStore";
@@ -13,17 +13,9 @@
     {
         <div class="message-box retro-font-8bit">@ViewBag.message</div>
     }
-    <p class="retro-font-8bit" style="color: #ffcc33; text-align: center;">A code has been sent to <b>@Model.user.Email</b>.<br />Enter it below to confirm your password change.</p>
+    <p class="retro-font-8bit" style="color: #ffcc33; text-align: center;">A code has been sent to <b>@Model.email</b>.<br />Enter it below to confirm your password change.</p>
     @using (Html.BeginForm("TwoFactorPage", "User", FormMethod.Post))
     {
-        @Html.HiddenFor(m => m.user.Id)
-        @Html.HiddenFor(m => m.user.Name)
-        @Html.HiddenFor(m => m.user.Email)
-        @Html.HiddenFor(m => m.user.LastLogin)
-        @Html.HiddenFor(m => m.user.LastIp)
-        @Html.HiddenFor(m => m.user.ImagePath)
-        @Html.HiddenFor(m => m.user.Role)
-        @Html.HiddenFor(m => m.user.CartId)
         @Html.HiddenFor(m => m.code)
         @Html.HiddenFor(m => m.password)
         @Html.HiddenFor(m => m.status)
