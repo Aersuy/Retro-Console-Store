@@ -34,9 +34,9 @@ namespace RetroConsoleStore.BusinessLogic
             _loginBL = new LoginBL1(_passwordHash, _loggingBL, _errorBL, _messaging);
             _productBL = new ProductBL(_errorBL,_loggingBL);
             _accountBL = new AccountBL(_errorBL);
-            _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
-            _adminBL = new AdminBL(_errorBL, _loginBL,_messaging,_passwordHash);
+            _adminBL = new AdminBL(_errorBL, _loginBL, _messaging, _passwordHash);
             _statisticsBL = new StatisticsBL(_errorBL, _adminBL);
+            _cart = new CartBL(_errorBL, _loggingBL,_loginBL,_statisticsBL);
             _review = new ReviewBL(_errorBL);
         }
 

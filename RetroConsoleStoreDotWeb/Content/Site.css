@@ -642,6 +642,37 @@ form button:hover {
     color: #ffcc33;
 }
 
+/* Global .retro-card override to fix Bootstrap interference */
+.retro-card,
+.card.retro-card,
+.retro-card.card {
+    background-color: #3a1f5d !important;
+    background: #3a1f5d !important;
+    border: 4px solid #e6007e !important;
+    border-radius: 4px !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(230, 0, 126, 0.5) !important;
+}
+
+/* Ensure retro-card title and text colors are correct */
+.retro-card .card-title,
+.card.retro-card .card-title,
+.retro-card.card .card-title {
+    color: #ffcc33 !important;
+}
+
+.retro-card .price-tag,
+.card.retro-card .price-tag,
+.retro-card.card .price-tag {
+    color: #ffcc33 !important;
+}
+
+/* Override any Bootstrap card body styles for retro cards */
+.retro-card .card-body,
+.card.retro-card .card-body,
+.retro-card.card .card-body {
+    color: #ffffff !important;
+}
 
 .navbar-brand.retro-font-pixel {
     transform: none !important;

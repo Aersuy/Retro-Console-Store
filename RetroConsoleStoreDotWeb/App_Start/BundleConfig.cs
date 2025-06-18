@@ -33,11 +33,16 @@ namespace RetroConsoleStoreDotWeb.App_Start
 
             bundles.Add(new StyleBundle("~/bundles/site/css").Include("~/Content/Site.css"));
 
+
+
+
             bundles.Add(new StyleBundle("~/bundles/catalog/css").Include("~/Content/catalog.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new StyleBundle("~/bundles/product/css").Include("~/Content/product.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new StyleBundle("~/bundles/auth/css").Include("~/Content/auth.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/bundles/updateuser/css").Include("~/Content/updateuser.css", new CssRewriteUrlTransform()));
 
 
 

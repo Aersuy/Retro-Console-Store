@@ -237,6 +237,28 @@
         border-radius: 8px;
         padding: 2rem;
         margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    /* Override style.css and catalog.css height constraints for this page */
+    .product-container .retro-card,
+    .product-container .product-details.retro-card,
+    .product-container .reviews-section.retro-card,
+    .product-container .retro-card.h-100 {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        flex: none !important;
+    }
+    
+    /* Ensure the reviews section can expand to show all content */
+    .reviews-section {
+        height: auto !important;
+        min-height: 300px !important;
     }
 
     .review-header {
@@ -473,25 +495,31 @@
     /* No Reviews Message */
     .no-reviews {
         text-align: center;
-        padding: 3rem;
+        padding: 2rem;
+        width: 100%;
     }
 
     .retro-message-box {
-        background: rgba(0, 0, 0, 0.2);
-        border: 2px solid #666;
-        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #e6007e;
+        border-radius: 8px;
         padding: 2rem;
         display: inline-block;
+        max-width: 500px;
+        margin: 0 auto;
     }
 
     .retro-message-box h4 {
         color: #ffcc33;
         margin-bottom: 1rem;
+        font-size: 1.2rem;
     }
 
     .retro-message-box p {
-        color: #ccc;
+        color: #fff;
         margin: 0;
+        font-size: 1rem;
+        line-height: 1.4;
     }
 
     .char-limit-note {

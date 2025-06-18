@@ -138,3 +138,10 @@
     color: #ffffff;
     box-shadow: 0 0 10px rgba(230, 0, 126, 0.5);
 }
+
+/* Override height constraints for product page content sections that need to expand */
+.reviews-section.retro-card,
+.product-details.retro-card {
+    height: auto !important;
+    min-height: auto !important;
+}

@@ -223,7 +223,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
                     }
                     if (totalStats.TotalItemsSold > 0)
                     {
-                        totalStats.AverageOrderValue = totalStats.TotalItemsSold / totalStats.TotalRevenue;
+                        totalStats.AverageOrderValue = ((decimal)totalStats.TotalRevenue/totalStats.TotalItemsSold);
                     }
                     if (totalStats.TotalUsers > 0)
                     {

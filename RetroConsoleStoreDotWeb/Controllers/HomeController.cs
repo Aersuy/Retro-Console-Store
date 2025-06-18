@@ -27,7 +27,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             {
                return RedirectToAction("Login", "Auth");
             }
-            return View();
+            return RedirectToAction("Catalog", "Item");
         }
         public ActionResult productDetail()
         {
