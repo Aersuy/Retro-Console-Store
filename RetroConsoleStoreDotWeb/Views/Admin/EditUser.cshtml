@@ -1,0 +1,47 @@
+@model RetroConsoleStoreDotDomain.Model.User.UserSmall
+@using RetroConsoleStoreDotDomain.Enums
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit User | Admin";
+}
+<div class="catalogue-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-5">
+                <h1 class="retro-font-pixel">Edit User</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="catalogue-content">
+                    <div class="famicom-controller-ports mb-4">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.Hidden("editTag", true)
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Name, new { @class = "retro-font-8bit" })
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control retro-input", required = "required" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Email, new { @class = "retro-font-8bit" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control retro-input", required = "required", type = "email" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Role, "Role", new { @class = "retro-font-8bit" })
+                            @Html.EnumDropDownListFor(m => m.Role, new { @class = "form-control retro-input" })
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="retro-btn"><i class="fa fa-save"></i> Save Changes</button>
+                        </div>
+                    }
+                    <div class="famicom-cartridge-slot mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

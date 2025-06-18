@@ -67,6 +67,7 @@
     <Compile Include="Enums\URole.cs" />
     <Compile Include="Error\ETable.cs" />
     <Compile Include="Logs\LTable.cs" />
+    <Compile Include="Model\Misc\ContactMSG.cs" />
     <Compile Include="Model\Misc\LogM.cs" />
     <Compile Include="Model\Product\CartItemModel.cs" />
     <Compile Include="Model\Product\ProductModelBack.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Model\User\OTPRequest.cs" />
     <Compile Include="Model\User\UnbanMessage.cs" />
     <Compile Include="Products\ReviewT.cs" />
+    <Compile Include="User\ContactMessageT.cs" />
     <Compile Include="User\UserBannedT.cs" />
     <Compile Include="Statistics\ProductStatsT.cs" />
     <Compile Include="Statistics\UserStatsT.cs" />

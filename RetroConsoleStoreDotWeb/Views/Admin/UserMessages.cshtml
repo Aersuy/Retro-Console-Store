@@ -1,0 +1,75 @@
+﻿@model IEnumerable<RetroConsoleStoreDotDomain.Model.Misc.ContactMSG>
+@{
+    ViewBag.Title = "User Messages | RetroConsoleStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="catalogue-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-5">
+                <h1 class="retro-font-pixel"><i class="fa fa-envelope-open"></i> User Messages</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="catalogue-content">
+                    <div class="famicom-controller-ports mb-4">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div>
+                        @if (Model != null && Model.Any())
+                        {
+                            <div class="row g-4">
+                                @foreach (var msg in Model)
+                                {
+                                    <div class="col-12 col-md-6">
+                                        <div class="retro-card p-4 h-100 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <div class="retro-font-8bit mb-2"><i class="fa fa-user"></i> @msg.Name</div>
+                                                <div class="mb-2"><i class="fa fa-envelope"></i> <span style="word-break: break-all;">@msg.Email</span></div>
+                                                <div class="mb-2"><i class="fa fa-comment"></i> <span style="white-space: pre-line;">@msg.message</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="retro-font-8bit text-center py-4">No user messages found.</div>
+                        }
+                    </div>
+                    <div class="famicom-cartridge-slot mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .retro-card {
+        min-height: 200px;
+        background: linear-gradient(135deg, #3a1f5d 60%, #2a1144 100%);
+        border: 4px solid #e6007e;
+        border-radius: 8px;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(230, 0, 126, 0.5);
+        margin-bottom: 20px;
+        transition: transform 0.2s;
+    }
+    .retro-card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 24px rgba(230, 0, 126, 0.3);
+    }
+    .retro-font-8bit {
+        color: #ffcc33;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1.1rem;
+        text-shadow: 1px 1px 0 #2a1144;
+    }
+    .fa {
+        color: #e6007e;
+        margin-right: 8px;
+    }
+</style>
+

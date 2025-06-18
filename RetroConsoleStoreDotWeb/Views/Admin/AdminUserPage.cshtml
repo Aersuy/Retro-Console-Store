@@ -13,7 +13,6 @@
         </div>
 
         <div class="admin-actions">
-            <a href="@Url.Action("AddUser", "Admin")" class="admin-button retro-font-8bit">Add New User</a>
             <a href="@Url.Action("AdminDashboard", "Admin")" class="admin-button retro-font-8bit">Back to Dashboard</a>
         </div>
 
@@ -47,8 +46,8 @@
                                     <span class="status-badge active">Active</span>
                                 }
                             </td>
-                            <td class="action-buttons">
-                                <a href="@Url.Action("EditUser", "Admin")" class="action-button edit">Edit</a>
+                            <td class="action-buttons" style="display:flex; gap:8px; align-items:center; justify-content:center;">
+                                <a href="@Url.Action("EditUser", "Admin", new { Id = user.Id, Name = user.Name, Email = user.Email, Role = (int)user.Role })" class="action-button edit">Edit</a>
                                 <a href="@Url.Action("UserDetails", "Admin")" class="action-button view">View</a>
                                 @if (user.Role != RetroConsoleStoreDotDomain.Enums.URole.Banned && user.Role != RetroConsoleStoreDotDomain.Enums.URole.Administrator)
                                 {

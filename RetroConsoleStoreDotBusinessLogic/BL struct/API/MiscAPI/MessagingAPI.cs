@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -9,6 +10,7 @@ using System.Web.Configuration;
 using MimeKit;
 using RetroConsoleStoreDotBusinessLogic.DBModel;
 using RetroConsoleStoreDotBusinessLogic.Interfaces;
+using RetroConsoleStoreDotDomain.Model.Misc;
 using RetroConsoleStoreDotDomain.Model.User;
 using RetroConsoleStoreDotDomain.User;
 
@@ -20,6 +22,67 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.API.MiscAPI
         public MessagingAPI(IError error)
         {
             _error = error;
+        }
+
+        internal bool SendContactMessageAPI(ContactMSG msg)
+        {
+          
+            try
+            {
+                using (var ctx = new MainContext())
+                {
+                    var message = new ContactMessageT()
+                    {
+                        Email = msg.Email,
+                        Name = msg.Name,
+                        message = msg.message,
+                        CreatedAt = DateTime.Now,
+                        User = ctx.Users.FirstOrDefault(p => p.id == msg.User.Id)
+                    };
+                    ctx.ContactMessages.Add(message);
+                    ctx.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error sending contact message//API");
+                return false;
+            }
+        }
+        internal IEnumerable<ContactMSG> GetAllMessagesAPI()
+        {   List<ContactMSG> response = new List<ContactMSG>();
+            try
+            {
+                using(var ctx = new MainContext())
+                {
+                    var messages= ctx.ContactMessages.Include("User").ToList();
+                    foreach (var item in messages)
+                    {
+                        response.Add(MsgFromTableMap(item));
+                    }
+                    return response;
+                }
+            } catch(Exception ex)
+            {
+                _error.ErrorToDatabase(ex, "Error getting all messages//API");
+                return null;
+            }
+        }
+        internal ContactMSG MsgFromTableMap(ContactMessageT msg)
+        {
+            return new ContactMSG()
+            {
+                Email = msg.Email,
+                Name = msg.Name,
+                message = msg.message,
+                User = new UserSmall()
+                {
+                    Id = msg.User.id,
+                    Name = msg.User.username,
+                    Email = msg.User.email
+                }
+            };
         }
         internal bool SendBanEmail(BanReport report)
         {

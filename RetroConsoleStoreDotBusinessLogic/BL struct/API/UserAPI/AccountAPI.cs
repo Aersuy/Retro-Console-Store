@@ -72,7 +72,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.UserAPI
                 LastIp = user.LastIP
             };
         }
-        internal UserSmall GetUserByIDAPI(int id)
+        internal UserSmall GetUserByIDAPI(int? id)
         {
             try
             {

@@ -283,6 +283,8 @@
     <Content Include="Views\User\TwoFactorPage.cshtml" />
     <Content Include="Views\Auth\Login2FA.cshtml" />
     <Content Include="Views\Auth\OTPLogin.cshtml" />
+    <Content Include="Views\Admin\UserMessages.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

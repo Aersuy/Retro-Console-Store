@@ -21,7 +21,7 @@ namespace RetroConsoleStoreDotBusinessLogic.DBModel
         public virtual DbSet<ProductStatsT> ProductStatistics { get; set; }
         public virtual DbSet<UserStatsT> UserStatsTs { get; set; }
         public virtual DbSet<UserBannedT> UserBannedTs { get; set; }
-
+        public virtual DbSet<ContactMessageT> ContactMessages { get; set; }
         public virtual DbSet<ReviewT> Reviews { get; set; }
 
 

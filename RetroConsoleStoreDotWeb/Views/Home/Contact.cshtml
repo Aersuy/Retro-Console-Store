@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RetroConsoleStoreDotDomain.Model.Misc.ContactMSG
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Contact Us | RetroConsoleStore";
 }
@@ -20,23 +21,29 @@
                     </div>
                     
                     <div class="contact-form-wrapper">
-                        <form method="post" action="/Home/Contact">
+                        @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
                             <div>
-                                <label for="Name">Name:</label>
-                                <input type="text" id="Name" name="Name" placeholder="Your name here..." required />
+                                @Html.LabelFor(m => m.Name)
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name here...", @class = "form-control", required = "required" })
                             </div>
                             <div>
-                                <label for="Email">Email:</label>
-                                <input type="email" id="Email" name="Email" placeholder="your@email.com" required />
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email, new { @type = "email", @placeholder = "your@email.com", @class = "form-control", required = "required" })
                             </div>
                             <div>
-                                <label for="Message">Message:</label>
-                                <textarea id="Message" name="Message" placeholder="Type your message here..." required></textarea>
+                                @Html.LabelFor(m => m.message, "Message")
+                                @Html.TextAreaFor(m => m.message, new { @placeholder = "Type your message here...", @class = "form-control", required = "required" })
                             </div>
                             <div class="button-container">
                                 <button type="submit">Send Message</button>
                             </div>
-                        </form>
+                        }
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-info mt-3">@ViewBag.Message</div>
+                        }
                     </div>
                     
                     <div class="famicom-cartridge-slot"></div>

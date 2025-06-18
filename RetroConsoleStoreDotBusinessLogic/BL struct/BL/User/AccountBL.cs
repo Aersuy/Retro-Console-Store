@@ -20,7 +20,7 @@ namespace RetroConsoleStoreDotBusinessLogic.BL_struct.BL.User
         {
             return GetUsersAPI();
         }
-        public UserSmall GetUserByIDBL(int id) 
+        public UserSmall GetUserByIDBL(int? id) 
         {
             return GetUserByIDAPI(id);
         }

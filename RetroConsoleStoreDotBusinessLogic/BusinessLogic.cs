@@ -76,5 +76,9 @@ namespace RetroConsoleStore.BusinessLogic
         {
             return _loggingBL;
         }
+        public IMessaging GetMessageBl()
+        {
+            return _messaging;
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
         private readonly IStatistics _statisticsBL;
         private readonly IReview _reviewBL;
         private readonly ILog _log;
+        private readonly IMessaging _message;
         private const string UploadPath = "~/Content/images/Products/";
         // GET: Admin
         public AdminController()
@@ -37,6 +38,7 @@ namespace RetroConsoleStoreDotWeb.Controllers
             _reviewBL = businessLogic.GetReviewBl();
             _statisticsBL = businessLogic.GetStatsBL();
             _log = businessLogic.GetLogBL();
+            _message = businessLogic.GetMessageBl();
         }
         [HttpGet]
         public ActionResult AddProduct()
@@ -191,6 +193,24 @@ namespace RetroConsoleStoreDotWeb.Controllers
         {
             var reviews = _reviewBL.GetAllBL();
             return View(reviews);
+        }
+        public ActionResult UserMessages()
+        {
+            var messages = _message.GetAllMessagesBL();
+            return View(messages);
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(UserSmall model)
+        {  
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserSmall user, bool editTag)
+        {
+            _adminBL.UpdateUserBL(user);
+            return RedirectToAction("AdminUserPage", "Admin");
         }
     }
 }
